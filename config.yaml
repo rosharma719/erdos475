@@ -1,0 +1,31 @@
+model: claude-opus-5-5
+effort: high            # low|medium|high|xhigh|max  (Opus 5.5 defaults to medium; set explicitly)
+fallbacks: default      # server-side refusal fallback; set null to disable
+max_tokens:
+  director: 4000
+  prover: 32000
+  referee: 16000
+  literature: 12000
+  synthesis: 8000
+budget:
+  per_round_usd: 6.0
+  total_usd: 20.0
+  per_call_max_output_tokens: 32000
+pricing_per_mtok:        # Opus 5.5; used for local budget accounting only
+  input: 4.0
+  output: 20.0
+  cache_read: 0.20
+  cache_write: 5.0
+round:
+  approaches_per_target: 2        # two genuinely different attacks per important target
+  referee_passes_for_complete: 2  # independent referee calls before a proof may be marked audited
+  literature_web_search: true
+  literature_max_searches: 5
+verification:
+  timeout_seconds: 120
+  memory_mb: 2048
+programmes:             # target share of research effort (director is shown actual vs target)
+  A: 0.6                # dense-set flexibility / avoidance
+  B: 0.3                # near-complete constructions
+  C: 0.1                # integer range / structural alternatives
+human_review_required_for_major: true

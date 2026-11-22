@@ -1,0 +1,24 @@
+id: CNALL
+target_node: CN_ALL_K
+programme: C
+tags:
+- CN
+- polynomial
+- coefficient
+- gcd
+- Nullstellensatz
+status: parked
+goal: 'Prove gcd(c_k) has no prime factor > k for all k>=4 (c_k = coefficient of Alt(y_d·I_m)). PARKED:
+  reopen only with a genuinely new algebraic idea (hidden sign-reversing involution, root-system/coinvariant
+  identity).'
+known_inputs:
+- polynomial_cn
+principal_gap: No structural handle; domain isolation, Schubert coordinates, smooth combinations (0/242..0/728
+  for k=10..13) all fail.
+proof_relevance: Would imply Graham for every k-set at every prime p>k, a uniform route.
+allowed_methods:
+- analytic_constructions
+excluded_methods:
+- lean_formalization
+- coefficient_table_extension
+success_condition: A proof or a rigorous reduction to a smaller statement.

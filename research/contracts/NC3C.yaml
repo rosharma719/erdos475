@@ -1,0 +1,49 @@
+id: NC3C
+target_node: NEAR_COMPLETE_P4
+programme: B
+tags:
+- near-complete
+- Hicks
+- graceful
+- terrace
+- contraction
+- NC3
+- HOS
+- F1
+- Contract NC3
+status: open
+goal: 'Prove that for every prime p and every 3-element subset C of F_p^*, the complement A = F_p^* \
+  C (so |A| = p-4) has a valid ordering. This is the first case beyond the published |A| >= p-3. (A 4-element
+  C would be |A| = p-5, the case after this one.)
+
+  '
+known_inputs:
+- contraction
+- near_complete
+- index_two
+principal_gap: 'Ledger ''Contract NC3'': zero-sum C={x,y,-x-y} reduces (proved, unaudited) to four one-parameter
+  end-pattern families F1..F4 (bands cover ~[0.15r,0.85r], small/large parameters fail, possibly search
+  artefacts); generic non-zero-sum C needs a two-parameter pattern (~half embed at r=12); ± pairs handled
+  by HOS Lemma 4.5 (exceptions (d,r) in {(2,4),(2,5),(2,8)}). Need explicit graceful-permutation families
+  (Walecki/twizzler type) for all r>=20 plus a selection lemma on dilation/position (the fixed-position
+  version is false: 91/228 two-step patterns fail at r=14).'
+proof_relevance: 'Extends the known near-complete range by one. A scalable version may enable a theorem
+  for growing complements.
+
+  '
+approaches:
+- Explicit graceful-permutation families realizing F1-F4 (zero-sum C) and the two-end-difference patterns
+  (generic C), with a selection lemma over dilations; finite verification covers r<=18.
+- 'Top-down: find a valid cycle of a larger explicit dense object (geometric/other R-sequencing) cutting
+  into consecutive blocks whose sums are exactly C''s complement, via the contraction lemma.'
+allowed_methods:
+- analytic_constructions
+- combinatorial_arguments
+- exact_counterexample_search
+excluded_methods:
+- lean_formalization
+- proof_by_finite_testing
+success_condition: 'A complete proof with every case covered, or a rigorous counterexample to the proposed
+  intermediate lemma.
+
+  '

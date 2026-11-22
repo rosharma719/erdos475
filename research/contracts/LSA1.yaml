@@ -1,0 +1,45 @@
+id: LSA1
+target_node: FP_ALL
+programme: A
+tags:
+- FP
+- avoidance
+- balance
+- DFL
+- merge-chain
+- PATH-AVOID
+- free-point
+- Avoid
+status: open
+goal: 'Prove FP∀ (equivalently DFL(1)) for all primes p, or a precisely stated sufficient lemma, by a
+  NON-asymptotic mechanism: for every zero-sum A, |A|>=5, and every merge pair (a1,a2) with z=a1+a2 ∉
+  A∪{0}, A''=(A\\{a1,a2})∪{z} has a valid cycle starting with z missing a1 or a2. A non-explicit threshold
+  is useless: dense sets at primes between 41 and the effective threshold cannot be enumerated. State
+  exactly how the argument escapes the balance identity (slack p-k at every level) and the failure of
+  local repair.'
+known_inputs:
+- dense_avoidance
+- contraction
+- index_two
+principal_gap: Merge-chain induction escalates constraints one-for-one (balance identity); arbitrary-obstacle
+  grasshopper/finishing lemmas are false; local repair fails dense (566/942 stuck at (31,28)); CN cannot
+  absorb avoidance (degree excess k-3/k-4). Need either a frame where old constraints expire, or a non-inductive
+  large-set flexibility lemma (AV/PATH-AVOID with bounded c) paired with a finite end-game.
+proof_relevance: Direct route to a uniform all-primes theorem (implies Graham for zero-sum sets; DFL(1)
+  for dense A settles dense sets by one merge).
+approaches:
+- 'Non-inductive absorption: fix reserve S and order, reduce Graham(A) to PATH-AVOID(A\\S,F) with F chosen;
+  prove PATH-AVOID for bounded slack deficiency via a structural counting argument that uses the walk''s
+  own visited set.'
+- Strengthened hypothesis (S) (one cycle expanding all splits) proved by induction with a cycle-choice
+  argument or richer repair move with termination proof; test against the six-element obstruction B={±1,±2,±3}.
+allowed_methods:
+- analytic_constructions
+- combinatorial_arguments
+- exact_counterexample_search
+excluded_methods:
+- lean_formalization
+- proof_by_finite_testing
+- asymptotic_threshold_arguments
+success_condition: A complete proof of FP∀/DFL(1) (or a stated stronger lemma implying it), or a rigorous
+  counterexample (concrete p, A, merge pair) with the weakest salvageable statement.

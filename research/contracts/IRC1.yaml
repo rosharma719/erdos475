@@ -1,0 +1,35 @@
+id: IRC1
+target_node: IRC
+programme: C
+tags:
+- IRC
+- zigzag
+- integer
+- absorber
+- Z*
+- canonical
+- run-split
+status: open
+goal: Prove the Integer Range Conjecture (finite P,N ⊂ Z_{>0}, ΣP=ΣN, some signed ordering with distinct
+  partial sums and range <= maxP+maxN-1), or a proved weakening that still implies Graham for all primes,
+  WITHOUT assuming the refuted Z* (dense symmetric P=N=[1..h], h=7,8,10, have no zigzag walk). Zigzag/shell-absorber
+  ideas may be used only in regimes where they are proved.
+known_inputs:
+- integer_range
+principal_gap: 'No flexibility mechanism: rooted induction accumulates rooting conditions (lifts safe
+  only if y<p1-p2 or q1>p1+q2); shell absorber fails near-complete; random zigzag success collapses for
+  AP / GAP-structured sets; run-split Conjecture R unproved.'
+proof_relevance: Independent p-free route to all primes; hedge against dependence on one architecture.
+  Dense regime (where sign rules fail) is where the integer statement is robust.
+approaches:
+- Two-ruler criterion with Hamiltonian-cycle style constructions for the dense regime (no sign rule).
+- Absorber with growing reserve and a rigorous end-game counting lemma, handling near-complete via IRC
+  directly.
+allowed_methods:
+- analytic_constructions
+- combinatorial_arguments
+- exact_counterexample_search
+excluded_methods:
+- lean_formalization
+- proof_by_finite_testing
+success_condition: A complete proof, or a rigorous counterexample to IRC / the stated intermediate lemma.

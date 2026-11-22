@@ -1,0 +1,15 @@
+[project]
+name = "erdos475"
+version = "0.1.0"
+description = "Autonomous research system aimed at a complete proof of Erdős #475"
+requires-python = ">=3.10"
+dependencies = ["anthropic>=1.0", "pyyaml>=6"]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[tool.setuptools]
+packages = ["engine"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
