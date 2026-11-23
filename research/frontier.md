@@ -56,3 +56,16 @@ OBSTRUCTION_BREAKING:
   - By CONTRACTION, any valid ordering in which u and v are adjacent and σ = a ∉ A⁺ \ {u, v} yields a valid ordering of A. The non-membership holds by construction.
 - **Remaining required lemma: adjacency strengthening of the p−3 construction.** One must show the rotational sequencing in that proof can be arranged with a prescribed pair adjacent. Both the exact published statement and its construction must be quoted, so the Pitfall 8 audit can be carried out.
 - **Kill criterion.** If the adjacency strengthening fails for a structural reason, such as rotational symmetry forcing u and v apart, the round must document that obstruction precisely. That result would directly inform FP_ADJACENCY_EQUIV, and NC3C would then be broadened, not retried.
+
+## 2026-11-23 LSA1 (Claude, interactive, no API) -> broaden
+NEXT: broaden
+
+RATIONALE:
+- **Tried the planned route.** I attacked the fused-block (adjacency) form of FP with an exact alternant, Σ_π sgn(π)·P(π) = V(B)·G_n(B; a2). Details are in `claims/fused_block_alternant.md`.
+- **Gains (candidates awaiting the referee).**
+  - The alternant criterion itself.
+  - Closed forms G_3 = e_1 e_3 (a2 − a1) and G_4 = 4 e_1² e_4 (a2 − a1), giving a short new proof of FP_SIZE_5_6 for all p ≥ 5.
+- **Kill criterion met.**
+  - For |A| ≥ 7, G_n depends on the set and vanishes mod p at a rate of about 1/p (exhaustive over scaling orbits, p = 13, 17, 19).
+  - The weighted joint version never failed. But proving it reduces to a per-size Nullstellensatz certificate whose bad primes would have to be ≤ n + 2: the same unstructured problem as CN_ALL_K.
+- **Programme A algebraic route: parked.** Do not reopen without a structural handle on the prime content of per-size certificates. The next round should go to Programme C (IRC) or to the cycle-choice/flexibility direction.
