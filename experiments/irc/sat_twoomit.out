@@ -14,3 +14,4 @@ two-omission h=16: 504 pairs; found 504, NONE 0; 780s
 two-omission h=17: 616 pairs; found 616, NONE 0; 2201s
 two-omission h=18: 744 pairs; found 744, NONE 0; 1317s
 two-omission h=19: 888 pairs; found 888, NONE 0; 2310s
+two-omission h=20: 1050 pairs; found 1050, NONE 0; 46366s

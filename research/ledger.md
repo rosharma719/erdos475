@@ -742,3 +742,29 @@ Offsets c with (2M+3)/3 <= c < M are impossible for tight half-walks; small a mu
 - **Single-gap c=1 obstruction.**
   - The odd-M, odd-a case and inequality (1) are accepted.
   - The even-M, odd-a < M/2 exclusion holds only if min D = 0. Translated forms give valid tight cycles: (M, a) = (10, 3), (14, 3), (14, 5), each verified mod 2M+3.
+## 2026-11-23 Pulled claude/amazing-maxwell-wfz06f (fast-forward); GPT lift-classification round audited
+- Branch brought in: audit of GPT's offset submission (divisibility theorem: M points with no difference c fit in 2M+3-c positions iff c | M, M+1, M+2 or M+3 — accepted, checked to M=3000; single-gap c=1 parity obstruction corrected: needs min D=0, counterexamples (10,3),(14,3),(14,5)); fused-block alternant for FP adjacency (closed forms n<=4, route parked).
+- GPT: M->M+1 three-step lift from a B-path works iff a=2 and the path starts at 0 or 3. Own check on all 86 certificates with M>=5: 0 mismatches (only (6,2,start 3) succeeds). A negative result for this induction move.
+## 2026-11-23 Claude L20: junction half-walk c=a + exact half-walk SAT; coverage M=8..27 complete
+Junction c=a (first step +b, merge at the seam) solves a=2,3,4 at M up to 50 (exact SAT, seconds). Scan: every tight pair M<=27 covered (junction c=a when a | M..M+3, else internal c=M). Prompt for an explicit proof: prompts/gpt_round_junction.md.
+## 2026-11-23 Claude L22: recursion for H_k — proved infinite family for a=2
+Reduction lemma: F(al,be) with al+be ≡ 1 (mod 3) reduces (zigzag + detour through the outlier) to F with sum (s-1)/3; with finite bases this proves H_k for k=4,6,19,181,... (M=4k+2, a=2 tight pairs, all primes p>=2M+3; checked constructively at M=726). Open: reduction gadgets for s ≡ 0,2 mod 3.
+## 2026-11-23 GPT proof of H_k for all k — AUDITED, ACCEPTED (Claude)
+Four-state generalised recursion (F,T,C,D on B_s) + 12 seeds + outer zigzag/detour assembly. Hand-checked every edge/vertex set; own implementation verifies F,T,C,D for s<=1499, H_k for k<=3000, and the end-to-end tight cycles M=4k+2, a=2 for k<=400. Result: tight pairs with a=2 and M ≡ 2 (mod 4) are solved for every prime. Tight family status: a=1 all M (L7); a=2, M ≡ 2 mod 4 (this); rest open (certificates through M=33).
+## 2026-11-23 Claude L24–L25: global attack — near-symmetric structure + SPLICE conjecture
+After the best dilation, dense sets are a symmetric core + small remainder (remainder/k ≈ 0.45 at α=0.5, 0.12 at α=0.9, p=53). SPL (insert the remainder into the FIXED explicit symmetric core walk) holds in every exact test (p=53 α=0.5–0.9; p=101 α=0.9). Proving SPL would cover all A with a nonempty core. Prompt: prompts/gpt_round_global.md (updated).
+## 2026-11-23 Claude L26–L27: two-arc induction fails; AVOID reduction found
+Cut-and-place (remainder as two blocks at the seams) fails (α=0.9: 0/12). But SPL solutions have a canonical form: one remainder step before the final −c, the rest after the core walk; then validity ⇔ the remainder's partial sums avoid the core vertex set. Exact tests p=53: 12/12 at α=0.5, 0.65, 0.8; 7/12 at α=0.9. So middle densities reduce to obstacle-avoidance for the smaller remainder.
+## 2026-11-23 Claude L28: avoidance threshold ≈ 1/2 occupancy; occupancy-preserving recursion GO(θ)
+Random-obstacle tests (p=53): avoidance always solvable at occupancy ≤ 0.5. The AVOID step preserves occupancy exactly, so an induction on |R| needs only (a) a core-walk placement lemma under obstacles and (b) an empty-core base case.
+## 2026-11-23 GPT F(α,β) round audited (Claude)
+Cone necessary condition (β ≤ 3α+2, α ≤ 3β−4) consistent with exhaustive search α+β ≤ 15; both extremal rays verified to 2000 by own code; ten-band recursion read. General F is off the critical path (only the diagonal H_k is used). Next prompt: prompts/gpt_round_next_main.md (tight remainder; GO(θ) placement lemma; SPL near-complete).
+## 2026-11-23 Claude L29: rigid recursive GO fails
+Recursing the AVOID step with the explicit alternating core walk at every level fails without brute-force fallback (p=101: 0/8). The placement lemma needs flexible core walks; recorded as a negative result.
+## 2026-11-23 Claude L30: flexible-core recursion fails too — GO(θ) route not viable as framed
+Even with searched core half-walks at each level, the recursive AVOID construction fails (p=53: 0/6 at α=0.5). The general case needs a new mechanism; the tight-family programme remains the productive line.
+## 2026-11-23 Claude L31: a=2 all M via junction c=2 two-phase pair shape (SAT, M=10..40)
+Explicit vertex-set shape (pairs spaced by 4, one phase shift of 2, L ∈ {1,2,3} leading pairs) admits a valid junction half-walk for every M in 10..40. Handed to GPT for the forced-ladder/state-recursion proof (addendum in prompts/gpt_round_next_main.md).
+## 2026-11-23 Claude L32: a=3 explicit junction shape (blocks + step-2 run) valid for every M=12..30; a=4 tiles identified
+## 2026-11-23 GPT a=2 nested-scaffold round audited (Claude)
+All 57 junction certificates (M up to 85) re-verified independently: valid tight cycles. The M ≡ 5 (mod 8) certificates are an explicit zigzag-block template with one bounded middle gadget — next prompt asks GPT to write the per-residue formulas and prove them (prompts/gpt_round_a2_formula.md).
