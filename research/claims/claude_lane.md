@@ -160,9 +160,40 @@ Greedy ordering fails for a=2,3 and for some parities, so the uniform family nee
 (zigzag + O(1) gadgets) is the shape of an explicit all-M proof.
 Also audited: GPT two-merge family (k=7..399, 0 failures); GPT forced bridge J (candidate edge lists checked by hand).
 
-## L15. Universal header + zigzag ladder (data, research/data/B_canonical_paths.txt)
+## L15. Universal header + zigzag ladder (data) — CORRECTED: only (M+1,a,0,M-3,-1,M-2) is common to all a; the continuation 2,M-4,3,M-5 holds only for some a (GPT: for a=4,5,7,8,9 it would repeat the label b). ALSO SUPERSEDED for small a by L18 (B-shape impossible when floor(M/2)>2a+7).
 Canonical descending-label B-paths for a=4..11, M=24..33 all contain the header
 (M+1, a, 0, M-3, -1, M-2, 2, M-4, 3, M-5) and are otherwise ladders of inward zigzag blocks joined by links whose labels
 continue the consecutive run; label gaps occur only at skipped vertices/shifted boundaries, and b=M+1-a fills one.
 This is the template for an explicit all-M construction (handed to GPT: prompts/gpt_round_ladder.md).
 GPT round (multimerge, rainbow spanning tree): checked, correct, but both avoid the dense Hamiltonicity problem.
+
+## L16. Template test: header + long right zigzag + searched left part (experiments/irc/template.py)
+Fixing the header (M+1,a,0,M-3,-1,M-2,2) and forcing a LONG inward zigzag after 2 leaves a left part that the search
+cannot complete except with a short tail (a=10: M=22 needs a 12-vertex left part; M>=26 times out). So the long run must
+sit on the LEFT of M+1 as a ladder of blocks (as in L15), not as a single zigzag after 2. Consistent with L15; the ladder
+parametrisation (block sizes, attachment point, end gadget) is the remaining design problem (GPT prompt gpt_round_ladder.md).
+
+## L17. General pairs: SYNCHRONIZED-WALK form of the mirrored overlay half-walk (proved equivalence; experiments/irc/syncwalk.py)
+Let c ∈ P∩N, P\{c} = P1 ⊔ P2, N\{c} = N1 ⊔ N2. Let X be a walk 0->e with steps +P1, -N1 and K a walk 0->e with steps
++N2, -P2. Then (X, +c, -K^rev, -c) is a valid ordering iff X and K are self-avoiding and V(X) ∩ (V(K)+c) = ∅.
+(Unstructured, this is just a rotation of any cycle containing ±c — tautological.)
+STRUCTURED version (= mirrored overlay half-walk with merges, L10): additionally X and K are CO-MONOTONE, i.e. both are
+coarsenings of one walk delta (between consecutive X-vertices, and between consecutive K-vertices, delta moves
+monotonically). Then W comes from (delta, c, -delta^rev, -c) by merging; only block-boundary vertices must be distinct.
+Covers symmetric IRC (X=K), tight a=1 (spiral), tight a>=2 (B-shape: X has +a,+b, K has +(M+1)), GPT's two-merge and
+multimerge families. Restrictiveness: only 29% of cross-valid (X,K) pairs are co-monotone (12,694/44,402, small cases).
+Evidence: all 51 random balanced pairs with a common element (3-5 elements per side, values <=12) have a structured
+solution with the Graham range; tight M<=6 all a. Small cases only — larger tests need a non-brute-force search.
+Lemma (proved): for the tight family with a>=2, delta cannot be an OUTWARD walk (every new vertex a new extreme): the
+merged run (a,b) must come last with spread < b before it, but all magnitudes up to M-1 are used earlier.
+OPEN: (i) pairs with P∩N = ∅ (pivot must be a piece); (ii) existence of co-monotone pairs in general.
+
+## L18. GPT's length obstruction: the c=M half-walk FAILS for small a (verified)
+Total edge length forces M(M-1)/2 <= 2*sum_{x in D\{a}}|x-m| - 1 (triangle inequality through a centre m, after
+merging 0-a-(M+1) into the monotone edge 0-(M+1)). Own computation with the optimal centre (M<80): the B-shape is
+impossible exactly when floor(M/2) > 2a+7 (first case M=24, a=2; 420 cases, all predicted by GPT's inequality), and the
+A-shape already fails from (M,a)=(12,2). Since A and B are the only shapes with c=M and spread <= M+2 (L8), the c=M
+half-walk cannot cover the tight family for a << M. Consistent with my data: canonical search returned None for a=2,3.
+Consequences: (i) the "B-only lemma" is false in general; (ii) for a >= (floor(M/2)-7)/2 it may still hold;
+(iii) small a needs another offset (c=1 has room: the same bound is far from tight there) — testing c=1 at M=24..30.
+a=1 is unaffected (spiral, junction merge, L7).
