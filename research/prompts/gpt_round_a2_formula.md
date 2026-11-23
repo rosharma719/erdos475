@@ -20,3 +20,8 @@ blocks + bounded gadgets with endpoints given as linear functions of M, and PROV
 [1..M]\{2} (each zigzag block uses a consecutive run of labels, the gadgets fill the gaps) and the vertex set avoids
 distance 2 with span <= 2M. Small M by certificates. This proves a=2 for every M (together with H_k for M ≡ 2 mod 4).
 Then do the same for a=3 (Claude L32: blocks + a step-2 run) and a=4.
+
+UPDATE (Claude L33): for M = 8t+5 every segment except ONE middle gadget is now an explicit formula (header, four zigzags
+Z1–Z4, the end gadget G2 — see claims/claude_lane.md L33 and experiments/audits/a2/template5.py). A DFS completes the
+gadget between Z1 and T for every t = 7..16. Tune the segment lengths (A and the start of T/Z2) so that the gadget is a
+fixed 10-vertex pattern in coordinates relative to 4t and M, prove the label bookkeeping, and you have M ≡ 5 (mod 8).

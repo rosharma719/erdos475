@@ -357,3 +357,106 @@ a=4 (c=4, no two points at distance 4): SAT solutions are built from two density
 "xxxx...." and the tile {0,2,3,5} mod 8 ("x.xx.x.."), e.g. M=19: xxxx....xxxx....xxxx....xxxx......xxx;
 M=21: xxxx....x.xx.x..x..x.xx.x..x.xx.x....xxxx. Shape family not fixed yet.
 Pattern across a: D is made of period-2a tiles of density 1/2 avoiding difference a, with one or two phase changes.
+
+## L33. a=2, M = 8t+5: explicit template with ONE free gadget (experiments/audits/a2/template5.py)
+From GPT's certificates (M=61,69,77,85) I fixed, as exact linear formulas in t, every part except one middle gadget:
+ H  = 0, M-1, M-2, M-9
+ Z1 = 4i, M-9-4i (i = 1..A)
+ T  = -M+4t+4, -M+4t-7, -M+4t+8, -M+4t-11
+ Z2 = -(4J+5), then (-M+4j+1, -(4j+5)) for j = J-1..0, J = t-3
+ Z3 = (M-8-4i, 4i-1) for i = 0..t-2, then M-8-4(t-1)
+ G2 = M-(4t+10), -M+(4t-3), -M+4t, -M+(4t+5), -M+(4t-4), -M+(4t+9), -M+(4t-8)   (uniform, checked t=8,9,10)
+ Z4 = -(4t-8), then (-M+4j, -4j) for j = t-3..1, then -M
+With these fixed, a DFS fills the gap between Z1 and T for EVERY t = 7..16 (M = 61..133) with a gadget of 8–14 vertices
+(A ≈ t-7..t-4). The gadget is not yet uniform: forcing A = t-5 (10 free vertices) works for t <= 11 only, so one of the
+fixed segment lengths must be tuned with t. All the long zigzags are proved-consecutive label runs; making the gadget
+uniform turns this into a proof of a=2 for M ≡ 5 (mod 8).
+
+## L34. AUDIT: GPT's tight a=2,3,4,5 constructions — ACCEPTED; and the a>=6 route
+Construction: W = (δ, +M, −rev δ, +b, −M, −(M+1), +a) (symmetric core walk on [1,M]\{a,b} + a four-step bridge).
+Own implementation from the stated formulas (experiments/audits/a2to5/audit.py): 0 failures for a=2,3,4,5 at every
+M up to 1200 (labels, distinct partial sums, range <= 2M+2, distinct mod 2M+3). Hand-checked: the bridge lemma
+(vertices M+b, b, −a fall in empty regions), a=2 alternating core in [0,M−2], the a=3 reflection recursion
+(D_M = {0,M−1,2} ∪ (M−3−D_{M−3})), and the a=4, a=5 headers with the one-hole graceful recursion
+G_{n,d} = (n−1,1,n) || (n−1 − G_{n−3,d}). THEOREM (candidate): the tight pair is solved for every M when a ≤ 5.
+So the tight family is now proved for a = 1, 2, 3, 4, 5 (all M).
+a>=6. GPT's obstruction holds only for its maximally packed window [3−a, M+2−a]. With the window relaxed, exact SAT
+(experiments/irc/bridge_sat.py, bridge_scan.py) finds the SAME bridge (+b,−M,−(M+1),+a) working for every a >= 6 and
+every M = 13..31 except a near M/2, where the bridge (+a,−M,+b,−(M+1)) works. The cores found have the shape
+   D = {−a−1} ∪ ([2−a, M−a−2] \ {h}) ∪ {M−a}     (one free internal hole h)
+— an interval with one hole plus one outlier at each end. Seeds G_{n,d} for n = d+1 (plain zigzag), d+2, d+3 exist for every
+d = 4..16 (experiments/irc/gseeds.py), so G_{n,d} extends to every d once those seeds are given uniformly.
+
+## L35. Uniform normal form for the WHOLE tight family (X bridge + two-hole interval core); corrections to L34
+CORRECTION to L34. The G-bridge core shape R1 = {−a−1} ∪ ([2−a,M−a−2]\{h}) ∪ {M−a} (= GPT's normalized V(M,H), start a+1)
+is exact-SAT UNSAT for EVERY hole h when a >= 14 (checked (a,M) = (14,30),(14,31),(15,32),(18,38); works for 6<=a<=13,
+experiments/irc/age6/r1scan.py). Also R1 is the UNIQUE G-bridge window with min D = −a−1. So "same bridge for all a>=6"
+in L34 was wrong; in bridge_scan.out the X bridge was used for a >= 14 at EVERY M, not only near a ≈ M/2.
+NEW NORMAL FORM (all a >= 2). Bridge X: W = (δ, +M, −rev δ, +a, −M, +b, −(M+1)), b = M+1−a, bridge vertices M+a, a, M+1.
+Core: D = [−k, M−1−k] \ {1, a}, path from 0. Lemma (proved by hand): for 0 <= k < M−a, D ∩ (D+M) = ∅ (span M−1); bridge
+points avoid D ∪ (M+D) (a, 1 are holes; a−M < −k; M+a > M−1−k); span = max(2M−1, M+a+k) <= 2M+2 since
+k < M−a; so any such δ is a valid ordering for every p >= 2M+3. Shifting by k: the core is
+   LR(M,a,k): Hamiltonian path on [0, M−1] \ {k+1, k+a}, starting at k, with edge lengths exactly [1, M−1] \ {a, M+1−a}.
+(a "linear realization" with two holes; the holes sit next to the start and at distance a from it.)
+EVIDENCE: with the single uniform choice k = ⌊(M−a)/2⌋, exact SAT finds LR(M,a,k) and the full signed walk verifies for
+EVERY 2 <= a <= M/2 and EVERY M = 8..46 (experiments/irc/age6/lrgrid.py, lrgrid.out; a = M/2 checked separately). The set of
+good k is a wide window around (M−a)/2 (e.g. a=20,M=50: k=6..24). Largest-label-first solutions are an outer zigzag
+k, M−1, 0, M−2, 1, M−3, ... with a bounded middle gadget near the two holes (experiments/irc/age6/lrdfs.py).
+So the tight family = one clean two-hole linear-realization theorem, uniform in a.
+ALSO: one-hole G_{n,d} for ALL d >= 4 with explicit zigzag bases, no citation and no small seeds:
+   n=d+1: (d,1,d−1,2,...);  n=d+2: (d+1,d+2) || zig(1..d from 1) minus its last vertex  [lengths 1,d+1,d−1..2];
+   n=d+3: (d+2,1,d+3,d+1) || zig(2..d from 2) with its second-to-last vertex deleted   [lengths d+1,d+2,2,d−1, then d−2..3,1].
+Verified d=4..150, n <= d+199 (experiments/audits/gnd/audit_gnd.py). GPT's bases B/C (via prescribed-start graceful lemma) also check.
+
+## L36. Literature status (verified from TeX sources) + audit of GPT LR/global round + reversed-G evidence for LR
+STATUS OF #475 (sources read in full or in theorem statements):
+- arXiv:2610.34424 Thm (thm:asymptotic): an ABSOLUTE n_0 such that every S ⊆ G\{0}, G finite abelian, |S| >= n_0, is
+  rearrangeable — NO condition on p. n_0 not computed. (Preprint, Oct 2026.)
+- Kravitz arXiv:2407.01835: |A| <= log p/log log p, EVERY prime. Costa–Della Fiore–Fontana–Vena arXiv:2603.20961: |A| <= 20
+  in any abelian group (zero-sum <= 22), computer-assisted. Verified computationally for all p <= 23 (ADMS 2016 / CMPP 2018).
+- Pham–Sauermann arXiv:2602.15797: C_α <= |S| <= p^{1-α}, any p, C_α explicit but ~exp(10^15).
+- teorth/erdosproblems database: #475 status "decidable" (= reduced to a finite but huge check), not "proved".
+CONSEQUENCE: for all primes, the open set is exactly 21 <= |A| < n_0 together with log p/log log p < |A| — a finite but
+uncomputed set of (p, A). "Finishing" #475 = either an explicit n_0 small enough to check, or a constructive all-primes
+argument for the bounded-size window. Our constructive programme targets the latter (sizes are unrestricted in it).
+AUDIT (GPT LR/global round): (1) occupancy identity [−k,2M−1−k]\{1}: correct (also noted in L35). (2) forbidden-sum graph
+x~y iff x+y ∈ {±c} is a Hamiltonian path on F_p: correct (R_−R_+ = translation by −2c; degree-1 vertices ±c/2; p−1 edges,
+connected). Zero-overlap cycle for minimal zero-sum |B| <= 5: proof checked, correct (n=4 matching argument valid). Narrow.
+(3) Single-edge two-vertex expansion LR(M)->LR(M+2) impossible: accepted. (Claude also: the stretch invariant "no short
+edge crosses the midpoint" is SAT-UNSAT for essentially all (M,a) — experiments/irc/age6/cutsat.py — so stretch recursions die.)
+NEW EVIDENCE for an LR recursion: LR(M,a,k) has solutions whose REVERSE begins with GPT's G-step header (M−2, 0, M−1, 2)
+for every 5 <= a <= M/2−2 tested, M = 14..22, exactly for k ≡ ⌊M/2⌋+1 (mod 2) (experiments/irc/age6/revg.py).
+So LR reversed = two-missing-label G-recursion (peel n−1,1,n; reflect) ending at k, with the end-holes k+1, k+a carried
+through the reflections; only a ≈ M/2 needs separate bases.
+
+## L37. AUDIT: GPT atom-fusion round — ACCEPTED; Strong Fusion (SF) reduction of Graham to one lemma
+Accepted (proofs re-derived by hand; own code experiments/audits/fusion/audit_fusion.py):
+- Four-block fusion word (b1,c1,b2..bm,c2..cn) for disjoint minimal atoms when the only proper zero-sum subsets of B∪C are
+  B, C, cross inverse pairs and their complements (Hall on K_{m,n} minus the 4 cross adjacencies; explicit m=3 / n=3 cases).
+- Two disjoint minimal triples always fuse: 2156/2156 pairs, p in {7,...,23}, by own construction. Examples mod 19 verify.
+- Maximal-atom switching lemma (in a max atom partition, every proper zero-sum subset of B∪C and its complement are atoms).
+- Integer version via large-prime theorem: correct, and correctly flagged as giving no range control.
+NEW (Claude): STRONG FUSION statement
+  SF: every zero-sum A ⊆ F_p^× that is not a minimal atom contains a minimal atom B with Z = A\B zero-sum such that for
+      EVERY valid cycle z of Z, some rotation/reversal of z and some order of B make (b1, z1, b2,...,bm, z2,...,zn) valid.
+SF ⇒ Graham for all p (induction on |A|: Z has a valid cycle by induction, SF fuses ANY of them; atoms are valid in any
+order; then the zero-sum reduction handles nonzero-sum sets). Exhaustive test (experiments/audits/fusion/strong_fusion.py):
+0 failures for all zero-sum non-atom A with p=11, |A|<=9 (65 sets; all of them), p=13, |A|<=8 (234 sets), p=17, |A|<=7 (1316 sets).
+SF is an "every cycle" statement, so it is the induction-ready form of GPT's fusion: the missing theorem is exactly SF.
+
+## L38. Strong Fusion: edge-insertion form, counting lemma, and the MAX-ATOM rule (0 failures in 5264 sets)
+EDGE-INSERTION FORM (exact). Rotating the Z-cycle to start at vertex u (successor u', step w = u'−u), the four-block word
+is "replace edge u→u' by (b1, w, b2, ..., bm)". New vertices: u+b1 and u'+σ_j (σ_j = b1+...+bj, 1<=j<=m−1). Valid iff these
+m points avoid V_Z and u+b1 ≠ u'+σ_j (⇔ w ≠ −(b2+...+bj)). Pair insertion (+c,w,−c) is m=2. Reversal of the Z-cycle
+(step order reversed) has vertex set −V_Z; traversing the same vertex set backwards is NOT allowed (it uses −Z).
+COUNTING LEMMA (proved). Let r(t)=|V∩(V−t)|, r* = max_{t≠0} r(t), n=|V|, m=|B|. Bad (edge, order) pairs are at most
+  Σ_{j=1}^{m−1} j!(m−j)! Σ_{|S|=j} r(σ(S))  [σ(S)≠0 by minimality]  +  (m−1)! Σ_{b∈B} r(b)  +  (m−1)·m!   <=  m!(m·r* + m−1),
+out of n·m! pairs. Hence: if n > m·r* + m − 1, B inserts into THAT cycle. (Covers spread-out vertex sets; not dense/structured.)
+WHICH ATOM (exhaustive, experiments/audits/fusion/sf_which.py, sf_fast.py):
+  - "every atom works" FAILS (e.g. p=13 A=(1,2,3,5,7,9,12), B={1,12}); all such failures at p<=19 are INVERSE PAIRS, plus
+    triples in the dense p=13, |A|=10 case.
+  - MAX-ATOM RULE: B = any atom of MAXIMUM size (with A\B zero-sum) fuses with EVERY valid cycle of A\B — 0 failures:
+    p=11 all 65 sets, p=13 all 257 sets (incl. A=F_13^×), p=17 |A|<=8 (2074), p=19 |A|<=7 (2868). Total 5264.
+  - SF itself (some atom) also 0 failures for p=17 |A|<=9, p=19 |A|<=7.
+CONJECTURE SF-max: for every zero-sum non-atom A ⊆ F_p^× and every maximum-size atom B ⊂ A with A\B zero-sum, every valid
+cycle of A\B admits the edge insertion of B. SF-max ⇒ Graham for all p.
