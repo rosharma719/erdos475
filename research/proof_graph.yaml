@@ -1,8 +1,8 @@
 root: ERDOS475
 nodes:
   ERDOS475:
-    statement: "Graham/Erd\u0151s #475: for every prime p, every nonempty A \u2286 Z_p\\{0} has an ordering\
-      \ with pairwise distinct partial sums."
+    statement: 'Graham/Erdős #475: for every prime p, every nonempty A ⊆ Z_p\{0} has an ordering with pairwise distinct
+      partial sums.'
     status: candidate
     depends_on:
     - LARGE_P_NONEFFECTIVE
@@ -12,8 +12,8 @@ nodes:
     major: true
     programme: null
     source: problem.md
-    notes: Closes only if the middle range of primes (41 .. non-explicit threshold >= ~e^(10^10)) is covered
-      by an explicit, non-asymptotic argument.
+    notes: Closes only if the middle range of primes (41 .. non-explicit threshold >= ~e^(10^10)) is covered by
+      an explicit, non-asymptotic argument.
     audit:
       referee_accepts: 0
       rounds: []
@@ -21,8 +21,8 @@ nodes:
     finite_instances: ''
     history: []
   LARGE_P_NONEFFECTIVE:
-    statement: "Conjecture holds for all sufficiently large p (Pham\u2013Sauermann arXiv:2602.15797 with\
-      \ Kravitz, Bedert\u2013Kravitz, M\xFCyesser\u2013Pokrovskiy et al.); no numerical threshold in print."
+    statement: Conjecture holds for all sufficiently large p (Pham–Sauermann arXiv:2602.15797 with Kravitz, Bedert–Kravitz,
+      Müyesser–Pokrovskiy et al.); no numerical threshold in print.
     status: published
     depends_on: []
     covers:
@@ -38,8 +38,8 @@ nodes:
     finite_instances: ''
     history: []
   FINITE_P_LE_37:
-    statement: "Exhaustive: every nonempty A \u2286 Z_p\\{0} valid for all primes p <= 37 (Archdeacon\
-      \ et al. <=25; Claude p=29,31,37 via orbit enumeration with Burnside-count match)."
+    statement: 'Exhaustive: every nonempty A ⊆ Z_p\{0} valid for all primes p <= 37 (Archdeacon et al. <=25; Claude
+      p=29,31,37 via orbit enumeration with Burnside-count match).'
     status: finite_verified
     depends_on: []
     covers:
@@ -55,8 +55,8 @@ nodes:
     finite_instances: all nonempty subsets, all primes <= 37
     history: []
   UNIFORM_ALL_P:
-    statement: An explicit non-asymptotic argument valid for all primes (or all primes above 37 up to
-      the effective threshold).
+    statement: An explicit non-asymptotic argument valid for all primes (or all primes above 37 up to the effective
+      threshold).
     status: candidate
     depends_on:
     - FP_ALL
@@ -65,8 +65,8 @@ nodes:
     major: true
     programme: A
     source: ledger
-    notes: 'OR-routes (not modeled by AND-dependencies): FP_ALL / DFL1 (prog A), IRC (prog C), CN_ALL_K
-      (parked). Dependency list shows the primary route only.'
+    notes: 'OR-routes (not modeled by AND-dependencies): FP_ALL / DFL1 (prog A), IRC (prog C), CN_ALL_K (parked).
+      Dependency list shows the primary route only.'
     audit:
       referee_accepts: 0
       rounds: []
@@ -74,28 +74,44 @@ nodes:
     finite_instances: ''
     history: []
   FP_ALL:
-    statement: "FP\u2200: for every zero-sum A, |A|>=5, and every merge pair with z=a1+a2 \u2209 A\u222A\
-      {0}, A'=(A\\{a1,a2})\u222A{z} has a valid cycle starting with z whose partial sums miss a1 or a2.\
-      \ Implies Graham for zero-sum sets given merge pairs (Dias da Silva\u2013Hamidoune)."
+    statement: 'FP∀: for every zero-sum A, |A|>=5, and every merge pair with z=a1+a2 ∉ A∪{0}, A''=(A\{a1,a2})∪{z}
+      has a valid cycle starting with z whose partial sums miss a1 or a2. Implies Graham for zero-sum sets given
+      merge pairs (Dias da Silva–Hamidoune).'
     status: candidate
     depends_on:
     - LIFT_MERGE_CHAIN
+    - FP_INDEX_ONE_MERGED
+    - FP_INDEX_TWO_H
+    - FP_SIZE_5_6
     covers: []
     major: true
     programme: A
     source: 'ledger: free-point round'
-    notes: 'Exhaustive p<=19 (8,283/8,283 at p=19); dense random p<=23. Equivalent to DFL(1) shifted by
-      one size. Obstacle: BALANCE_IDENTITY; local repair fails dense (LOCAL_REPAIR_DENSE).'
+    notes: 'Exhaustive p<=19 (8,283/8,283 at p=19); dense random p<=23. Equivalent to DFL(1) shifted by one size.
+      Obstacle: BALANCE_IDENTITY; local repair fails dense (LOCAL_REPAIR_DENSE).'
     audit:
       referee_accepts: 0
-      rounds: []
+      rounds:
+      - 20261122T155310:1
+      - 20261122T155310:2
       human: none
-    finite_instances: 'p<=19 exhaustive; dense random p<=23 (not recorded as finite_verified: no check
-      run by this system)'
-    history: []
+    finite_instances: p<=19 exhaustive; dense random p<=23 (ledger)
+    history:
+    - '-> finite_verified for: p in {7,11,13,17,19,23}, all integer index-1 and index-2 sets (identity dilation),
+      all ordered merge pairs; ThmB cases 9324 ThmC cases (H holds) 10418 H-failures (not covered) 30250'
+    - referee ACCEPT in 20261122T155310:1
+    - '-> finite_verified for: all zero-sum A of size 5 and 6 in Z_p^*, p in {7,11,13,17,19}, all merge pairs; checks
+      FP, ''every valid cycle good'' for |A|=5, and bad<=>B1..B4 characterization for |A|=6'
+    - referee ACCEPT in 20261122T155310:2
+    - 'note (20261122T155310): LSA1 round: proved pieces cover only index<=2 (sparse, k(k+1)/2<=2p) and |A|<=6.
+      Open pieces: index-2 non-wrapping pairs with (H) failing (the majority of index-2 cases), index>=3, |A|>=7
+      in general, and the dense regime. Neither the balance identity nor the local-repair failure was addressed.'
+    - 'status restored to candidate: finite check must not change a universal claim'
+    - 'local data (Claude, no API): pure lift-induction Q-closure nonempty for all zero-sum A, 5<=|A|<=p-2, p<=13
+      and sizes 5..8 at p=17; every legal pair has a Q-cycle that lifts. See research/data/LSA1.md.'
   DFL1:
-    statement: "DFL(1): for every zero-sum B, p/2<=|B|<=p-2, x\u2208B, r\u2209{0,x}: a valid cycle starting\
-      \ with x misses r. Equivalent to FP\u2200."
+    statement: 'DFL(1): for every zero-sum B, p/2<=|B|<=p-2, x∈B, r∉{0,x}: a valid cycle starting with x misses
+      r. Equivalent to FP∀.'
     status: candidate
     depends_on:
     - FP_ALL
@@ -103,8 +119,9 @@ nodes:
     major: false
     programme: A
     source: ledger
-    notes: 'Exhaustive p<=17 (14,366 tests). Ledger: any threshold-based proof of this cannot finish the
-      conjecture; needs non-asymptotic mechanism.'
+    notes: 'Exhaustive p<=17 (14,366 tests). Ledger: any threshold-based proof of this cannot finish the conjecture;
+      needs non-asymptotic mechanism. DOMAIN: equivalence with FP only for r, x−r ∉ B∖{x}, 2r ≠ x; unrestricted
+      DFL(1) is stronger.'
     audit:
       referee_accepts: 0
       rounds: []
@@ -112,8 +129,8 @@ nodes:
     finite_instances: ''
     history: []
   S_PROPERTY:
-    statement: "(S): for every zero-sum B, 4<=|B|<=p-3, marked z\u2208B, some simple cycle through edge\
-      \ 0->z has no legal pair {h,z-h} in its vertex set (one cycle expands all splits)."
+    statement: '(S): for every zero-sum B, 4<=|B|<=p-3, marked z∈B, some simple cycle through edge 0->z has no legal
+      pair {h,z-h} in its vertex set (one cycle expands all splits).'
     status: candidate
     depends_on:
     - FP_ALL
@@ -121,8 +138,8 @@ nodes:
     major: false
     programme: A
     source: ledger
-    notes: "Exhaustive p<=31 (17,026,322 marked orbit pairs); GPT claims all p for |B|<=6 (unaudited).\
-      \ Six-element obstruction B={\xB11,\xB12,\xB13}, z=1 shows small witnesses do not lift."
+    notes: Exhaustive p<=31 (17,026,322 marked orbit pairs); GPT claims all p for |B|<=6 (unaudited). Six-element
+      obstruction B={±1,±2,±3}, z=1 shows small witnesses do not lift.
     audit:
       referee_accepts: 0
       rounds: []
@@ -130,8 +147,7 @@ nodes:
     finite_instances: ''
     history: []
   LIFT_MERGE_CHAIN:
-    statement: "Merge-chain lift: if y\u2208B\\{x}, z=x+y \u2209 B\u222A{0}\u222AR then Avoid(B,x,R) \u21D0\
-      \ Avoid(B',z,R\u222A{x})."
+    statement: 'Merge-chain lift: if y∈B\{x}, z=x+y ∉ B∪{0}∪R then Avoid(B,x,R) ⇐ Avoid(B'',z,R∪{x}).'
     status: candidate
     depends_on: []
     covers: []
@@ -146,9 +162,9 @@ nodes:
     finite_instances: ''
     history: []
   BALANCE_IDENTITY:
-    statement: 'Unwinding the merge chain: level j has |B|=k-j, |R|=j, free residues p-(k-j); slack is
-      p-k at every level, so no bounded-|R| hypothesis closes; the maximal ''avoid any R, |R|<=free-1''
-      hypothesis is false for small B.'
+    statement: 'Unwinding the merge chain: level j has |B|=k-j, |R|=j, free residues p-(k-j); slack is p-k at every
+      level, so no bounded-|R| hypothesis closes; the maximal ''avoid any R, |R|<=free-1'' hypothesis is false for
+      small B.'
     status: candidate
     depends_on: []
     covers: []
@@ -161,7 +177,9 @@ nodes:
       rounds: []
       human: none
     finite_instances: ''
-    history: []
+    history:
+    - 'note (20261122T155310): LSA1: no mechanism escaping slack p-k was found. The index-1/2 window arguments work
+      only because each window holds at most one forbidden lift. That fails at index>=3 (T-1 lifts per window).'
   PATH_AVOID:
     statement: 'PATH-AVOID(A\S, F): an ordering of A\S with distinct partial sums avoiding |F|=|S|-1 prescribed
       points. Contains Graham (c=0).'
@@ -178,10 +196,12 @@ nodes:
       rounds: []
       human: none
     finite_instances: ''
-    history: []
+    history:
+    - 'note (20261122T155310): LSA1: visited-set counting in the dense regime produced no rigorous bound beyond
+      the modular-grasshopper limit |M|<=3. Theorem D (ABSORBER_BOOKKEEPING) only restates the reduction.'
   INDEX_TWO:
-    statement: 'Index-two theorem: zero-sum A with a dilation whose least positive residues sum to exactly
-      2p has a simple cycle with any prescribed element first.'
+    statement: 'Index-two theorem: zero-sum A with a dilation whose least positive residues sum to exactly 2p has
+      a simple cycle with any prescribed element first.'
     status: candidate
     depends_on: []
     covers:
@@ -207,8 +227,8 @@ nodes:
     major: false
     programme: B
     source: ledger
-    notes: Withdrawn after three-jump correction; carry at trip 2->3 transition; last-4 exhaustive end-game
-      never failed empirically (p=17,19; 60k random).
+    notes: Withdrawn after three-jump correction; carry at trip 2->3 transition; last-4 exhaustive end-game never
+      failed empirically (p=17,19; 60k random).
     audit:
       referee_accepts: 0
       rounds: []
@@ -216,8 +236,8 @@ nodes:
     finite_instances: ''
     history: []
   THREE_JUMP_LEMMA:
-    statement: "Corrected three-jump lemma: b<c<d, F=F1\u222AF2 with gaps >= D > 2c, t+b+c+d \u2209 F\
-      \ => some ordering of b,c,d lands outside F at both intermediate points."
+    statement: 'Corrected three-jump lemma: b<c<d, F=F1∪F2 with gaps >= D > 2c, t+b+c+d ∉ F => some ordering of
+      b,c,d lands outside F at both intermediate points.'
     status: candidate
     depends_on: []
     covers: []
@@ -247,9 +267,8 @@ nodes:
     finite_instances: ''
     history: []
   CONTRACTION:
-    statement: "Contraction lemma: a valid cycle of A\u207A with a consecutive block B, \u03C3=\u03A3\
-      B\u22600, \u03C3\u2209A\u207A\\B, merges to a valid cycle of (A\u207A\\B)\u222A{\u03C3}; disjoint\
-      \ blocks may be merged simultaneously; no free-point condition."
+    statement: 'Contraction lemma: a valid cycle of A⁺ with a consecutive block B, σ=ΣB≠0, σ∉A⁺\B, merges to a valid
+      cycle of (A⁺\B)∪{σ}; disjoint blocks may be merged simultaneously; no free-point condition.'
     status: candidate
     depends_on: []
     covers: []
@@ -264,9 +283,8 @@ nodes:
     finite_instances: ''
     history: []
   NEAR_COMPLETE_P3:
-    statement: "Published (Hicks\u2013Ollis\u2013Schmitt arXiv:1809.02684 via graceful permutations; cited\
-      \ by Kravitz arXiv:2407.01835): every A with p-3 <= |A| <= p-1 is valid, i.e. complement size c\
-      \ <= 2."
+    statement: 'Published (Hicks–Ollis–Schmitt arXiv:1809.02684 via graceful permutations; cited by Kravitz arXiv:2407.01835):
+      every A with p-3 <= |A| <= p-1 is valid, i.e. complement size c <= 2.'
     status: published
     depends_on: []
     covers:
@@ -286,14 +304,14 @@ nodes:
     status: candidate
     depends_on:
     - NEAR_COMPLETE_P3
-    - CONTRACTION
+    - NC3_ALL
     covers:
     - '|A| = p-4, all primes p'
     major: false
     programme: B
     source: contracts/NC3C.yaml
-    notes: 'Only r=(p-1)/2>=20 needed (p<=37 verified). Reduction proved (unaudited); constructions NC3-Z1..Z4,
-      selection NC3-S, non-zero-sum NC3-N open. Refutation search: no counterexample p<=73 for |C|=3.'
+    notes: Reduced to NC3_ZEROSUM via ONE_ELEMENT_REDUCTION. Old case split (inverse-pair/zero-sum/generic) is obsolete;
+      zipper & cyclotomic nodes are now spare tools for larger complements.
     audit:
       referee_accepts: 0
       rounds: []
@@ -301,17 +319,20 @@ nodes:
     finite_instances: ''
     history: []
   IRC:
-    statement: "Integer Range Conjecture: for finite P,N \u2282 Z_{>0} with \u03A3P=\u03A3N, some signed\
-      \ ordering has distinct partial sums and range <= maxP+maxN-1. Implies Graham for every prime (via\
-      \ the integer reduction)."
+    statement: 'Integer Range Conjecture: for finite P,N ⊂ Z_{>0} with ΣP=ΣN, some signed ordering has distinct
+      partial sums and range <= maxP+maxN-1. Implies Graham for every prime (via the integer reduction).'
     status: candidate
-    depends_on: []
+    depends_on:
+    - MINIMAL_ZEROSUM_IRC
+    - SYMMETRIC_IRC
     covers: []
     major: true
     programme: C
     source: ledger
-    notes: 1,888,173 instances (values<=18,n<=9); dense cases up to n=60 solved by randomized DFS. Bound
-      tight (P=N={5,6}).
+    notes: '1,888,173 instances (values<=18,n<=9); dense cases up to n=60 solved by randomized DFS. Bound tight
+      (P=N={5,6}). Adversarial tests (Claude): 3,569 structured instances up to value 90, 0 violations; tight family
+      P=N={a,a+1}. Established special cases (candidates): symmetric P=N and minimal zero-sum collections. Open:
+      joining atoms (GAP-S2).'
     audit:
       referee_accepts: 0
       rounds: []
@@ -319,9 +340,8 @@ nodes:
     finite_instances: ''
     history: []
   INTEGER_REDUCTION:
-    statement: "Reduction (proved in ledger): zero-sum A \u2194 integer zero-sum set P\u222A(\u2212N)\
-      \ with maxP+maxN<=p-1; orderings with distinct integer partial sums and range<=p-1 are valid cycles\
-      \ mod p."
+    statement: 'Reduction (proved in ledger): zero-sum A ↔ integer zero-sum set P∪(−N) with maxP+maxN<=p-1; orderings
+      with distinct integer partial sums and range<=p-1 are valid cycles mod p.'
     status: candidate
     depends_on: []
     covers: []
@@ -343,8 +363,8 @@ nodes:
     major: false
     programme: null
     source: ledger CORRECTION Nov 22 1pm
-    notes: P=N=[1..h] has no zigzag walk for h=7,8,10 (plain exhaustive). Do not impose as a hypothesis.
-      Restricted version (sparse regime) open.
+    notes: P=N=[1..h] has no zigzag walk for h=7,8,10 (plain exhaustive). Do not impose as a hypothesis. Restricted
+      version (sparse regime) open.
     audit:
       referee_accepts: 0
       rounds: []
@@ -367,14 +387,14 @@ nodes:
     finite_instances: ''
     history: []
   CONJECTURE_R:
-    statement: "Conjecture R: a zigzag walk exists with \u03C3,\u03C4 each having <=2 ascents."
+    statement: 'Conjecture R: a zigzag walk exists with σ,τ each having <=2 ascents.'
     status: candidate
     depends_on: []
     covers: []
     major: false
     programme: C
     source: ledger
-    notes: "Exhaustive n<=10 for (\u22642,\u22642); undecided n>=25. Depends on the Z* repair."
+    notes: Exhaustive n<=10 for (≤2,≤2); undecided n>=25. Depends on the Z* repair.
     audit:
       referee_accepts: 0
       rounds: []
@@ -382,16 +402,15 @@ nodes:
     finite_instances: ''
     history: []
   SHELL_ABSORBER:
-    statement: 'Shell-absorber theorem for density below a threshold: reserve top-k of P and N; finish
-      exhaustively. Works at low/moderate density; fails near-complete.'
+    statement: 'Shell-absorber theorem for density below a threshold: reserve top-k of P and N; finish exhaustively.
+      Works at low/moderate density; fails near-complete.'
     status: candidate
     depends_on: []
     covers: []
     major: false
     programme: C
     source: ledger
-    notes: "Heuristic evidence only; no rigorous end-game counting lemma. Sparse failures 0/300 for n=30\u2013\
-      60."
+    notes: Heuristic evidence only; no rigorous end-game counting lemma. Sparse failures 0/300 for n=30–60.
     audit:
       referee_accepts: 0
       rounds: []
@@ -399,8 +418,7 @@ nodes:
     finite_instances: ''
     history: []
   CN_REDUCTION:
-    statement: "Thm 1 (CN reduction): if c_k \u2262 0 mod p then every A\u2286Z_p\\{0}, |A|=k, has a valid\
-      \ ordering."
+    statement: 'Thm 1 (CN reduction): if c_k ≢ 0 mod p then every A⊆Z_p\{0}, |A|=k, has a valid ordering.'
     status: candidate
     depends_on:
     - CN_NONZERO_SUM_CORRESPONDENCE
@@ -416,16 +434,15 @@ nodes:
     finite_instances: ''
     history: []
   CN_NONZERO_SUM_CORRESPONDENCE:
-    statement: "Deficit-1 coefficient of V(y)\xB7I_m equals \xB1c_k(d) for every k (general derivation\
-      \ via (m-1)1-\u03C3(\u03B4)=(\u03C3w0)(\u03B4)); k=5\u20138 checks are confirmation only."
+    statement: Deficit-1 coefficient of V(y)·I_m equals ±c_k(d) for every k (general derivation via (m-1)1-σ(δ)=(σw0)(δ));
+      k=5–8 checks are confirmation only.
     status: candidate
     depends_on: []
     covers: []
     major: false
     programme: C
     source: ledger (general proof added 3:45pm); claims/polynomial_cn.md
-    notes: "Short derivation supplied; needs referee audit of \u03B4, m, I and coefficient-extraction\
-      \ conventions."
+    notes: Short derivation supplied; needs referee audit of δ, m, I and coefficient-extraction conventions.
     audit:
       referee_accepts: 0
       rounds: []
@@ -433,8 +450,8 @@ nodes:
     finite_instances: ''
     history: []
   CN_ALL_K:
-    statement: 'Conjecture CN: for all k>=4, gcd(c_k) has no prime factor > k. (Strong form ''divides
-      12'' refuted at k=13: gcd=8.)'
+    statement: 'Conjecture CN: for all k>=4, gcd(c_k) has no prime factor > k. (Strong form ''divides 12'' refuted
+      at k=13: gcd=8.)'
     status: candidate
     depends_on:
     - CN_REDUCTION
@@ -442,8 +459,8 @@ nodes:
     major: true
     programme: C
     source: ledger
-    notes: 'Holds k<=13 (gcds 1,2,4,6,12,6,1,4,8 for k=5..13). Arithmetically random-looking; structural
-      handle absent. PARKED: reopen only with a genuinely new algebraic idea.'
+    notes: 'Holds k<=13 (gcds 1,2,4,6,12,6,1,4,8 for k=5..13). Arithmetically random-looking; structural handle
+      absent. PARKED: reopen only with a genuinely new algebraic idea.'
     audit:
       referee_accepts: 0
       rounds: []
@@ -451,8 +468,8 @@ nodes:
     finite_instances: ''
     history: []
   CDFV_LE20:
-    statement: "Costa\u2013Della Fiore\u2013Fontana\u2013Vena arXiv:2603.20961: every A\u2286G\\{0}, |A|<=20,\
-      \ sequenceable in any abelian group (zero-sum <=22)."
+    statement: 'Costa–Della Fiore–Fontana–Vena arXiv:2603.20961: every A⊆G\{0}, |A|<=20, sequenceable in any abelian
+      group (zero-sum <=22).'
     status: published
     depends_on: []
     covers:
@@ -460,9 +477,9 @@ nodes:
     major: false
     programme: B
     source: ledger
-    notes: "AUDIT FLAGS: \u211A-rank closure unsound with torsion (det \u221217 example, k=9,p=17); deposited\
-      \ treeSearch.py has length-cap, known-block-skip, missing total-sum issues. Theorem not refuted;\
-      \ proof method not accepted by this ledger. Do not use as a verified dependency."
+    notes: 'AUDIT FLAGS: ℚ-rank closure unsound with torsion (det −17 example, k=9,p=17); deposited treeSearch.py
+      has length-cap, known-block-skip, missing total-sum issues. Theorem not refuted; proof method not accepted
+      by this ledger. Do not use as a verified dependency.'
     audit:
       referee_accepts: 0
       rounds: []
@@ -470,7 +487,7 @@ nodes:
     finite_instances: ''
     history: []
   SMALL_SETS_LE12:
-    statement: "Small |A|<=12 for all p (cited in Kuang\u2013Wang); Alspach\u2013Liversidge <=9."
+    statement: Small |A|<=12 for all p (cited in Kuang–Wang); Alspach–Liversidge <=9.
     status: published
     depends_on: []
     covers:
@@ -486,16 +503,15 @@ nodes:
     finite_instances: ''
     history: []
   ATOMICIUM:
-    statement: Atomicium all-primes proof candidate (repo Atomicium-org/graham-rearrangement-certificates
-      @23cb1d03).
+    statement: Atomicium all-primes proof candidate (repo Atomicium-org/graham-rearrangement-certificates @23cb1d03).
     status: blocked
     depends_on: []
     covers: []
     major: false
     programme: null
     source: ledger
-    notes: "Lemma C0.3 gap; \u03BA_rest, S, d_cert undefined; normalization trichotomy mixes potentials;\
-      \ paper self-describes as conditional programme."
+    notes: Lemma C0.3 gap; κ_rest, S, d_cert undefined; normalization trichotomy mixes potentials; paper self-describes
+      as conditional programme.
     audit:
       referee_accepts: 0
       rounds: []
@@ -503,8 +519,8 @@ nodes:
     finite_instances: ''
     history: []
   QRANK_CLOSURE:
-    statement: Rational-rank closure rule (floating-point numpy.matrix_rank) as a valid branch-closing
-      criterion mod p.
+    statement: Rational-rank closure rule (floating-point numpy.matrix_rank) as a valid branch-closing criterion
+      mod p.
     status: refuted
     depends_on: []
     covers: []
@@ -534,15 +550,766 @@ nodes:
     finite_instances: ''
     history: []
   MODULAR_GRASSHOPPER:
-    statement: "Partial sums of any ordering of R can avoid an arbitrary forbidden set M\u2286Z_p\\{0},\
-      \ \u03A3R\u2209M."
+    statement: Partial sums of any ordering of R can avoid an arbitrary forbidden set M⊆Z_p\{0}, ΣR∉M.
     status: refuted
     depends_on: []
     covers: []
     major: false
     programme: A
     source: ledger
-    notes: "Only |M|<=0\u20133 tolerated (p=11,13 exhaustive); any argument must use the walk's own structure."
+    notes: Only |M|<=0–3 tolerated (p=11,13 exhaustive); any argument must use the walk's own structure.
+    audit:
+      referee_accepts: 0
+      rounds: []
+      human: none
+    finite_instances: ''
+    history: []
+  FP_ADJACENCY_EQUIV:
+    statement: 'Lemma 0: for zero-sum A and merge pair (a1,a2), FP(A;a1,a2) iff A has a valid cycle in which a1,a2
+      are cyclically consecutive (either order).'
+    status: candidate
+    depends_on: []
+    covers:
+    - FP_ALL
+    major: false
+    programme: A
+    source: run 20261122T155310
+    notes: ''
+    audit:
+      referee_accepts: 0
+      rounds: []
+      human: none
+    finite_instances: ''
+    history: []
+  FP_INDEX_ONE_MERGED:
+    statement: 'Theorem B: if A'' = (A\{a1,a2})∪{z} has index 1 under some dilation λ, then FP(A;a1,a2). Hence FP
+      holds for all merge pairs of index-1 A, and for wrapping pairs (λa1+λa2>p) of index-2 A.'
+    status: candidate
+    depends_on:
+    - FP_ADJACENCY_EQUIV
+    covers:
+    - FP_ALL
+    major: false
+    programme: A
+    source: run 20261122T155310
+    notes: ''
+    audit:
+      referee_accepts: 0
+      rounds: []
+      human: none
+    finite_instances: ''
+    history: []
+  FP_INDEX_TWO_H:
+    statement: 'Theorem C: A index 2 under λ, merge pair non-wrapping (z̄=λa1+λa2<p). With c1>...>cn the decreasing
+      representatives of λA'', m maximal with D_m=c1+..+cm<p, assume (H): z̄<c_{m+1} if D_m+c_{m+1}>p, and z̄<c_{m+2}
+      if D_m+c_{m+1}=p. Then FP(A;a1,a2).'
+    status: candidate
+    depends_on:
+    - FP_ADJACENCY_EQUIV
+    - INDEX_TWO
+    covers:
+    - FP_ALL
+    major: false
+    programme: A
+    source: run 20261122T155310
+    notes: ''
+    audit:
+      referee_accepts: 0
+      rounds: []
+      human: none
+    finite_instances: ''
+    history: []
+  ABSORBER_BOOKKEEPING:
+    statement: 'Theorem D: A=T⊔S zero-sum, S ordered with no zero consecutive block (except the full block when
+      T=∅), F={σ+s1+..+sj : 1<=j<=m-1}, σ=ΣT. A T-ordering with distinct partial sums, avoiding F, nonzero before
+      the end, extends to a valid ordering of A.'
+    status: candidate
+    depends_on: []
+    covers:
+    - PATH_AVOID
+    major: false
+    programme: A
+    source: run 20261122T155310
+    notes: ''
+    audit:
+      referee_accepts: 0
+      rounds: []
+      human: none
+    finite_instances: ''
+    history: []
+  ENDPOINT_LEMMA_E:
+    statement: 'Lemma E: for zero-sum B={z}∪R, |R|=m>=2, and any ordering of R (valid or not), the points satisfy
+      P2+Pm ≠ z. Consequences: {P2,Pm}≠{a1,a2} when a1+a2=z, and (S) holds at |B|=4.'
+    status: candidate
+    depends_on: []
+    covers:
+    - S_PROPERTY
+    - FP_ALL
+    major: false
+    programme: A
+    source: run 20261122T155310
+    notes: ''
+    audit:
+      referee_accepts: 0
+      rounds: []
+      human: none
+    finite_instances: ''
+    history: []
+  FP_SIZE_5_6:
+    statement: FP(A;a1,a2) holds for every merge pair of every zero-sum A with |A|∈{5,6}, at every prime. For |A|=5,
+      every valid z-first cycle of A' misses a1 or a2. For |A|=6, the bad valid cycles are exactly those meeting
+      patterns B1–B4, each hit by <=2 orderings, so a union bound closes.
+    status: candidate
+    depends_on:
+    - ENDPOINT_LEMMA_E
+    covers:
+    - FP_ALL
+    major: false
+    programme: A
+    source: run 20261122T155310
+    notes: ''
+    audit:
+      referee_accepts: 0
+      rounds: []
+      human: none
+    finite_instances: ''
+    history: []
+  FP_INDEX_TWO_HFAIL:
+    statement: FP for index-2 A with a non-wrapping merge pair where (H) fails, i.e. z̄ >= c_{m+1} (or >= c_{m+2}
+      in the tie case D_m+c_{m+1}=p). Needs a dodging argument tolerating 2 forbidden lifts per window. This is
+      the majority of index-2 cases (30250 of 40668 for p<=23).
+    status: blocked
+    depends_on:
+    - FP_INDEX_TWO_H
+    - INDEX_TWO
+    covers: []
+    major: false
+    programme: A
+    source: run 20261122T155310
+    notes: ''
+    audit:
+      referee_accepts: 0
+      rounds: []
+      human: none
+    finite_instances: ''
+    history: []
+  FP_INDEX_GE3_WINDOW:
+    statement: A window/trip lemma for index T>=3 tolerating T−1 forbidden lifts per window, sufficient for FP at
+      index T. Its failure mode matches the three-jump gap-size constraint (THREE_JUMP_LEMMA needs gaps > 2c).
+    status: blocked
+    depends_on:
+    - THREE_JUMP_LEMMA
+    - INDEX_THREE
+    covers: []
+    major: false
+    programme: A
+    source: run 20261122T155310
+    notes: ''
+    audit:
+      referee_accepts: 0
+      rounds: []
+      human: none
+    finite_instances: ''
+    history: []
+  FP_SIZE_7:
+    statement: FP(A;a1,a2) for all zero-sum |A|=7 via a classification of bad valid z-first cycles, analogous to
+      B1–B4 at |A|=6. Bad index pairs {2,4},{3,5},{3,4} give sum conditions that must be handled structurally. The
+      value is a mechanism extending past |A|=6, not the fact itself (already known for small sets).
+    status: blocked
+    depends_on:
+    - FP_SIZE_5_6
+    - ENDPOINT_LEMMA_E
+    covers: []
+    major: false
+    programme: A
+    source: run 20261122T155310
+    notes: ''
+    audit:
+      referee_accepts: 0
+      rounds: []
+      human: none
+    finite_instances: ''
+    history: []
+  FP_ALL__FIN_20261122T155310:
+    statement: 'Finite restriction of FP_ALL, exactly the tested domain: all zero-sum A of size 5 and 6 in Z_p^*,
+      p in {7,11,13,17,19}, all merge pairs; checks FP, ''every valid cycle good'' for |A|=5, and bad<=>B1..B4 characterization
+      for |A|=6'
+    status: finite_verified
+    depends_on: []
+    covers: []
+    major: false
+    programme: A
+    source: verification engine
+    notes: 'proof_of_universal_claim: false'
+    audit:
+      referee_accepts: 0
+      rounds: []
+      human: none
+    finite_instances: all zero-sum A of size 5 and 6 in Z_p^*, p in {7,11,13,17,19}, all merge pairs; checks FP,
+      'every valid cycle good' for |A|=5, and bad<=>B1..B4 characterization for |A|=6
+    history: []
+    restriction_of: FP_ALL
+  NEAR_COMPLETE_P4:
+    statement: "Prove that for every prime p and every 3-element subset C of F_p^*, the complement A = F_p^* \\\
+      \ C (so |A| = p-4) has a valid ordering. This is the first case beyond the published |A| >= p-3. (A 4-element\
+      \ C would be |A| = p-5, the case after this one.)\n\n  Case split required: (i) sum C != 0: rotational sequencing\
+      \ in which the three omitted elements form a consecutive block (after dilation) so truncation applies; (ii)\
+      \ sum C = 0: a 4-step block whose sum equals one of its steps, contracted; (iii) C containing an inverse pair\
+      \ {x,-x}: HOS Lemma 4.5 special window. Beyond the proof of p-4, PRIORITISE a scalable local-pattern embedding\
+      \ theorem or operation that could address complements of size c>3: variable-position embeddings, dilation\
+      \ freedom, local terrace transformations. Do not assume the fixed-position embedding statement. Every lemma\
+      \ needs a complete proof or a precise missing hypothesis; use computation only to test new claims. Report\
+      \ separately whether the mechanism plausibly generalises to unbounded complement size. If local embedding\
+      \ cannot cover all cases, state a precise structural obstruction and whether another family of rotational\
+      \ sequencings removes it."
+    status: candidate
+    depends_on:
+    - FINITE_P_LE_37
+    - NC3_PARTITION
+    covers: []
+    major: false
+    programme: B
+    source: contract
+    notes: ''
+    audit:
+      referee_accepts: 0
+      rounds:
+      - 20261122T161323:1
+      - 20261122T161323:2
+      human: none
+    finite_instances: ''
+    history:
+    - referee REJECT in 20261122T161323:1
+    - referee REJECT in 20261122T161323:2
+    - 'note (20261122T161323): Round NC3C produced no content: two empty submissions, both REJECTed. Status unchanged
+      (candidate). Required repairs for any resubmission: (1) state the theorem with explicit quantifiers; (2) define
+      validity (distinct partial sums over prefixes 1..|A|; for ΣC=0, A is zero-sum); (3) use the partition (a)
+      ΣC=0 / (b) ΣC≠0 with inverse pair / (c) ΣC≠0 without inverse pair; (4) give an explicit P0≤41 and cite FINITE_P_LE_37
+      for p<P0; (5) cite exact hypotheses of HOS Lemma 4.5 and NEAR_COMPLETE_P3; (6) include a separate report on
+      scalability to unbounded complement size.'
+  NC3_PARTITION:
+    statement: 'For p>2 and C⊂F_p^*, |C|=3, exactly one of the following holds: (a) ΣC=0, in which case C contains
+      no pair {x,-x}; (b) ΣC≠0 and C contains exactly one pair {x,-x}; (c) ΣC≠0 and C contains no inverse pair.
+      Moreover ΣA=-ΣC for A=F_p^*\C. Hence case (a) is exactly the case where A is zero-sum.'
+    status: candidate
+    depends_on: []
+    covers:
+    - NEAR_COMPLETE_P4
+    major: false
+    programme: B
+    source: run 20261122T161323
+    notes: ''
+    audit:
+      referee_accepts: 0
+      rounds: []
+      human: none
+    finite_instances: ''
+    history: []
+  NC3_CASE_A_ZEROSUM:
+    statement: 'For every prime p≥41 and every C={x,y,-x-y}⊂F_p^* with no inverse pair: construct a rotational sequencing
+      (graceful permutation) of F_p^*, after a suitable dilation, containing a consecutive 4-step block B⊇C∪{s}
+      with ΣB=s. Contraction (CONTRACTION) then yields a valid cycle of A=F_p^*\C. The construction is to come from
+      explicit end-pattern families F1–F4 with a selection lemma over dilation and position covering all parameters,
+      including the small and large parameter ranges outside the observed band [0.15r,0.85r].'
+    status: blocked
+    depends_on:
+    - CONTRACTION
+    - NC3_PARTITION
+    covers: []
+    major: false
+    programme: B
+    source: run 20261122T161323
+    notes: ''
+    audit:
+      referee_accepts: 0
+      rounds: []
+      human: none
+    finite_instances: ''
+    history: []
+  NC3_CASE_B_PAIR:
+    statement: 'For every prime p≥41 and C={x,-x,y}, y∉{0,±x}: a valid ordering of F_p^*\C, obtained via the HOS
+      Lemma 4.5 special window or a truncation argument. Verify that Lemma 4.5''s hypotheses cover complement size
+      3. Handle the exceptional (d,r)∈{(2,4),(2,5),(2,8)} explicitly, or show they occur only for p≤37.'
+    status: blocked
+    depends_on:
+    - NEAR_COMPLETE_P3
+    - NC3_PARTITION
+    covers: []
+    major: false
+    programme: B
+    source: run 20261122T161323
+    notes: ''
+    audit:
+      referee_accepts: 0
+      rounds: []
+      human: none
+    finite_instances: ''
+    history: []
+  NC3_CASE_C_GENERIC:
+    statement: 'For every prime p≥41 and C with ΣC≠0 and no inverse pair: a dilation λ and a rotational sequencing
+      in which λC forms a consecutive terminal (truncatable) block. This requires an explicit two-parameter end-pattern
+      family together with a variable-position/dilation selection lemma. The fixed-position version is false.'
+    status: blocked
+    depends_on:
+    - NC3_PARTITION
+    covers: []
+    major: false
+    programme: B
+    source: run 20261122T161323
+    notes: ''
+    audit:
+      referee_accepts: 0
+      rounds: []
+      human: none
+    finite_instances: ''
+    history: []
+  HOS_LEMMA_45:
+    statement: 'Hicks–Ollis–Schmitt Lemma 4.5 (arXiv:1809.02684): a graceful permutation of [1..r] with prescribed
+      last (equivalently first) absolute difference d exists, except (d,r) ∈ {(2,4),(2,5),(2,8)}.'
+    status: published
+    depends_on: []
+    covers: []
+    major: false
+    programme: B
+    source: ledger
+    notes: Second-hand statement via ledger/review; exact hypotheses unchecked against the paper.
+    audit:
+      referee_accepts: 0
+      rounds: []
+      human: none
+    finite_instances: ''
+    history: []
+  NC3_INVERSE_PAIR:
+    statement: 'C={u,−u,v}, v≠±u: A=F_p^×∖C has a valid ordering, all p (HOS 4.5 + rotational sequencing + block
+      deletion).'
+    status: candidate
+    depends_on:
+    - HOS_LEMMA_45
+    - FINITE_P_LE_37
+    covers:
+    - '|A| = p-4 with C containing an inverse pair'
+    major: false
+    programme: B
+    source: external review 2026-11-22
+    notes: 'In-session audit complete; remaining dependency: HOS Lemma 4.5 for all r>=9 (published, text unchecked).
+      Not promoted: promotion requires the referee gates. SUBSUMED by ONE_ELEMENT_REDUCTION + NC3_ZEROSUM.'
+    audit:
+      referee_accepts: 0
+      rounds: []
+      human: none
+    finite_instances: ''
+    history:
+    - 'Audited by Claude in-session (no API): rotational sequencing validity re-derived (points = 2r consecutive
+      integers mod 2r+1); block positions r-1,r,r+1; arc partial sums distinct; dilation bookkeeping (νu≠±r). Conditional
+      ONLY on HOS Lemma 4.5 as stated. Local check: for r=4..13 the (d,r) with no graceful permutation of first
+      difference d are exactly (2,4),(2,5),(2,8), matching the cited exceptions. r>=14 search hit its node cap (search
+      limit, not evidence).'
+  NC3_ZEROSUM:
+    statement: 'p>=11 prime, C 3 distinct elements, ΣC=0: A=F_p^×∖C has a valid ordering (Walecki sequencing + simultaneous
+      contraction of a 2-block and a 3-block). p=7 direct; p<=5 vacuous.'
+    status: candidate
+    depends_on: []
+    covers:
+    - '|A| = p-4, ΣC = 0'
+    major: false
+    programme: B
+    source: GPT proof 2026-11-22 (claims/nc3z_analytic_proof.md)
+    notes: Candidate with strong in-session audit; uses only the Walecki graceful permutation (explicit), no HOS
+      Lemma 4.5.
+    audit:
+      referee_accepts: 0
+      rounds: []
+      human: none
+    finite_instances: ''
+    history:
+    - 'GPT supplied complete proof. Claude in-session audit: lemmas re-derived, independent implementation 2,926/2,926
+      zero-sum triples p<=61 OK. Awaiting referee gates for promotion; not promoted by the auditing model.'
+  NC3_GENERIC:
+    statement: 'C 3 elements, ΣC≠0, no inverse pair: A=F_p^×∖C has a valid ordering (two-parameter end pattern).'
+    status: candidate
+    depends_on:
+    - NC3_CYCLOTOMIC
+    - NC3_ZIPPER
+    covers:
+    - '|A| = p-4, ΣC != 0, no inverse pair'
+    major: false
+    programme: B
+    source: external review 2026-11-22
+    notes: 'Remaining gap: parametric family of rotational sequencings realising the zipper adjacencies for every
+      generic C. Data: random graceful sequencings cover 100% of generic orbits at p=23,29; single Walecki only
+      26-30%. SUBSUMED by ONE_ELEMENT_REDUCTION + NC3_ZEROSUM.'
+    audit:
+      referee_accepts: 0
+      rounds: []
+      human: none
+    finite_instances: ''
+    history: []
+  NC3_ZIPPER:
+    statement: 'Two-pair zipper lemma: disjoint consecutive blocks (a,b),(a+b,c) in a rotational sequencing of F_p^×
+      => F_p^×∖{a,b,c} has a valid ordering (ΣC≠0).'
+    status: candidate
+    depends_on: []
+    covers: []
+    major: false
+    programme: B
+    source: GPT 2026-11-22; claims/nc3c_zipper_lemma.md
+    notes: 'In-session audit: sound; 3,725 constructed orderings verified.'
+    audit:
+      referee_accepts: 0
+      rounds: []
+      human: none
+    finite_instances: ''
+    history:
+    - 'Claude audit: correct; direct verification 3725/0 failures.'
+  ADJ_ALL:
+    statement: 'ADJ-ALL (BR_2): for every zero-sum A, 5<=|A|<=p-2, and every x≠y in A with x+y≠0, some valid cycle
+      has x,y consecutive (illegal pairs x+y∈A included). Strictly stronger than FP∀ (which needs legal pairs only).'
+    status: candidate
+    depends_on: []
+    covers: []
+    major: false
+    programme: A
+    source: local exhaustive data (Claude, 2026-11-22)
+    notes: 'Exhaustive p=11 sizes 5..9, p=13 sizes 7..10: only inverse pairs fail. BR_3 also holds on the same data.
+      BR_m (m>=4) is false.'
+    audit:
+      referee_accepts: 0
+      rounds: []
+      human: none
+    finite_instances: ''
+    history: []
+  NC3_CYCLOTOMIC:
+    statement: Double-transversal criterion for geometric-block rotational sequencings and the quadratic-residue
+      zipper theorem (a sufficient condition covering a thin set of generic classes).
+    status: candidate
+    depends_on:
+    - NC3_ZIPPER
+    covers: []
+    major: false
+    programme: B
+    source: GPT 2026-11-22; claims/nc3c_cyclotomic.md
+    notes: Audited in-session; correct. Coverage of the quadratic corollary alone 25%→15% of generic classes for
+      23<=p<=101.
+    audit:
+      referee_accepts: 0
+      rounds: []
+      human: none
+    finite_instances: ''
+    history:
+    - 'Claude audit: criterion iff 0/3.1M mismatches; quadratic theorem 0 invalid over >190k constructed orderings.'
+  ONE_ELEMENT_REDUCTION:
+    statement: For 2<=|A|<=p-3, if every zero-sum set of the same cardinality has a valid ordering then so does
+      every set (one-element balancing x -> x-ΣA). Hence Graham for size k reduces to zero-sum k-sets.
+    status: candidate
+    depends_on: []
+    covers: []
+    major: false
+    programme: B
+    source: GPT 2026-11-22; claims/one_element_reduction_and_pminus5.md
+    notes: Hand proof + exhaustive check p<=23 (4.3M sets) + transfer verified p<=13; strong in-session audit. Not
+      promoted by the auditing model.
+    audit:
+      referee_accepts: 0
+      rounds: []
+      human: none
+    finite_instances: ''
+    history: []
+  ZEROSUM_4COMPL:
+    statement: 'Zero-sum 4-element complements, p>=11: F_p^×∖C has a valid ordering (Walecki simultaneous contraction
+      of two 2-blocks and the central 3-block).'
+    status: candidate
+    depends_on: []
+    covers:
+    - '|A| = p-5, ΣA = 0'
+    major: false
+    programme: B
+    source: GPT 2026-11-22; claims/one_element_reduction_and_pminus5.md
+    notes: 'Own implementation: all zero-sum 4-complements 11<=p<=47 OK; selection lemma conditions satisfiable
+      throughout (hand proof partially checked).'
+    audit:
+      referee_accepts: 0
+      rounds: []
+      human: none
+    finite_instances: ''
+    history: []
+  NC3_ALL:
+    statement: Every A with |A|=p-4 has a valid ordering, all primes p.
+    status: candidate
+    depends_on:
+    - ONE_ELEMENT_REDUCTION
+    - NC3_ZEROSUM
+    covers:
+    - '|A| = p-4, all primes p'
+    major: false
+    programme: B
+    source: GPT 2026-11-22; claims/one_element_reduction_and_pminus5.md
+    notes: Subsumes inverse-pair and generic cases (the zipper/cyclotomic routes are no longer needed for this).
+    audit:
+      referee_accepts: 0
+      rounds: []
+      human: none
+    finite_instances: ''
+    history: []
+  NC4_ALL:
+    statement: Every A with |A|=p-5 has a valid ordering, all primes p.
+    status: candidate
+    depends_on:
+    - ONE_ELEMENT_REDUCTION
+    - ZEROSUM_4COMPL
+    covers:
+    - '|A| = p-5, all primes p'
+    major: false
+    programme: B
+    source: GPT 2026-11-22; claims/one_element_reduction_and_pminus5.md
+    notes: Small primes p<=7 by hand; p>=11 via Theorem 3.
+    audit:
+      referee_accepts: 0
+      rounds: []
+      human: none
+    finite_instances: ''
+    history: []
+  EC_CONJ:
+    statement: 'External-core conjecture EC: for zero-sum B with a valid cycle, z∈B, every r∉B∪{0} is avoided by
+      some valid cycle with first step z. Implies FP∀.'
+    status: candidate
+    depends_on:
+    - FP_ALL
+    covers: []
+    major: false
+    programme: A
+    source: GPT 2026-11-22; claims/cycle_flexibility.md
+    notes: 'Proved k<=5 (all p); data: exhaustive p<=13, p=17 sampled (95,840 checks, 0 failures). Not self-inductive
+      (merging creates two avoidance requirements). Adversarial tests p=41..61 (22,908 queries, 5 families incl.
+      symmetric, coset unions, near-complete, dense): 0 failures, 0 undetermined, controls pass.'
+    audit:
+      referee_accepts: 0
+      rounds: []
+      human: none
+    finite_instances: ''
+    history:
+    - 'p>=41 adversarial test (Claude): 0 failures; see claims/flexibility_quantitative_audit.md'
+  MC_CONJ:
+    statement: 'Minimal-core conjecture MC: for |B|>=5, K(B,z)={0,z}: every r∉{0,z}, even r∈B, is avoidable by a
+      rooted valid cycle. (k=4 inverse-pair family z,−z,±z/2 is the only forced-vertex exception found.)'
+    status: candidate
+    depends_on:
+    - EC_CONJ
+    covers: []
+    major: false
+    programme: A
+    source: GPT 2026-11-22; claims/cycle_flexibility.md
+    notes: 'Data: p=11,13 exhaustive, p=17 sampled (195,360 checks), 0 failures. Equivalent: some valid cycle has
+      a z-edge starting at an exit vertex of the r-translation. Adversarial tests p=41..61 (22,908 queries, 5 families
+      incl. symmetric, coset unions, near-complete, dense): 0 failures, 0 undetermined, controls pass.'
+    audit:
+      referee_accepts: 0
+      rounds: []
+      human: none
+    finite_instances: ''
+    history:
+    - 'p>=41 adversarial test (Claude): 0 failures; see claims/flexibility_quantitative_audit.md'
+  HOLE_TRANSPORT:
+    statement: Hole-transport lemma + rotation-boundary theorem + inverse-pair segment insertion (flexibility toolkit).
+    status: candidate
+    depends_on: []
+    covers: []
+    major: false
+    programme: A
+    source: GPT 2026-11-22; claims/cycle_flexibility.md
+    notes: Hand-checked; example verified. Existence of augmenting chains in general is open.
+    audit:
+      referee_accepts: 0
+      rounds: []
+      human: none
+    finite_instances: ''
+    history: []
+  FOLD_CONJ:
+    statement: 'FOLD: every symmetric A=±W, W⊆[1..r], has a valid half-cycle (s_1..s_m,−s_1..−s_m), equivalently
+      a distinct-label cyclic labelling of C_m with folded edge weights = W and an odd number of opposite-sign edges.
+      Exact reduction proved; existence conjectural.'
+    status: candidate
+    depends_on: []
+    covers: []
+    major: false
+    programme: C
+    source: Claude analytic 2026-11-22; claims/symmetric_folded_cycle.md
+    notes: 'Reduction proved + checked (832 solutions). Existence verified for all symmetric sets p<=19. Antipodal-case
+      extension of GPT''s double-transversal criterion. SUPERSEDED: valid cycles for all symmetric sets proved by
+      SYMMETRIC_IRC (different construction).'
+    audit:
+      referee_accepts: 0
+      rounds: []
+      human: none
+    finite_instances: ''
+    history: []
+  GEOM_SWAP_THEOREM:
+    statement: On the geometric cycle zH (h generator of H, |H|=k≥3) every non-root adjacent swap is valid iff h²−h+1∉H;
+      hence MC holds for zH when some generator has h²−h+1∉H, equivalently p∤g_k.
+    status: candidate
+    depends_on:
+    - MC_CONJ
+    covers: []
+    major: false
+    programme: A
+    source: GPT 2026-11-22; claims/c5_coset_escape_audit.md
+    notes: 442 (p,h) cases + 285 (k,p) criterion cases, 0 violations.
+    audit:
+      referee_accepts: 0
+      rounds: []
+      human: none
+    finite_instances: ''
+    history:
+    - 'Claude in-session audit: verified with own code (see claims file).'
+  COSET_ESCAPE:
+    statement: 'Partial-transversal geometric blocks (t distinct cosets): if v_i=X+P_i lie in distinct cosets and
+      all w_i∉W then K(B,u_0)={0,u_0} (MC for that set).'
+    status: candidate
+    depends_on:
+    - MC_CONJ
+    covers: []
+    major: false
+    programme: A
+    source: GPT 2026-11-22; claims/c5_coset_escape_audit.md
+    notes: '711 random hypothesis-satisfying instances: all removable, 0 violations. Covers only coset-structured
+      sets.'
+    audit:
+      referee_accepts: 0
+      rounds: []
+      human: none
+    finite_instances: ''
+    history:
+    - 'Claude in-session audit: verified with own code (see claims file).'
+  MARKED_EDGE_MATCHING:
+    statement: Deleting a vertex set D from a full rotational sequencing yields exactly the step set F_p^×∖C iff
+      replacement sums are distinct/nonzero and S_D=L_D∖C; D must cover the edges labelled by C.
+    status: candidate
+    depends_on: []
+    covers: []
+    major: false
+    programme: A
+    source: GPT 2026-11-22; claims/c5_coset_escape_audit.md
+    notes: Walecki valid 5-deletions = 15p−63 verified p=19..47.
+    audit:
+      referee_accepts: 0
+      rounds: []
+      human: none
+    finite_instances: ''
+    history:
+    - 'Claude in-session audit: verified with own code (see claims file).'
+  BOUNDED_SWAP_REPAIR:
+    statement: Every valid rooted cycle can remove any occupied external vertex by validity-preserving adjacent-swap
+      chains.
+    status: refuted
+    depends_on: []
+    covers: []
+    major: false
+    programme: A
+    source: GPT counterexample 2026-11-22; Claude verified p=13..101
+    notes: 'B={±1,±2,±3}, z=1, a=(1,3,−2,−3,−1,2), r=4. EC/MC are NOT refuted: they ask for existence of some cycle.'
+    audit:
+      referee_accepts: 0
+      rounds: []
+      human: none
+    finite_instances: all primes 13<=p<=101
+    history: []
+  MC_MINIMAL_ZEROSUM:
+    statement: 'MC holds for every zero-sum B with no proper nonempty zero-sum subset: every ordering is valid and
+      any internal vertex is removed by one adjacent swap.'
+    status: candidate
+    depends_on:
+    - MC_CONJ
+    covers: []
+    major: false
+    programme: A
+    source: GPT 2026-11-22; Claude audit
+    notes: Hand proof + 1.1M swaps verified (p=23,29). Covers sparse/structured sets only.
+    audit:
+      referee_accepts: 0
+      rounds: []
+      human: none
+    finite_instances: ''
+    history: []
+  MC_DENSE_MP:
+    statement: 'For sufficiently large p, zero-sum B with |B| ≥ p−√p+1, z∈B, R ⊆ F_p∖{0,z} with |R| ≤ p−|B|: a valid
+      rooted cycle avoiding R exists (corollary of Müyesser–Pokrovskiy Thm 6.9).'
+    status: candidate
+    depends_on:
+    - MC_CONJ
+    covers: []
+    major: false
+    programme: A
+    source: GPT 2026-11-22; Claude audit
+    notes: CONDITIONAL on the unverified statement of MP Thm 6.9 and a non-explicit p0; logic of the corollary re-read
+      and sound.
+    audit:
+      referee_accepts: 0
+      rounds: []
+      human: none
+    finite_instances: ''
+    history: []
+  ENERGY_SELECTION:
+    statement: A valid rooted cycle minimising the additive-energy defect E_+(V) avoids any prescribed external
+      r.
+    status: refuted
+    depends_on: []
+    covers: []
+    major: false
+    programme: A
+    source: GPT 2026-11-22; Claude audit
+    notes: 'Counterexamples verified exactly: p=41, B={10,21,25,31,36}, z=10, r=5; B={6,7,9,28,35,38}, z=6, r=3.'
+    audit:
+      referee_accepts: 0
+      rounds: []
+      human: none
+    finite_instances: ''
+    history: []
+  MOBILITY_SELECTION:
+    statement: A valid rooted cycle maximising the number of valid non-root adjacent swaps avoids any prescribed
+      external r.
+    status: refuted
+    depends_on: []
+    covers: []
+    major: false
+    programme: A
+    source: GPT 2026-11-22; Claude audit
+    notes: GPT's instance was wrong (off-by-one in its formula); genuine counterexample p=41, B={2,7,16,25,32},
+      z=32, r=16 verified by Claude.
+    audit:
+      referee_accepts: 0
+      rounds: []
+      human: none
+    finite_instances: ''
+    history: []
+  SYMMETRIC_IRC:
+    statement: 'Symmetric IRC: for S={b_1>…>b_m}, the explicit walk (δ,M,−δ^rev,−M) has distinct integer vertices
+      and range b_1+b_2 ≤ 2b_1−1; hence every symmetric A=−A ⊆ F_p^× (any p, any size) has an explicit valid cyclic
+      ordering.'
+    status: candidate
+    depends_on: []
+    covers:
+    - A = −A, all primes p, all sizes
+    major: false
+    programme: C
+    source: GPT 2026-11-22; Claude audit; claims/symmetric_irc.md
+    notes: Hand proof + exhaustive/mod-p checks (52,068 symmetric sets p<=31; 20,000 random up to p=997). Referee
+      gates pending.
+    audit:
+      referee_accepts: 0
+      rounds: []
+      human: none
+    finite_instances: ''
+    history:
+    - 'Claude in-session audit: verified with own code.'
+  MINIMAL_ZEROSUM_IRC:
+    statement: IRC holds for balanced signed collections with no proper nonempty zero-sum subcollection (sign-rule
+      walk, range ≤ maxP+maxN−1).
+    status: candidate
+    depends_on: []
+    covers: []
+    major: false
+    programme: C
+    source: GPT 2026-11-22; Claude audit
+    notes: 3,142 pairs verified.
     audit:
       referee_accepts: 0
       rounds: []

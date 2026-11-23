@@ -142,7 +142,9 @@ class Round:
         (self.dir / "report.md").write_text(report)
         re_out = self.step("07_reassess", lambda: self.call(
             "director", "director", f"REASSESS\n\nContract: {cid}\n\nRound report:\n{report}\n\n"
-            f"Graph frontier:\n{self._frontier_text()}\n\nAnswer with `NEXT: continue|broaden|abandon` and `RATIONALE:`."))
+            f"Graph frontier:\n{self._frontier_text()}\n\nAnswer with `NEXT: continue|broaden|abandon`, `RATIONALE:`, and, if continuing or broadening, "
+            f"`OBSTRUCTION_BREAKING:` naming the documented obstruction the next round must overcome and the new idea for doing so. "
+            f"Reject any next step that meets a documented obstruction without a new mechanism."))
         m = re.search(r"NEXT:\s*(continue|broaden|abandon)", re_out)
         self.state["next"] = m.group(1) if m else "continue"
         self._save_state()
@@ -166,7 +168,9 @@ class Round:
                 f"## Programme effort: target {tgt}, rounds so far {counts}\n\n"
                 f"## Recent runs\n{self.db.recent_runs()}\n\n## frontier.md\n{C.frontier()[-4000:]}\n\n"
                 "Reply with `CONTRACT: <id>`, `PROGRAMME: <A|B|C>`, `RATIONALE:` (name the mathematical dependency "
-                "or obstruction that justifies this choice), and `GLOBAL_LINK:` (how success moves the full conjecture).")
+                "or obstruction that justifies this choice), `GLOBAL_LINK:` (how success moves the full conjecture), and "
+                "`OBSTRUCTION_BREAKING:` (which documented obstruction in obstructions/ or the ledger this attempt must overcome, and the specific new idea that makes that plausible; "
+                "if the idea hits an already documented obstruction with no new mechanism, do NOT propose it).")
         return self.call("director", "director", task)
 
     def _parse_contract(self, text):
@@ -193,6 +197,8 @@ class Round:
         task = (f"## Problem\n{C.problem()}\n\n## Contract\n{self._contract_text(c)}\n\n"
                 f"## Established claims this contract may use\n{C.claims_for(c, self.graph)}\n\n"
                 f"## Ledger excerpt\n{C.ledger_excerpt(c)}\n\n## Known obstructions (do not repeat these)\n{C.relevant_obstructions(c)}\n\n"
+                f"## Obstruction-breaking hypothesis (from the contract / director)\n{c.get('obstruction_breaking', '(none given: state which documented obstruction you target)')}\n\n"
+                f"## Obstruction-breaking hypothesis\n{c.get('obstruction_breaking', '(none given: state which documented obstruction you target)')}\n\n"
                 f"## Literature notes\n{lit[:12000]}\n\nTARGET_NODE: {c.get('target_node', c['id'])}\n\n"
                 f"You are attempting approach {i} of {n}. "
                 + ("It must use a genuinely different mechanism from the earlier attempts:\n" + prev + "\n" if prev else "")
@@ -232,8 +238,8 @@ class Round:
                          f"instances: {r.instances or '-'}\n```\n{r.stdout.strip()[-1500:]}\n```")
             if r.supports in self.graph.nodes:
                 if r.result == "PASS" and r.kind == "finite" and r.instances:
-                    self.graph.record_finite_verification(r.supports, r.instances)
-                elif r.result == "COUNTEREXAMPLE":
+                    self.graph.record_finite_restriction(r.supports, f"{self.run_id}_{i}_{k}", r.instances)
+                elif r.result == "COUNTEREXAMPLE" and r.kind == "counterexample":
                     self.graph.record_refutation(r.supports, r.stdout.strip()[-300:])
                     p = ROOT / "experiments" / "counterexamples" / f"{self.run_id}_{r.supports}_{k}.py"
                     p.write_text(r.code)       # kept for human audit: model-authored checks can be buggy
@@ -242,7 +248,7 @@ class Round:
     def _apply_audit(self, target, i, verdict, claim):
         if target not in self.graph.nodes:
             return
-        self.graph.record_referee(target, f"{self.run_id}:{i}", verdict)
+        self.graph.record_referee(target, f"{self.run_id}:{i}", verdict, claim_complete=claim.startswith("complete"))
         if verdict == "ACCEPT" and claim.startswith("complete"):
             n = self.cfg["round"]["referee_passes_for_complete"]
             ok, blockers = self.graph.try_promote(target, n, self.cfg["human_review_required_for_major"])

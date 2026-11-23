@@ -6,7 +6,7 @@ class FakeLLM:
         self.referee_verdict = referee_verdict
         self.calls = []
 
-    def complete(self, *, role, system, task, max_tokens, web_search=False):
+    def complete(self, *, role, system, task, max_tokens, web_search=False, **kw):
         self.calls.append(role)
         usage = dict(input=1000, output=500, cache_read=0, cache_write=0)
         return LLMResult(getattr(self, role)(task), "end_turn", "fake", usage, 0.01)
@@ -27,9 +27,15 @@ class FakeLLM:
         return f"""## THEOREM
 For p = 7, every 3-subset C of F_p^* has complement with a valid ordering.
 ## PROOF
-Exhaustive check only (NOT a general proof).
+Exhaustive check only (NOT a general proof). We enumerate every 3-subset C of F_7^* and exhibit an explicit ordering of the complement for each. We enumerate every 3-subset C of F_7^* and exhibit an explicit ordering of the complement for each. We enumerate every 3-subset C of F_7^* and exhibit an explicit ordering of the complement for each. We enumerate every 3-subset C of F_7^* and exhibit an explicit ordering of the complement for each. 
 ## DEPENDENCIES
 (none)
+## GAPS
+G1: the statement for general p is not proved; only p=7 was checked exhaustively.
+## NOVELTY
+dry run: nothing new.
+## OBSTRUCTION_ADDRESSED
+none (dry run)
 ## STATUS_CLAIM
 partial
 ## CHECKS
@@ -45,8 +51,11 @@ Tried small cases first.
 """
 
     def referee(self, task):
-        return (f"## VERDICT: {self.referee_verdict}\n## ISSUES\n- Only finite instances are covered; "
+        return (f"## VERDICT: {self.referee_verdict}\n## ISSUES\n1. (repairable) Only finite instances are covered; "
                 "no argument for general p.\n## COUNTEREXAMPLE_ATTEMPTS\nnone\n")
+
+    def compare(self, task):
+        return '{"relation": "new", "closest": null, "note": "dry run"}'
 
     def synthesis(self, task):
         return """```json

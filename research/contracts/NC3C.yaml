@@ -11,12 +11,16 @@ tags:
 - HOS
 - F1
 - Contract NC3
-status: open
-goal: 'Prove that for every prime p and every 3-element subset C of F_p^*, the complement A = F_p^* \
-  C (so |A| = p-4) has a valid ordering. This is the first case beyond the published |A| >= p-3. (A 4-element
-  C would be |A| = p-5, the case after this one.)
-
-  '
+status: superseded
+goal: 'Statement: for every prime p > 37 and every 3-element C ⊂ F_p^*, A = F_p^* \\ C has an ordering
+  with pairwise distinct partial sums (nonzero NOT required; state the convention explicitly when ΣA =
+  -ΣC = 0). Primes p <= 37 are covered by FINITE_P_LE_37 (cite as base). Use the TRUE partition: (I) C
+  contains an inverse pair {x,-x}; (II) no inverse pair and ΣC = 0; (III) no inverse pair and ΣC != 0.
+  (The earlier case split overlapped: C={x,-x,y} fell in two cases.) Attempt (I) first. Check that HOS
+  Lemma 4.5 applies to |C|=3 (it may assume |C|<=2) before relying on it; if not, build the case-(I) construction
+  by a splitting lift or contraction that avoids it. Beyond p-4, PRIORITISE a scalable local-pattern embedding
+  mechanism for complements of size c>3; report separately whether it generalises. Every lemma needs a
+  complete proof or a precise missing hypothesis.'
 known_inputs:
 - contraction
 - near_complete
@@ -47,3 +51,14 @@ success_condition: 'A complete proof with every case covered, or a rigorous coun
   intermediate lemma.
 
   '
+obstruction_breaking: 'Documented obstructions: (1) fixed-position/forced-prefix embedding is FALSE (91/228
+  two-step patterns fail at r=14); (2) HOS remark that p-4 ''seems unlikely'' by terrace truncation alone;
+  (3) zero-sum C cannot be truncated (a c-window never sums to 0). New mechanisms to use: contraction
+  of a (c+1)-window whose sum is one of its steps; variable position + dilation freedom; ±-pair special
+  window (HOS Lemma 4.5).'
+hard_target: All primes r=(p-1)/2 >= 20 and generic (non-±pair) 3-element complements, via an explicit
+  family — not just finite verification.
+known_regime:
+- '|C| <= 2 (published HOS)'
+- p <= 37 (exhaustive)
+- the ±-pair case via HOS Lemma 4.5 alone

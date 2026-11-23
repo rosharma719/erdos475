@@ -1,6 +1,6 @@
 """SQLite bookkeeping for runs, calls, token usage and budgets. Math lives in Markdown/YAML, not here."""
 from __future__ import annotations
-import sqlite3, time
+import sqlite3, threading, time
 from pathlib import Path
 
 SCHEMA = """
@@ -16,8 +16,10 @@ class BudgetExceeded(RuntimeError):
 
 class Storage:
     def __init__(self, path: str | Path):
-        self.db = sqlite3.connect(str(path))
+        self.db = sqlite3.connect(str(path), check_same_thread=False)
         self.db.executescript(SCHEMA)
+        self.lock = threading.RLock()
+        self.reserved: dict = {}          # run_id -> USD reserved by in-flight calls
 
     def start_run(self, run_id, contract, programme):
         self.db.execute("INSERT OR IGNORE INTO runs VALUES(?,?,?,?,?,NULL,NULL)",
@@ -29,7 +31,22 @@ class Storage:
                         (status, time.time(), outcome, run_id))
         self.db.commit()
 
+    def reserve(self, run_id, est, per_round, total):
+        """Atomically reserve worst-case spend for an in-flight call so parallel workers cannot overshoot."""
+        with self.lock:
+            inflight = sum(self.reserved.values())
+            if self.spent(run_id) + self.reserved.get(run_id, 0) + est > per_round:
+                raise BudgetExceeded(f"per-round budget ${per_round} would be exceeded for {run_id}")
+            if self.spent() + inflight + est > total:
+                raise BudgetExceeded(f"total budget ${total} would be exceeded")
+            self.reserved[run_id] = self.reserved.get(run_id, 0) + est
+
+    def release(self, run_id, est):
+        with self.lock:
+            self.reserved[run_id] = max(0.0, self.reserved.get(run_id, 0) - est)
+
     def record_call(self, run_id, role, model, usage: dict, cost, stop_reason):
+      with self.lock:
         self.db.execute(
             "INSERT INTO calls(run_id,role,model,ts,input_tokens,output_tokens,cache_read,cache_write,cost_usd,stop_reason)"
             " VALUES(?,?,?,?,?,?,?,?,?,?)",

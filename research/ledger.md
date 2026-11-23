@@ -597,3 +597,86 @@ The parameter is ≈ |y/(2x)| mod p for the chosen special element x, since r �
 | 2026-11-21 | Claude (GPT rate-limited) | Atomicium audit: κ\_rest, 𝒮, d\_cert undefined; normalization trichotomy mixes potentials. C0.3 is a symptom of an unfinished proof programme, not a local slip. Rough estimate: the current large-p chain gives a threshold ≳ e^{10¹⁰}, so computation cannot close the gap. p = 37 exhaustive run started (512 resumable chunks; chunk 0: 63.4M orbits, all valid). |
 | 2026-11-21 | Claude: literature + computation | Status mapped: Pham–Sauermann settles large p non-effectively; Oct 2026 papers handle large sets in all abelian groups. Exhaustive verification of p = 29 and p = 31 (orbit counts match Burnside). Read Atomicium C0.3 and agreed the surgery-step increase is unhandled. Ledger created. |
 | 2026-11-21 | GPT round 1 | p = 29 certificate (331,185 zero-sum orbits); C0.3 gap via checker example; C0.2 crossing-count repair; branch missed by arXiv:2603.20961 search; size-23 cutoff p > 1.09×10⁹. Counts and branch arithmetic confirmed by Claude; the rest unaudited. |
+
+## 2026-11-22 LSA1 — run 20261122T155310
+Round LSA1 ran two approaches. Both were refereed ACCEPT as partial results; FP_ALL itself remains open.
+(1) Lemma 0: FP(A;a1,a2) holds iff A has a valid cycle in which a1 and a2 are cyclically consecutive, in either order.
+(2) Theorem B: FP holds for every merge pair once the merged set A' has index 1 under some dilation. This covers every pair of an index-1 A, and every wrapping pair (λa1+λa2 > p) of an index-2 A.
+(3) Theorem C: for index-2 A, a non-wrapping pair and hypothesis (H) (z̄ below the first overflowing decreasing representative c_{m+1}, or c_{m+2} on the tie D_m+c_{m+1}=p), FP holds.
+(4) Theorem D is pure bookkeeping for the absorber split T⊔S. It gives no PATH-AVOID mechanism.
+(5) FP holds for every merge pair when |A|=5 (where every valid z-first cycle of A' already misses a1 or a2) and when |A|=6. The |A|=6 proof uses Lemma E (P2+Pm ≠ z for any ordering) plus a union bound over the bad patterns B1–B4.
+Neither approach escapes the balance identity. Index ≤ 2 forces k(k+1)/2 ≤ 2p, so all of this is the sparse regime.
+The finite check shows (H) fails in 30250 index-2 non-wrapping instances against 10418 covered, so Theorem C covers a minority.
+Precise remaining gaps:
+(a) index-2 non-wrapping pairs where (H) fails, i.e. z lands in trip 1 and a window can hold 2 forbidden lifts;
+(b) index ≥ 3, where T−1 lifts per window break the one-blocked-element step;
+(c) |A|=7, where bad index pairs give sum conditions, not position-pinned elements;
+(d) the dense regime / balance identity. Untouched.
+
+## 2026-11-22 NC3C — run 20261122T161323
+Round NC3C: both approaches returned empty submissions, with no theorem statement, no proof and no dependency citations. Both referees rejected them as fatal-missing. No mathematical content was tested, so this round is no evidence for or against any listed approach. NEAR_COMPLETE_P4 / NC3C stay candidate.
+Five structural facts came out of the referee reports.
+(1) The contract's case split is not a partition, but it repairs to the following one:
+  (a) ΣC=0. Here C has no inverse pair, since {x,-x,y} sums to y≠0.
+  (b) ΣC≠0 and C ⊇ {x,-x}. C holds at most one inverse pair; a second would force y=±x or y=0.
+  (c) ΣC≠0 and C has no inverse pair.
+  Referee 2's claim that (iii) overlaps (ii) is wrong. Case (iii) overlaps only (i).
+(2) For p>2, ΣF_p^*=0, so ΣA=-ΣC. Case (a) is exactly the zero-sum-A case. There, 'valid' must be fixed as distinct partial sums over all prefixes of lengths 1..|A|, which is equivalent to a valid cycle. Every resubmission must state this definition.
+(3) Validity is dilation-invariant, so C may be normalised, e.g. 1∈C.
+(4) Small primes: p=2,3 are vacuous, p=5 is trivial, and every p≤37 is already covered by FINITE_P_LE_37. A construction route therefore needs an explicit threshold P0≤41, or new labelled computation for the primes below P0.
+(5) HOS Lemma 4.5 and NEAR_COMPLETE_P3 must be cited with exact hypotheses. In particular, check that Lemma 4.5 applies to complement size 3, not only size ≤2.
+The remaining gap is unchanged: explicit graceful-permutation families plus a dilation/position selection lemma for cases (a), (b) and (c), each with an explicit P0≤41. The scalability report is still owed.
+
+## 2026-11-22 Corrections after external review (recorded by the system; unaudited)
+- **DFL(1) ⇔ FP equivalence has a restricted domain.** DFL(1) allows any r ∉ {0,x}. The FP correspondence (merge pair (r, x−r) for B∖{x}∪{r,x−r}) is a valid set-merging instance only when r, x−r ∉ B∖{x} and 2r ≠ x. Unrestricted DFL(1) is strictly stronger; the finite evidence supports the stated (admissible) form.
+- **Asymptotics.** The statement that an asymptotic proof cannot complete the conjecture "even in principle" is too strong: an effective threshold plus exhaustive verification would be logically sufficient. The obstruction is practical (known thresholds ≳ e^(10^10) make verification infeasible).
+- **NC3 inverse-pair case (C={u,−u,v}, v≠±u): candidate proof** from HOS Lemma 4.5 + rotational sequencing + deletion of the consecutive block (δ_{r−1}, r, −δ_{r−1}); see claims/inverse_pair.md. Depends on HOS Lemma 4.5 (exceptions (d,r) ∈ {(2,4),(2,5),(2,8)}), r ≥ 9, plus finite verification p ≤ 37. Local check (experiments/exploration/inverse_pair_check.py): construction verified end-to-end for all d at p = 19, 23 and for 12/13 values at p = 29 (d = 13 not found within the search budget: a search limit, not a counterexample to the lemma).
+- **System failure diagnosis (NC3C and LSA1 rounds):** empty submissions were output-budget starvation (prover consumed the whole max_tokens on reasoning; 32k–48k caps at medium/high effort) and, with a 32k task budget, early surrender; not a loss in extraction. The pipeline now detects starvation, skips referees for proof-free submissions, and requires a structured failure record.
+
+## 2026-11-22 NC3-Z (zero-sum, p−4) solved by GPT; zipper lemma for the generic case
+- **NC3-Z:** GPT supplied a complete proof (claims/nc3z_analytic_proof.md): Walecki rotational sequencing, normalise C to C_t={−1,t,1−t}, contract a 2-block (δ_i,δ_{i+1}) and the 3-block (δ_{r−1},r,−δ_{r−1}) simultaneously. Claude audit in-session: lemmas re-derived; independent implementation verified all 2,926 zero-sum triples for 11≤p≤61. Status: candidate pending the referee gates.
+- **Zipper lemma (generic ΣC≠0, no inverse pair):** sufficient condition proved and audited (claims/nc3c_zipper_lemma.md); 3,725 constructed orderings valid. Coverage data: random graceful sequencings realise it for all generic dilation-orbits at p=23 (57/57) and p=29 (100/100); the single Walecki sequencing covers only about a quarter. Remaining gap: a parametric graceful family (the NC3-Z method needed only one explicit sequencing; the generic case seems to need a family).
+- **p−4 status:** inverse-pair (HOS 4.5, audited modulo that lemma) + zero-sum (this proof) + generic (open, reduced to the embedding family). NC3 now has a scalable template: cross-block contraction.
+
+## 2026-11-22 Local-pattern realizability study (Claude, free local computation)
+- ADJ-ALL: every pair x,y with x+y≠0 (legal or not) is consecutive in some valid cycle of every zero-sum A, 5≤|A|≤p−2 — exhaustive p=11 (5..9), p=13 (7..10); only inverse pairs fail. BR_3 also holds (0 failures in 28,296 tuples at p=13). BR_m (m≥4) false.
+- Two-adjacency (zipper-shaped) failures are all block-sum coincidences at p=13 (k≥7).
+- Top-down contraction ladder available for only ~5–15% of dense instances: a single step doesn't reach the dense regime.
+- Takeaway: dense-regime flexibility seems to be a LOCAL-PATTERN statement for ≤3 blocks, but any induction needs simultaneous adjacencies whose obstruction is the coincidence conditions — equivalent to the known balance obstruction. Details: research/data/LSA1.md.
+
+## 2026-11-22 Cyclotomic zipper constructions (GPT) — audited by Claude
+Double-transversal criterion and quadratic-residue zipper theorem verified (criterion iff: 0 mismatches / 3.1M cases; quadratic theorem: >190k constructed orderings, 0 invalid). The quadratic corollary covers only ~25% (p=23) → ~15% (p=101) of generic dilation classes, so NC3-G (generic p−4) stays open: need a prescribed-pattern completion lemma for pairs of coset transversals, or a parametric graceful family. Random graceful sequencings covered 100% of generic classes at p=23,29, so the target is very likely true. Separately: ADJ-ALL holds on all exhaustive searches at p=13,17,19 (769k pairs at p=19, 0 failures) and the coincidence-free two-pair pattern at p=17,19 (38k patterns, 0 failures).
+
+## 2026-11-22 Same-cardinality zero-sum reduction; |A|=p−4 and p−5 (GPT) — audited by Claude (no API)
+- **ONE_ELEMENT_REDUCTION:** for 2≤|A|≤p−3 with s=ΣA≠0 there is x∈A with y=x−s∉A∪{0}; replacing x by y gives a zero-sum set of the same size, and a valid ordering of it transfers (rotate to start at y, swap first label). Hand-proved and exhaustively verified (p≤23: ≈4.3M sets, 0 exceptions; transfer end-to-end p≤13). Consequence: Graham for size k reduces to ZERO-SUM k-sets, for all primes.
+- **|A|=p−4:** now follows from NC3_ZEROSUM alone (inverse-pair and generic complement cases and the zipper/cyclotomic routes are not needed for this theorem). **|A|=p−5:** follows from the zero-sum 4-complement theorem (Walecki 2+2+3 contraction + selection lemma); own implementation verified all zero-sum 4-complements 11≤p≤47.
+- Coverage now: |A| ≥ p−5 (candidates, audited in-session; referee gates pending) beyond the published p−3 ≤ |A|. Fixed-Walecki coarsening is NOT enough in general: p=19, C={7,8,10,14,18} regression (no fixed-Walecki contraction yields A although a valid cycle exists).
+- Strategic: the whole conjecture is now a statement about zero-sum sets of each size.
+
+## 2026-11-22 Cycle flexibility: EC and MC (GPT) — audited by Claude
+- EC (rooted external core ⊆ B∪{0}) proved for |B|≤5; MC (K(B,z)={0,z} for |B|≥5) conjectured. Independent exhaustive/sampled search: no failure of EC or MC at p=11,13 (exhaustive), p=17 (sampled; 195k MC checks). Only forced-vertex exception: the k=4 family {z,−z,±z/2,∓z/2}. Hole-transport example and rotation-boundary theorem verified.
+- Equivalent formulation: MC(B,z,r) ⇔ ∃ valid cycle with a z-edge v→v+z such that v+r is a hole (v an exit of the r-translation). Rotation-boundary says exits exist; need the z-edge to start at one.
+- These are the cleanest dense-regime targets so far (EC ⇒ FP∀; MC strictly stronger). Neither is proved for general |B|.
+
+## 2026-11-22 Symmetric sets: exact reduction to a folded graceful cycle (Claude analytic)
+A=±W has a valid half-cycle (s_1..s_m,−s_1..−s_m) iff C_m admits a distinct-label folded labelling with edge-weight set W and an odd number of opposite-sign edges (Möbius twist). Proof is two lines (vertices are T/2±Q_j). Half-cycles exist for every symmetric set at p ≤ 19 (836 sets, 0 failures). This is the antipodal-subgroup specialisation of the cyclotomic double-transversal criterion extended from W=[1..r] to arbitrary W. Also p=23 (2,036 symmetric sets) and p=29 (16,369): 0 failures. Conjecture FOLD recorded; next: an inductive subdivision argument.
+- FOLD follow-up (Claude): edge-subdivision induction provably reduces to the merge/free-point problem (a subdivision that keeps an old weight forces the new weight fold(2e)); no canonical restricted form (≤1 same-sign edge fails for ~38% of sets; exactly-one-sum-edge fails for ~10%, always sets with several large weights). Heuristic expected number of solutions is huge for every W. No proof yet.
+
+## 2026-11-22 GPT c=5 / coset-escape note — audited by Claude; move-chain quantification
+Verified with own code: zero-sum 5-set counts and Burnside orbits, Walecki pair-sum spectrum {±1,2,r±1}, 15p−63 valid 5-deletions (p=19..47), geometric swap theorem (442 cases), g_k table and generator criterion (285 cases), coset-escape theorem (711 random instances), Walecki-alone coverage 220/634 at p=47. Fixed-cycle move rates: one swap / chain≤3 remove a prescribed vertex in ≈83%/89% at density 0.2 but only ≈10%/25% at density 0.87 (p=23,31) — bounded local repair of a FIXED cycle fails in the dense regime; MC needs flexibility in the choice of cycle. Cyclotomic coverage is not universal (divisors of p−1). GPT direction: quantitative flexibility theorems over cycle choice, coset-core + absorber lemma.
+
+## 2026-11-22 Methodological review (see research/METHOD_REVIEW.md)
+Key findings: (1) strengthening conjectures were tested only at p ≤ 23–29, inside the region where Graham is already verified, so they carry almost no evidence about p ≥ 41; (2) effort followed verifiability (near-complete) rather than the allocation plan; (3) a five-line reduction (same-size balancing) collapsed a day of nonzero-sum casework — a reduction audit should come first; (4) author ≠ auditor: Claude-authored 'proved' claims were never independently audited; (5) the 'computation can't close the gap' pivot rests on an unaudited estimate and open problem #2 (effective large-p) got no work; (6) 'published' nodes are second-hand; (7) uniform lemmas should be certified by finite exceptional-prime lists. Revised protocol adopted (METHOD_REVIEW.md §D).
+
+## 2026-11-22 GPT quantitative flexibility note audited; p≥41 adversarial EC/MC tests (Claude)
+- GPT: bounded adjacent-swap repair from an arbitrary cycle is false even for k=6 and every p≥13 (B={±1,±2,±3}); relocation counterexample (6,−4,−10,−6,10,4) for p≥29. Verified. Deterministic swap-count bound, uniform-cycle probability bound and unique-difference relocation theorem: verified on every tested case (0 violations); dependency-path 'iff' and outcome tables not audited.
+- METHOD fix (review item 1): EC/MC tested at p=41..61 on five adversarial families with positive controls: 22,908 queries, 0 failures, 0 undetermined; only the known |B|=4 exception is unavoidable. Evidence for EC/MC now extends past the verified range of Graham itself.
+
+## 2026-11-22 GPT literature/selection round audited; structured adversaries; IRC adversarial tests (Claude)
+- The e^(10^10) threshold estimate is WITHDRAWN (outdated exponent, unevaluated constants); GAP-A1: extract the real constants. GPT-reported (unverified here): Costa–Della Fiore 1/3 exponent; Pham–Sauermann explicit constants; Müyesser–Pokrovskiy Thm 6.9 ⇒ MC for |B|≥p−√p+1 (large p, conditional).
+- Energy-minimisation refuted as a selection rule (verified). Swap-mobility maximisation refuted too, but GPT's instance was an artefact of an off-by-one bug; correct counterexample p=41, B={2,7,16,25,32}. MC for minimal zero-sum sets verified.
+- Structured adversarial tests p=41..127 (intervals, annuli, GAP2/3, unions of intervals, dense intervals/annuli up to near-complete): 0 failures of EC/MC, 0 undetermined, controls pass. Rigidity: minimum #valid cycles is p-independent and attained by small-integer sets = tight IRC cases. IRC adversarial tests: 3,569 instances, 0 violations.
+- Observation (user): raising p alone will not expose counterexamples; the informative adversaries are p-free (integer/IRC) and extremal-count (rigidity) families.
+
+## 2026-11-22 Symmetric IRC proved (GPT); audited by Claude
+Every symmetric A=−A ⊆ F_p^× has an explicit valid cyclic ordering for every prime p: the walk (δ,M,−δ^rev,−M) with δ the descending alternating path on b_2>…>b_m. Range b_1+b_2 ≤ 2b_1−1 ≤ p−2. Verified: all 65,535 S ⊆ [1..16]; every symmetric subset for all primes ≤ 31 (52,068 sets incl. full group); 20,000 random up to p=997; hand proof re-derived. Also minimal zero-sum IRC (sign rule). This resolves the symmetric/dense-interval obstruction of the zigzag programme and supersedes FOLD. Next: GAP-S2 (joining minimal zero-sum atoms), and 'symmetric core + bounded asymmetric remainder' splicing.

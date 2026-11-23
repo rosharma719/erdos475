@@ -1,0 +1,29 @@
+id: NC3I
+target_node: NC3_INVERSE_PAIR
+programme: B
+tags:
+- NC3
+- inverse-pair
+- HOS
+status: open
+goal: 'Audit/prove: for p odd prime, C={u,−u,v} (v≠±u), A=F_p^×∖C has a valid ordering, via HOS Lemma
+  4.5 and block deletion (see claims/inverse_pair.md). Complete, check every hypothesis (r>=9, signs,
+  which end the prescribed difference sits at, rotation validity for a zero-sum set), state precisely
+  what depends on HOS 4.5.'
+known_inputs:
+- inverse_pair
+principal_gap: Exact hypotheses of HOS Lemma 4.5 and rotation/deletion validity.
+proof_relevance: Closes one of the three p−4 cases and doubles as an end-to-end pipeline test on a known-solution
+  task.
+hard_target: A complete rigorous proof of the proposition for all odd p.
+known_regime: []
+roles:
+  prover:
+    model: claude-opus-5-5
+    effort: medium
+    task_budget: 30000
+allowed_methods:
+- analytic_constructions
+excluded_methods:
+- lean_formalization
+success_condition: Complete proof or a precise failure of a stated hypothesis.

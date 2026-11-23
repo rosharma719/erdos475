@@ -1,0 +1,15 @@
+=== p=41: queries 914; C3 controls (expect 0): [0, 0, 0, 0, 0, 0]
+annulus      C1: found 39 none 0 undet 0 | C2: found 0 none 39 undet 0 | EC: found 196 none 0 undet 0 | MC: found 195 none 0 undet 0
+interval     C1: found 36 none 0 undet 0 | C2: found 0 none 36 undet 0 | EC: found 193 none 0 undet 0 | MC: found 180 none 0 undet 0
+=== p=47: queries 1034; C3 controls (expect 0): [0, 0, 0, 0, 0, 0]
+annulus      C1: found 42 none 0 undet 0 | C2: found 0 none 42 undet 0 | EC: found 226 none 0 undet 0 | MC: found 210 none 0 undet 0
+interval     C1: found 42 none 0 undet 0 | C2: found 0 none 42 undet 0 | EC: found 220 none 0 undet 0 | MC: found 210 none 0 undet 0
+=== p=53: queries 1117; C3 controls (expect 0): [0, 0, 0, 0, 0, 0]
+annulus      C1: found 42 none 0 undet 0 | C2: found 0 none 42 undet 0 | EC: found 223 none 0 undet 0 | MC: found 210 none 0 undet 0
+interval     C1: found 48 none 0 undet 0 | C2: found 0 none 48 undet 0 | EC: found 264 none 0 undet 0 | MC: found 240 none 0 undet 0
+=== p=61: queries 1263; C3 controls (expect 0): [0, 0, 0, 0, 0, 0]
+annulus      C1: found 48 none 0 undet 0 | C2: found 0 none 48 undet 0 | EC: found 254 none 0 undet 0 | MC: found 240 none 0 undet 0
+interval     C1: found 54 none 0 undet 0 | C2: found 0 none 54 undet 0 | EC: found 295 none 0 undet 0 | MC: found 270 none 0 undet 0
+=== p=73: queries 1466; C3 controls (expect 0): [0, 0, 0, 0, 0, 0]
+annulus      C1: found 51 none 0 undet 0 | C2: found 0 none 51 undet 0 | EC: found 277 none 0 undet 0 | MC: found 255 none 0 undet 0
+interval     C1: found 66 none 0 undet 0 | C2: found 0 none 66 undet 0 | EC: found 370 none 0 undet 0 | MC: found 330 none 0 undet 0

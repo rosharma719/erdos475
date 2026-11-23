@@ -1,0 +1,36 @@
+=== p=61: queries 2257; C3 controls (expect 0): [0, 0, 0, 0, 0, 0]
+GAP2         C1: found 30 none 0 undet 0 | C2: found 0 none 30 undet 0 | EC: found 174 none 0 undet 0 | MC: found 150 none 0 undet 0
+GAP3         C1: found 18 none 0 undet 0 | C2: found 0 none 18 undet 0 | EC: found 102 none 0 undet 0 | MC: found 90 none 0 undet 0
+annulus      C1: found 42 none 0 undet 0 | C2: found 0 none 42 undet 0 | EC: found 242 none 0 undet 0 | MC: found 210 none 0 undet 0
+interval     C1: found 57 none 0 undet 0 | C2: found 0 none 57 undet 0 | EC: found 324 none 0 undet 0 | MC: found 285 none 0 undet 0
+two-intervals C1: found 30 none 0 undet 0 | C2: found 0 none 30 undet 0 | EC: found 176 none 0 undet 0 | MC: found 150 none 0 undet 0
+=== p=73: queries 2382; C3 controls (expect 0): [0, 0, 0, 0, 0, 0]
+GAP2         C1: found 39 none 0 undet 0 | C2: found 0 none 39 undet 0 | EC: found 228 none 0 undet 0 | MC: found 195 none 0 undet 0
+GAP3         C1: found 18 none 0 undet 0 | C2: found 0 none 18 undet 0 | EC: found 103 none 0 undet 0 | MC: found 90 none 0 undet 0
+annulus      C1: found 42 none 0 undet 0 | C2: found 0 none 42 undet 0 | EC: found 248 none 0 undet 0 | MC: found 210 none 0 undet 0
+interval     C1: found 57 none 0 undet 0 | C2: found 0 none 57 undet 0 | EC: found 330 none 0 undet 0 | MC: found 285 none 0 undet 0
+two-intervals C1: found 30 none 0 undet 0 | C2: found 0 none 30 undet 0 | EC: found 171 none 0 undet 0 | MC: found 150 none 0 undet 0
+=== p=89: queries 2234; C3 controls (expect 0): [0, 0, 0, 0, 0, 0]
+GAP2         C1: found 27 none 0 undet 0 | C2: found 0 none 27 undet 0 | EC: found 156 none 0 undet 0 | MC: found 135 none 0 undet 0
+GAP3         C1: found 18 none 0 undet 0 | C2: found 0 none 18 undet 0 | EC: found 106 none 0 undet 0 | MC: found 90 none 0 undet 0
+annulus      C1: found 42 none 0 undet 0 | C2: found 0 none 42 undet 0 | EC: found 243 none 0 undet 0 | MC: found 210 none 0 undet 0
+interval     C1: found 57 none 0 undet 0 | C2: found 0 none 57 undet 0 | EC: found 335 none 0 undet 0 | MC: found 285 none 0 undet 0
+two-intervals C1: found 30 none 0 undet 0 | C2: found 0 none 30 undet 0 | EC: found 176 none 0 undet 0 | MC: found 150 none 0 undet 0
+=== p=101: queries 2238; C3 controls (expect 0): [0, 0, 0, 0, 0, 0]
+GAP2         C1: found 27 none 0 undet 0 | C2: found 0 none 27 undet 0 | EC: found 159 none 0 undet 0 | MC: found 135 none 0 undet 0
+GAP3         C1: found 18 none 0 undet 0 | C2: found 0 none 18 undet 0 | EC: found 106 none 0 undet 0 | MC: found 90 none 0 undet 0
+annulus      C1: found 42 none 0 undet 0 | C2: found 0 none 42 undet 0 | EC: found 245 none 0 undet 0 | MC: found 210 none 0 undet 0
+interval     C1: found 57 none 0 undet 0 | C2: found 0 none 57 undet 0 | EC: found 337 none 0 undet 0 | MC: found 285 none 0 undet 0
+two-intervals C1: found 30 none 0 undet 0 | C2: found 0 none 30 undet 0 | EC: found 173 none 0 undet 0 | MC: found 150 none 0 undet 0
+=== p=113: queries 2243; C3 controls (expect 0): [0, 0, 0, 0, 0, 0]
+GAP2         C1: found 30 none 0 undet 0 | C2: found 0 none 30 undet 0 | EC: found 176 none 0 undet 0 | MC: found 150 none 0 undet 0
+GAP3         C1: found 15 none 0 undet 0 | C2: found 0 none 15 undet 0 | EC: found 89 none 0 undet 0 | MC: found 75 none 0 undet 0
+annulus      C1: found 42 none 0 undet 0 | C2: found 0 none 42 undet 0 | EC: found 249 none 0 undet 0 | MC: found 210 none 0 undet 0
+interval     C1: found 57 none 0 undet 0 | C2: found 0 none 57 undet 0 | EC: found 335 none 0 undet 0 | MC: found 285 none 0 undet 0
+two-intervals C1: found 30 none 0 undet 0 | C2: found 0 none 30 undet 0 | EC: found 176 none 0 undet 0 | MC: found 150 none 0 undet 0
+=== p=127: queries 2172; C3 controls (expect 0): [0, 0, 0, 0, 0, 0]
+GAP2         C1: found 27 none 0 undet 0 | C2: found 0 none 27 undet 0 | EC: found 161 none 0 undet 0 | MC: found 135 none 0 undet 0
+GAP3         C1: found 12 none 0 undet 0 | C2: found 0 none 12 undet 0 | EC: found 72 none 0 undet 0 | MC: found 60 none 0 undet 0
+annulus      C1: found 42 none 0 undet 0 | C2: found 0 none 42 undet 0 | EC: found 250 none 0 undet 0 | MC: found 210 none 0 undet 0
+interval     C1: found 57 none 0 undet 0 | C2: found 0 none 57 undet 0 | EC: found 337 none 0 undet 0 | MC: found 285 none 0 undet 0
+two-intervals C1: found 30 none 0 undet 0 | C2: found 0 none 30 undet 0 | EC: found 176 none 0 undet 0 | MC: found 150 none 0 undet 0

@@ -19,8 +19,10 @@ def main(argv=None):
     ap = argparse.ArgumentParser(prog="engine")
     sub = ap.add_subparsers(dest="cmd", required=True)
     r = sub.add_parser("run", help="one research round")
-    r.add_argument("--contract"); r.add_argument("--resume"); r.add_argument("--dry-run", action="store_true")
-    sub.add_parser("status"); sub.add_parser("coverage"); sub.add_parser("check-graph")
+    r.add_argument("--contract"); r.add_argument("--resume"); r.add_argument("--branches", type=int); r.add_argument("--dry-run", action="store_true")
+    c = sub.add_parser("campaign", help="autonomous multi-round loop until solved / budget / needs human")
+    c.add_argument("--contract"); c.add_argument("--max-rounds", type=int, default=10); c.add_argument("--dry-run", action="store_true")
+    sub.add_parser("status"); sub.add_parser("views"); sub.add_parser("coverage"); sub.add_parser("check-graph")
     h = sub.add_parser("human-approve", help="record human review of a major result"); h.add_argument("node")
     sub.add_parser("regress", help="feed known-bad proofs to the referee (costs money)")
     a = ap.parse_args(argv)
@@ -33,6 +35,9 @@ def main(argv=None):
         print(f"spent ${db.spent():.2f} of ${cfg['budget']['total_usd']}")
         for row in db.recent_runs(): print(row)
         for n, k, s, t in graph.frontier()[:10]: print(f"  frontier impact={n} {k} [{s}] {t}")
+    elif a.cmd == "views":
+        from .views import write_frontier_view
+        write_frontier_view(graph, ROOT / "research" / "views" / "frontier.md"); print("research/views/frontier.md")
     elif a.cmd == "coverage":
         print(graph.coverage_report())
     elif a.cmd == "check-graph":
@@ -45,8 +50,16 @@ def main(argv=None):
         from .regression import run_regressions
         from .claude import ClaudeLLM
         sys.exit(run_regressions(ClaudeLLM(cfg), db))
+    elif a.cmd == "campaign":
+        from .campaign import run_campaign
+        if a.dry_run:
+            from .fake import FakeLLM; llm = FakeLLM()
+        else:
+            load_env()
+            from .claude import ClaudeLLM; llm = ClaudeLLM(cfg)
+        print("campaign ended:", run_campaign(cfg, llm, db, graph, a.max_rounds, a.contract))
     elif a.cmd == "run":
-        from .orchestrator import Round
+        from .orchestrator_v2 import Round
         if a.dry_run:
             from .fake import FakeLLM
             llm = FakeLLM()
@@ -56,5 +69,5 @@ def main(argv=None):
                 sys.exit("ANTHROPIC_API_KEY not set (copy .env.example to .env, or `ant auth login`)")
             from .claude import ClaudeLLM
             llm = ClaudeLLM(cfg)
-        d = Round(cfg, llm, db, graph, run_id=a.resume, contract_id=a.contract).run()
+        d = Round(cfg, llm, db, graph, run_id=a.resume, contract_id=a.contract, branches=a.branches).run()
         print(f"round written to {d}\nreport: {d / 'report.md'}")

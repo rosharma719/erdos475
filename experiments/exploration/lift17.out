@@ -1,0 +1,2 @@
+p=17: zero-sum sets size>=5 processed: 2158, Q empty for 0 sets
+  min fraction of legal pairs with a lifted cycle: 1.0 (k, #pairs)= (5, 6)

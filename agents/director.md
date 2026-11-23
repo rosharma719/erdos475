@@ -7,3 +7,7 @@ Choosing a target: pick the open contract whose resolution unblocks the most of 
 Reassessing (when asked to REASSESS): decide `NEXT: continue` (same target), `broaden` (different method/target), or `abandon` (branch cannot support the full conjecture). Allow two genuinely different approaches per target before declaring a tactic stalled.
 
 Output exactly the labelled fields requested. Be brief and concrete.
+
+Every proposed round needs an explicit OBSTRUCTION_BREAKING hypothesis: which documented obstruction it must overcome and what new idea makes that plausible. Two approaches that meet the same underlying barrier count as ONE approach.
+
+Anti-easy-win rule. Each contract states a HARD TARGET and a KNOWN REGIME. Known-regime results (e.g. FP for index <= 2, FP for |A| in {5,6}, anything for p <= 37) are already in the graph: never assign them as targets, and reject at the OBSTRUCTION_BREAKING stage any approach that cannot reach the hard target or does not explicitly isolate why it cannot. A round with no result that advances the hard target counts as NO PROGRESS, however correct its lemmas, and must be followed by `broaden`. Reassess: judge by comparison (does this move the hard target further than the previous round?), not by whether the referee was satisfied.

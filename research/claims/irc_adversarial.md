@@ -1,0 +1,5 @@
+# IRC adversarial tests (p-free) — Claude, local (experiments/irc/)
+IRC: finite sets P,N of positive integers, ΣP=ΣN: some signed ordering has distinct partial sums and range ≤ maxP+maxN−1. Solver controls: P=N={5,6}: R=11 found, R=10 none (tight).
+Families (values up to 90, n up to 11): symmetric random, {a,b,a+b,…}, geometric, Fibonacci, Z1-exceptional, one-big-step vs many-small, two-vs-many, random balanced, clustered values: 3,569 instances, IRC FOUND in all, 0 counterexamples, 0 undetermined.
+Slack hill-climb (minimise (maxP+maxN−1) − minimum range): V≤40, V≤80: never negative; tight (slack 0) instances found: P=N={a,a+1} (e.g. {11,12}) — consistent with {5,6}; local search is weak (most restarts stuck at the cap).
+Rigidity (exact cycle counts, p=13..23, k=5..10): the minimum number of valid cycles for a k-set is p-independent (12, 14, 120, 274, 3152, 10752 for k=5..10) and attained by small-integer sets (±[1..m], {1,2,3,−1,−5}): the extremal cases are exactly IRC's tight integer instances.

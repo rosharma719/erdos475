@@ -8,4 +8,6 @@ Respond with exactly:
 ## VERDICT: ACCEPT | REJECT | GAPS   (ACCEPT only if you found no unresolved logical gap and would sign the proof)
 ## FINITE_ONLY: yes | no   (yes if any part of the claim rests on checked instances)
 ## ISSUES — numbered; each cites the exact step, why it fails, and severity (fatal/repairable/cosmetic)
+## SCOPE: advances_hard_target | known_regime_only | foundational   (judge against the contract's HARD TARGET and KNOWN REGIME: `known_regime_only` = the proof covers only what is already in the graph/published; `foundational` = a lemma the hard regime needs, not a retreat)
+## MANDATED_INSTANCES — if the contract lists them: `M#: PASS|FAIL` per instance, checking that the submission genuinely handles that instance (a FAIL or omission fails the submission regardless of other merits)
 ## COUNTEREXAMPLE_ATTEMPTS — what you tried and what happened

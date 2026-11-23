@@ -6,3 +6,5 @@ Output a single ```json block:
  "failed_attempts": [{"title":"...","why_failed":"the specific step that fails, precisely"}],
  "new_gaps": [{"id":"...","statement":"...","depends_on":[]}]}
 Record failed approaches precisely so later rounds do not repeat them. Prefer isolating a sharp new gap over summarising.
+
+Never write a universal claim as finite-verified: finite checks are recorded by the engine as separate restriction nodes. A referee ACCEPT of a partial result is not a theorem; record only the precise statement proved, as its own candidate node, and keep the universal claim's status.

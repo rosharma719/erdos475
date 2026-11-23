@@ -79,26 +79,52 @@ class ProofGraph:
         self._log(id, f"-> {status}: {reason}")
         return True
 
+    def add_gap(self, target, text, tag, programme=None, dedupe_fn=None):
+        """Register an explicitly declared gap as a blocked node the target depends on (so the target
+        cannot be promoted while it stands). Deterministic: not left to an LLM summary."""
+        if dedupe_fn:
+            for i, n in self.nodes.items():
+                if n.get("kind") == "gap" and dedupe_fn(text, n["statement"]) > 0.6:
+                    self.add_dependency(target, i)
+                    return i
+        gid = f"GAP_{target}_{tag}"
+        if gid in self.nodes:
+            return gid
+        self.add_node(gid, text, "blocked", programme=programme, source="declared gap",
+                      notes="explicitly declared by a prover/referee; close it or refute it with evidence")
+        self.nodes[gid]["kind"] = "gap"
+        self.add_dependency(target, gid)
+        return gid
+
     def record_refutation(self, id, evidence: str):
         """Only the deterministic verification engine calls this."""
         self.nodes[id]["status"] = "refuted"
         self.nodes[id]["finite_instances"] = evidence
         self._log(id, f"-> refuted by deterministic check: {evidence[:200]}")
 
-    def record_finite_verification(self, id, instances: str):
-        n = self.nodes[id]
-        if n["status"] in SOLID | {"refuted"}:
-            return
-        n["status"] = "finite_verified"
-        n["finite_instances"] = instances
-        self._log(id, f"-> finite_verified for: {instances[:200]}")
+    def record_finite_restriction(self, claim_id, tag, instances: str):
+        """A finite check NEVER changes the status of the universal claim. It creates a separate
+        finite_verified proposition recording exactly the domain tested."""
+        nid = f"{claim_id}__FIN_{tag}"
+        if nid in self.nodes:
+            return nid
+        self.add_node(nid, f"Finite restriction of {claim_id}, exactly the tested domain: {instances}",
+                      "finite_verified", source="verification engine",
+                      notes="proof_of_universal_claim: false")
+        self.nodes[nid]["finite_instances"] = instances
+        self.nodes[nid]["restriction_of"] = claim_id
+        self._log(claim_id, f"finite restriction recorded as {nid}; status of {claim_id} unchanged")
+        return nid
 
-    def record_referee(self, id, round_id, verdict):
+    def record_referee(self, id, round_id, verdict, claim_complete=True):
+        """Acceptance of a PARTIAL result is logged but never counts toward promotion."""
         a = self.nodes[id]["audit"]
         if round_id in a["rounds"]:
             return
         a["rounds"].append(round_id)
-        if verdict == "ACCEPT":
+        if verdict == "ACCEPT" and not claim_complete:
+            self._log(id, f"referee ACCEPT of a partial result in {round_id} (not counted toward promotion)")
+        elif verdict == "ACCEPT":
             a["referee_accepts"] += 1
         else:
             a["referee_accepts"] = 0   # any rejection resets the audit
@@ -113,8 +139,8 @@ class ProofGraph:
                 out.append(f"dependency {d} is {self.nodes.get(d, {}).get('status', 'missing')}")
         if n["status"] in {"refuted", "blocked"}:
             out.append(f"status is {n['status']}")
-        if n["status"] == "finite_verified" and not n["audit"]["rounds"]:
-            out.append("finite evidence only; no analytic argument audited")
+        if n["status"] == "finite_verified":
+            out.append("finite evidence only; a finite restriction is not a proof")
         if human_required and n["major"] and n["audit"]["human"] != "approved":
             out.append("major result awaits human review")
         return out

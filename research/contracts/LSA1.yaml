@@ -10,13 +10,13 @@ tags:
 - PATH-AVOID
 - free-point
 - Avoid
-status: open
-goal: 'Prove FP∀ (equivalently DFL(1)) for all primes p, or a precisely stated sufficient lemma, by a
-  NON-asymptotic mechanism: for every zero-sum A, |A|>=5, and every merge pair (a1,a2) with z=a1+a2 ∉
-  A∪{0}, A''=(A\\{a1,a2})∪{z} has a valid cycle starting with z missing a1 or a2. A non-explicit threshold
-  is useless: dense sets at primes between 41 and the effective threshold cannot be enumerated. State
-  exactly how the argument escapes the balance identity (slack p-k at every level) and the failure of
-  local repair.'
+status: dormant
+goal: 'Prove FP∀ (equivalently: for every zero-sum A, |A|>=5, and every merge pair (a1,a2) with a1+a2
+  ∉ A∪{0}, A has a valid cycle in which a1,a2 are cyclically ADJACENT — Lemma 0) for all primes, by a
+  NON-asymptotic mechanism that works in the dense regime. Primary concrete target: the family A = Z_p^*
+  \\ {±1}, all p >= 41, every admissible pair; then generic dense sets. Use the supplied data (research/data/LSA1.md)
+  and your code-execution tool to test conjectures BEFORE asserting them. Either prove a mechanism, or
+  produce a rigorous counterexample, or isolate the exact step that blocks.'
 known_inputs:
 - dense_avoidance
 - contraction
@@ -40,6 +40,26 @@ allowed_methods:
 excluded_methods:
 - lean_formalization
 - proof_by_finite_testing
-- asymptotic_threshold_arguments
+- asymptotic_arguments_with_infeasible_thresholds
 success_condition: A complete proof of FP∀/DFL(1) (or a stated stronger lemma implying it), or a rigorous
   counterexample (concrete p, A, merge pair) with the weakest salvageable statement.
+obstruction_breaking: 'Documented obstructions: balance identity (merge-chain induction loses freedom
+  1-for-1); one-step repair of an ARBITRARY invalid cycle fails dense; CN adjacency encoding exceeds degree
+  budget; arbitrary-obstacle lemmas are false. NEW DATA to exploit: the valid-cycle space of every dense
+  zero-sum set tested is CONNECTED under single valid-to-valid moves (segment reversal, element relocation)
+  — p=11: 57/57 sets (size>=5); p=13: 193/193 sets (size>=6); Z_p^*\\{±1} at p=7,11,13. This is different
+  from one-step repair of invalid cycles. Find a proof mechanism that uses valid-cycle connectivity or
+  a monotone/structured sequence of moves (e.g. an explicit family of valid cycles with prescribed adjacencies
+  built recursively in p or |A|), or refute connectivity at p>=17.'
+hard_target: Index >= 3 dilations and the dense regime |A| >= p/3 (where merge-chain avoidance, local
+  repair and finite enumeration all fail).
+known_regime:
+- FP for index <= 2 (Theorems B/C pattern, covers only k <~ 2*sqrt(p))
+- FP for |A| in {5,6} (counting over orderings; inside published |A| <= 12/20)
+- anything proved only for p <= 37
+mandated_instances:
+- id: M1
+  description: A = Z_p^* \ {±1} for every prime p >= 41, every admissible merge pair (densest FP family;
+    the index grows with p)
+- id: M2
+  description: A = Z_p^* \ C for generic 4-element C, p >= 41, every admissible merge pair

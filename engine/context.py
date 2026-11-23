@@ -55,3 +55,6 @@ def problem():
 
 def frontier():
     return read(R / "frontier.md")
+
+def data(contract):
+    return read(R / "data" / f"{contract['id']}.md")

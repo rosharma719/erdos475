@@ -11,7 +11,7 @@
 9. **Rooted/avoid hypotheses accumulate.** Any induction with a rooting or avoidance condition must show the condition re-establishes itself at the next level (balance identity: slack p−k at every level).
 10. **Arbitrary-obstacle lemmas are false.** Finishing/grasshopper lemmas that avoid an *arbitrary* forbidden set of comparable size fail (modular grasshopper: only |M| ≤ 0–3 at p=11,13; one-step finishing blocked by k points). Use the walk's own visited-set structure.
 11. **Hypothesis thresholds matter.** Three-jump lemma with D > d only is FALSE (jumps 1,6,7; F1={1,13}, F2={7}); D > 2c needed. Re-derive any statistic computed against a wrong hypothesis.
-12. **Non-explicit thresholds cannot finish.** An argument valid only for p > P0 with P0 unspecified leaves primes up to P0 uncovered; dense sets there cannot be enumerated. Demand a non-asymptotic mechanism.
+12. **Non-explicit or infeasible thresholds do not finish.** An argument valid only for p > P0 with P0 unspecified leaves primes up to P0 uncovered. An EFFECTIVE P0 plus exhaustive verification would suffice logically, but the thresholds known (≥ ~e^(10^10)) are computationally prohibitive: a practical, not a mathematical, obstruction.
 13. **A checker accepting a configuration is not a counterexample** until the configuration is shown reachable (Atomicium C0.3); and a checker rejecting is not a refutation of the theorem (CDFV ℚ-rank).
 14. **Dense symmetric sets are the hard case** (Z* refuted by [1..h], h=7,8,10; near-complete sets defeat the shell absorber). Test every general lemma there first.
 15. **Fixed-position/forced-prefix patterns fail.** Dilation and position freedom is essential in graceful-permutation constructions (91/228 patterns fail at r=14 with fixed position).

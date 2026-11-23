@@ -1,0 +1,44 @@
+=== p=41: sets/family 40, queries 5554
+controls C3 (expect all 0 = unavoidable): [0, 0, 0, 0, 0, 0]
+complement         C1: found 80 none 0 undet 0 | C2: found 0 none 80 undet 0 | EC: found 480 none 0 undet 0 | MC: found 480 none 0 undet 0
+cosets             C1: found 80 none 0 undet 0 | C2: found 0 none 80 undet 0 | EC: found 474 none 0 undet 0 | MC: found 466 none 0 undet 0
+dense              C1: found 80 none 0 undet 0 | C2: found 0 none 80 undet 0 | EC: found 480 none 0 undet 0 | MC: found 480 none 0 undet 0
+symmetric          C1: found 80 none 0 undet 0 | C2: found 0 none 80 undet 0 | EC: found 456 none 0 undet 0 | MC: found 480 none 0 undet 0
+symmetric+triple   C1: found 80 none 0 undet 0 | C2: found 0 none 80 undet 0 | EC: found 478 none 0 undet 0 | MC: found 480 none 0 undet 0
+=== p=43: sets/family 30, queries 4170
+controls C3 (expect all 0 = unavoidable): [0, 0, 0, 0, 0, 0]
+complement         C1: found 60 none 0 undet 0 | C2: found 0 none 60 undet 0 | EC: found 360 none 0 undet 0 | MC: found 360 none 0 undet 0
+cosets             C1: found 60 none 0 undet 0 | C2: found 0 none 60 undet 0 | EC: found 360 none 0 undet 0 | MC: found 358 none 0 undet 0
+dense              C1: found 60 none 0 undet 0 | C2: found 0 none 60 undet 0 | EC: found 360 none 0 undet 0 | MC: found 360 none 0 undet 0
+symmetric          C1: found 60 none 0 undet 0 | C2: found 0 none 60 undet 0 | EC: found 340 none 0 undet 0 | MC: found 360 none 0 undet 0
+symmetric+triple   C1: found 60 none 0 undet 0 | C2: found 0 none 60 undet 0 | EC: found 352 none 0 undet 0 | MC: found 360 none 0 undet 0
+=== p=47: sets/family 30, queries 4182
+controls C3 (expect all 0 = unavoidable): [0, 0, 0, 0, 0, 0]
+complement         C1: found 60 none 0 undet 0 | C2: found 0 none 60 undet 0 | EC: found 360 none 0 undet 0 | MC: found 360 none 0 undet 0
+cosets             C1: found 60 none 0 undet 0 | C2: found 0 none 60 undet 0 | EC: found 360 none 0 undet 0 | MC: found 358 none 0 undet 0
+dense              C1: found 60 none 0 undet 0 | C2: found 0 none 60 undet 0 | EC: found 360 none 0 undet 0 | MC: found 360 none 0 undet 0
+symmetric          C1: found 60 none 0 undet 0 | C2: found 0 none 60 undet 0 | EC: found 344 none 0 undet 0 | MC: found 360 none 0 undet 0
+symmetric+triple   C1: found 60 none 0 undet 0 | C2: found 0 none 60 undet 0 | EC: found 360 none 0 undet 0 | MC: found 360 none 0 undet 0
+=== p=53: sets/family 25, queries 3472
+controls C3 (expect all 0 = unavoidable): [0, 0, 0, 0, 0, 0]
+complement         C1: found 50 none 0 undet 0 | C2: found 0 none 50 undet 0 | EC: found 300 none 0 undet 0 | MC: found 300 none 0 undet 0
+cosets             C1: found 50 none 0 undet 0 | C2: found 0 none 50 undet 0 | EC: found 300 none 0 undet 0 | MC: found 286 none 0 undet 0
+dense              C1: found 50 none 0 undet 0 | C2: found 0 none 50 undet 0 | EC: found 300 none 0 undet 0 | MC: found 300 none 0 undet 0
+symmetric          C1: found 50 none 0 undet 0 | C2: found 0 none 50 undet 0 | EC: found 292 none 0 undet 0 | MC: found 300 none 0 undet 0
+symmetric+triple   C1: found 50 none 0 undet 0 | C2: found 0 none 50 undet 0 | EC: found 294 none 0 undet 0 | MC: found 300 none 0 undet 0
+=== p=59: sets/family 20, queries 2734
+controls C3 (expect all 0 = unavoidable): [0, 0, 0, 0, 0, 0]
+complement         C1: found 40 none 0 undet 0 | C2: found 0 none 40 undet 0 | EC: found 240 none 0 undet 0 | MC: found 240 none 0 undet 0
+cosets             C1: found 40 none 0 undet 0 | C2: found 0 none 40 undet 0 | EC: found 240 none 0 undet 0 | MC: found 210 none 2 undet 0
+dense              C1: found 40 none 0 undet 0 | C2: found 0 none 40 undet 0 | EC: found 240 none 0 undet 0 | MC: found 240 none 0 undet 0
+symmetric          C1: found 40 none 0 undet 0 | C2: found 0 none 40 undet 0 | EC: found 204 none 0 undet 0 | MC: found 240 none 0 undet 0
+symmetric+triple   C1: found 40 none 0 undet 0 | C2: found 0 none 40 undet 0 | EC: found 238 none 0 undet 0 | MC: found 240 none 0 undet 0
+  ANOMALY ('cosets', 'MC', 4) 11 35 [11, 24, 35, 48]
+  ANOMALY ('cosets', 'MC', 4) 48 24 [11, 24, 35, 48]
+=== p=61: sets/family 20, queries 2796
+controls C3 (expect all 0 = unavoidable): [0, 0, 0, 0, 0, 0]
+complement         C1: found 40 none 0 undet 0 | C2: found 0 none 40 undet 0 | EC: found 240 none 0 undet 0 | MC: found 240 none 0 undet 0
+cosets             C1: found 40 none 0 undet 0 | C2: found 0 none 40 undet 0 | EC: found 240 none 0 undet 0 | MC: found 236 none 0 undet 0
+dense              C1: found 40 none 0 undet 0 | C2: found 0 none 40 undet 0 | EC: found 240 none 0 undet 0 | MC: found 240 none 0 undet 0
+symmetric          C1: found 40 none 0 undet 0 | C2: found 0 none 40 undet 0 | EC: found 240 none 0 undet 0 | MC: found 240 none 0 undet 0
+symmetric+triple   C1: found 40 none 0 undet 0 | C2: found 0 none 40 undet 0 | EC: found 240 none 0 undet 0 | MC: found 240 none 0 undet 0

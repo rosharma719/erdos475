@@ -1,0 +1,56 @@
+id: NC3Z
+target_node: NC3_ZEROSUM
+programme: B
+tags:
+- NC3
+- near-complete
+- zero-sum
+- F1
+- graceful
+- contraction
+- HOS
+- terrace
+status: solved_candidate
+goal: 'Let p=2r+1 be prime, r>=20, and C ⊆ F_p^× a 3-element set with ΣC=0 and no inverse pair (so C={x,y,−x−y}).
+  Prove that A=F_p^×∖C has a valid ordering (distinct partial sums), preferably by constructing a graceful
+  permutation and applying the four-step contraction mechanism in the ledger (''Contract NC3'', zero-sum
+  reduction): dilate so a chosen element of C is ±r, contract a 4-window whose sum is one of its steps.
+  The ledger reduces the construction to four signed-difference first-two-step families F1(a)=(a−r,a),
+  F2(a)=(a,a−r), F3(b)=(b,b−r−1), F4(b)=(r+1−b,−b) (up to reversal/complement), plus the choice of which
+  element of C is normalised to ±r. Priority: a uniform analytic construction and a rigorous selection
+  lemma. Observed embedding bands are evidence, not theorems. You may replace the graceful-permutation
+  construction by a more general mechanism. Use computation only for falsification and independent checking,
+  never in place of proof.'
+known_inputs:
+- contraction
+- near_complete
+- inverse_pair
+principal_gap: Explicit graceful-permutation families realising F1..F4 across their bands for all r>=20,
+  and a selection lemma showing some choice of normalised element always lands in a band (small/large
+  parameters fail in all four families).
+proof_relevance: Closes the zero-sum case of p−4; a parametric local-pattern embedding theorem here is
+  the template for complements of size c>3.
+hard_target: All r>=20 (not only finite r), zero-sum no-inverse-pair complements, via an explicit family
+  plus selection lemma.
+known_regime:
+- inverse-pair case (candidate-proved via HOS 4.5)
+- p<=37 (exhaustive)
+- '|C|<=2 (published)'
+obstruction_breaking: 'Documented: fixed-position/forced-prefix embedding is FALSE (91/228 two-step patterns
+  fail at r=14); zero-sum C cannot be truncated, so a (c+1)=4-window must be CONTRACTED; small and large
+  parameters fail in all four families (partly search artefacts at r>=25). New mechanism to use: variable
+  position + dilation freedom + choice of which element of C is normalised.'
+approaches:
+- Explicit parametric graceful-permutation families (Walecki/twizzler-type with local modifications) realising
+  F1..F4 over the observed bands, then a selection lemma on the dilation class.
+- A more general local transformation on rotational terraces that realises the needed two-step pattern
+  without full graceful control.
+allowed_methods:
+- analytic_constructions
+- combinatorial_arguments
+- exact_counterexample_search
+excluded_methods:
+- lean_formalization
+- proof_by_finite_testing
+success_condition: A complete proof; a rigorously proved intermediate theorem with a precise remaining
+  gap; or an explicit obstruction to the reduction. Report exactly what is established and what remains.

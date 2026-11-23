@@ -33,3 +33,14 @@ excluded_methods:
 - lean_formalization
 - proof_by_finite_testing
 success_condition: A complete proof, or a rigorous counterexample to IRC / the stated intermediate lemma.
+hard_target: 'Dense regime: symmetric P=N=[1..h] and near-complete instances, where sign rules fail.'
+known_regime:
+- sparse/short-AP sets (Kravitz positives-then-negatives)
+- index <= 2 zigzag theorem
+- values <= 18, n <= 9 enumerations
+mandated_instances:
+- id: M1
+  description: P=N=[1..h] for h in {7,8,10} (no zigzag walk exists; IRC must still produce a walk of range
+    <= 2h-1)
+- id: M2
+  description: near-complete instances n=21-23 that zigzag search could not decide

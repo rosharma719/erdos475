@@ -1,0 +1,17 @@
+(b) p=19: consecutive-pair sums [1, 2, 8, 10, 18] ⊆ {±1,2,r±1}: True; 4j+1-block-sum=middle: True
+(b) p=23: consecutive-pair sums [1, 2, 10, 12, 22] ⊆ {±1,2,r±1}: True; 4j+1-block-sum=middle: True
+(b) p=29: consecutive-pair sums [1, 2, 13, 15, 28] ⊆ {±1,2,r±1}: True; 4j+1-block-sum=middle: True
+(b) p=31: consecutive-pair sums [1, 2, 14, 16, 30] ⊆ {±1,2,r±1}: True; 4j+1-block-sum=middle: True
+(b) p=37: consecutive-pair sums [1, 2, 17, 19, 36] ⊆ {±1,2,r±1}: True; 4j+1-block-sum=middle: True
+(b) p=41: consecutive-pair sums [1, 2, 19, 21, 40] ⊆ {±1,2,r±1}: True; 4j+1-block-sum=middle: True
+(b) p=43: consecutive-pair sums [1, 2, 20, 22, 42] ⊆ {±1,2,r±1}: True; 4j+1-block-sum=middle: True
+(b) p=47: consecutive-pair sums [1, 2, 22, 24, 46] ⊆ {±1,2,r±1}: True; 4j+1-block-sum=middle: True
+(b) p=29: max #isolated deleted vertices over valid 5-deletions = 3 (claimed <=4)
+(b) p=19: valid 5-deletions 222, 15p-63 = 222
+(b) p=23: valid 5-deletions 282, 15p-63 = 282
+(b) p=29: valid 5-deletions 372, 15p-63 = 372
+(b) p=31: valid 5-deletions 402, 15p-63 = 402
+(b) p=37: valid 5-deletions 492, 15p-63 = 492
+(b) p=41: valid 5-deletions 552, 15p-63 = 552
+(b) p=43: valid 5-deletions 582, 15p-63 = 582
+(b) p=47: valid 5-deletions 642, 15p-63 = 642
