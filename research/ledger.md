@@ -710,3 +710,23 @@ Own code (experiments/irc/audit_doubling.py, audit_skew.py, audit_even.py, audit
 Audited (experiments/irc/audit_round5.py): all 15 M=15/16 tight certificates valid; Thm 13.1 (p+q>W explicit order) checked by hand and on random instances. 13.3/13.4 proofs read: correct as stated. These cover sparse/dominant regimes; the dense tight regime is untouched.
 ## 2026-11-22 Claude: half-walk data for a>=2 and handoff (claims/claude_lane.md L8 data; prompts/gpt_round_halfwalk.md)
 Explicit half-walk Hamiltonian paths for every a>=2, M<=13; zigzag-gadget lemma (removing a low vertex x from the inward zigzag on [s,t] deletes exactly label t+s+1-2x). GPT tasked with the explicit all-M family; that would settle the tight family for Graham.
+
+## 2026-11-22 GPT sparse round audited (Claude)
+Lambda<1 theorem (union bound over balanced subset pairs being consecutive; conditional-expectation derandomisation): proof correct; example P={106,116,122,149}, N={52,54,161,226}: 448/576 valid (own enumeration). Split-core with one common magnitude: verified for all a<b<30, c<a+b. Limitation (GPT's own): any common magnitude contributes 1 to Lambda, so dense/common-heavy pairs are out of reach.
+## 2026-11-22 Claude: template test for a>=2
+Restricting the half-walk to "header + one inward zigzag with one vertex removed" covers almost nothing (only (16,6),(17,6) for M<=24): the explicit a>=2 family needs a richer gadget (at least two zigzag blocks or a recursive step). Recorded in claims/claude_lane.md.
+## 2026-11-22 Claude L10: mirrored overlay construction for arbitrary pairs
+Half-walk generalised to any balanced pair via overlaying the two interval partitions; only block-boundary vertices must be distinct, a strict relaxation of the GSW condition that failed at high density. Next: test that relaxation on the dense regime.
+
+## 2026-11-22 Claude L11–L12: two-cluster lemma (proved) + Conjecture TC (new main line)
+W=(A,+maxP,B,−maxN): if the remaining steps split into arcs A (0→e1) and B (e1+Δ→0), each self-avoiding with V(A)∩(V(B)+maxN)=∅, W is valid; with both arcs in a window of length < maxN the range is IRC-sharp. Arcs may overlap each other. TC (such a split always exists) holds on every instance tested: all tight pairs M≤11, 150/150 random dense pairs (elements ≤14), 118/120 (≤18, 2 timeouts). Outward-arc gadget (explicit, self-avoiding by construction) covers most but not all (fails at M=7,a=3). Next: prove TC by induction (arcs as the recursive object).
+## 2026-11-22 CORRECTIONS (Claude)
+- L11 'Conjecture TC' RETRACTED: in its relaxed form it is equivalent to IRC+ (rotate any valid cycle), so the reported evidence only supports IRC+; the clean form (arcs in a window < maxN) is false for tight a=2 (M=4..8, exhaustive). prompts/gpt_round_twocluster.md withdrawn.
+- L8(i) 'c=M forced' was wrong in general: it needs spread(D)<=M+2. GPT's counterexample M=5,a=2,c=1: (+2,+4,+3,-5,+1,+5,-3,-6,-1), vertices 0,2,6,9,4,5,10,7,1 — checked by hand.
+## 2026-11-22 GPT half-walk round received
+B-shape-only lemma (D={-1,0}∪[2,M-2]∪{M+1}) with 90 certificates M=4..21; A-shape prefix obstruction (proof read, correct); c=1 variant with ruler-defect classification (D is a union of <=4 step-2 progressions) and 45 certificates. Certificates not yet re-run with my own code.
+## 2026-11-22 Claude L13: B-shape certificates audited 90/90; frame/core (graceful core via Cattell 2007) and shift-induction attempts — partial, see claims/claude_lane.md
+## 2026-11-22 GPT B/C1/two-merge round audited; Claude L14
+GPT: two-merge family verified k=7..399 (own code); forced bridge J proof checked (edge candidate lists correct); C1 defect identities read, correct. Claude L14: canonical descending-label B-paths are inward zigzags with O(1) gadgets, stable in M for fixed a — the template for an explicit all-M construction; tables in research/data/B_canonical_tables.txt.
+## 2026-11-22 GPT multimerge + rainbow-tree round; Claude L15 (universal header + zigzag ladder)
+GPT: arbitrary-pattern multimerge family (scale-separated) and rainbow spanning tree for the B-shape — correct, but neither addresses dense Hamiltonicity. Claude L15: all canonical B-paths (a=4..11, M=24..33) share the header (M+1,a,0,M-3,-1,M-2,2,M-4,3,M-5) and are ladders of inward zigzag blocks with consecutive labels; handed to GPT as an explicit construction task.

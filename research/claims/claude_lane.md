@@ -63,7 +63,7 @@ Range = M + (M-1) = 2M-1 <= maxP+maxN-1. So this pair (the most rigid Z-asym cas
 gave Artin-conditional results) has an explicit valid ordering for every M, hence for every prime p >= 2M+3.
 Verified independently M=4..15 (junction.py).
 
-## L8. Structure forced for a>=2 (proved)
+## L8. Structure forced for a>=2 (CORRECTED: (i) holds only under spread(D)<=M+2; GPT found c=1 half-walks, e.g. M=5,a=2)
 In any L6-construction for the tight pair with range <= 2M+2: (i) c=M (since |D|=M forces c>=M when spread(D)<=M+2);
 (ii) the contracted pair must be internal to delta: two consecutive equal-sign steps of sizes a,b, i.e. a jump of
 M+1 through an intermediate vertex; (iii) up to reflection and translation D is
@@ -84,3 +84,85 @@ Path on D (vertex order of delta; translate so that the first vertex is 0):
 Recurring shape: a short "header" through the outliers (0, M+1) and the extreme core points carrying the labels
 M-1, M-2, M-3, a, b, followed by an inward zigzag on a core interval with one vertex removed. Lemma used: the inward
 zigzag s,t,s+1,t-1,... on [s,t] with the low vertex x removed uses every label 1..t-s except t+s+1-2x.
+
+## L9. Single-zigzag template is too narrow (exhaustive within template, experiments/irc/header_zig.py)
+Half-walk = header (outside points of shape A + jump) + ONE inward zigzag on a core [s,t] with one vertex removed:
+solutions only at (M,a)=(16,6),(17,6) among all 2<=a, M<=24. The general family must combine >=2 zigzag blocks
+(each block uses a consecutive label range; removed vertices delete single labels) or be recursive in M.
+Note: GPT's "common-pair insertion" reformulation (P=C∪{a,b}, N=C∪{a+b}) is the same problem: the half-walk lemma is
+exactly a way of inserting all common pairs ±C at once (as a mirrored half-walk), with the core ({a,b},{a+b}) realised
+as the internal jump.
+
+## L10. General pairs: the mirrored overlay construction (proved framework)
+Given balanced P,N (any sets), choose orders of P and N, lay both as interval partitions of [0,W] and overlay the cut
+points; the pieces form a multiset S with every P-element and every N-element a union of consecutive pieces
+(common elements c in P∩N may be kept whole as their own pieces). If the pieces are distinct, build
+W = (delta, c, -delta^rev, -c) over S where each overlay component (maximal chain of overlapping P- and N-blocks) is a
+consecutive same-sign run of delta in overlay order. Merge every P-block among the positive steps and every N-block among
+the negative steps. The result is an ordering of +P ∪ -N.
+Validity needs ONLY the surviving vertices (block boundaries) to be distinct: D at P-block boundaries for the first half,
+c+D at N-block boundaries for the second, with no cross collision. This is strictly weaker than requiring the full
+symmetric walk to be valid, which is what the earlier GSW coverage tests demanded (coverage fell to 0/30 at p=37, k=22).
+L7 (tight a=1) and L8 (tight a>=2) are the special case S=[1,M], one component {a,b | a+b}.
+NEXT TEST: coverage of dense zero-sum sets (p=37..47, k ~ 0.5p-0.8p) by the relaxed (surviving-vertex) condition, mod p.
+If it covers the dense regime where GSW failed, this becomes the general route.
+
+## L11. TWO-CLUSTER LEMMA — RETRACTED AS A NEW CONJECTURE (tautological in its relaxed form)
+RETRACTION (2026-11-22): any valid cycle, rotated to end with -d, has the form (A,+c,B,-d) with A,B self-avoiding and
+V(A)∩(V(B)+d)=∅. So relaxed TC (cross-condition + Graham range) is EQUIVALENT to IRC+ itself; the 'evidence' below is
+only evidence for IRC+. The non-trivial 'clean' version (both arcs inside one window of length <= d-1) FAILS: exhaustive
+search (twocluster.py) finds none for tight a=2, M=4..8. Do not use TC as a target. Original text kept below for the record.
+Lemma. Let P,N be balanced, c = max P >= d = max N (else negate), Delta = c-d, T = (P\{c}) ∪ -(N\{d}).
+Suppose T is split into two sequences A, B with A a path 0 -> e1 and B a path e1+Delta -> 0 (endpoints automatic:
+sum T = -Delta), such that (i) A has distinct vertices, (ii) B has distinct vertices, (iii) V(A) ∩ (V(B)+d) = ∅.
+Then W = (A, +c, B, -d) is a valid ordering of +P ∪ -N: its vertices are V(A) (cluster 0), then c+e1 = d+(e1+Delta),
+then d+V(B) (cluster d). If moreover all of V(A) ∪ V(B) lies in an interval of length <= d-1, (iii) is automatic and
+range(W) <= 2d-1 <= maxP+maxN-1 (IRC). Graham needs only range(W) <= maxP+maxN (+1 if that is odd).
+NOTE: the arcs A and B may share vertices; only the shifted cross-condition (iii) is needed.
+Conjecture TC: every balanced pair admits such a split (with the Graham range bound).
+Evidence (exact DFS, experiments/irc/twocluster2.py): all tight pairs M<=11 (every a); 150/150 random dense balanced
+pairs with elements <=14; 118/120 at elements <=18 (2 timeouts, 0 failures). No failure found.
+Special cases: L7 and L8 are TC with A and B mirror images; GPT's 13.1 (p+q>W) is TC with monotone arcs.
+
+## L12. Outward arcs (explicit gadget; partial)
+A walk is OUTWARD if every new vertex is a new max or new min. Outward walks are automatically self-avoiding:
+continuing in the same direction from the current extreme is always allowed; reversing needs |step| > current spread.
+(Spiral = all reversals with increasing magnitudes; spread = largest step.) Restricting TC to arcs that are outward
+from one of their ends (experiments/irc/outward2.py): works for all tight M<=6 and most M=7,8, but fails exhaustively
+at (M,a)=(7,3). So two outward arcs are not always enough; arcs need at least one more level of structure.
+Reduction note: if (P\{c} ∪ {Delta}, N\{d}) had a valid ordering of range <= d-1, cutting it at +Delta would give TC;
+that is too strong in the dense case (it would need maxP''+maxN'' <= maxN), which is why the arcs must be allowed to overlap.
+
+## L13. Toward an all-M proof of the B-shape lemma (a>=2)
+- Audit: all 90 GPT B-certificates (M=4..21) re-lifted with own code (experiments/irc/audit_B.py): 90/90 valid tight
+  cycles, range 2M+2. Data in research/data/B_certs.py.
+- Stable frame: for fixed a the certificates share a frame around the jump that translates with M, e.g.
+  a=2: (6, M-4, 5, M-3, 3, M-2, 0, 2, M+1, 4) for M=18..21; a=3: (5, M-3, 0, 3, M+1, 2, M-2, 4) for M=18..21.
+  The rest is an irregular middle part.
+- Frame/core split with a classical graceful core: the inner interval [s,s+n-1] carries labels 1..n-1 as a graceful
+  path, entered by a connecting edge of label n; the frame carries labels n+1..M-1. The core end is then covered by
+  Cattell's theorem (Discrete Math 2007): every vertex of P_n can receive every label allowed by parity, except leaves of
+  P_{4k}. Frames with strictly decreasing labels do not exist (frame_search.py); unrestricted frames exist for n=a-1
+  when a is small relative to M (frame2.py: e.g. (14,5) with n=4) but not for a near M/2.
+- Induction "shift the top half by +1 and attach the new vertex at an end" (exact rule that grows a zigzag) rarely
+  applies to the certificates (grow.py); consecutive certificates differ by such a shift plus a small local change, so a
+  proof by induction needs one extra local move.
+
+## L14. B-shape solutions are inward zigzags with O(1) local defects (data; experiments/irc/edgedfs.py)
+Edge-by-edge search assigning labels from the top down (fixed jump edges 0-a, a-(M+1), smallest low endpoint first)
+gives canonical B-paths whose label->edge tables are, in M-relative coordinates, IDENTICAL across M for fixed a in the
+top part, and then an inward zigzag (x, M-x-c) with consecutive labels, interrupted by a bounded number of fix-ups
+(an edge into M+1 from the middle, the jump edge 0-a, and an end gadget). Example a=6, M=28:
+ 1:-1~M-2 2:-1~M-3 3:0~M-3 4:2~M-2 5(b):6~M+1 6:2~M-4 7:3~M-4 8:3~M-5 9:4~M-5 10:4~M-6 11:5~M-6 12:5~M-7
+ 13:M-14~M+1 14:7~M-7 ... 21:10~M-11 22(a):0~6 23:11~M-12 24:11~M-13 25:12~M-13 26:M-14~M-12 27:12~13
+(entry "k:x~y" = edge of length M-k). Tables for a=4..10 at M=28..40: research/data/B_canonical_tables.txt.
+Greedy ordering fails for a=2,3 and for some parities, so the uniform family needs a case split, but the structure
+(zigzag + O(1) gadgets) is the shape of an explicit all-M proof.
+Also audited: GPT two-merge family (k=7..399, 0 failures); GPT forced bridge J (candidate edge lists checked by hand).
+
+## L15. Universal header + zigzag ladder (data, research/data/B_canonical_paths.txt)
+Canonical descending-label B-paths for a=4..11, M=24..33 all contain the header
+(M+1, a, 0, M-3, -1, M-2, 2, M-4, 3, M-5) and are otherwise ladders of inward zigzag blocks joined by links whose labels
+continue the consecutive run; label gaps occur only at skipped vertices/shifted boundaries, and b=M+1-a fills one.
+This is the template for an explicit all-M construction (handed to GPT: prompts/gpt_round_ladder.md).
+GPT round (multimerge, rainbow spanning tree): checked, correct, but both avoid the dense Hamiltonicity problem.

@@ -13,3 +13,4 @@ merge h=15: 112 pairs; found 112, NONE 0; 714s
 merge h=16: 128 pairs; found 128, NONE 0; 1542s
 merge h=17: 144 pairs; found 144, NONE 0; 1867s
 merge h=18: 162 pairs; found 162, NONE 0; 1457s
+merge h=19: 180 pairs; found 180, NONE 0; 3124s
