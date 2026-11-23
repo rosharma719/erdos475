@@ -197,3 +197,12 @@ half-walk cannot cover the tight family for a << M. Consistent with my data: can
 Consequences: (i) the "B-only lemma" is false in general; (ii) for a >= (floor(M/2)-7)/2 it may still hold;
 (iii) small a needs another offset (c=1 has room: the same bound is far from tight there) — testing c=1 at M=24..30.
 a=1 is unaffected (spiral, junction merge, L7).
+
+## L19. Which offsets c are possible at all (proved) + GPT's 3-shape obstruction (verified)
+GPT extended L18 to all three c=M shapes A, B, C={0}∪[3,M-1]∪{M+1,M+2}; own check (optimal centre, M<120, a>=3 for C
+since 2∉C): every case with floor(M/2)>2a+7 is excluded. GPT's c=1 certificate for (M,a)=(24,2) verified with own code:
+valid tight cycle, range 50.
+Lemma (offset window). A tight half-walk with offset c needs |D|=M, D∩(D+c)=∅ and spread s <= 2M+2-c. If
+(2M+3)/3 <= c < M then s+1 <= 2c, the pairs (x,x+c) inside the window are disjoint, and an independent set has size
+<= c < M. Hence c ∈ [1,(2M+2)/3] or c = M. Combined with L18: for small a the offset must satisfy c <= ~2M/3; c=1 is
+the natural choice (length bound slack ~ M^2/2).

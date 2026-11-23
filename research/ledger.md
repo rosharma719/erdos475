@@ -734,3 +734,5 @@ GPT: arbitrary-pattern multimerge family (scale-separated) and rainbow spanning 
 Mirrored overlay half-walk ⇔ two co-monotone walks X (+P1,−N1), K (+N2,−P2) from 0 to the same endpoint with V(X)∩(V(K)+c)=∅. Unifies symmetric IRC, tight a=1/a≥2, two-merge, multimerge. Small random pairs with a common element: 51/51 solvable in structured form. Open: disjoint P,N; general existence.
 ## 2026-11-22 GPT: B-shape lemma REFUTED for small a (length obstruction), verified by Claude
 No Hamiltonian B-path exists when floor(M/2) > 2a+7 (first M=24, a=2); A-shape fails from (12,2). So the c=M half-walk cannot close the tight family for small a. My L15 'universal header' overstated (common part only (M+1,a,0,M-3,-1,M-2)); corrected. Tight family now: a=1 proved; large a via B-shape (open); small a needs another offset c (c=1 under test).
+## 2026-11-23 GPT 3-shape c=M obstruction verified; (24,2) c=1 certificate verified; Claude L19 offset window lemma
+Offsets c with (2M+3)/3 <= c < M are impossible for tight half-walks; small a must use c <= 2M/3 (c=1 natural, two-column sum/difference model). Prompt: prompts/gpt_round_offsets.md.
