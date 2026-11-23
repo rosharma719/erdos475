@@ -23,7 +23,8 @@ def allzig(P,N):
                     rec(x,ny,up,un|1<<j,seen|({d} if not last else set()),steps+[-n])
     rec(0,0,0,0,frozenset({0}),[])
     return res
-for M in range(3,10):
+if __name__=="__main__":
+ for M in range(3,10):
     P=range(1,M+1);N=list(range(2,M))+[M+1]
     Z=allzig(P,N); bad=0; holes=set()
     for st,V in Z:

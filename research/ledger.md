@@ -687,3 +687,26 @@ Every symmetric A=−A ⊆ F_p^× has an explicit valid cyclic ordering for ever
 
 ## 2026-11-22 Asymmetric Zigzag round 1 (GPT) audited; adversarial tests (Claude)
 Slack theorem, tight-family classification, staircase family, two-ruler equivalence and both mechanism counterexamples verified with own code. Z-asym survives all tests so far (near-symmetric merge families h≤10; tight family M≤10); the tight family at M=11 had two instances undetermined at a 60M-node cap — exact re-run with 8e9 nodes in progress. A genuine non-symmetric counterexample would not refute Graham but would redirect the plan to the contraction route (backup).
+
+## 2026-11-22 GPT doubling / closure / direct-construction rounds — audited by Claude (summary)
+Own code (experiments/irc/audit_doubling.py, audit_skew.py, audit_even.py, audit_round4.py): symmetric interval [1..M] has a zigzag iff 2M+1 prime and 2 primitive root (SAT agrees M=1..13); tight contraction subcase (8 instances); Conjecture R refuted (472,320 ruler pairs); skewed-tight hole bound (all zigzags M=3..9); no single-edge lift M>=10; energy minimiser not zigzag; even-M a=1 map is a valid cover but a single cycle only for 13 of 299 even M<=600 (Artin-type); scaled escape family L=4..399; M=16 scaffold unique. All candidates, none promoted. SAT sweeps: every asymmetric pair tested has a zigzag (tight M<=14, two-omission h<=16, merge h<=15).
+
+## 2026-11-22 Claude's own lane (research/claims/claude_lane.md)
+- L1 minimal-hole lemma (proved): asymmetric balanced pairs leave >=2 window holes; exactly 2 iff tight family.
+- L2 two-ruler forward-distance reformulation (proved); simple ruler shapes fail for M>=6.
+- L3 label-preserving double swaps: exact condition; impossible inside one affine piece (explains rigidity); they preserve cycle-count parity, while both parities occur among covers — joining needs hole-changing moves.
+- L4 exhaustive cover counts a=1: 71/162/369 covers (M=6,7,8), 19/51/56 Hamiltonian.
+- Recursion probe: deleting new labels from any zigzag at M+1 or M+2 never gives a zigzag at M (0/19..0/135) — insertion recursion impossible.
+- Literature: Pham–Sauermann (arXiv:2602.15797) + BK + BBKMM give all sufficiently large p with non-explicit, astronomically large p_0; finite check to p_0 impossible, uniform proof required.
+- L5 (strategic, proved): the tight family's rigidity comes from IRC's range bound 2M; Graham only needs range <= maxP+maxN (+1 if odd) and no sign rule (IRC+). New primary target for Claude: asymmetric generalisation of the symmetric walk using that room.
+
+## 2026-11-22 Claude: a=1 tight family settled for Graham (IRC), half-walk method (claims/claude_lane.md L6-L8)
+- L6 half-walk lemma (proved): any signed ordering delta of S\{c} with distinct partial sums D and D∩(D+c)=∅ gives the valid cycle (delta,c,-delta^rev,-c); same-sign adjacent pairs contract.
+- L7 THEOREM (proved): P=[1,M], N={2..M-1,M+1} has an explicit valid ordering with range 2M-1 for EVERY M: spiral delta=(1,-2,3,...), c=M, contract the final (-1,-M). This is the most rigid asymmetric case; the zigzag route had only primitive-root-conditional constructions.
+- L8: for a>=2 the construction is forced into two explicit window shapes and reduces to a two-path graceful labelling problem; solutions exist for all a>=2, M<=12. Open: explicit family.
+- GPT round (M=15/16 certificates, sorted-target rigidity lemma) received; certificates not yet independently audited.
+
+## 2026-11-22 GPT consolidated round (large-opposite, minimal zero-sum, large common pair, small-block composition, M=15/16)
+Audited (experiments/irc/audit_round5.py): all 15 M=15/16 tight certificates valid; Thm 13.1 (p+q>W explicit order) checked by hand and on random instances. 13.3/13.4 proofs read: correct as stated. These cover sparse/dominant regimes; the dense tight regime is untouched.
+## 2026-11-22 Claude: half-walk data for a>=2 and handoff (claims/claude_lane.md L8 data; prompts/gpt_round_halfwalk.md)
+Explicit half-walk Hamiltonian paths for every a>=2, M<=13; zigzag-gadget lemma (removing a low vertex x from the inward zigzag on [s,t] deletes exactly label t+s+1-2x). GPT tasked with the explicit all-M family; that would settle the tight family for Graham.

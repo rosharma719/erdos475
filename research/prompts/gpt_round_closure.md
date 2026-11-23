@@ -21,3 +21,11 @@ C. If you believe a counterexample exists, name the family and the first M, with
 
 Deliverable: complete argument + standalone stdlib verifier. Mark every unproved step UNPROVED. No literature restatement.
 We will supply: SAT witnesses for tight M=3..14 (research/data/zasym_witnesses.md, being generated), list of failing symmetric sets.
+
+## Update after your last round (audited)
+Your even-M map is a correct cycle cover with exact labels, but it is a single cycle for only 13 of 299 even M<=600 (M=4,8,10,20,28,32,34,64,80,158,206,332,350).
+So arithmetic maps alone give Artin-type conditional results. The next round must do ONE of:
+ (1) Cycle JOINING: a label-preserving move on covers (change several sources' targets simultaneously so each label is used once) that merges two cycles; prove the cycle count can always be driven to 1, e.g. via a connected "switch graph" argument.
+ (2) A RECURSIVE construction: from a zigzag for (M,a) build one for (M',a') with M' ~ 2M or M+k, by inserting a block of steps with a proved collision-free embedding (NOT the single-edge lift, which you showed impossible).
+ (3) Show the cover family has a free parameter (several (u,v) holes / offset choices) and prove some member is single-cycle for every M without Artin-type input.
+Data: research/data/zasym_witnesses.md (tight M<=14, holes (u,v)); many zigzags per (M,a) exist: for a=1, M=3..9 there are 5,8,14,19,51,56,135.
