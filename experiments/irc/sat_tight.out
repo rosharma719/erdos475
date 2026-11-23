@@ -1,0 +1,2 @@
+control symmetric [1..9]: FOUND (ledger: FOUND) OK
+control symmetric [1..10]: NONE (ledger: NONE) OK

@@ -325,6 +325,8 @@ nodes:
     depends_on:
     - MINIMAL_ZEROSUM_IRC
     - SYMMETRIC_IRC
+    - THREADED_SPLICE
+    - Z_ASYM
     covers: []
     major: true
     programme: C
@@ -1310,6 +1312,44 @@ nodes:
     programme: C
     source: GPT 2026-11-22; Claude audit
     notes: 3,142 pairs verified.
+    audit:
+      referee_accepts: 0
+      rounds: []
+      human: none
+    finite_instances: ''
+    history: []
+  THREADED_SPLICE:
+    statement: 'IRC holds when a symmetric core S⊆P∩N (or a dominant 3-step core) leaves a balanced remainder whose
+      component heights fit in the two vacant rails: b+H ≤ M−1 (e.g. Σ(P∖S) ≤ M−b−1).'
+    status: candidate
+    depends_on:
+    - SYMMETRIC_IRC
+    - MINIMAL_ZEROSUM_IRC
+    covers: []
+    major: false
+    programme: C
+    source: GPT 2026-11-22; Claude audit; claims/threaded_splicing.md
+    notes: Verified on 5,303 + 4,000 random instances. Thin family (light remainder).
+    audit:
+      referee_accepts: 0
+      rounds: []
+      human: none
+    finite_instances: ''
+    history:
+    - 'Claude audit: own implementation, 9,300 instances, 0 violations.'
+  Z_ASYM:
+    statement: 'Asymmetric Zigzag: for P≠N (finite sets of distinct positive integers, equal sums) there is a zigzag
+      ordering (positive first; negative when the sum is positive, positive when negative) with pairwise distinct
+      partial sums. Z_ASYM + SYMMETRIC_IRC + ONE_ELEMENT_REDUCTION ⇒ Graham for every prime.'
+    status: candidate
+    depends_on: []
+    covers: []
+    major: true
+    programme: C
+    source: GPT closure attempt 2026-11-22; claims/zasym_round1.md
+    notes: 'Open. Evidence: exhaustive P,N ⊆ [1..10] (28,480 pairs, GPT); near-symmetric merge families h≤10 (164/164)
+      and tight family M≤10 (Claude); M=11 two undetermined (running). Proved structure: two-sided slack theorem,
+      tight-family classification, staircase family, two-ruler equivalence.'
     audit:
       referee_accepts: 0
       rounds: []

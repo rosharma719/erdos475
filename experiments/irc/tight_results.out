@@ -1,0 +1,7 @@
+tight family M<=6: 8 pairs; found 8, NONE 0, undet 0
+tight family M<=8: 15 pairs; found 15, NONE 0, undet 0
+tight family M<=9: 19 pairs; found 19, NONE 0, undet 0
+tight family M<=10: 24 pairs; found 24, NONE 0, undet 0
+tight family M<=11: 29 pairs; found 27, NONE 0, undet 2
+    UNDET (11, 1, 11)
+    UNDET (11, 2, 10)

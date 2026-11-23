@@ -1,0 +1,9 @@
+k=10: p=37: targets 30, covered by generalised symmetric walks 30; not found 0
+k=17: p=37: targets 30, covered by generalised symmetric walks 13; not found 17
+k=22: p=37: targets 30, covered by generalised symmetric walks 0; not found 30
+k=26: p=37: targets 30, covered by generalised symmetric walks 1; not found 29
+k=12: p=41: targets 30, covered by generalised symmetric walks 30; not found 0
+k=19: p=41: targets 30, covered by generalised symmetric walks 4; not found 26
+k=24: p=41: targets 30, covered by generalised symmetric walks 0; not found 30
+k=30: p=41: targets 30, covered by generalised symmetric walks 0; not found 30
+k=14: p=47: targets 30, covered by generalised symmetric walks 26; not found 4

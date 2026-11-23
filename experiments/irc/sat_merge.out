@@ -1,0 +1,12 @@
+control symmetric [1..9]: FOUND (ledger: FOUND) OK
+control symmetric [1..10]: NONE (ledger: NONE) OK
+merge h=6: 18 pairs; found 18, NONE 0; 0s
+merge h=7: 24 pairs; found 24, NONE 0; 0s
+merge h=8: 32 pairs; found 32, NONE 0; 1s
+merge h=9: 40 pairs; found 40, NONE 0; 3s
+merge h=10: 50 pairs; found 50, NONE 0; 5s
+merge h=11: 60 pairs; found 60, NONE 0; 14s
+merge h=12: 72 pairs; found 72, NONE 0; 42s
+merge h=13: 84 pairs; found 84, NONE 0; 79s
+merge h=14: 98 pairs; found 98, NONE 0; 268s
+merge h=15: 112 pairs; found 112, NONE 0; 714s

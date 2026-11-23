@@ -1,0 +1,11 @@
+sh: ${=pk}: bad substitution
+p=31 k=10: sampled 30 zero-sum sets, representable with S ⊆ classes(λA): 30 (100.0%)
+p=31 k=14: sampled 30 zero-sum sets, representable with S ⊆ classes(λA): 28 (93.3%)
+p=37 k=10: sampled 30 zero-sum sets, representable with S ⊆ classes(λA): 29 (96.7%)
+p=37 k=14: sampled 30 zero-sum sets, representable with S ⊆ classes(λA): 29 (96.7%)
+p=37 k=17: sampled 30 zero-sum sets, representable with S ⊆ classes(λA): 19 (63.3%)
+p=41 k=12: sampled 30 zero-sum sets, representable with S ⊆ classes(λA): 30 (100.0%)
+p=41 k=16: sampled 30 zero-sum sets, representable with S ⊆ classes(λA): 21 (70.0%)
+p=41 k=19: sampled 30 zero-sum sets, representable with S ⊆ classes(λA): 17 (56.7%)
+p=47 k=14: sampled 30 zero-sum sets, representable with S ⊆ classes(λA): 27 (90.0%)
+p=47 k=18: sampled 30 zero-sum sets, representable with S ⊆ classes(λA): 17 (56.7%)

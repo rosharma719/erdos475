@@ -1,0 +1,13 @@
+control symmetric [1..9]: FOUND (ledger: FOUND) OK
+control symmetric [1..10]: NONE (ledger: NONE) OK
+two-omission h=6: 14 pairs; found 14, NONE 0; 0s
+two-omission h=7: 26 pairs; found 26, NONE 0; 0s
+two-omission h=8: 44 pairs; found 44, NONE 0; 1s
+two-omission h=9: 68 pairs; found 68, NONE 0; 2s
+two-omission h=10: 100 pairs; found 100, NONE 0; 7s
+two-omission h=11: 140 pairs; found 140, NONE 0; 12s
+two-omission h=12: 190 pairs; found 190, NONE 0; 55s
+two-omission h=13: 250 pairs; found 250, NONE 0; 87s
+two-omission h=14: 322 pairs; found 322, NONE 0; 158s
+two-omission h=15: 406 pairs; found 406, NONE 0; 354s
+two-omission h=16: 504 pairs; found 504, NONE 0; 780s

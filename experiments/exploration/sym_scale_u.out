@@ -1,0 +1,5 @@
+p=37 k=14: sampled 30 zero-sum sets, representable with S ⊆ classes(λA): 30 (100.0%)
+p=37 k=17: sampled 30 zero-sum sets, representable with S ⊆ classes(λA): 21 (70.0%)
+p=41 k=12: sampled 30 zero-sum sets, representable with S ⊆ classes(λA): 30 (100.0%)
+p=41 k=16: sampled 30 zero-sum sets, representable with S ⊆ classes(λA): 28 (93.3%)
+p=47 k=14: sampled 30 zero-sum sets, representable with S ⊆ classes(λA): 30 (100.0%)

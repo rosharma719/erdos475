@@ -680,3 +680,10 @@ Key findings: (1) strengthening conjectures were tested only at p ≤ 23–29, i
 
 ## 2026-11-22 Symmetric IRC proved (GPT); audited by Claude
 Every symmetric A=−A ⊆ F_p^× has an explicit valid cyclic ordering for every prime p: the walk (δ,M,−δ^rev,−M) with δ the descending alternating path on b_2>…>b_m. Range b_1+b_2 ≤ 2b_1−1 ≤ p−2. Verified: all 65,535 S ⊆ [1..16]; every symmetric subset for all primes ≤ 31 (52,068 sets incl. full group); 20,000 random up to p=997; hand proof re-derived. Also minimal zero-sum IRC (sign rule). This resolves the symmetric/dense-interval obstruction of the zigzag programme and supersedes FOLD. Next: GAP-S2 (joining minimal zero-sum atoms), and 'symmetric core + bounded asymmetric remainder' splicing.
+
+## 2026-11-22 Threaded splicing (GPT) audited; symmetric-walk contraction exploration (Claude)
+- Threaded splice: IRC holds for symmetric core (or dominant 3-step core) + arbitrary balanced remainder whose total width fits the two vacant rails (b+H ≤ M−1). Own implementation: 5,303 + 4,000 random instances valid; lemma bounds held; thin family (light remainder), GAP-S1..S3 remain.
+- Contraction of symmetric walks covers 99–100% of zero-sum orbits at p ≤ 23 (100% for |A| ≤ (p−1)/2 at p=23); restriction S ⊆ classes(λA) is too strong; heuristic count predicts coverage for |A| ≲ 0.45p for all p; unrestricted-S sampling at p=37..59 in progress (experiments/exploration/sym_scale_u.out).
+
+## 2026-11-22 Asymmetric Zigzag round 1 (GPT) audited; adversarial tests (Claude)
+Slack theorem, tight-family classification, staircase family, two-ruler equivalence and both mechanism counterexamples verified with own code. Z-asym survives all tests so far (near-symmetric merge families h≤10; tight family M≤10); the tight family at M=11 had two instances undetermined at a 60M-node cap — exact re-run with 8e9 nodes in progress. A genuine non-symmetric counterexample would not refute Graham but would redirect the plan to the contraction route (backup).
