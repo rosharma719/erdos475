@@ -44,9 +44,9 @@ Nov 21, 2026 · @Rohan Sharma
 
 **Cross-checks of GPT's p = 29 certificate:** 9,256,396 zero-sum subsets and 331,185 zero-sum orbits are both exact, but both include the empty set (nonempty: 9,256,395 sets). The certificate zip itself has not been seen by Claude.
 
-**Combined:** every prime ≤ **37** is verified (Archdeacon et al. ≤ 25, plus 29, 31 and 37 here). Priority for 29, 31 and 37 is unchecked.
+**Combined:** every prime ≤ **43** is verified (Archdeacon et al. ≤ 25, plus 29, 31 and 37 here; 41 and 43 added 2026-11-24 by `experiments/checks/padding_check.cpp`, reproduced; see the entry of that date). At p = 47 and 53, all subsets with ≤ 5 unpaired elements are verified. Priority for 29–43 is unchecked.
 
-**Next feasible:** p = 41 (2⁴⁰ subsets, ≈ 2.7·10¹⁰ orbits, \~14× the p = 37 work). Feasible on a multi-core machine with `graham4`; a zigzag-first checker would be faster.
+**Next feasible:** p = 47 (all subsets). p ≤ 43 is done with the padding checker.
 
 **All abelian groups of order ≤ 27 (Claude, `seqgrp.c`).**
 
@@ -980,6 +980,29 @@ Edge-insertion form of four-block fusion; counting lemma (n > m·r* + m − 1 su
 - **FV** (one-point avoidance for t-rooted cycles, x ∉ {0, t, t/2}) holds **exhaustively for every p ≤ 31, every size**: 485M tests at p = 31, 0 failures. FV ⇒ Graham via one contraction.
 - **Two-point avoidance fails, but rarely** (4 / 180,908 at p = 17, sizes 5–12, one structured set). FV needs a structured induction.
 - **Primary thread now:** the minimal-counterexample form (all admissible splits forced at once).
+
+## 2026-11-24 Claude: forced-vertex route, rounds 2–5 (claims/forced_vertex_FV.md, updates 1–4)
+- **Two-edge exchange: refuted (verified at p = 11).**
+  - Frozen-cut theorem: an exchanged cycle collides whenever the arc sums equal the negated new labels.
+  - In the example, all 6 blocked source cycles fail to exchange.
+- **Structured avoidance and global blocking (verified, reproduced).**
+  - SIA never fails (exhaustive p ≤ 17, sampled p = 19 and 23).
+  - Counting identities verified through p = 13; the combined counting criterion covers every nonsymmetric set at p ≤ 13.
+  - Double-petal theorem proved.
+  - The counting bounds fail on a dense set at p = 17 (GPT; not re-run). Petal existence is generic for random dense sets, so the petal route is closed.
+  - Theorems 2–3 (every element has an admissible partner; a minimal counterexample has ≥ (n − 4)/2 hubs) proved.
+- **AFV: every admissible inner pair works.**
+  - p ≤ 19 exhaustive: 23,602 / 23,602 pairs at p = 17 and 136,907 / 136,907 at p = 19.
+  - Cross-verified by GPT's independent implementation.
+- **DOM: any admissible matching is realised as adjacencies of an x-avoiding cycle.**
+  - p = 17: 2, 3 and maximal families exhaustive.
+  - **p = 19 maximal families exhaustive: 436,183 tests, 0 failures.**
+  - GPT: 500,000 sampled maximal matchings at p = 23 and 29, all succeed.
+  - The naive induction is circular, since expandable in C is the same as adjacent in B.
+- **Orientation-graph criterion and closed orientation count proved** (the pseudoforest criterion in F_p).
+- **Refuted:** the joint top Nullstellensatz coefficient, nonzero total witness count mod p, independent-to-simultaneous expandability, and transposition-only switching.
+- **Open:** choosing a contracted cycle with a feasible orientation graph (the cycle-selection gap).
+- **Pending:** AFV at p = 23 (rerun in progress).
 
 ## 2026-11-24 Finite verification extended to p ≤ 43, plus a five-unpaired family (external patch, audited by Claude)
 Patch `erdos475_changes.patch`, extracted from the uploaded PDF. It adds `experiments/checks/padding_check.cpp`, `experiments/checks/padding_paths.py` and `research/reports/padding_and_finite_verification.tex`, and edits the README.
