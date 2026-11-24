@@ -779,3 +779,9 @@ Offsets c with (2M+3)/3 <= c < M are impossible for tight half-walks; small a mu
 - **Open:** a lift for middle roots.
 - **Tight family.** Reduced exactly to the rooted symmetric problem S = [1, M] ∖ {b} rooted at a. A half-walk template is solved for M ≤ 20 (a = 3 with M ≥ 18 undetermined). No explicit all-M family yet; a single zigzag block is impossible.
 - **Referee gates:** not run. No Anthropic API key in this cloud session; a key can only be supplied as an environment variable.
+
+## 2026-11-24 Claude: BS handoff audit + top-gap lift (claims/bs_handoff_audit.md)
+- **Handoff results.** The two-path separation lemma, the |P| ≤ 2 BS theorem and the safe-contraction criterion are accepted, and their computations rerun exactly. The |P| ≤ 2 case is already covered, with the stronger IRC bound, by the repo's index ≤ 2 theorem.
+- **k ≥ 3 path separation is false.** An explicit 3-path counterexample is recorded.
+- **New, proved: top-gap lift.** If p₁ > q₁, p₁ − p₂ > q₂ and p₁ − q₁ ∉ P, then G\* at every root reduces to a smaller instance. Verified on 3,001 lifted walks.
+- **What remains of the G\* induction:** pairs with no top gap on either side (the dense case). Conjecture still open.
