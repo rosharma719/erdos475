@@ -875,3 +875,8 @@ Offsets c with (2M+3)/3 <= c < M are impossible for tight half-walks; small a mu
 - **Accepted:** Theorems 1–3 (compatible contraction and ±M insertion in the compact band, and congruence elimination). The family is verified for s ≤ 7.
 - **Proved scope lemma:** the compact band (t < K) forces n < 4√D. So this regime is sparse (|A| = O(√p)), not dense.
 - **Open:** dense regime.
+
+## 2026-11-24 Claude: multiscale gluing round audited (claims/multiscale_gluing_audit.md)
+- **Accepted:** interval and lattice gluing, compatibility preserved under gluing (candidate), compact-band absorption, and Thm 5 (insertion exceptions removed when 2t + H < 2K).
+- **Verified for m ≤ 200:** the dense no-cut family A_m (n/D → 1/2), with explicit compatible contraction and insertion. It disproves universal zero-sum band decomposition.
+- **Scope:** gluing needs a lattice or compact-band scale separation, so generic dense sets are still open (GAP A).
