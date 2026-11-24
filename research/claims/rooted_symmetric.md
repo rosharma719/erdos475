@@ -55,3 +55,15 @@ For r = min S (all S with values ≤ 14 and 2–11 elements, 16,263 sets), templ
 - The first family is S = {1, k, k+1, k+2} with r = 1. Here R = {k+1, k}, the alternating sums are {k+1, 1}, and r = 1 collides.
 - Together with `rs4.py` (half the hard cases have no half-walk at all), this shows that small roots need a construction that is **not** of the form (δ, +M, −δ^rev, −M).
 - No such construction is known. This is the open core of the spiral route, and it contains the tight family.
+
+## Addendum 2 (2026-11-24): the tight family in half-walk form
+For S = [1, M] ∖ {b} with root a, Theorem 1 asks for a path P on [0, M−1] with:
+- exactly one hole;
+- steps [1, M−1] ∖ {b}, each used once;
+- the edge a → 0 into the minimum.
+
+Results:
+- **Exhaustive search (`hw.py`)** finds such paths for every 2 ≤ a ≤ 4 and every M tested (up to M = 21 for a = 4). So the tight family is solvable inside the proved Theorem 1 template, and the general walks that small roots of other sets need are not required here.
+- **Observed shape.** a → 0, then an inward zigzag (0, M−1, 1, …) whose lows skip a and whose highs skip M−2, then a detour to M−2, one hole, and an irregular tail.
+- **Simple families fail.** A pure skip-zigzag (`zz.py`) and "zigzag + one detour + one hole" (`fam.py`) each cover only a few (M, a). An explicit all-M formula needs a tail gadget that depends on M and a mod small numbers.
+- **Status:** not proved. This is the most concrete closable gap: an explicit graceful-type path construction.
