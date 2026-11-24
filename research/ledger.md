@@ -742,3 +742,14 @@ Offsets c with (2M+3)/3 <= c < M are impossible for tight half-walks; small a mu
 - **Single-gap c=1 obstruction.**
   - The odd-M, odd-a case and inequality (1) are accepted.
   - The even-M, odd-a < M/2 exclusion holds only if min D = 0. Translated forms give valid tight cycles: (M, a) = (10, 3), (14, 3), (14, 5), each verified mod 2M+3.
+
+## 2026-11-23 External dossier added (not yet audited)
+`research/reports/2026-11-23_complete_chat_research_report.docx` is a chat research dossier. A plain-text extraction sits next to it as `.txt`.
+- **Its own verdict:** no all-primes proof and no counterexample.
+- **Claims it makes:**
+  - SF and SF-max (atom fusion into every complement cycle) are refuted at p = 19 and p = 37.
+  - P_all is refuted at p = 11.
+  - CMAS, a coherent maximal-atom cycle selector, is certified for p ≤ 23 but unproved in general.
+  - Inverse-pair and triple-atom fusion results, including a five-step three-mine theorem.
+  - An explicit list of unproved items, U1 onwards.
+- **Status:** all of its content is unaudited here. Treat it as `candidate` until checked.
