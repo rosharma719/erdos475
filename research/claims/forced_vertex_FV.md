@@ -43,3 +43,22 @@ If A is a minimum counterexample, then **for every** admissible split (x, y) we 
   - This refutes local two-edge exchange as a universal mechanism.
   - It does **not** test the global statement: in a minimal counterexample *every* cycle of every B_xy is blocked, whereas here only 6/44 are.
   - Refinement (GPT, correct): FV is needed only for x, y ∉ B (x ≠ y, x + y = t). The FP∀ form suffices, not avoidance of labels already in B.
+
+## Update 2 (2026-11-24): structured avoidance and global blocking (GPT round, audited)
+**Verified** (`sia.py`, `cnt.py`, rerun exactly):
+- **Structured inner avoidance (SIA)** never fails: exhaustive p ≤ 17, sampled p = 19 and 23. The strict self-reducing version (s ∉ {x, y}) fails only at |B| ∈ {3, 4}, and only for lack of an admissible pair. Restricted FV for |B| ≤ 4 is proved directly (read).
+- **Model obstruction** B = {4, 5, 8, 9, 12, 13} mod 17: K = {0, t}, and the unavoidable pairs are {1, 4}, {9, 13} at t = 5. All 88 structured expansions succeed.
+- **Counting identities through p = 13:**
+  - (1): 2Σ_e c(B_e) = E_good + N₁ + 2N₂.
+  - (4): one-repeat orderings counted by gluing two smaller zero-sum cycles.
+  - The bounds c(B_e) ≤ H_e (component) and c(B_e) ≤ J_e (double petal).
+  - The combined criterion covers every nonsymmetric set at p ≤ 13; the 6 uncovered sets are symmetric.
+- **Not re-run:** the p = 17 dense failure F₁₇^× ∖ {1, 2, 14} (Σ c(B_e) = 5,163,930 < N_one = 17,995,452, and c < min(H, J) for every split).
+
+**Proved (hand-checked).**
+- Thm 1/2 (structured criterion and compression form).
+- Thm 3 (one-repeat multiplicity ≤ 2).
+- **Thm 5 (double petals):** in a minimal counterexample, every admissible split (x, y) has a hub z ∈ {x, y} lying in two zero-sum sets L ∪ {z} and R ∪ {z} that meet only in z. The arcs sum to −y, y − x and −y.
+- The double-petal condition is automatic at density > 1/2, so only petal *counts* carry force.
+
+**Assessment (Claude).** The counting bounds are relaxations of identity (1). Making them "compatibility-aware" converges to computing c(B_e) exactly, which is tautological. New force must come from **structure**, not sharper counting: either a proof of SIA, or a structure theorem for minimal counterexamples followed by an explicit treatment of structured sets.
