@@ -936,3 +936,8 @@ Offsets c with (2M+3)/3 <= c < M are impossible for tight half-walks; small a mu
 - **Verified:** five extremal lifting fractions (1/7 nonsymmetric; 1/37 and 16/183 for ±[1..m]).
 - **Proved:** fiber bounds, the hole criterion, and the arithmetic-chain decomposition for inverse-pair lifts.
 - **Status:** LF neither proved nor refuted. Weak LF is nearly circular. The open estimate is the hole/chain distribution among rooted walks.
+
+## 2026-11-24 Claude: forced-vertex route (claims/forced_vertex_FV.md)
+- **FV** (one-point avoidance for t-rooted cycles, x ∉ {0, t, t/2}) holds **exhaustively for every p ≤ 31, every size**: 485M tests at p = 31, 0 failures. FV ⇒ Graham via one contraction.
+- **Two-point avoidance fails, but rarely** (4 / 180,908 at p = 17, sizes 5–12, one structured set). FV needs a structured induction.
+- **Primary thread now:** the minimal-counterexample form (all admissible splits forced at once).
