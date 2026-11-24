@@ -794,3 +794,11 @@ Offsets c with (2M+3)/3 <= c < M are impossible for tight half-walks; small a mu
 - The robust reinsertion of ±x fails for 12% of reduced walks.
 - The existential version fails only on 18 tiny symmetric cases.
 - Same cycle-choice obstruction as before; no proof route for the dense case.
+
+## 2026-11-24 Claude: rooted symmetric theorem (claims/rooted_symmetric.md)
+- **Proved: rooting criterion** for the symmetric half-walk, giving RS+ (root +r, window [−M, M]).
+- **Proved: two explicit templates.**
+  - (a) Spiral-after-root, for r not an alternating prefix sum of S ∖ {M, r}.
+  - (b) Outward spiral, for r ∈ {b₂, b₃}.
+- **Proved corollary: IRC+ for one-merge near-symmetric pairs** P = (S ∖ {r}) ∪ {r + y}, N = S ∪ {y} with r + y > M, for arbitrary (including dense) S. This is the first proved dense asymmetric family with unbounded index in the IRC route.
+- **Open:** RS+ for all roots. Data shows half-walks are not enough. The tight family is the key case.
