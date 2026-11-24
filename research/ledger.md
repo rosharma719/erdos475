@@ -771,3 +771,11 @@ Offsets c with (2M+3)/3 <= c < M are impossible for tight half-walks; small a mu
 - **New candidates.**
   - The independent-switch closure theorem, checked by hand.
   - Switch-budget examples, reproduced: p = 1009 needs 2 switches, p = 2003 needs 4.
+
+## 2026-11-24 Claude: rooted-window IRC round (claims/rooted_window_irc.md)
+- **G\*.** Every root r ∈ P admits a valid cycle in the window (−max N, max P], except an explicit list E (sizes ≤ 3+3 and d·{1, …, 5}). Values ≤ 15: 9.68M instances and 63.25M roots; every failure lies in E.
+- **Root at max P:** 0 failures. Unlike zigzag Z1, it has no exceptional family.
+- **Max-root lift lemma:** proved. It reduces root-max to G\* at a middle root of a smaller instance; 2.8% of instances admit no lift.
+- **Open:** a lift for middle roots.
+- **Tight family.** Reduced exactly to the rooted symmetric problem S = [1, M] ∖ {b} rooted at a. A half-walk template is solved for M ≤ 20 (a = 3 with M ≥ 18 undetermined). No explicit all-M family yet; a single zigzag block is impossible.
+- **Referee gates:** not run. No Anthropic API key in this cloud session; a key can only be supplied as an environment variable.
