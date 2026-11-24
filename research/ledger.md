@@ -870,3 +870,8 @@ Offsets c with (2M+3)/3 <= c < M are impossible for tight half-walks; small a mu
   - Theorem 3, cardinality-free ±M insertion for M ≥ max(P + 1, Q + h).
 - **Verified:** the minimum-span-core obstruction.
 - **Scope:** the safe rules need a dominant top element. The dense, closely spaced extremes regime is still open.
+
+## 2026-11-24 Claude: band-compatibility round audited (claims/band_compatibility_audit.md)
+- **Accepted:** Theorems 1–3 (compatible contraction and ±M insertion in the compact band, and congruence elimination). The family is verified for s ≤ 7.
+- **Proved scope lemma:** the compact band (t < K) forces n < 4√D. So this regime is sparse (|A| = O(√p)), not dense.
+- **Open:** dense regime.
