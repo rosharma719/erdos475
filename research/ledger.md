@@ -1002,7 +1002,7 @@ Edge-insertion form of four-block fusion; counting lemma (n > m·r* + m − 1 su
 - **Orientation-graph criterion and closed orientation count proved** (the pseudoforest criterion in F_p).
 - **Refuted:** the joint top Nullstellensatz coefficient, nonzero total witness count mod p, independent-to-simultaneous expandability, and transposition-only switching.
 - **Open:** choosing a contracted cycle with a feasible orientation graph (the cycle-selection gap).
-- **Pending:** AFV at p = 23 (rerun in progress).
+- **AFV at p = 23:** the exhaustive run was stopped twice at the 2-hour time limit (no result). Exhaustive AFV coverage ends at p = 19; p = 23 has only GPT's sampled tests.
 
 ## 2026-11-24 Finite verification extended to p ≤ 43, plus a five-unpaired family (external patch, audited by Claude)
 Patch `erdos475_changes.patch`, extracted from the uploaded PDF. It adds `experiments/checks/padding_check.cpp`, `experiments/checks/padding_paths.py` and `research/reports/padding_and_finite_verification.tex`, and edits the README.
