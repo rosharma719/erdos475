@@ -33,3 +33,13 @@ This is the cleanest-data statement in the project: no exception list besides x 
 
 ## The minimal-counterexample formulation (the actual target)
 If A is a minimum counterexample, then **for every** admissible split (x, y) we have x, y ∈ K(B_xy, x + y). There are at least min(p − n − 1, n − 4) distinct sums, each giving a constraint on a different smaller set. The goal is to show these constraints are incompatible, for example by an exchange lemma relating cycles of B_xy and B_x′y′ for two splits sharing an element or a sum.
+
+## Update (2026-11-24): two-edge exchange refuted (GPT round, audited)
+- **Exchange criterion** (a shared-element or shared-sum swap of two labels, keeping both arcs) and the **frozen-cut theorem**: if {ΣU, ΣV} = {−a, −b}, the exchanged cycle (a, U, b, V) collides for *every* internal ordering. **CORRECT.** The cut vertices a + ΣU and a + ΣU + b depend only on the arc sums.
+- **Counterexamples at p = 11, A = {1, 2, 3, 4, 5, 8, 10}: VERIFIED** (`exchange_counterexamples.py`).
+  1. Split (5, 1), giving B with t = 6: 44 rooted cycles, 6 blocked. **All 6** are frozen-cut for the exchange to (5, 4) → t′ = 9, even though B′ has a good cycle avoiding 5.
+  2. The blocked cycle (9, 4, 10, 5, 2, 3) of split (1, 8) has **no** valid outgoing exchange to any of the 3 splits sharing an element or the sum.
+- **Scope.**
+  - This refutes local two-edge exchange as a universal mechanism.
+  - It does **not** test the global statement: in a minimal counterexample *every* cycle of every B_xy is blocked, whereas here only 6/44 are.
+  - Refinement (GPT, correct): FV is needed only for x, y ∉ B (x ≠ y, x + y = t). The FP∀ form suffices, not avoidance of labels already in B.
