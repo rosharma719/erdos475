@@ -980,3 +980,16 @@ Edge-insertion form of four-block fusion; counting lemma (n > m·r* + m − 1 su
 - **FV** (one-point avoidance for t-rooted cycles, x ∉ {0, t, t/2}) holds **exhaustively for every p ≤ 31, every size**: 485M tests at p = 31, 0 failures. FV ⇒ Graham via one contraction.
 - **Two-point avoidance fails, but rarely** (4 / 180,908 at p = 17, sizes 5–12, one structured set). FV needs a structured induction.
 - **Primary thread now:** the minimal-counterexample form (all admissible splits forced at once).
+
+## 2026-11-24 Finite verification extended to p ≤ 43, plus a five-unpaired family (external patch, audited by Claude)
+Patch `erdos475_changes.patch`, extracted from the uploaded PDF. It adds `experiments/checks/padding_check.cpp`, `experiments/checks/padding_paths.py` and `research/reports/padding_and_finite_verification.tex`, and edits the README.
+
+- **Every nonempty subset at every prime p ≤ 43 has a valid ordering.**
+  - Reproduced here (2 min 40 s at p = 43): 2,437,679,510 words, each checked directly for labels, total and distinct vertices. They cover 102,280,151,422 zero-sum sets (including ∅), which equals (2⁴² + 42)/43. An independent additive-coordinate DP count also agrees.
+  - p = 37 and 41 reproduce too: 1,857,283,156 and 26,817,356,776 sets.
+  - Non-zero-sum sets follow by the one-element reduction. Sizes p − 2 and p − 1 are handled by powers of a primitive root.
+  - **This extends the repo's p ≤ 37 to p ≤ 43.**
+- **p = 47 and 53, every subset with ≤ 5 unpaired elements:** reproduced (181,927,935 and 2,111,832,063 words).
+- **Infinite family (proved; extension lemma hand-checked).** U_a = {−2, −3, 4, −a, a + 1}, 5 ≤ a < a + 1 ≤ (p − 1)/2, with *any* disjoint symmetric padding, via the two-path extension P′ = (u, −Q), Q′ = (v, −P) for u, v > d. Python check: 18,434 orderings at odd moduli 13–31. It generalises to 4j + 5 unpaired labels.
+- **Centered lifts.** Every zero-sum five-set has a dilation whose centered representatives sum to 0 in ℤ, for p ≥ 29 (Minkowski bound (192/115)^{1/4} p^{3/4}); the only small-p exception is the p = 11 orbit of {1, 3, 4, 5, 9}. Census reproduced at p ≤ 23.
+- **Obstruction.** The inner labels {6, −3, −4, 5, −5} admit no two-path representation in [0, 6].
