@@ -753,3 +753,15 @@ Offsets c with (2M+3)/3 <= c < M are impossible for tight half-walks; small a mu
   - Inverse-pair and triple-atom fusion results, including a five-step three-mine theorem.
   - An explicit list of unproved items, U1 onwards.
 - **Status:** all of its content is unaudited here. Treat it as `candidate` until checked.
+
+## 2026-11-24 External dossier, Volume II, added (not yet audited)
+`research/reports/2026-11-24_research_continuation_and_proof_roadmap.docx` continues the Nov 23 dossier. A plain-text extraction sits next to it as `.txt`.
+- **Its own verdict:** the full conjecture is unresolved.
+- **Claims it makes:**
+  - A complete two-atom theorem.
+  - An explicit construction for every symmetric set in an odd cyclic group.
+  - An asymmetry-preserving zero-sum reduction.
+  - An algebraic reduction to a symmetric case.
+  - A 497-element expansion certificate.
+  - The remaining "uniform expansion theorem", stated precisely as the open target.
+- **Status:** all of its content is unaudited here. Treat it as `candidate`.
