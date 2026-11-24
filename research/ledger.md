@@ -919,3 +919,4 @@ Offsets c with (2M+3)/3 <= c < M are impossible for tight half-walks; small a mu
 - NTV (arXiv:2610.40712, Thm 1.5) and Kuang–Wang (arXiv:2610.34424, Thm 1.6) prove that every S ⊆ G ∖ {0} with |S| ≥ C (absolute, non-explicit) in every finite abelian group is rearrangeable.
 - So Erdős #475 reduces to **bounded size**: make C explicit, plus prove Graham for |A| < C at all primes. See `STRATEGY.md` §5.
 - The dense-regime programmes (IRC, BS, spiral) target a case that is already proved.
+- **Correction (same day).** NTV §6 fixes ε = 10⁻⁵ and D = 4·10⁵. The local-repair condition needs q ≲ 2^(−40D), so C ≳ 2^(1.6·10¹²). The proof architecture also forces C ≥ about e^(10⁵). So the "finite check" is infeasible, and dense sets below C (all practical sizes) remain open. See STRATEGY §5.

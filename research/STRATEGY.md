@@ -77,7 +77,7 @@ Primary sources were read from arXiv; erdosproblems.com returned 403 and was not
 - **Kuang–Wang, arXiv:2610.34424, Thm 1.6:** the same statement, with an absolute n₀.
 - **Neither gives a numerical value.** Their internal constants are non-explicit ("c_D sufficiently small", C ≥ 10²⁵, |G|^(−1/9500)-type bounds; taken from the fetch's summary of the full text, not verbatim).
 
-**Consequence.** Graham holds for every |A| ≥ C at every prime. The dense regime that all integer, spiral and contraction routes targeted is **already proved** (non-effectively). The remaining problem is exactly:
+**Consequence.** Graham holds for every |A| ≥ C at every prime. The dense regime is therefore proved **for |A| ≥ C only**; see the size estimate for C below, which leaves the dense regime open for every practically relevant size. The remaining problem is exactly:
 
 > **(E) make C explicit, and (F) prove Graham for all |A| < C at every prime.**
 
@@ -91,4 +91,14 @@ Primary sources were read from arXiv; erdosproblems.com returned 403 and was not
 **Revised ranking:**
 1. Quantify (E): extract an explicit C from NTV, the cleaner "absolute C" proof, or at least its order of magnitude. Identify which lemma dominates and whether a structural argument could replace it for moderate sizes.
 2. Push (F) upward: soundly re-verify CDFV (k ≤ 20), and extend the all-characteristic per-size certificates as far as feasible.
-3. Dense-regime constructions are now of independent interest only. They no longer advance the all-primes problem.
+3. ~~Dense-regime constructions are now of independent interest only.~~ **Corrected (below):** C is astronomically large, so dense sets with |A| < C are still open.
+
+### Explicit size of C (Claude, from the NTV PDF, Section 6, read locally)
+- **Verbatim:** "Fix ε = 10⁻⁵, D = 400000, and c = 2⁻⁵⁰/(D + 1). Write n = |S| and assume throughout that n is sufficiently large."
+- **Local repair needs a tiny q.** Prop 4.1 needs q + nF < c_D. Lemma 4.2 gives P(B₀) ≤ 2^(40D+3)·q, so c_D is about 2^(−40D) = 2^(−1.6·10⁷). In every case q is (polylog n)·n^(−ε) (for example Case 1: q = 26 log(2n)/n^ε).
+- **Hence n^(10⁻⁵) > 2^(1.6·10⁷), i.e. C ≳ 2^(1.6·10¹²), roughly 10^(5·10¹¹).**
+- **Architectural floor.** The dense case (Prop 5.18, the n^(1 − 57000ε) term) forces ε < 1/57000. Any n^(−ε)-based repair then needs C ≥ about e^(1/ε): tens of thousands of digits, even with an ideal repair lemma.
+- **Verdict.**
+  - "Solved up to a finite check" means a finite check over set sizes up to about 10^(5·10¹¹). That is not feasible, and no foreseeable improvement of these constants makes it feasible.
+  - Finishing Erdős #475 needs a qualitatively different argument for all moderate sizes, dense sets included.
+  - The dense-regime programmes (IRC, BS, spiral) therefore **remain relevant**. The bounded-size reduction does not shortcut the problem.
