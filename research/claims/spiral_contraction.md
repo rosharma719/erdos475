@@ -45,3 +45,32 @@ So **r_min ≤ lb + 2 always**, and equality holds for 90–96% of orbits. Equal
   1. *Algebraic step:* choose a symmetric expansion of A, splitting about q/3 elements t = u + v.
   2. *Geometric step:* realise all the prescribed pairs (their magnitude graph has max degree 2) as adjacent steps of one admissible half-walk.
 - The near-extremality data suggests looking for a proof that uses (close to) the minimal triple decomposition.
+
+## Update (2026-11-24): compact SC2 refuted at p = 59; refined picture
+GPT follow-up round, pasted in chat. The inline verifier was rerun here (`v59.py`), and the scope check is new (`imb.py`).
+
+- **Imbalance obstruction: CORRECT (hand-checked).** In a compact half-walk the two layers D and D + M are separated. Only the two blocks containing a layer-crossing edge (±M) can need recentering, at most one each way. So Σ⟨block⟩ ∈ {−p, 0, p}, which gives I(A) := min_λ |Σ⟨λa⟩|/p ≤ 1 for every compact spiral contraction, with blocks of any length.
+- **Counterexample: VERIFIED.** A = Q₅₉ (quadratic residues, |A| = 29, zero-sum) has centered sum ±177 under every dilation, so I = 3. Compact SC2 and compact SC (any block lengths) are **false**.
+- **Modular half-walk lemma** (D distinct mod p, D ∩ (D + M) = ∅): trivially correct. The certificate δ (19 steps, 11 pair merges) contracts to exactly Q₅₉: VERIFIED.
+- **Contraction-graph theorem and triple-packing bound** r ≥ max(⌈q/3⌉, ⌈(q − T)/2⌉): CORRECT. The component cases re-derived: two-vertex path d = 0; zero-sum triple d = 0; other paths and cycles 2d ≥ q.
+- **The p = 101 example** U = [1, 33] ∖ {23, 33}, A = U ∪ ±[34, 43]: zero-sum, q = 31, T = 0 verified. So r ≥ 17 = lb + 6, and the "lb + 2" rule is **false** (my 19/23 data only reflected small p).
+- **Correction accepted.** Attaining the parity-adjusted bound does not imply q = 3r, so the 90–96% is not a triple-decomposition rate.
+
+### New observation (Claude): the obstruction is rare and arithmetic
+| p | I(A) over 400 random zero-sum sets of size (p − 1)/2 | I(Q_p) |
+|---|---|---|
+| 29 | 0 (399), 1 (1) | 0 |
+| 41 | 0 (400) | 0 |
+| 59 | 0 (400) | **3** |
+| 83 | 0 (400) | **3** |
+| 101 | 0 (400) | 0 |
+
+- For p ≡ 3 (mod 4), I(Q_p) equals the class number h(−p) in both cases checked (h(−59) = h(−83) = 3). This is consistent with Dirichlet's formula for the residue/non-residue excess on (0, p/2).
+- So compact-SC2 failures come from **multiplicatively structured sets with few distinct dilations**. There are infinitely many such failures, growing like √p. Random sets have I = 0.
+
+### Revised targets
+1. **SC2-I (compact):** every zero-sum A with I(A) ≤ 1 is a compact ≤2-block spiral contraction.
+   - This keeps the *explicit* valid cycle with no collision analysis, and it covers essentially all random sets.
+   - Consistent with all data: p ≤ 23 exhaustive, GPT's p = 29 certificates, and the p = 31 sample.
+2. **Sets with I(A) ≥ 2** (every dilation unbalanced by ≥ 2p): a structured, rare class (quadratic-residue-like). Classify them, then treat them separately, for example by modular half-walks (MSC2) or algebraic constructions.
+3. **Caution on MSC2.** A modular half-walk is no longer an explicit construction: finding δ with distinct D mod p and D ∩ (D + M) = ∅ is itself a Graham-type sequencing problem. MSC2 loses the "no collision analysis" advantage. Prefer SC2-I plus a structural treatment of I ≥ 2.

@@ -901,3 +901,9 @@ Offsets c with (2M+3)/3 <= c < M are impossible for tight half-walks; small a mu
 - **Independently verified exhaustive:** p = 19 (804/804) and p = 23 (8,384/8,384), for every size. GPT reports p = 29 (331,184/331,184); not re-run here.
 - **Structure:** the minimal number of merges is always ⌈q/3⌉ (parity-adjusted) or that +2; it equals the bound for 90–96% of orbits.
 - **Open:** prove SC2 (symmetric expansion plus realisation of prescribed adjacent pairs in one half-walk).
+
+## 2026-11-24 Claude: compact SC2 refuted (p = 59), refined (claims/spiral_contraction.md update)
+- **Verified:** the imbalance obstruction (compact spiral contractions have I(A) ≤ 1). Q₅₉ has I = 3, so compact SC2 is false. The modular half-walk certificate for Q₅₉ checks out.
+- **Verified:** the triple-packing lower bound. The p = 101 example refutes the lb + 2 rule.
+- **New:** random half-density sets have I = 0. Failures are quadratic-residue-type sets, and I(Q_p) = h(−p) at p = 59 and 83.
+- **Revised target:** SC2-I (compact SC2 for all A with I(A) ≤ 1) plus a separate structural treatment of I ≥ 2.
