@@ -49,3 +49,9 @@ Then (P, N) has a valid cycle with range ≤ max P + max N. This is IRC+, and it
 - So RS+ seems to be true in general, but half-walks alone cannot prove it.
 
 **Next target.** Prove RS+ for every root. A proof needs a template beyond half-walks for about half the hard cases, starting with S = [1, M] ∖ {b} and small r, which is exactly the tight family.
+
+## Addendum (2026-11-24): the smallest root
+For r = min S (all S with values ≤ 14 and 2–11 elements, 16,263 sets), templates (a) and (b) plus the split-spiral variants leave **5,195 (32%) uncovered** (`rs5.py`).
+- The first family is S = {1, k, k+1, k+2} with r = 1. Here R = {k+1, k}, the alternating sums are {k+1, 1}, and r = 1 collides.
+- Together with `rs4.py` (half the hard cases have no half-walk at all), this shows that small roots need a construction that is **not** of the form (δ, +M, −δ^rev, −M).
+- No such construction is known. This is the open core of the spiral route, and it contains the tight family.
