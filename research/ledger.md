@@ -880,3 +880,8 @@ Offsets c with (2M+3)/3 <= c < M are impossible for tight half-walks; small a mu
 - **Accepted:** interval and lattice gluing, compatibility preserved under gluing (candidate), compact-band absorption, and Thm 5 (insertion exceptions removed when 2t + H < 2K).
 - **Verified for m ≤ 200:** the dense no-cut family A_m (n/D → 1/2), with explicit compatible contraction and insertion. It disproves universal zero-sum band decomposition.
 - **Scope:** gluing needs a lattice or compact-band scale separation, so generic dense sets are still open (GAP A).
+
+## 2026-11-24 Claude: imbalance/core-selection round audited (claims/imbalance_core_audit.md)
+- **Verified:** a counterexample to GAP B as stated. A prescribed compact flexible-pairing core can be unrepairable, while another core of the same set works.
+- **Accepted:** singleton-group insertion, the block-extrema theorem and its √D imbalance barrier, and constant-modulus triple lifting (dense constructed families).
+- **Open:** compatible decomposition of a *given* dense set. This is the conjecture.
