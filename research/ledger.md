@@ -862,3 +862,11 @@ Offsets c with (2M+3)/3 <= c < M are impossible for tight half-walks; small a mu
 - **Theorem D:** read; its example is verified.
 - **Consequence:** Targets A and B are proved for moderate mass.
 - **Open:** GAP A and GAP B (high mass, the dense regime), still at the run-count wall.
+
+## 2026-11-24 Claude: diameter-controlled contraction audited (claims/diameter_controlled_audit.md)
+- **Accepted:**
+  - Theorem 1, a safe extreme contraction (every bounded core expands) under two diameter inequalities.
+  - Rules A and B.
+  - Theorem 3, cardinality-free ±M insertion for M ≥ max(P + 1, Q + h).
+- **Verified:** the minimum-span-core obstruction.
+- **Scope:** the safe rules need a dominant top element. The dense, closely spaced extremes regime is still open.
