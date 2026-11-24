@@ -206,3 +206,257 @@ Lemma (offset window). A tight half-walk with offset c needs |D|=M, D∩(D+c)=�
 (2M+3)/3 <= c < M then s+1 <= 2c, the pairs (x,x+c) inside the window are disjoint, and an independent set has size
 <= c < M. Hence c ∈ [1,(2M+2)/3] or c = M. Combined with L18: for small a the offset must satisfy c <= ~2M/3; c=1 is
 the natural choice (length bound slack ~ M^2/2).
+
+## L20. Junction half-walk with offset c=a; exact SAT for half-walks (experiments/irc/halfwalk_sat.py, hw_scan.py)
+Construction (proved validity): delta = signed ordering of [1..M]\{a} with FIRST step +b (b=M+1-a); D distinct,
+D ∩ (D+a) = ∅. Then W = (delta, +a, -delta^rev, -a) ends with (-b,-a); merging gives -(M+1) and exactly the tight pair
+P=[1,M], N=[1,M+1]\{a,b}. Range = a + spread(D) <= 2M+2 required. (a=1 is the spiral theorem L7 with roles of c swapped.)
+Packing (divisibility theorem, branch audit): c=a is admissible only if a | M, M+1, M+2 or M+3 — always true for a<=4.
+Exact SAT (complete; UNSAT = no such half-walk) finds junction c=a half-walks quickly: a=2,3,4 for M=24,30,40,50
+(<=15 s each). Coverage scan (first admissible of: junction c=a; internal c=M; internal c=1,2,3), M=8..27, every a:
+EVERY tight pair covered (j_a when a | M..M+3, else internal c=M). Scan continuing to M=45, where c=M is excluded for
+small a (floor(M/2) > 2a+7), to test the small offsets there.
+Target theorem: (J) for every a>=2 with a | M+j (0<=j<=3) a junction c=a half-walk exists; (B) remaining a are large
+enough for c=M, or need c=1,2,3 internal.
+
+## L21. GPT's aligned c=1 ladder (a=2) and H_k; zigzag structure of H_k (experiments/irc/hk.py)
+GPT: for a=2, c=1, aligned single-gap D, the odd labels force a ladder; M=0 mod 4 impossible, M=4k+2 equivalent to
+H_k = Hamiltonian path on {-k-1..-1}∪{2..k+1} from k+1 with labels 2..2k+1 (witnesses k<=19; proof read, correct).
+Own search: H_k = inward zigzag k+1,-k,k,-(k-1),... (labels 2k+1, 2k, ... consecutive) + a tail that contains the outlier
+-(k+1). Tail sizes grow (~k/3 for k=4..19), so H_k is not "zigzag + bounded gadget". The full zigzag uses labels 2k+1..3 on
+all vertices except -(k+1) and misses label 2; the outlier can only attach from a negative inner vertex x with label
+k+1-|x| in [k/2,k]. So H_k reduces to a half-size graceful problem on the inner block with one prescribed end and one
+missing label — a natural recursion (Cattell-type) to formalise.
+Scan (hw_scan.out): every tight pair M<=33 covered by junction c=a / internal c=M / internal c=1.
+
+## L22. Recursion for H_k: a proved infinite family (experiments/irc/frec.py, fchain.py)
+Generalised problem F(al,be): Hamiltonian path on [-al,be]\{0,1} with labels {2,...,al+be-1} (all but the maximum),
+starting at the top be ("T") or bottom -al ("B"). H_k = F(k+1,k+1,T). Reflection x -> 1-x: F(al,be,B) ≅ F(be-1,al+1,T).
+REDUCTION LEMMA (proved). If s = al+be ≡ 1 (mod 3), r = (s-1)/3, then
+  be, -(al-1), be-1, -(al-2), ..., be-r+1, -(al-r)   (inward zigzag, labels s-1 down to s-2r+1)
+  -> -al (detour, labels r and r+1 = s-2r-1, s-2r)
+  -> an F(al-r-1, be-r, B) path (labels 2..s-2r-2),
+is a solution of F(al,be,T). Proof: the zigzag labels are consecutive; -(al-r) -> -al has label r, -al -> -(al-r-1) has
+label r+1, and r+1 = s-2r and r = s-2r-1 exactly when 3r = s-1; the inner vertex set is [-(al-r-1), be-r]\{0,1}
+and its label set {2..(al-r-1)+(be-r)-1} = {2..s-2r-2} is what remains. The inner sum is s' = s-2r-1 = r.
+COROLLARY (proved, with finite base). F(al,be,T) is solvable whenever the chain s -> (s-1)/3 -> ... stays ≡ 1 (mod 3)
+until it reaches a sum <= 30 whose instance is solvable (exact DFS). In particular H_k for k = 4, 6, 19, 181, ...,
+and so the tight pairs (M=4k+2, a=2) for those k, for every prime p >= 2M+3. Verified constructively for k=181 (M=726).
+GAP: s ≡ 0, 2 (mod 3). The zigzag-from-top rule with a gadget of <=2 extra vertices gives no reduction there
+(frec2.py: 87 of 100 instances with s in [10,24] have none). Need reduction gadgets for the other residues.
+
+## L23. AUDIT: GPT's proof of H_k for all k >= 2 — ACCEPTED (candidate, ready for referee)
+Generalised problem Q(s;d,e) on B_s = [-s,-1] ∪ [2,s+1]: start e, lengths [2,2s+1]\{d}. States F=(2,s-1), T=(2s+1,-s),
+C=(2s,-s+1), D=(2s-1,-s+2). Recursions F_s -> F_{s-3}; T_s, D_s -> F_{s-4}; C_s -> F_{s-3}; 12 seeds; then
+H_k = (k+1,-k,...,s+2,-(s+1), -(k+1), Q(s; s+j+1, -j)) with k = 2s+j+1, j in {s, s-1, s-2} by k mod 3.
+Checked by hand: all four header edge sets (incl. connector) and vertex sets; the H_k assembly (zigzag lengths
+2k+1..2s+3, detour lengths k-s = s+j+1 and k+1-j = 2s+2). Own independent implementation
+(experiments/audits/hk/audit_hk.py): F,T,C,D valid for all s <= 1499; H_k valid for all k = 2..3000; end-to-end tight
+cycles (M=4k+2, a=2, c=1 aligned ladder) valid with range <= 2M+2 for k = 2..400.
+THEOREM (now proved, modulo referee): the tight pair P=[1,M], N=[1,M+1]\{2,M-1} has a valid ordering for every
+M ≡ 2 (mod 4), M >= 10, hence for every prime p >= 2M+3. With L7: a=1 all M; a=2 all M ≡ 2 (mod 4).
+This is the recursion of L22 made complete (four states instead of one).
+
+## L24. Global plan for arbitrary sets: how symmetric are the lifted pairs? (experiments/irc/core_density.py)
+For random zero-sum A ⊂ Z_53^*, minimising over dilations the asymmetric remainder r = |P0|+|N0| (P0=P\N, N0=N\P):
+ density 0.20: r ≈ 8.2 of k=10 | 0.35: 11.6 of 18 | 0.50: 12.5 of 26 | 0.65: 11.2 of 33 | 0.80: 9.1 of 41 | 0.90: 5.4 of 46.
+So after a good dilation, dense sets are NEAR-SYMMETRIC (core = P∩N carries most of the set; remainder ≈ (1-α)-proportion),
+while sparse sets have lots of free room (p-1-k residues unused). This suggests a two-regime proof:
+ (I) dense (α >= 1/2+ε): symmetric half-walk on the core (always exists: symmetric IRC) + splice the small remainder
+     (threaded splicing / small-block absorption generalised to remainders of size ≈ free room);
+ (II) sparse: an argument that uses the free room (Λ<1-type or a flexible greedy with proof);
+ (III) the middle α ≈ 1/2 is where both are tight — the real crux.
+
+## L25. SPLICE CONJECTURE (SPL) — strong structured evidence (experiments/irc/splice_test.py)
+For zero-sum A ⊂ Z_p^*, choose the dilation minimising the asymmetric remainder; let C = P∩N (core) and R = (+P0) ∪ (−N0)
+(remainder). Take the EXPLICIT symmetric IRC walk on ±C, W_C = (δ, c, −δ^rev, −c) with c = max C and
+δ = (b2, −b3, b4, …) — fixed cyclic step order, free rotation — and insert the remainder steps at any positions, in any
+order. SPL: some insertion has pairwise distinct partial sums mod p.
+This is a genuine restriction (the 2|C| core steps must occur in W_C's exact cyclic order), not a reformulation.
+Evidence (exact DFS): p=53 α=0.9: 10/10; α=0.8: 10/10; α=0.65: 7/7; α=0.5: 7/7 (remainders up to 14; larger skipped);
+p=101 α=0.9: 8/8 (remainders 8–10). No failure.
+If SPL is proved, Graham follows for every zero-sum A with a nonempty core (dense and middle densities); the
+one-element reduction turns any A into a zero-sum set of the same size. Sets with an empty core after every dilation
+are sparse and would need the separate sparse-regime argument.
+
+## L26. Cut-and-place induction FAILS (experiments/irc/cutplace.py)
+Rigid version of SPL: take a valid ordering U of the remainder, cut it into two arcs, put arc1 at the end of δ and arc2 at
+the end of −δ^rev (W = δ, arc1, +c, −δ^rev, arc2, −c). Success (exact, <=300 orderings of U, all cuts): p=53
+α=0.9: 0/12; α=0.8: 3/12; α=0.65: 2/3. Free insertion (SPL, L25) succeeded on all of these densities. So the remainder
+must be spread through the core walk, not placed as two blocks; an induction "Graham(remainder) => Graham(A)" via two
+seams is false in general. A proof of SPL needs a distributed insertion rule.
+
+## L27. AVOID REDUCTION: the remainder goes AFTER the core walk (experiments/irc/splice_pattern.py, avoid_form.py)
+SPL solutions found by exact search put one remainder step x1 just before the core's final −c and all other remainder
+steps after the core walk. In that form, with V_C = vertex set of the explicit core walk (any rotation) and top = the
+vertex before −c:
+  W valid  <=>  U = (x1, x2, ..., x_r) is an ordering of the remainder R whose nonzero partial sums avoid V_C,
+                and top + x1 avoids V_C ∪ V(U).
+So Graham(A) <= "Graham with a forbidden set" for the SMALLER set R (r ≈ 0.45k at α=0.5), with forbidden set the
+structured core vertex set (lower cluster D ⊂ [0,b2] ∪ upper cluster b1+D).
+Evidence (exact, p=53, 12 random sets each): α=0.5: 12/12, α=0.65: 12/12, α=0.8: 12/12, α=0.9: 7/12 (near-complete
+sets have too little free room; the free-insertion SPL form still worked 10/10 there).
+Consequence: across middle densities the conjecture reduces to an obstacle-avoidance statement for a sparser set.
+Λ-type union bounds are too weak (expected collisions ≈ r|V_C|/p ≈ 3 at α=0.5), so the avoidance statement needs to
+use the cluster structure of V_C and the freedom in the rotation and the choice of x1.
+
+## L28. Obstacle-avoidance threshold + a recursion that preserves occupancy (experiments/irc/avoid_threshold.py)
+Test: random zero-sum R (size r) in Z_53^*, forbidden F (0 ∉ F), occupancy θ = (r+|F|)/(p-1); 15 trials each.
+ random F:  θ <= 0.6 always solvable (r=6,10,14); θ=0.7–0.8 fails only for r=6 (10/15, 8/15).
+ two-cluster F (like V_C): θ <= 0.5 always solvable; θ=0.6–0.8 failures grow for small r (r=6: 14,12,5 of 15).
+So avoidance looks safe up to occupancy ≈ 1/2 for these obstacle shapes; larger r is MORE robust.
+(Arbitrary F is false — F ⊇ R blocks the first step — so any lemma must use structure or translation freedom.)
+RECURSION GO(θ): "zero-sum R with obstacles F, occupancy <= θ, has an ordering avoiding F". The AVOID step (L27)
+replaces (R, F) by (remainder R', F ∪ V_C), and |V_C| = 2|C| = |R| - |R'|, so OCCUPANCY IS EXACTLY PRESERVED while the
+set shrinks. An induction on |R| at fixed θ therefore needs only:
+ (a) placement: some dilation/rotation/pivot makes the explicit core walk avoid F (naive counting is too weak:
+     |F|·|V_C| bad incidences against |V_C| rotations — needs structure);
+ (b) base: sets with EMPTY core under every dilation (genuinely sparse/asymmetric) avoiding F — e.g. minimal
+     zero-sum (13.2), Λ<1, or a new argument.
+For Graham itself F = ∅ and θ = k/(p-1); dense sets have θ > 1/2, where the free-insertion form (not AVOID) is needed at
+the top level only.
+
+## L29. Rigid recursive GO fails (experiments/irc/go_recursive.py)
+Full recursion GO(R,F) using at every level the EXPLICIT alternating core walk (pivot = max core element, top 6
+dilations, all rotations), AVOID insertion, brute force only when |R| <= 8: success without any fallback is rare —
+p=53: α=0.5 1/8, α=0.8 5/8; p=101: 0/8 at α=0.5 and 0.8 (thousands of levels with no admissible placement). (An earlier
+8/8 count was produced by a brute-force fallback and is not evidence.) So the single AVOID step works (L27, remainder
+solved freely), but the placement lemma (a) is FALSE for the rigid explicit core walk at deeper levels: the explicit walk
+usually hits the inherited obstacles. A working recursion must use flexible symmetric walks (any half-walk on the core,
+any pivot — the symmetric IRC family is large) or a different obstacle-tolerant core construction.
+
+## L30. Flexible-core recursion also fails (experiments/irc/go_flex.py)
+Same recursion as L29 but the core half-walk at each level is SEARCHED (any pivot among the 4 largest, any signed order
+δ with D, c+D distinct and avoiding the inherited obstacles), 4 best dilations, AVOID insertion, brute force only at
+|R|<=8, no fallback: p=53 α=0.5: 0/6, α=0.8: 2/6 (hundreds of levels with no admissible step).
+Conclusion: the AVOID step works at the top level only because the remainder is then solved without structure. Recursing
+it turns the problem into obstacle-avoidance for ever sparser sets, and the structured core walks cannot carry the
+obstacles. The occupancy-preserving recursion GO(θ) is not a viable proof route in this form. The general (non-tight)
+case still needs a genuinely new mechanism for sparse/middle sets with obstacles.
+
+## L31. a=2 for ALL M: junction c=2 with a two-phase pair shape (experiments/irc/junction_shape.py, js2.py, js3.py)
+Junction half-walk, offset c=2 (a=2, b=M-1): delta = ordering of [1..M]\{2}, first step +b, D with no two points at
+distance 2, spread <= 2M. SAT solutions have D = "pairs" {x,x+1} spaced by 4 with one phase shift. Restricting to the
+explicit shape
+   D = {4i, 4i+1 : 0<=i<L} ∪ {4L+2+4j, 4L+3+4j : j<U}  (+ one singleton at an end when M is odd),
+translated so that the path starts at a vertex st with st+b ∈ D, exact SAT finds a valid half-walk for EVERY
+M = 10..40, with L ∈ {1,2,3} (L=1 up to M≈21, then L=2, L=3 at M=38,40). Each gives a valid ordering of the tight pair
+(a=2) with range <= 2M+2.
+Why this shape: with no distance-2 pairs, D is at most about half of each parity class; pairs at phase 0 and phase 2 make
+labels ≡ 0,1,3 (mod 4) available inside a phase and labels ≡ 2 (mod 4) only across the phase shift.
+Next: forced-structure analysis on this shape (as GPT did for the aligned c=1 ladder) -> generalised states ->
+recursion. That would prove a=2 for all M (covering M ≡ 0 mod 4 and odd M, which H_k does not).
+
+## L32. a=3 and a=4 junction shapes (experiments/irc/js_a3.py; SAT patterns)
+a=3 (c=3, D has no two points at distance 3): the shape
+   m blocks {6j, 6j+1, 6j+2} (j<m) , gap 5 , then an alternating run of t = M-3m points (step 2)
+(or the run first) admits a valid junction half-walk for EVERY M = 12..30, with m ∈ {2,3,4}. The long part is a single
+step-2 progression — the same column structure as GPT's aligned c=1 ladder, so the forced-ladder argument should carry
+over.
+a=4 (c=4, no two points at distance 4): SAT solutions are built from two density-1/2 tiles of period 8, the block
+"xxxx...." and the tile {0,2,3,5} mod 8 ("x.xx.x.."), e.g. M=19: xxxx....xxxx....xxxx....xxxx......xxx;
+M=21: xxxx....x.xx.x..x..x.xx.x..x.xx.x....xxxx. Shape family not fixed yet.
+Pattern across a: D is made of period-2a tiles of density 1/2 avoiding difference a, with one or two phase changes.
+
+## L33. a=2, M = 8t+5: explicit template with ONE free gadget (experiments/audits/a2/template5.py)
+From GPT's certificates (M=61,69,77,85) I fixed, as exact linear formulas in t, every part except one middle gadget:
+ H  = 0, M-1, M-2, M-9
+ Z1 = 4i, M-9-4i (i = 1..A)
+ T  = -M+4t+4, -M+4t-7, -M+4t+8, -M+4t-11
+ Z2 = -(4J+5), then (-M+4j+1, -(4j+5)) for j = J-1..0, J = t-3
+ Z3 = (M-8-4i, 4i-1) for i = 0..t-2, then M-8-4(t-1)
+ G2 = M-(4t+10), -M+(4t-3), -M+4t, -M+(4t+5), -M+(4t-4), -M+(4t+9), -M+(4t-8)   (uniform, checked t=8,9,10)
+ Z4 = -(4t-8), then (-M+4j, -4j) for j = t-3..1, then -M
+With these fixed, a DFS fills the gap between Z1 and T for EVERY t = 7..16 (M = 61..133) with a gadget of 8–14 vertices
+(A ≈ t-7..t-4). The gadget is not yet uniform: forcing A = t-5 (10 free vertices) works for t <= 11 only, so one of the
+fixed segment lengths must be tuned with t. All the long zigzags are proved-consecutive label runs; making the gadget
+uniform turns this into a proof of a=2 for M ≡ 5 (mod 8).
+
+## L34. AUDIT: GPT's tight a=2,3,4,5 constructions — ACCEPTED; and the a>=6 route
+Construction: W = (δ, +M, −rev δ, +b, −M, −(M+1), +a) (symmetric core walk on [1,M]\{a,b} + a four-step bridge).
+Own implementation from the stated formulas (experiments/audits/a2to5/audit.py): 0 failures for a=2,3,4,5 at every
+M up to 1200 (labels, distinct partial sums, range <= 2M+2, distinct mod 2M+3). Hand-checked: the bridge lemma
+(vertices M+b, b, −a fall in empty regions), a=2 alternating core in [0,M−2], the a=3 reflection recursion
+(D_M = {0,M−1,2} ∪ (M−3−D_{M−3})), and the a=4, a=5 headers with the one-hole graceful recursion
+G_{n,d} = (n−1,1,n) || (n−1 − G_{n−3,d}). THEOREM (candidate): the tight pair is solved for every M when a ≤ 5.
+So the tight family is now proved for a = 1, 2, 3, 4, 5 (all M).
+a>=6. GPT's obstruction holds only for its maximally packed window [3−a, M+2−a]. With the window relaxed, exact SAT
+(experiments/irc/bridge_sat.py, bridge_scan.py) finds the SAME bridge (+b,−M,−(M+1),+a) working for every a >= 6 and
+every M = 13..31 except a near M/2, where the bridge (+a,−M,+b,−(M+1)) works. The cores found have the shape
+   D = {−a−1} ∪ ([2−a, M−a−2] \ {h}) ∪ {M−a}     (one free internal hole h)
+— an interval with one hole plus one outlier at each end. Seeds G_{n,d} for n = d+1 (plain zigzag), d+2, d+3 exist for every
+d = 4..16 (experiments/irc/gseeds.py), so G_{n,d} extends to every d once those seeds are given uniformly.
+
+## L35. Uniform normal form for the WHOLE tight family (X bridge + two-hole interval core); corrections to L34
+CORRECTION to L34. The G-bridge core shape R1 = {−a−1} ∪ ([2−a,M−a−2]\{h}) ∪ {M−a} (= GPT's normalized V(M,H), start a+1)
+is exact-SAT UNSAT for EVERY hole h when a >= 14 (checked (a,M) = (14,30),(14,31),(15,32),(18,38); works for 6<=a<=13,
+experiments/irc/age6/r1scan.py). Also R1 is the UNIQUE G-bridge window with min D = −a−1. So "same bridge for all a>=6"
+in L34 was wrong; in bridge_scan.out the X bridge was used for a >= 14 at EVERY M, not only near a ≈ M/2.
+NEW NORMAL FORM (all a >= 2). Bridge X: W = (δ, +M, −rev δ, +a, −M, +b, −(M+1)), b = M+1−a, bridge vertices M+a, a, M+1.
+Core: D = [−k, M−1−k] \ {1, a}, path from 0. Lemma (proved by hand): for 0 <= k < M−a, D ∩ (D+M) = ∅ (span M−1); bridge
+points avoid D ∪ (M+D) (a, 1 are holes; a−M < −k; M+a > M−1−k); span = max(2M−1, M+a+k) <= 2M+2 since
+k < M−a; so any such δ is a valid ordering for every p >= 2M+3. Shifting by k: the core is
+   LR(M,a,k): Hamiltonian path on [0, M−1] \ {k+1, k+a}, starting at k, with edge lengths exactly [1, M−1] \ {a, M+1−a}.
+(a "linear realization" with two holes; the holes sit next to the start and at distance a from it.)
+EVIDENCE: with the single uniform choice k = ⌊(M−a)/2⌋, exact SAT finds LR(M,a,k) and the full signed walk verifies for
+EVERY 2 <= a <= M/2 and EVERY M = 8..46 (experiments/irc/age6/lrgrid.py, lrgrid.out; a = M/2 checked separately). The set of
+good k is a wide window around (M−a)/2 (e.g. a=20,M=50: k=6..24). Largest-label-first solutions are an outer zigzag
+k, M−1, 0, M−2, 1, M−3, ... with a bounded middle gadget near the two holes (experiments/irc/age6/lrdfs.py).
+So the tight family = one clean two-hole linear-realization theorem, uniform in a.
+ALSO: one-hole G_{n,d} for ALL d >= 4 with explicit zigzag bases, no citation and no small seeds:
+   n=d+1: (d,1,d−1,2,...);  n=d+2: (d+1,d+2) || zig(1..d from 1) minus its last vertex  [lengths 1,d+1,d−1..2];
+   n=d+3: (d+2,1,d+3,d+1) || zig(2..d from 2) with its second-to-last vertex deleted   [lengths d+1,d+2,2,d−1, then d−2..3,1].
+Verified d=4..150, n <= d+199 (experiments/audits/gnd/audit_gnd.py). GPT's bases B/C (via prescribed-start graceful lemma) also check.
+
+## L36. Literature status (verified from TeX sources) + audit of GPT LR/global round + reversed-G evidence for LR
+STATUS OF #475 (sources read in full or in theorem statements):
+- arXiv:2610.34424 Thm (thm:asymptotic): an ABSOLUTE n_0 such that every S ⊆ G\{0}, G finite abelian, |S| >= n_0, is
+  rearrangeable — NO condition on p. n_0 not computed. (Preprint, Oct 2026.)
+- Kravitz arXiv:2407.01835: |A| <= log p/log log p, EVERY prime. Costa–Della Fiore–Fontana–Vena arXiv:2603.20961: |A| <= 20
+  in any abelian group (zero-sum <= 22), computer-assisted. Verified computationally for all p <= 23 (ADMS 2016 / CMPP 2018).
+- Pham–Sauermann arXiv:2602.15797: C_α <= |S| <= p^{1-α}, any p, C_α explicit but ~exp(10^15).
+- teorth/erdosproblems database: #475 status "decidable" (= reduced to a finite but huge check), not "proved".
+CONSEQUENCE: for all primes, the open set is exactly 21 <= |A| < n_0 together with log p/log log p < |A| — a finite but
+uncomputed set of (p, A). "Finishing" #475 = either an explicit n_0 small enough to check, or a constructive all-primes
+argument for the bounded-size window. Our constructive programme targets the latter (sizes are unrestricted in it).
+AUDIT (GPT LR/global round): (1) occupancy identity [−k,2M−1−k]\{1}: correct (also noted in L35). (2) forbidden-sum graph
+x~y iff x+y ∈ {±c} is a Hamiltonian path on F_p: correct (R_−R_+ = translation by −2c; degree-1 vertices ±c/2; p−1 edges,
+connected). Zero-overlap cycle for minimal zero-sum |B| <= 5: proof checked, correct (n=4 matching argument valid). Narrow.
+(3) Single-edge two-vertex expansion LR(M)->LR(M+2) impossible: accepted. (Claude also: the stretch invariant "no short
+edge crosses the midpoint" is SAT-UNSAT for essentially all (M,a) — experiments/irc/age6/cutsat.py — so stretch recursions die.)
+NEW EVIDENCE for an LR recursion: LR(M,a,k) has solutions whose REVERSE begins with GPT's G-step header (M−2, 0, M−1, 2)
+for every 5 <= a <= M/2−2 tested, M = 14..22, exactly for k ≡ ⌊M/2⌋+1 (mod 2) (experiments/irc/age6/revg.py).
+So LR reversed = two-missing-label G-recursion (peel n−1,1,n; reflect) ending at k, with the end-holes k+1, k+a carried
+through the reflections; only a ≈ M/2 needs separate bases.
+
+## L37. AUDIT: GPT atom-fusion round — ACCEPTED; Strong Fusion (SF) reduction of Graham to one lemma
+Accepted (proofs re-derived by hand; own code experiments/audits/fusion/audit_fusion.py):
+- Four-block fusion word (b1,c1,b2..bm,c2..cn) for disjoint minimal atoms when the only proper zero-sum subsets of B∪C are
+  B, C, cross inverse pairs and their complements (Hall on K_{m,n} minus the 4 cross adjacencies; explicit m=3 / n=3 cases).
+- Two disjoint minimal triples always fuse: 2156/2156 pairs, p in {7,...,23}, by own construction. Examples mod 19 verify.
+- Maximal-atom switching lemma (in a max atom partition, every proper zero-sum subset of B∪C and its complement are atoms).
+- Integer version via large-prime theorem: correct, and correctly flagged as giving no range control.
+NEW (Claude): STRONG FUSION statement
+  SF: every zero-sum A ⊆ F_p^× that is not a minimal atom contains a minimal atom B with Z = A\B zero-sum such that for
+      EVERY valid cycle z of Z, some rotation/reversal of z and some order of B make (b1, z1, b2,...,bm, z2,...,zn) valid.
+SF ⇒ Graham for all p (induction on |A|: Z has a valid cycle by induction, SF fuses ANY of them; atoms are valid in any
+order; then the zero-sum reduction handles nonzero-sum sets). Exhaustive test (experiments/audits/fusion/strong_fusion.py):
+0 failures for all zero-sum non-atom A with p=11, |A|<=9 (65 sets; all of them), p=13, |A|<=8 (234 sets), p=17, |A|<=7 (1316 sets).
+SF is an "every cycle" statement, so it is the induction-ready form of GPT's fusion: the missing theorem is exactly SF.
+
+## L38. Strong Fusion: edge-insertion form, counting lemma, and the MAX-ATOM rule (0 failures in 5264 sets)
+EDGE-INSERTION FORM (exact). Rotating the Z-cycle to start at vertex u (successor u', step w = u'−u), the four-block word
+is "replace edge u→u' by (b1, w, b2, ..., bm)". New vertices: u+b1 and u'+σ_j (σ_j = b1+...+bj, 1<=j<=m−1). Valid iff these
+m points avoid V_Z and u+b1 ≠ u'+σ_j (⇔ w ≠ −(b2+...+bj)). Pair insertion (+c,w,−c) is m=2. Reversal of the Z-cycle
+(step order reversed) has vertex set −V_Z; traversing the same vertex set backwards is NOT allowed (it uses −Z).
+COUNTING LEMMA (proved). Let r(t)=|V∩(V−t)|, r* = max_{t≠0} r(t), n=|V|, m=|B|. Bad (edge, order) pairs are at most
+  Σ_{j=1}^{m−1} j!(m−j)! Σ_{|S|=j} r(σ(S))  [σ(S)≠0 by minimality]  +  (m−1)! Σ_{b∈B} r(b)  +  (m−1)·m!   <=  m!(m·r* + m−1),
+out of n·m! pairs. Hence: if n > m·r* + m − 1, B inserts into THAT cycle. (Covers spread-out vertex sets; not dense/structured.)
+WHICH ATOM (exhaustive, experiments/audits/fusion/sf_which.py, sf_fast.py):
+  - "every atom works" FAILS (e.g. p=13 A=(1,2,3,5,7,9,12), B={1,12}); all such failures at p<=19 are INVERSE PAIRS, plus
+    triples in the dense p=13, |A|=10 case.
+  - MAX-ATOM RULE: B = any atom of MAXIMUM size (with A\B zero-sum) fuses with EVERY valid cycle of A\B — 0 failures:
+    p=11 all 65 sets, p=13 all 257 sets (incl. A=F_13^×), p=17 |A|<=8 (2074), p=19 |A|<=7 (2868). Total 5264.
+  - SF itself (some atom) also 0 failures for p=17 |A|<=9, p=19 |A|<=7.
+CONJECTURE SF-max: for every zero-sum non-atom A ⊆ F_p^× and every maximum-size atom B ⊂ A with A\B zero-sum, every valid
+cycle of A\B admits the edge insertion of B. SF-max ⇒ Graham for all p.

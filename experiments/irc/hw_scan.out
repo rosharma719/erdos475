@@ -1,0 +1,30 @@
+M 8 a2:j2 a3:j3 a4:j4
+M 9 a2:j2 a3:j3 a4:j4
+M 10 a2:j2 a3:j3 a4:j4 a5:j5
+M 11 a2:j2 a3:j3 a4:j4 a5:i11
+M 12 a2:j2 a3:j3 a4:j4 a5:j5 a6:j6
+M 13 a2:j2 a3:j3 a4:j4 a5:j5 a6:i13
+M 14 a2:j2 a3:j3 a4:j4 a5:j5 a6:i14 a7:j7
+M 15 a2:j2 a3:j3 a4:j4 a5:j5 a6:j6 a7:i15
+M 16 a2:j2 a3:j3 a4:j4 a5:i16 a6:j6 a7:i16 a8:j8
+M 17 a2:j2 a3:j3 a4:j4 a5:j5 a6:j6 a7:i17 a8:i17
+M 18 a2:j2 a3:j3 a4:j4 a5:j5 a6:j6 a7:j7 a8:i18 a9:j9
+M 19 a2:j2 a3:j3 a4:j4 a5:j5 a6:i19 a7:j7 a8:i19 a9:i19
+M 20 a2:j2 a3:j3 a4:j4 a5:j5 a6:i20 a7:j7 a8:i20 a9:i20 a10:j10
+M 21 a2:j2 a3:j3 a4:j4 a5:i21 a6:j6 a7:j7 a8:j8 a9:i21 a10:i21
+M 22 a2:j2 a3:j3 a4:j4 a5:j5 a6:j6 a7:i22 a8:j8 a9:i22 a10:i22 a11:i22
+M 23 a2:j2 a3:j3 a4:j4 a5:j5 a6:j6 a7:i23 a8:j8 a9:i23 a10:i23 a11:i23
+M 24 a2:j2 a3:j3 a4:j4 a5:j5 a6:j6 a7:i24 a8:j8 a9:j9 a10:i24 a11:i24 a12:i24
+M 25 a2:j2 a3:j3 a4:j4 a5:j5 a6:i25 a7:j7 a8:i25 a9:j9 a10:i25 a11:i25 a12:i25
+M 26 a2:j2 a3:j3 a4:j4 a5:i26 a6:i26 a7:j7 a8:i26 a9:j9 a10:i26 a11:i26 a12:i26 a13:i26
+M 27 a2:j2 a3:j3 a4:j4 a5:j5 a6:j6 a7:j7 a8:i27 a9:j9 a10:j10 a11:i27 a12:i27 a13:i27
+M 28 a2:j2 a3:j3 a4:j4 a5:j5 a6:j6 a7:j7 a8:i28 a9:i28 a10:j10 a11:i28 a12:i28 a13:i28 a14:i28
+M 29 a2:j2 a3:j3 a4:j4 a5:j5 a6:j6 a7:i29 a8:j8 a9:i29 a10:j10 a11:i29 a12:i29 a13:i29 a14:i29
+M 30 a2:j2 a3:j3 a4:j4 a5:j5 a6:j6 a7:i30 a8:j8 a9:i30 a10:j10 a11:j11 a12:i30 a13:i30 a14:i30 a15:i1
+M 31 a2:j2 a3:j3 a4:j4 a5:i31 a6:i31 a7:i31 a8:j8 a9:i31 a10:i31 a11:j11 a12:i31 a13:i31 a14:i31 a15:i1
+M 32 a2:j2 a3:j3 a4:j4 a5:j5 a6:i32 a7:j7 a8:j8 a9:i32 a10:i32 a11:j11 a12:i32 a13:i32 a14:i32 a15:i1 a16:i1
+M 33 a2:j2 a3:j3 a4:j4 a5:j5 a6:j6 a7:j7 a8:i33 a9:j9 a10:i33 a11:j11 a12:j12 a13:i33 a14:i33 a15:i1 a16:i1
+M 34 a2:j2 a3:j3 a4:j4 a5:j5 a6:j6 a7:j7 a8:i34 a9:j9 a10:i34 a11:i34 a12:j12 a13:i34 a14:i34 a15:i1 a16:i1 a17:i1
+M 35 a2:j2 a3:j3 a4:j4 a5:j5 a6:j6 a7:j7 a8:i35 a9:j9 a10:i35 a11:i35 a12:j12 a13:i35 a14:i35 a15:i1 a16:i1 a17:i1
+M 36 a2:j2 a3:j3 a4:j4 a5:i1 a6:j6 a7:i36 a8:i36 a9:j9 a10:i36 a11:i36 a12:j12 a13:j13 a14:i36 a15:i1 a16:i1 a17:i1 a18:i1
+M 37 a2:j2 a3:j3 a4:j4 a5:j5 a6:i1 a7:i37 a8:j8 a9:i37 a10:j10 a11:i37 a12:i37 a13:j13 a14:i37 a15:i1 a16:i1 a17:i1 a18:i1
