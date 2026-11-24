@@ -1,0 +1,6 @@
+10 {'remaining': 1380, 'cardinality': 797, 'subset': 250, 'tail': 129, 'reverse-head': 165}
+11 {'remaining': 3218, 'cardinality': 2262, 'subset': 547, 'tail': 436, 'head': 83, 'reverse-head': 579}
+12 {'cardinality': 5984, 'tail': 1253, 'remaining': 6600, 'subset': 1402, 'reverse-head': 1881, 'head': 270}
+TOTAL {'remaining': 12020, 'subset': 2315, 'cardinality': 9369, 'tail': 1859, 'reverse-head': 2666, 'head': 353} 28582
+
+[exited with code 0]

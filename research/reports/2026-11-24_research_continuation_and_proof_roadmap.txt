@@ -1,0 +1,611 @@
+RESEARCH DOSSIER  /  VOLUME II
+Erdős #475
+Graham’s rearrangement conjecture
+Complete research continuation and exact proof roadmap
+November 24, 2026  |  Continuation of the November 23 dossier
+Scope. All substantive work in this conversation since the last uploaded report, including proofs, reductions, failed templates, computational evidence, and a newly verified 497-element expansion certificate.
+Status. The full conjecture remains unresolved. A complete symmetric construction and algebraic reduction to symmetry are established; the remaining uniform expansion theorem is identified precisely.
+Contents
+Executive summary and handoff
+Part I. Structural reductions and switching  •  §§1–11
+Part II. Arithmetic and auxiliary-weight reductions  •  §§12–14
+Part III. Constructive symmetry and asymmetry  •  §§15–19
+Part IV. Computation and exact obstruction certificates  •  §§20–23
+Part V. Exact remaining theorem and proof program  •  §§24–30
+References and source record
+
+Executive summary and handoff
+This continuation records the research after the uploaded 48-page document, “Erdős #475: Complete Research Dossier,” dated November 23, 2026. The earlier dossier ended with a failed universal fusion program, elementary atom-plus-pair/triple results, restricted multi-atom constructions and the unproved coherent maximal-atom selection principle. The present report covers every subsequent substantive research direction in this conversation, consolidating repeated statements rather than reproducing conversational commentary and decorative graphics.
+Outcome. The full all-primes conjecture is still open in this research. The strongest constructive advances are the complete two-atom theorem, an explicit construction for every symmetric set in an odd cyclic group, the asymmetry-preserving zero-sum reduction, the general algebraic reduction to a symmetric core, and several classes of asymmetric absorption. The exact missing ingredient is a compatible geometric expansion or a different direct construction for arbitrary asymmetric sets.
+Verification convention. “Proof” identifies a written mathematical argument from the conversation, with notation and qualifications standardized here. This is a research dossier, not a refereed paper. Proofs have not all been independently formalized. “Recorded computation” identifies counts or examples reported in the earlier turns; they are not represented as rerun in this compilation. “Reverified” identifies checks actually performed against the available script or by an independent direct calculation during compilation. No claim of literature novelty is made. Statements with an unresolved proof obligation are explicitly marked.
+Results at a glance
+Research line
+Result
+Status
+Anchor projection
+Proper support reductions and unique-atom-partition ordering
+Proof supplied
+Local contraction
+Double-blocked expansions force disjoint subset sums; simultaneous Hall criterion
+Proof supplied; universal versions false
+Defect repair
+One-defect reduction; counting identity; closed adjacent-swap components
+Proofs and counterexample
+Index and window dynamics
+Index ≤2; uniform zero-sum cardinalities; common-divisor two-atom theorem
+Proofs supplied
+General two-atom sets
+Four-block ordering with chosen distinguished steps
+Proof supplied
+Separators
+Gluing across interfaces of size ≤3; 4-connectivity restriction
+Proofs supplied
+Multi-atom fusion
+Rooted acyclicity, locality, simultaneous junction construction
+Proofs; universal SMAF open
+Arithmetic
+Signed lifts, torsion, lattice and modular kernel obstructions
+Proofs; rank-one obstruction persists
+Symmetric sets
+Explicit alternating construction for every odd cyclic modulus
+Proof supplied; elementary
+Asymmetry ≤4
+All sets, including nonzero total
+Proofs supplied
+Asymmetry 5
+Additive-relation and magnitude-gap subclasses
+Proofs supplied; general case open
+Arbitrary asymmetry
+Contraction to symmetric core, loss ≤r−2
+Algebraic proof; geometric lifting open
+Canonical expansion algorithms
+p=211 success of second template; p=503 failure of both
+Reverified
+ 
+Reading guide
+Part I records the structural and switching approaches in chronological order. Part II collects arithmetic and auxiliary-weight reductions. Part III develops symmetric and asymmetric constructions. Part IV records the two current exact algorithms, their witnesses, and the failed templates. Part V is the actionable frontier: precise hypotheses, success conditions, dependencies, alternative routes, and an audit checklist. All earlier results are retained even where a later argument supersedes their intended application.
+Part I. Structural reductions and switching
+1. Definitions and the external literature boundary
+For a prime p and a nonempty A ⊆ F_p \ {0}, Graham’s conjecture asks for a permutation with distinct nonempty partial sums. When ΣA=0, this is equivalent to a cyclic word whose n cyclic partial-sum vertices (including the initial 0, excluding the final repeated 0) are distinct, or equivalently to the absence of a nonempty proper zero-sum cyclic interval. An atom means a nonempty inclusion-minimal zero-sum subset. Every ordering of an atom is a simple cycle. A maximum atom partition maximizes the number k of atoms, not their largest size. A cardinality-minimal counterexample in a fixed prime is understood to have all smaller instances of the original Graham statement solved. The zero-sum reduction in §16 below justifies working in this form.
+The public problem record [1] reports proofs for |A|≤12, for p−3≤|A|≤p−1, and for every sufficiently large prime by combining four research programs. Pham and Sauermann [2] supply the medium-size range needed in that combination. Kuang and Wang [3] assert an absolute n₀ beyond which all sets of nonzero elements in finite abelian groups are rearrangeable. The latter is an October 2026 preprint. These sources do not provide, in the material reviewed here, a completed verification of every exceptional prime. We retain that distinction. The research below does not depend on the large-prime theorem except where explicitly noted.
+2. Anchor projection and the first algebraic reduction
+Anchor theorem. Assume smaller Graham instances are solved. Let A have sum zero and D⊊A, |D|≥2. Suppose D has a cyclic ordering in which every nonempty proper trace S∩D of an original zero-sum subset S is nonconsecutive. Then A is rearrangeable.
+Proof. Put R=A\D. Take a Graham ordering of R and split it into its first element and its tail. Neither block has a nonempty zero-sum interval: any such interval in the tail would equate two nonempty partial sums. Insert the two blocks in distinct gaps of the D-cycle. If a zero-sum proper interval I misses D, it lies in one block; if it contains all D, take its complementary zero-sum interval. Otherwise its trace on D is a proper consecutive cyclic interval, violating the anchor hypothesis. All possibilities are excluded.
+Two elements are inseparable if every zero-sum subset contains either both or neither. Taking D to be this pair proves that a minimal counterexample has no inseparable elements. This applies whenever two columns of the atom-incidence matrix coincide.
+Define M_A to have rows 1_B for every atom B⊆A, columns indexed by A. Every zero-sum subset decomposes into atoms; hence its incidence vector is a sum of rows. If v∈ker_Fp M_A has nonempty proper support D and its nonzero coordinate multiset has a simple zero-sum cyclic ordering, that ordering supplies an anchor. In particular, a proper-support kernel vector with distinct nonzero coordinates yields a reduction by cardinality induction; vectors of support 2 or 3 are automatically sequenceable (their nonzero coordinates sum to zero). The all-ones row is in the row space, using any atom partition. A basis consisting of that row and r−1 incidence rows distinguishes the n columns by binary patterns if the columns are distinct. Therefore n≤2^(r−1), i.e. r≥1+⌈log₂ n⌉, where r is the modular rank (not the later asymmetry parameter).
+Unique partition / class theorem. If A admits classes C₁,…,C_k, each of size at least two, and every zero-sum subset is a union of these classes, there is a direct solution. Write each class as a first element cᵢ and tail Rᵢ. Use (c₁,…,c_k,R₁,…,R_k). Every pair of classes interlaces: a cyclic interval cannot contain all of one and none of the other. Every nonempty proper union of classes is therefore nonconsecutive. A unique atom partition implies the hypothesis, because any zero-sum subset and its complement can be decomposed into atoms.
+Failure of universal proper anchors. For A=F_p^×, p≥7, no proper anchor D exists. Put R=A\D. A trace consisting of exactly one anchor element is always forbidden, so R is symmetric (use inverse pairs). For distinct r,s∈R with r+s≠0, −r−s must also belong to R, using the zero-sum triple if its elements are distinct, and trivially otherwise. If |R|≥4, take s∉{r,−r} to see that 2r=(r+s)+(r−s)∈R∪{0}; the two summands are distinct and nonzero. Thus R∪{0} is additively closed, which in a prime field forces R=A, contradiction. If |R|=2, R={±r}; the anchor D-cycle itself is simple and has p−3&gt;p/2 vertices. Its vertex set V intersects V+r, producing a proper interval of sum r. Adjoining −r gives a forbidden trace. Yet the full set is solved by a primitive root g: (1,g,…,g^(p−2)) has geometric-series partial sums (g^j−1)/(g−1). The anchor conjecture is therefore too strong.
+3. Essential torsion: original argument
+Assuming the sufficiently-large-prime theorem, any counterexample has rational incidence rank strictly greater than its rank modulo p. In fact some coordinate or coordinate-difference functional lies in the rational row space but not the modular row space. Otherwise a generic rational kernel vector avoids every coordinate hyperplane and equality hyperplane; clear denominators to obtain distinct nonzero integers. Every original zero-sum interval is still zero under this substitution. Reducing those integers modulo arbitrarily large primes transfers every obstruction, contradicting the large-prime result. Equal rational and modular ranks would force every integral functional in the rational row space to belong to the modular row space (compare the ranks after adjoining its row). This contradicts distinct nonzero original residues.
+If the rational rank is R and the rank defect is δ, every maximal minor is divisible by p^δ, by Smith normal form. If the largest atom has size m, Hadamard’s bound gives p^δ≤m^(R/2), and in particular p≤n^(n/2). Part II strengthens this without invoking the asymptotic theorem.
+Blocking families. A family of proper nonempty subsets of [n] is blocking if every cyclic permutation contains a member as an interval. Its incidence matrix, augmented by the all-ones row, represents a zero-sum counterexample modulo p exactly when its kernel contains a vector with distinct nonzero coordinates. This converts the problem into arithmetic realizability of unavoidable interval families. Enumeration is finite for fixed n but grows prohibitively, and no uniform characterization of blocking families was obtained.
+Effective alternative. If the large-set theorem [3] supplies a usable explicit n₀, the determinant bound makes the remaining domain finite: n&lt;n₀, p≤(n₀−1)^((n₀−1)/2). The abstract finiteness is not a proof by verification. Neither a usable numerical n₀ nor a full certificate was extracted.
+4. Single and simultaneous contractions
+Choose distinct x,y∈A with c=x+y∉A∪{0}. The smaller zero-sum set A′=(A\{x,y})∪{c} can be expanded by replacing c by (x,y) or (y,x). If a c-edge starts at u, the respective additional vertices are u+x and u+y; other vertices do not change.
+Double obstruction. If both expansions of a valid A′-cycle fail, there exist disjoint nonempty subsets of R=A\{x,y} both summing to −x or both summing to −y. Rotate the contracted cycle to start with c. The two failed expansions imply that a prefix and a suffix of the remaining ordered R each sum to −x, using the complements of the zero-sum intervals if necessary. If disjoint, the first conclusion holds. Otherwise their union is R; their disjoint nonempty complements both sum to −y because ΣR=−x−y.
+Call an element rich if two atoms intersect exactly in that element. If neither x nor y is rich, any compressible pair x,y could be expanded from every smaller valid cycle: disjoint representations of −x (or −y) yield two atoms through x (or y). Thus in a minimal counterexample all sums of distinct non-rich elements belong to A∪{0}. If P denotes the non-rich elements and n=|A|&lt;p−1, the Dias da Silva–Hamidoune theorem gives 2|P|−3≤n+1. At least ⌈(n−4)/2⌉ elements are rich. The full set n=p−1 is excluded by the primitive-root construction.
+Universal arbitrary-cycle expansion is false. Modulo 13 let A={1,2,3,4,5,6,7,11}. The following exhausts its compressible pairs, giving for each a valid contracted cycle with both expansions invalid. A itself has valid ordering (1,2,3,4,5,7,11,6), sums (1,3,6,10,2,9,7,0).
+Pair
+Bad contracted ordering
+1,7
+8,2,4,3,5,11,6
+1,11
+12,2,3,7,4,5,6
+2,6
+8,1,3,5,11,4,7
+2,7
+9,1,4,3,11,5,6
+3,5
+8,1,2,7,11,4,6
+3,6
+9,1,2,4,5,11,7
+3,7
+10,1,5,2,4,11,6
+4,5
+9,1,7,3,11,6,2
+4,6
+10,1,3,11,5,2,7
+5,7
+12,2,1,3,4,11,6
+ 
+Simultaneous contraction criterion. Contract disjoint pairs to distinct new steps c_i=x_i+y_i, preserving zero sum and distinctness. For a valid core cycle with occupied vertices V, the candidates for expansion i are h_i¹=u_i+x_i and h_i²=u_i+y_i. Form the undirected multigraph on residues with candidate pairs as edges; mark V as occupied. A simultaneous expansion exists iff every nontrivial connected component is a tree with at most one occupied vertex, or a unicyclic component with no occupied vertex. Necessity follows from e≤v−b and e≥v−1 in a component with v vertices, e edges and b occupied vertices. Sufficiency follows by rooting trees at the occupied vertex (or any vertex) and assigning edges their outward endpoints; orient a unicyclic core cyclically and its attached trees outward. This realizes distinct unoccupied representatives. This is exactly a matching/Hall problem.
+If differences x_i−y_i are dissociated (no nontrivial relation with coefficients −1,0,1), the candidate graph is a forest, since any graph cycle yields a signed relation. The only possible obstruction is a path between two occupied vertices; its signed differences equal an interval sum of core steps. GAP: choose contractions and core order so such paths cannot occur. The graph criterion is exact for fixed choices, not an existence proof for all A.
+5. One-defect repair and exact counting
+For a cyclic word w on n steps of sum zero, D(w)=n−|V(w)|, counting the distinct cyclic partial-sum vertices. In a minimal counterexample, delete any x, order A\{x} using the smaller-instance Graham theorem, and append x. The nonempty sums of the smaller word are distinct, so only 0 can be repeated. Since a zero-defect ordering would solve A, this yields exactly one repeated vertex, occurring twice.
+Swapping the consecutive steps at boundary i changes exactly that vertex to v_i′=v_(i−1)+v_(i+1)−v_i. At a repeated vertex the swap cannot increase defect: it either reaches a hole and solves the problem or moves the repeat to another occupied vertex, preserving the occupied set. In the strict propagation graph each one-defect state has two possible moves (the two repeated positions), so a component avoiding zero-defect states is a closed cycle. In a larger graph one may also swap unique vertices into holes (“buffer swaps”), preserving D≤1.
+Refuted repair principle. A strict closed orbit of length eight was reported at p=19, without a retained explicit witness. Even buffer swaps do not suffice. At p=17 take the full nonzero set with word (1,2,7,12,8,13,6,16,11,3,14,4,9,15,5,10). Cyclic vertices: (0,1,3,10,5,13,9,15,14,8,11,8,12,4,2,7). Holes: 6,16; repeated vertex 8. An independent breadth-first search during compilation confirms precisely eight reachable orderings under all cyclic adjacent swaps with D≤1, all of defect one. For wraparound swaps compare defects up to translation of the vertex set.
+The compact certificate uses switches at positions 0,7,9,11 with respective old/new values (0,8), (15,8), (8,0), (8,15). The four independent switches compete for three residues {0,8,15}. Of sixteen configurations eight have defect one: 0000,0001,0010,0101,0111,1010,1011,1111. Their repeat values are 8,15,0,8,0,8,15,8 respectively. No non-defect-increasing exit reaches a hole. Earlier research additionally checked single-element relocations without success. A reported seven-swap path allowing defect two has defect trajectory 1,2,1,2,2,2,1,0. Its final word (1,10,2,7,12,8,13,6,14,16,3,9,11,4,15,5) is valid (reverified). The intermediate path itself was not retained in the visible record.
+Independent switch theorem. If disjoint adjacent pairs can be switched simultaneously to repair a one-defect word, then the prescribed switches can be performed one at a time at repeated vertices. Starting at one repeated position scheduled to change, follow its new target. If occupied, the position holding it must also be scheduled to change, since the proposed final targets are distinct. No previously switched position can be a target again. The chain reaches a hole. Thus a trapped propagation orbit cannot be repaired simply by parallelizing independent switches.
+Deletion-count identity. Let G(B) count valid linear Graham orders, N₀(A) valid cyclic orders up to rotation, and N₁(A) cyclic orders of defect one up to rotation. Then
+Σ_{x∈A} G(A\{x}) = n N₀(A) + 2 N₁(A).
+Proof: appending the deleted step produces a cyclic order with defect ≤1; conversely a simple cycle contributes n deletions, a single-defect cycle exactly the two choices omitting a repeated vertex from the linear partial-sum list, and higher defect none. Thus the strict inequality 2N₁(A)&lt;ΣG(A\{x}) is equivalent to existence. GAP: prove a strict counting advantage; closed components refute naive injection arguments.
+6. Index-two and signed-boundary switching
+Index-two theorem. Any set of distinct nonzero residues modulo m whose least-positive integer representatives total at most 2m is Graham-rearrangeable. In particular a zero-sum set in F_p is solved if some dilation has least-positive total p or 2p.
+For total T≤m, the increasing integer sums are distinct mod m. If m&lt;T≤2m, start with increasing positive steps. A collision among nonempty sums occurs between vertices at distance m. If both colliding boundaries are ascending, with incoming/outgoing steps a&lt;b and c&lt;d, at least one of b−a&lt;d or d−c&lt;b holds. Otherwise −a−c≥0. The corresponding swap moves its boundary forward strictly into the other boundary’s outgoing arc, killing the collision without creating another. At most two lifts of any nonempty residue lie in (0,2m]. The swap creates a descent only at the freed boundary and cannot make a neighboring ascending boundary descending. Thus remaining collisions are still between ascending boundaries, except potentially the fixed endpoint T.
+If T collides at s_j=T−m, switch a_j=a,a_(j+1)=b. Its new value is s_j+δ, δ=b−a. Only possible new collision is at t=T−2m+δ. If occupied at s_k=t, then k≤j−2 (k=j−1 would force b=m). Switch the ascending pair there by ε=a_(k+1)−a_k&lt;a. Its opposite lift t+ε+m lies strictly within the outgoing arc of length a at s_j+δ, and t+ε&lt;m. This removes the endpoint obstruction, without creating another. Repeated ascending switches finish. For T=2m the endpoint is the cyclic initial vertex; the same proof gives the zero-sum circle interpretation (antipodal collisions). This proof applies to composite moduli as well.
+Recorded exhaustive verification for all sets with least-positive total ≤2p: p=11:319, 13:694, 17:2,727, 19:5,044, 23:15,609, 29:70,541, 31:112,273; zero failures.
+Index-three limitation. At p=13 the ascending word on {1,2,3,4,5,6,7,11} has total 39 and two copies of residue 2. Their ascending boundaries (5,6) and (7,11) shift to occupied 3 and 6. Neither switch immediately lowers defect. A third possible lift prevents the index-two argument from applying.
+7. Collision crossing and uniform-cardinality relations
+Suppose a zero-sum set admits no partition into three nonempty zero-sum sets (equivalently maximum atom multiplicity ≤2). No vertex can occur three times in a cyclic ordering, since the intervening intervals would partition the set into three. Any two collision chords must cross: nested or disjoint zero-sum intervals likewise yield three nonempty zero-sum pieces by taking differences and complements. If d collisions occur, pairwise crossing chords can be listed with endpoints v₁,…,v_d,v₁,…,v_d in cyclic order. The two blocks between each corresponding pair of successive endpoints have the same sum, and cannot both be singletons by distinctness. Thus n≥3d. This includes the d=1 case, where the two complementary zero-sum blocks have size at least 2. Recorded random propagation experiment: 61,699 single-defect starts at p=13,17,19,23,29,31,37,43,53,71,101, all repaired; no proof of universal propagation followed.
+Uniform-cardinality theorem. If every nonempty proper zero-sum subset has cardinality s or n−s, 2≤s≤n/2, the set is rearrangeable (prime-field case). Define W_i as the cyclic length-s window starting at i. A swap at boundary i changes W_i by δ=a_(i−1)−a_i≠0 and W_(i−s) by −δ, leaving other windows unchanged. At an ordering minimizing zero windows, any swap at W_i=0 must transfer its zero to W_(i−s), exchanging (0,δ) with (δ,0). Otherwise the minimum decreases.
+Case gcd(n,s)=1. Repeated transfers visit every position, so no other zero window can exist. After n transfers the zero returns, while the other n−1 window sums rotate. After n−1 circuits all window sums return. They uniquely determine the step vector: W_i−W_(i+1)=a_i−a_(i+s), so the difference of two vectors is constant by coprimality; n&lt;p and equal total force that constant zero. One circuit uses each cyclic adjacent transposition once in the order i,i−s,… . With h≡−s⁻¹ mod n, 1≤h≤n−1, their chronological ranks around the circle satisfy r_(j+1)=r_j+h mod n. There are h descents and n−h ascents. Tracking a label through each incident transposition shows it continues in the same direction through strictly later swaps, stopping at the next position with that direction. The permutation therefore consists of cycles of lengths h and n−h. Distinct labels returning after n−1 circuits require both lengths divide n−1. Since both exceed one, let h≤n−h without loss of generality; then n−h divides h−1, impossible. Hence no positive minimum.
+Case gcd(n,s)=g&gt;1, 2s&lt;n and n≠3s. There cannot be three disjoint zero-sum pieces: all would have size s, and the union of two would force n=3s. Along the zero-propagation orbit j_t=i−ts mod n, t=0,…,L−1, L=n/g≥3, the swaps are independent (positions not adjacent). Initially v_(j₀)=v_(j_(L−1)). The first transfer sets v_(j₀) to original v_(j₁), and the last transfer in a circuit sets v_(j_(L−1)) to that same value. Perform only those two switches. Since j₁ is unchanged, this creates a triple collision, impossible. Thus a transfer must reduce the count.
+Case n=2s. Complementary windows are zero together; a swap at their shared boundary changes both by opposite nonzero increments and eliminates both. Repeat.
+Case n=3s. For s=2, inverse-pair adjacency is the only issue; arrange the pairs interlaced. For s≥3, partition positions into J_i={i,i+s,i+2s}. Collisions are internal to a class. Its three independent switches provide two distinct candidate values per position. Hall fails only if all three candidate pairs are identical, say {x,y}. Make both x and y current by one switch if needed. A nonempty collection of switches in neighboring class J_(i+1) can preserve its goodness if already good: either switch to an unoccupied alternative or follow and switch a directed cycle of alternatives among its current vertices. If bad, switch any one. These switches change only one candidate per neighboring position of J_i; at least one alternate changes to a value outside {x,y} (distinct step labels ensure it differs also from its current value). Hall now holds. Repair J_i with independent switches, leaving actual vertices of other classes unchanged. Repeat until all classes good. This supplies the uniform theorem, including the formerly near-balanced cases.
+Common-divisor theorem. If maximum atom multiplicity ≤2 and every nonempty zero-sum subset has cardinality divisible by d≥2, partition boundary indices into residue classes mod d. Collisions only occur within a class. Each class has independent switches, two distinct values per position. A residue cannot belong to three candidate sets because choosing it at all three gives a triple collision. Counting incidences proves Hall: any I has at least |I| distinct candidates. Switch to a matching for each class successively; prior actual vertices are unchanged. This solves all such instances. A two-atom counterexample would need gcd of zero-sum cardinalities one and more than one complementary pair of lengths (superseded by the complete two-atom theorem in §9).
+8. Separation of two atoms and intermediate junction reductions
+Separated atom cycles. Let A=B⊔C admit at most two atoms in any partition. Order each atom independently as a path from 0 back to 0. Their common internal vertices must appear in the same relative order; an inversion would yield nested collision chords in the concatenation. Minimize the number of common internal vertices, then maximize Φ=Σ(i+j) over pairs b_i=c_j of internal indices. At a common vertex, switching its boundary within B either eliminates a common vertex or moves its partner to j′&lt;j. The switch within C similarly moves to i′&lt;i. These independent switches together yield b_i′=c_(j′) and c_j′=b_(i′), an inversion. Hence the minimum is zero. First steps of both atoms can be prescribed: a collision at i=1 cannot also be at j=1 (distinct first elements); switching C must move to i′&gt;1 or eliminate the collision, contrary to optimality. Similarly for j=1. This gives a single-defect starting word for every prescribed partition, without cardinality induction.
+For separated words W=(β₁,…,β_r,γ₁,…,γ_s), swapping the repeated-zero junctions yields h₁=γ₁−β_r, h₂=β₁−γ_s. If both fail, both targets must lie in the same atom interior: equal targets would create triple collision upon both swaps; different atom interiors yield noncrossing chords. Choose B a minimum atom. If both targets are in B, the new zero-sum interval cut off from B has size &lt;r, impossible. Thus both land in C. Prescribing b=β₁ and c=γ₁, failure of h₂ gives b−γ_s=γ₁+…+γ_j, hence a subset of C excluding c with sum −b. Therefore a sufficient condition is that for some b∈B and c∈C all subsets of C with sum −b contain c, including the case with no representation. This “mandatory-element” criterion is not automatic.
+Counterexample to automatic mandatory-element property: p=211, A={34,51,61,77,79,82,109,136,149,153,179,181,198,199}, unique smallest atom B={51,82,136,153}. The recorded counts of subsets of C summing to −b are 9,6,4,4 with empty intersections; 76 proper zero-sum subsets; no three-atom partition. Valid word: (199,109,136,149,198,179,51,61,34,181,79,82,77,153), sums (199,97,22,171,158,126,177,27,61,31,110,192,58,0).
+For the most balanced two-atom partition with smaller size r and larger size s≥2r, both failed targets cannot land in C: crossing forces lengths u,v&lt;s of new zero intervals with u+v&gt;s, so one exceeds r and gives a more balanced partition. If targets land in B, first-step prescriptions imply that representations of −c in B have empty intersection for every c∈C, hence each has at least two representations, as does c by complements. Since C∩(−C)=∅ for an atom of size&gt;2, counting yields 4s≤2^r−2. Thus s≥2r and 4s&gt;2^r−2 is sufficient for a solution. This is an intermediate result now subsumed by §9.
+Geometric propagation constraints. For indefinite nonbacktracking one-defect propagation in a two-atom set, let t_i be successive repeat-boundary positions. The two consecutive swaps at t₁,t₂ are independent since repeated vertices are nonadjacent. Applying only the second gives chords (t₀,t₁),(t₂,t₃), which must cross; the four positions are distinct, else a triple collision results. Consecutive triples have a consistent circular orientation. In that orientation d_i=(t_(i+1)−t_i) mod n is a permitted zero-sum length, and d_i+d_(i+1)&lt;n&lt;d_i+d_(i+1)+d_(i+2). If all smaller permitted lengths s≤n/3 and distinct smaller lengths obey r&lt;s⇒2r≤s, an infinite schedule is impossible. If all d_i are small, the triple inequality fails; otherwise a large n−s forces neighbors smaller than s, each ≤s/2, again failing the triple inequality. This proves another mixed-cardinality subclass. The general propagation conjecture was not proved or needed for the next theorem.
+9. Complete two-atom theorem
+Theorem. In any abelian group, a finite zero-sum set of distinct nonzero elements admitting no partition into three nonempty zero-sum subsets is rearrangeable. In the nonminimal case, choose a minimum-cardinality atom B, complement C, and arbitrary distinguished b∈B,c∈C. There is a valid four-block word (b,c,β₂,…,β_r,γ₂,…,γ_s), where the B and C permutations begin with b and c respectively. This is a joint choice of permutations, not fusion into an arbitrary fixed complement.
+Proof. C is an atom. The portion of the proposed word from 0 to c through (b,c,B\{b}) is simple for every ordering: vertices after the first two steps differ by nonempty subset sums of B\{b}; a collision involving the first step b or initial 0 and an earlier interior vertex would give a proper zero-sum set of size &lt;r; the last exceptional interior value c−β_r cannot be zero, and the endpoint c is distinct from b and 0. The portion from c back to 0 through C\{c} is simple since C is an atom.
+Protect the fixed first-path vertices b,b+c. Order R=C\{c}, of total T=−c, so its proper prefix sums avoid {b−c,b}. While ≥3 steps remain, at most two are forbidden. A failure with two unused steps x,y would mean {T−x,T−y}={b+T,b}, forcing one to be −b. This cannot belong to C: if r&gt;2 then {b,−b} is a smaller atom, and if r=2 it already lies in B. The admissible family is therefore nonempty (including the short R cases).
+Choose admissible orders minimizing path intersections, then maximizing Φ=Σ(i+j) over collision pairs v_i=v_j. Any remaining collision has 3≤i≤r and r+2≤j≤n−1; both boundary swaps act internally on disjoint atom blocks. Swapping B at i preserves the protected constraints. Minimality forces a new partner j′, and maximal Φ forces j′&lt;j. Swapping C at j either stays admissible, forcing i′&lt;i by the same argument, or hits a protected vertex at i′=1 or 2, again i′&lt;i. Perform both independent switches, temporarily allowing the protected condition to fail. This produces nested collision chords (i′,j) and (i,j′), with i′&lt;i&lt;j′&lt;j. The inner interval, outer minus inner, and outer complement are three disjoint nonempty zero-sum subsets. Contradiction. Hence the admissible optimum has no collisions. End of proof.
+Recorded exhaustive audit of the stronger prescribed-step theorem:
+p
+Nonminimal two-atom sets
+Fusion obligations
+Failures
+5
+1
+8
+0
+7
+3
+24
+0
+11
+40
+280
+0
+13
+127
+984
+0
+17
+988
+11,712
+0
+19
+2,496
+35,064
+0
+Total
+3,655
+48,072
+0
+ 
+10. Small separators and bounded-interface gluing
+Let H_A be the graph whose vertices are the elements of A, joining two if they belong to a common atom. All atoms of a zero-sum subset of A are also atoms of A.
+Zero-sum separator theorem. A=X⊔Y⊔D with X,Y nonempty, ΣX=ΣY=ΣD=0, 2≤|D|≤3; assume no atom meets both X and Y. If X∪D and Y∪D have simple cycles, glue them. Since |D|≤3, rotate/reverse to agree on the cyclic order d₁,…,d_q. Write the smaller words as (d₁,X₁,…,d_q,X_q) and (d₁,Y₁,…,d_q,Y_q), and interleave W=(d₁,X₁,Y₁,…,d_q,X_q,Y_q). A proper zero-sum interval or its complement contains at most one separator element. Decompose it into atoms. If none in D, each side intersection sums to zero; if one d, the atom containing it belongs to one side, so that side’s projection together with d sums to zero. At least one projection is proper nonempty and consecutive in the corresponding smaller cycle. Contradiction.
+Additive triple separator theorem. If D={a,b,c} with a+b=c and ΣX=ΣY=−c, and no atom crosses between X,Y, glue valid smaller cycles on X∪{a,b}, Y∪{a,b}. First Σ(X)∩(−Σ(Y))={0}, where Σ denotes all subset sums: a nonzero opposite pair of subset sums gives a zero-sum union whose atom partition must have a crossing atom. Neither X nor Y can contain two disjoint subsets summing to −c, since its remaining complement sums to c and the opposite side totals −c. Write smaller cycles (a,X₁,b,X₂) and (a,Y₁,b,Y₂). By reversal choose X₁,Y₁ to contain no subset of sum −c. Set W=(a,X₁,Y₁,c,b,X₂,Y₂). A zero-sum proper interval or complement has at most one separator element. For none, a or b, use projection as above. For c alone, the interval is confined to X₁∪Y₁∪{c}; its atom containing c forces a prohibited subset of sum −c. Contradiction.
+Four-connectivity restriction. For a cardinality-minimal zero-sum counterexample, H_A must be 4-vertex-connected (for odd p). If disconnected, each component totals zero; choose valid smaller cycles, write each as (x_i,R_i), then interleave first elements and tails as in §2. A zero interval projects to all or none of each component; interlacing rules out any proper union. Now suppose removal of D, |D|≤3, separates X,Y. In any complete atom partition let D_X be separator elements allocated to atoms meeting X. All possible allocations have sum −ΣX. Every atom extends to a partition. If D_X never changes, X∪D_X is disconnected from the remainder, impossible. Distinct allocations with equal sum imply, after deleting common elements, one of an inverse pair summing to zero, a zero-sum triple, or a+b=c. For a pair and a third element always allocated to the same side, absorb that fixed element into its side. If allocations differ by singleton versus pair, use the additive case. Thus either a zero-sum separator remains with both sides zero-sum, or D={a,b,c}, a+b=c, both sides of sum −c. The preceding gluing theorems and smaller-instance induction contradict minimality. This allocation classification uses distinct nonzero residues and p odd.
+Bounded-interface theorem. If H_A has a tree decomposition with adjacent bag intersections of size ≤3 and no bag contains three disjoint nonempty zero-sum subsets, then A is rearrangeable. Choose a smallest zero-sum counterexample subset B of A (and use the zero-sum reduction for smaller instances where needed; see audit caveat below). A 4-connected subgraph cannot straddle a tree interface of ≤3 vertices, so B lies in one bag. The two-atom theorem contradicts this. Caveat: the proof of four-connectivity only uses smaller zero-sum instances in the gluing cases, so selecting a minimal zero-sum subset of A suffices here; no replacement set outside A is needed.
+Example p=31: D={3,4,7}, X={30,2,26,28}, Y={14,10}. The seven reported atoms are {3,2,26}, {4,30,2,26}, {3,28}, {4,30,28}, {7,30,2,26,28}, {3,4,14,10}, {7,14,10}. A partition into three atoms is {3,28}, {4,30,2,26}, {7,14,10}. Smaller words (3,4,30,2,28,26), (3,4,14,10) glue to (3,7,4,30,2,28,26,14,10); sums (3,10,14,13,15,12,7,21,0). High connectivity is still possible (e.g. full nonzero sets), so small interfaces do not settle the general case.
+11. Maximum partitions, rooted acyclicity and simultaneous fusion
+Let k be the largest possible number of atoms in a partition A=B₁⊔…⊔B_k. Independently order each atom cyclically, rooted at zero, and retain all labeled edges in their directed union G. Then G−{0} is acyclic. Indeed G is balanced, with in/out degree k at 0. If it has a directed cycle not through 0, remove that cycle and decompose the remaining balanced graph into simple directed cycles. Exactly k of them use 0; together with the removed cycle there are at least k+1 disjoint zero-sum edge sets, contrary to maximum k. This extends the two-atom crossing phenomenon to arbitrary atom multiplicity, but does not give a simple cycle by itself.
+Simultaneous junction construction. Let f_i and ℓ_i be first and last steps of an internal ordering of B_i, and P_i its nonzero proper prefix vertices. Concatenate the atoms, then independently switch the k−1 internal junctions (ℓ_i,f_(i+1)) to (f_(i+1),ℓ_i). They are disjoint pairs of positions since all atoms have size ≥2. Precisely the k−1 extra zero vertices become h_i=f_(i+1)−ℓ_i; all other vertices remain unchanged. The word is simple iff the following is a disjoint union:
+{0} ⊔ P₁ ⊔ … ⊔ P_k ⊔ {h₁,…,h_(k−1)}.
+Thus the exact SMAF (simultaneous maximum-atom fusion) conjecture asks that some maximum partition, atom order, and internal permutations satisfy this criterion. Evidence was stronger (every tested maximum partition), but the existential version is the sufficient target. It is still unproved, and stronger than Graham itself.
+Four-atom locality theorem. If every zero-sum subset supported on at most four atoms of a fixed partition is a union of complete atoms, every simultaneous junction ordering is valid. A cyclic interval can partially meet at most four atoms, at most two per endpoint. Remove full atoms contained in a putative zero interval; what remains is zero-sum and supported on at most four partial atoms, so must be empty. A proper union of full atoms cannot be an interval, since each pair of adjacent atoms interlaces in the switched word and the chain of atom adjacencies is connected. Hence no proper zero interval exists.
+A high-connectivity example at p=211 uses A={±5,±14,±54,±56,±81,±85,±92}. Reported: maximum multiplicity 7, 23 atoms, interaction graph connectivity 12 and 89 of 91 edges, no mixed relation on ≤4 inverse pairs. The relation 5−14−54−56−92=−211 shows mixed relations exist. The valid word is (5,14,−5,54,−14,56,−54,81,−56,85,−81,92,−85,−92), with residues (5,19,14,68,54,110,56,137,81,166,85,177,92,0).
+Infinite family: take common independent e₁,e₂,e₃ and for each j private independent u_j,v_j,w_j. Let z_j=e₁+e₂+e₃+u_j+v_j+w_j. Include both signs of all basis vectors and z_j. There are 3+4t inverse pairs, and no signed relation supported on ≤4 pairs: a nonzero z_j coefficient forces all three private coordinates to be canceled, leaving common coordinates unless other terms are used. Each relation {e₁,e₂,e₃,u_j,v_j,w_j,−z_j} is an atom, and its negative also is. These overlap along common coordinates, giving interaction connectivity at least six when counting the three common pairs: in fact mixed atoms with both signs of each local group and the inverse-pair edges must be considered. The claimed ≥6 connectivity was not independently audited here; the no-short-relation condition and locality conclusion do not depend on that connectivity claim. Encode independent coordinates by sufficiently separated integer powers and choose a prime exceeding all relevant bounded sums to preserve the finite relation pattern.
+Sparse interaction theorem. A mixed support J means nonempty proper subsets S_i⊊B_i, i∈J, whose combined sum is zero. Assume no mixed support of size two. Define D on atoms by joining two that occur together in any mixed support of size three or four. If the complement graph of D has a Hamiltonian path, order atoms along it and apply simultaneous junctions. Two internal vertices colliding would force a size-two mixed support. A junction colliding with an internal vertex or another junction yields a mixed relation on ≤4 atoms; differences of prefixes in the common atom are sums of proper consecutive subsets or their negatives, with negatives replaced by complements. If a shared middle atom cancels, the support reduces to size two; otherwise a support of size three/four contains a consecutive pair of atoms forming a junction, disallowed by the chosen path. So all collisions are excluded. Dirac’s theorem applied after adding a universal vertex gives the sufficient bound Δ(D)≤(k−1)/2.
+For symmetric sets A={±a₁,…,±a_k}, choose signed representatives x_i and order the pair atoms. The junction word is (x₁,x₂,−x₁,x₃,−x₂,…,x_k,−x_(k−1),−x_k). Its vertices are {0}∪{x_i}∪{x_i+x_(i+1):i&lt;k}. Without a signed relation on three distinct pairs, choose increasing positive representatives ≤(p−1)/2. Consecutive sums are strictly increasing and &lt;p; equality with a representative would be a three-pair relation. This solves all such sets even with many higher-support relations. For k≥2, if T,Q count three- and four-element supports admitting signed zero-sums, the expected collision count of uniformly random signs and order is 3T/(2k)+3Q/[2k(k−1)]. Each triple has three choices of singled representative; its other pair is consecutive with probability 2/k and signs match with probability 1/4. Each quadruple has three pairings, both consecutive with probability 4/[k(k−1)], matching signs with probability 1/8. For support three or four the signed relation is unique up to negation: two differing patterns would give a shorter relation on a partition of the support, one side of size one or two, impossible for distinct inverse pairs. Adjacent junctions sharing a representative cannot collide. Expectation &lt;1 is sufficient. The general symmetric problem is solved by a different explicit construction in §15.
+Recorded exhaustive SMAF evidence, maximum partitions with k≥3:
+p
+Sets
+Maximum partitions
+Failures
+7
+1
+1
+0
+11
+26
+26
+0
+13
+130
+166
+0
+17
+2,635
+6,411
+0
+19
+10,854
+36,078
+0
+Total
+13,646
+42,682
+0
+ 
+Symmetric junction template recorded exhaustive counts for p=7,11,13,17,19,23,29,31: 4,26,57,247,502,2,036,16,369,32,752 sets respectively; total 51,993, zero failures. This is not a proof of SMAF even for symmetric sets, as the later symmetric theorem uses a different word.
+Part II. Arithmetic and auxiliary-weight reductions
+12. Balanced lifts and reduced lattice dimension
+Signed-lift theorem. Suppose a zero-sum set modulo p has distinct nonzero integer representatives totaling zero, with positive sum T&lt;p. Separate positive lengths P and magnitudes Q of negative lengths, both summing to T. Start two increasing paths from 0 to T, with each set of lengths sorted increasingly. At any common internal vertex where the neighboring lengths are a&lt;b and c&lt;d, one of b−a&lt;d or d−c&lt;b holds. Swap the corresponding adjacent lengths to move that vertex inside an edge of the other path, eliminating the common vertex without introducing another. Neighboring ascending boundaries remain ascending; the only descent is at the freed boundary. Repeat. The paths have disjoint interiors and share only endpoints. Traverse P forward and Q backward. Its integer vertex span T&lt;p ensures modular distinctness. The same proof over integers without a modulus produces an integer-simple cycle for any distinct nonzero balanced real weights. For symmetric sets this gives the sufficient condition min_{λ≠0} Σ_i ‖λa_i‖_p&lt;p, where ‖x‖_p=min([x]_p,p−[x]_p).
+Atom-dependent lattice bound. For any partition into atoms of sizes m_i, let d_i=m_i−1, d=Σd_i=n−k. Omit one coordinate per atom to obtain a∈F_p^d. The integer lattice L={x∈Z^d:x mod p∈F_p a} has covolume p^(d−1). Restore omitted coordinates by negatives of sums of their blocks. For each block put P_i=Σmax(x_ij,0), N_i=Σmax(−x_ij,0), and F(x)=Σmax(P_i,N_i). This is the restored total positive mass. A nonzero lattice point of F(x)&lt;p has a nonzero reduction (else each coordinate divisible by p and of absolute value &lt;p), hence gives a balanced lift of a nonzero dilation of the original set, solved by the signed-lift theorem.
+The volume of one block’s F_i-unit ball is Σ_{r=0}^{d_i} C(d_i,r)/(r!(d_i−r)!)=C(2d_i,d_i)/d_i!, by orthants and Vandermonde. Integrating the sum of the block radii over their simplex gives the total unit volume ∏C(2d_i,d_i)/d!. Minkowski applied to a slightly contracted radius-p body yields a nonzero point with F&lt;p whenever
+p &gt; 2^d d! / ∏_i C(2d_i,d_i).
+For symmetric k-pair sets this is p&gt;k!; for k triples, p&gt;(2/3)^k(2k)!. Bounds are sufficient, not necessary. They are now superseded for symmetric sets but relevant for other types.
+Reduced torsion. Let E:Z^d→Z^n restore the omitted coordinates exactly and N=M_A E. Entries of N are −1,0,1. If rational and modular ranks agree, a generic rational kernel vector can be chosen with all restored coordinates distinct and nonzero, since the original modular vector satisfies those inequalities. Scale to integers; the signed-lift switching proof over the integers makes a cyclic order with no integer zero interval, which excludes every original zero interval preserved by N. Thus any counterexample has rank defect δ≥1; if rational rank R, p^δ≤d^(R/2) by Smith normal form and Hadamard. In particular p≤d^(d/2), independent of published asymptotic theorems.
+13. Stronger rational and modular auxiliary-weight theorems
+The incidence matrix can be used even when its kernel vectors are not actual distinct residue vectors. Every original zero-sum interval must also have auxiliary weight zero (or an integer, in the modular setting).
+Rational nonvanishing theorem. Suppose w∈ker_Q M_A has all coordinates nonzero, not necessarily distinct. Separate the elements by sign of w, then order the positive and negative paths by nondecreasing absolute auxiliary weights. Treat the negative path in reverse, negating its original steps when constructing the second path. Both end at the same auxiliary height T. An original collision implies equal auxiliary heights; there is at most one interior vertex at each height on either path. At a collision, if adjacent auxiliary lengths on one path are equal, swapping their distinct original elements changes the original vertex but not its height; the only possible collision there disappears. If both inequalities are strict, use the ascending-boundary argument of §12 to move one vertex strictly inside the other's auxiliary edge. Neither switch creates a new collision or a descent at any remaining colliding boundary. Repeat. This solves A.
+Full rational rank necessity. In a cardinality-minimal counterexample, even a nonzero rational kernel vector with zero coordinates suffices for a solution. Let P,Q,Z be its positive, negative, zero classes. The smaller Z has a valid Graham ordering by induction. Split it into first singleton Z₁ and tail Z₂, each containing no zero-sum nonempty interval. Construct (P↑,Z₁,Q↓,Z₂). Auxiliary heights increase from 0 to T, stay there through Z₁, decrease to 0, stay there through Z₂. At extreme heights the actual vertices are simple because each zero-weight block is interval-zero-free. At intermediate heights only one vertex from each monotone path exists; the previous switching argument eliminates all collisions and leaves zero-weight blocks unchanged. Hence a minimal counterexample has ker_Q M_A={0}, i.e. rank_Q M_A=n. Here smaller *original Graham* instances are needed for Z, not just smaller zero-sum subsets. The nonzero-sum reduction in §16 provides the appropriate cardinality-minimal framework.
+Modular short-lift theorem. The same proof works for a real w≠0 with M_Aw integral, Σw_i=0 and positive mass T&lt;1. Every original zero interval has integral auxiliary weight, and the difference of any two path heights lies in (−1,1), so a collision forces equality of heights. Thus such a lift is forbidden in a minimal counterexample.
+Torsion-order bound. Using E,N,d_i,d as above, the row lattice Λ⊂Z^d of N has full rank in a minimal counterexample. Write τ=[Z^d:Λ], the product of its Smith factors. The dual Λ*={x:Nx integral} has covolume 1/τ. Restoring w=Ex gives exactly the auxiliary condition of the modular short-lift theorem. Consequently every nonzero x∈Λ* has F(x)≥1. Minkowski with the volume computed above proves
+τ ≤ 2^d d! / ∏_i C(2d_i,d_i).
+This bounds the full finite relation group Z^d/Λ, not just p. The p-primary elementary kernel dimension ℓ satisfies p^ℓ|τ, since the rank defect counts invariant factors divisible by p.
+Local kernel bound. Shorten C_A=ker_Fp M_A to vectors supported in a chosen J, |J|=r≥2, with dimension ℓ_J. Eliminate one coordinate using the all-ones row. The integer lattice of admissible reductions has covolume p^(r−1−ℓ_J). Its radius-p balanced norm ball has volume p^(r−1) C(2r−2,r−1)/(r−1)!. Minkowski and the modular short-lift theorem give
+p^ℓ_J ≤ 2^(r−1)(r−1)! / C(2r−2,r−1).
+Support size r
+Threshold
+First prime exceeding threshold (odd-prime setting)
+2
+1
+3
+3
+1.333
+3
+4
+2.400
+3
+5
+5.486
+7
+6
+15.238
+17
+7
+49.870
+53
+8
+187.972
+191
+9
+802.014
+809
+10
+3821.361
+3823
+ 
+For example at p≥53, any seven columns of M_A must be independent if A is a minimal counterexample. The thresholds are reproduced from the exact formula; they are not a complete classification of possible support sizes.
+Full-rank blocking family theorem. Replace all atom rows with any blocking family of actual zero-sum subsets, plus the all-ones row. The same auxiliary-height proof eliminates all blocking intervals if there is a nonzero rational kernel vector; track only collisions corresponding to the blocking intervals. An adjacent switch can change the element set of an interval only when one of its boundaries is moved, so unmodified boundary pairs cannot become new blocked intervals. A smaller-instance ordering handles zero-weight blocks. Consequently every blocking family of a minimal counterexample spans Q^n. The full-rank obstruction is stronger than merely requiring torsion, but not contradictory.
+14. Auxiliary multisets, low numbers of weight classes and rank-one examples
+Auxiliary multiset reduction. If some nonzero modular kernel vector w has a sequenceable multiset of nonzero coordinates, order its support accordingly and insert the smaller-instance zero-coordinate blocks at two distinct gaps, as in the anchor theorem. Original zero intervals have auxiliary sum zero, so a proper nonempty support trace is impossible. The same holds when the support is all of A. In the latter case it is only useful if the auxiliary multiset can already be sequenced by an independent theorem.
+Two-valued theorem. No modular kernel vector in a minimal counterexample can have only two distinct nonzero values u,v. Let X,Y,Z be its corresponding classes and zeros, sizes r,s, with ru+sv=0. The common terminal t=ru=−sv is nonzero because r,s&lt;p. Order X arbitrarily, insert Z₁, then order Y greedily and insert Z₂. Each constant-weight block traces an arithmetic progression of distinct auxiliary heights, from 0 to t and t back to 0. At a proper Y-prefix at most one X-vertex can have its auxiliary height. With at least two distinct unused original elements, choose a next step avoiding that one forbidden original residue. Z-blocks are simple at the two different endpoint levels. This solves the set. A nonzero vector with only one nonzero value is already impossible since its support is &lt;p and total auxiliary sum zero.
+Full-support three-valued theorem. Suppose w takes three nonzero values u_i, with multiplicities m_i and no zero coordinates. Group into three blocks of weights u_i. Their junctions t₀=0,t₁=m₁u₁,t₂=m₁u₁+m₂u₂ are distinct because each aggregate nonzero. Each block interior I_i={t_(i−1)+ju_i:1≤j&lt;m_i} is simple and excludes its own endpoints. Construct first two block orders greedily: a nonjunction height in the second has at most one earlier vertex to avoid; at a junction, only the nonincident block can have that height. The last block may have two forbidden values per internal position. If one position has at most one forbidden value, fill from both ends toward it: while ≥3 unused elements remain, avoid at most two; when two remain, avoid at most one at the final internal position. A singleton last block needs no work. Otherwise a last block with a suitable internal position exists unless I₁=I₂=I₃. Equality forces all multiplicities m equal. Comparing sums of I₁,I₂ gives m(m−1)(u₁+u₂)/2=0, hence u₁+u₂=0, then u₃=0 by total sum, contradiction. Thus all three-valued full-support instances are eliminated. This does not establish the three-valued case with zero coordinates.
+One repeated class contraction. Suppose exactly one nonzero value u is repeated m≥2 times and all other nonzero coordinates are distinct. If mu is nonzero and distinct from those other weights, contract that class to the auxiliary step mu. The smaller zero-sum auxiliary set has a simple cycle by induction. Expand mu into m copies of u. Its interior heights are distinct and avoid the expansion endpoints (m&lt;p); at each proper prefix they can hit at most one vertex of the contracted auxiliary cycle. Order the corresponding distinct original elements greedily avoiding that one collision. Insert the two simple zero-coordinate blocks at the expansion endpoints. This constructs a valid order of A. It is conditional on the stated distinct contracted weight.
+Barycenter restriction. For columns c_i of an augmented blocking matrix, equal barycenters of disjoint nonempty column subsets X,Y give a modular kernel vector with weights |Y| on X, −|X| on Y and zero elsewhere. These are distinct nonzero weights since |X|+|Y|≤n&lt;p. The two-valued construction, tracking blocking intervals, eliminates this. In particular equal-cardinality column subsets must have distinct sums (remove their common intersection). In a modular rank-r matrix with all-ones row, sums of a given size lie in an affine space of dimension at most r−1; hence C(n,⌊n/2⌋)≤p^(r−1).
+Obstruction to universal rational or index-two rectification. At p=31 take A={2,6,7,8,10,12,15,18,20,26}. No zero pairs exist, and its only zero triples are {6,7,18},{6,10,15}, intersecting. Therefore it cannot partition into three zero-sum pieces (would require sizes 3,3,4). To realize every proper zero-sum subset as auxiliary weight 1 and total 2 is impossible even with signed real weights: the sum of incidence vectors of {2,7,10,12}, {2,6,8,15}, {6,7,18}, {7,8,12,15,20} equals the sum for {6,7,8,10}, {2,7,8,12,15,18}, {2,6,7,12,15,20}. This forces 4=3. Valid word (2,6,7,8,12,10,15,18,20,26), sums (2,8,15,23,4,14,29,16,5,0). Thus even all two-atom sets cannot be assumed to admit an index-two representation.
+Rank-one example 1. For A={±1,±2,±3,±4,±5} mod 13, eliminate each negative coordinate. The reduced matrix contains rows:
+(1,1,−1,0,0); (1,0,1,−1,0); (1,0,0,1,−1);
+(0,1,1,0,−1); (1,0,1,1,1).
+Their determinant is 13 up to sign. Thus M_A has rational rank 10, modular rank 9, and the reduced finite relation group is Z/13Z (all maximal minors divisible by 13, one of magnitude 13). Its modular kernel is exactly the original residue line. Minimum balanced positive masses for scalar 1…6 up to sign are 15,20,16,19,17,18. None below 13. It has valid word (1,2,−1,−3,−2,−4,3,−5,4,5), sums (1,3,2,12,10,6,9,4,8,0), reverified. Thus rank conditions, local low-valued reductions and short lifts do not force a contradiction; rank-one torsion systems remain possible among legitimate solvable sets.
+Rank-one example 2. A={±2,±3,±5,±6,±7} mod 19 has reduced rows (−1,−1,1,0,0), (−1,0,−1,0,1), (−1,1,0,1,−1), (−1,1,1,−1,0), (−1,1,1,1,1), determinant of magnitude 19. Again ranks 10 and 9 and original kernel line. Minimum balanced positive mass over dilations is 20&gt;19. A direct construction in §15 solves it. These examples refute treating the necessary arithmetic restrictions alone as impossible.
+Part III. Constructive symmetry and asymmetry
+15. Symmetric sets: preliminary constructions and the complete theorem
+Recall the simultaneous-junction sufficient problem for a symmetric set: order signed representatives x_i with all x_i and x_i+x_(i+1) distinct and nonzero. Fixing inverse-pair order and choosing only signs is false universally. For p=11 and fixed order 1,2,3,4,5, the sixteen sign assignments up to overall negation have defects 0:0, 1:6, 2:7, 3:3 (recorded). Reordering to (1,−2,4,3,5) solves it, with word (1,−2,−1,4,2,3,−4,5,−3,−5), residues (1,10,9,2,4,7,3,8,5,0).
+Doubling-chain theorem. If the inverse-pair classes form a chain under multiplication by 2 up to sign, choose x_(i+1)=−2x_i. Then each junction sum is −x_i, and the vertex set is {0,x₁,…,x_k,−x₁,…,−x_(k−1)}, automatically distinct. The rank-one example mod 13 has chain (1,−2,4,5,3).
+Let H=⟨−1,2⟩⊂F_p^×, L=|H|/2, and assume (−2)^L=−1. A coset has a doubling chain of L representatives, last z=y/2 when first is y. If A is a union of cosets C_i satisfying C_i=3C_(i+1) (p&gt;3), join chains by setting the next first y=−2x/3, where x is previous last. The new junction x+y=x/3=−z is exactly the next chain’s unused opposite representative. All cosets are disjoint. This proves orbit fusion under the stated condition, not arbitrary concatenation. The latter fails in the reported test at p=19 with pair magnitudes {1,2,3,4,5,6,8}.
+Parallel-path theorem above the short-lift threshold. Let positive magnitudes a_i sum to T&gt;p, δ=T−p. If a&lt;b are two magnitudes both &gt;δ, and b−a is not a subset sum of the remaining magnitudes R, take positive paths (a,R,b) and (b,R,a) with identical R-order. All internal sums lie strictly between δ and p, hence avoid endpoint residues 0,δ and are collision-free modulo p iff the integer paths are disjoint. An equality a+u_i=b+u_j would express b−a as a consecutive subset sum of R, impossible. Traverse first forward, second backward. It suffices that b−a&lt;min R (if R nonempty). For p=19, magnitudes {2,3,5,6,7}, T=23, choose a=5,b=6,R=(2,3,7). Valid word (5,2,3,7,6,−5,−7,−3,−2,−6), sums (5,7,10,17,4,18,11,8,6,0), reverified. This solves the rank-one example despite no short auxiliary lift.
+Boundary T=p. For symmetric magnitudes sorted a₁&lt;a₂&lt;…&lt;a_k with total p (k≥3), start P=(a₁,a₃,a₂,a₄,…), Q=(a₂,a₃,a₁,a₄,…). The first two interior vertices in each are different, and h=a₁+a₂ is absent. All remaining common internal vertices have ascending boundaries. Apply the ascending swaps to eliminate them; moves are forward beyond h and do not change the first steps. The two paths then form a cycle with only endpoints 0 and p coinciding modulo p. At the cyclic junction swap (−a₂,a₁) to (a₁,−a₂), placing a vertex at unoccupied h (up to a common translation on re-rooting). This solves T=p. These results were later superseded by the full symmetric theorem.
+Complete symmetric theorem (central constructive result). Every symmetric subset of nonzero residues in an odd cyclic group Z_m is rearrangeable. Let 0&lt;a₁&lt;…&lt;a_k≤(m−1)/2 be its positive pair magnitudes. Set x_i=(−1)^(i+1)a_i and take
+W=(x₁,x₂,…,x_k,−x_(k−1),…,−x₂,−x₁,−x_k).
+Proof. With s_j=Σ_{i≤j}x_i and s₀=0, even-index sums strictly decrease and odd-index sums strictly increase. Every vertex is distinct; s_(k−1),s_k are the extremes, distance a_k. A second path Q=(x_k,x₁,…,x_(k−1)) has same start 0 and end T=s_k. Its nonterminal internal vertices are x_k+s_j, j=0,…,k−2. If x_k&gt;0, s_(k−1) is the unique minimum, so these are strictly above T, the maximum of the first path. If x_k&lt;0, they lie strictly below T, its minimum. Thus the paths meet only at endpoints. The combined integer span is at most 2a_k≤m−1, so modular reduction preserves distinctness. Traversing the first path forward and the second backward is exactly W. The k=1 case gives (x₁,−x₁) directly. No primality is needed beyond odd modulus and unique inverse-pair representatives.
+Recorded exhaustive test: all odd moduli 3 through 33, 131,054 nonempty symmetric subsets, zero failures. Selected counts m=7:7, 13:63, 17:255, 23:2,047, 29:16,383, 31:32,767, 33:65,535. No computation is required by the proof.
+Two-path generalization. The two paths need not use identical sets of magnitudes. Suppose a zero-sum set A can be partitioned as P⊔(−Q), with signed representatives of absolute value ≤M=(p−1)/2, both paths ordered with strictly increasing magnitudes and alternating signs, both final steps positive (or both negative, by reflection). Both terminal values then lie in (0,M] in the positive case and agree modulo p because ΣA=0; thus they agree as integers T. Each path's final vertex and penultimate vertex are the extremes. Move Q's last step to its beginning. Its internal vertices are above T, whereas P's vertices are ≤T. Combined span ≤L_P+L_Q≤p−1, so traverse P forward and Q shifted backward to obtain a valid cycle. Both paths must be nonempty; zero-sum and a nonempty alternating path rule out an empty other path.
+Exact descending-sign criterion. Scan absolute magnitudes downward. Both paths initially require the same sign (positive for convenience). A paired magnitude goes one to each, reversing both required signs (the second path uses negated original elements). At an unpaired magnitude assign its original element either to P or negated to Q when the required sign matches. After the first unpaired element the required signs differ. The second can be assigned iff its original sign is opposite the first, restoring agreement. Thus any run of unpaired magnitudes followed by a paired magnitude must be even, with opposite signs in consecutive pairs; the final run can have one leftover. This is necessary and sufficient for the stated two-path template, not for existence of arbitrary Graham orderings. Each unpaired pair can be assigned both to the same path or split as permitted, giving some freedom.
+Example infinite dense asymmetric family: {1,−2,−3,4}∪{±5,…,±M}, p≥11; unpaired descending signs +,−,−,+, cardinality p−5. The criterion applies. Recorded exhaustive coverage under dilations:
+p
+All nonempty zero-sum sets
+Solved by two paths
+Coverage
+7
+9
+9
+100%
+11
+93
+91
+97.8%
+13
+315
+299
+94.9%
+17
+3,855
+3,471
+90.0%
+19
+13,797
+12,025
+87.2%
+ 
+The fixed circular numeric order of signed representatives in the older junction construction, allowing all signs and cyclic starts, fails at p=17 on magnitudes {1,2,3,4,5,6,8}; p=19 on {1,2,3,4,5,7,8}; p=23 on {1,2,4,6,7,10,11}. Recorded sets tested before stopping 240,460,1,570 respectively (all 4 at p=7, 26 at 11, 57 at 13 passed). A naive deletion from canonical symmetric closure A∪(−A) also fails, under every dilation, at p=17 on A={1,2,3,4,7,8,10,11,12,13,14}. Valid word (10,12,14,11,8,4,1,7,2,13,3), sums (10,5,2,13,4,8,9,16,1,14,0). These failures motivate controlled expansion rather than deleting from a fixed symmetric word.
+16. The asymmetry parameter and its first complete cases
+For odd p, define S=A∩(−A), U=A\(−A), r=|U|, q=|S|/2, n=2q+r. Then U∩(−U)=∅, ΣA=ΣU, and n+r≤p−1. If ΣA=0 then r=0 or r≥3. From here on r means asymmetry, not a matrix rank.
+Triple absorption. Every zero-sum A=S⊔C with C a disjoint triple is solved. Scale one triple element to 1. Using distinct signed representatives in [−M,M], the other two must be b and −(b+1) with 2≤b≤M−1: a signed sum of −1+p=2M would require equal M’s; negative-negative sum −1 is impossible. Write c=b+1. Contract (1,b) to c, giving symmetric core S⊔{±c}; none of magnitudes 1,b,c belongs to S. In the canonical symmetric construction choose the global sign so that the first path’s step of magnitude c is positive. It starts at the current minimum u and reaches new maximum u+c. The previous span is &lt;b because magnitude b is absent. Expand c to (b,1): the intermediate u+b is strictly beyond all preceding vertices, and all later path vertices are fresh extrema outside the current interval. The expansion preserves the first path’s span and cannot collide with the separated second path. If c is the last step, the other path is still shifted by c, and only interior vertices of the first are added. The combined span remains &lt;p. This solves every zero-sum set of asymmetry 3.
+Four unpaired theorem. Let U={a,b,c,d}, sum zero. Normalize by (a+b)⁻¹ (nonzero, since no inverse pairs), making the two pair sums 1 and −1. Signed representatives of two distinct nonzero elements summing to ±1 mod p have opposite signs and consecutive absolute magnitudes: wraparound would require two equal extreme representatives of magnitude M. The two magnitude pairs are disjoint, with no other magnitude between their endpoints. Thus the descending two-path criterion applies under arbitrary symmetric padding. This solves all zero-sum sets with r=4. More generally, if an arbitrary U can be partitioned into pairs all of whose sums lie in {s,−s}, s≠0, scale by s⁻¹. All are consecutive opposite-sign magnitude pairs, and the same proof works for any number of pairs. Since ΣU=0 and fewer than p pairs, numbers with sum +s and −s agree.
+Asymmetry-preserving reduction for nonzero sum. Let ΣA=s≠0 and r≥2. We can replace some x∈A by y=x−s∉A∪{0} without increasing asymmetry, obtaining zero-sum B. Such a replacement does not increase r if x∈U or if y=−u for some u∈U distinct from x. Assume none possible. For u∈U\{s}, u−s must be in A, else replace u; s−u cannot be in A, else replace it by −u (if it equals u this is the first type). So u−s∈U. Since subtraction by s traverses all p residues, the finite U excluding zero must be {s,2s,…,rs}. Its sum s implies (r−1)(r+2)=0 mod p, impossible for 2≤r≤M. Hence a replacement exists. Rotate a valid B-cycle to start with y, then replace that first element by x: every nonempty partial sum changes by the same s. Distinctness is preserved. This reduction does not decrease cardinality but preserves or decreases r; for cardinality induction one can first prove the zero-sum case at each n, then transfer to nonzero-sum instances at that n.
+If r=1, A=S⊔{a}; if S empty trivial. Otherwise choose a symmetric cycle with vertex set V. Since |V|&lt;p and a≠0, V is not invariant under translation by a. Choose v∈V with v+a∉V, rotate to start at v and append a. The old nonempty sums are V−v, and the new last sum a is absent. This solves r=1. r=0 is symmetric; r=2 with zero sum is impossible, so transfer from the zero-sum base. p=2 is trivial. We conclude that for every prime all sets with r≤4 are rearrangeable.
+17. Five unpaired elements with an additive relation
+Theorem (as developed in the conversation). If a zero-sum set has five unpaired elements U containing a relation a+b=c among distinct elements, it is rearrangeable. The five-set U itself is always an atom, since a proper zero-sum triple would leave an inverse pair, and smaller or larger proper zero subsets are also impossible.
+Normalize c=1. The summands of a+b=1 have signed representatives t and −(t−1). The two remaining sum to −2, normally represented as v and −(v+2), with v&gt;0 (two negative distinct nonzero lengths cannot total −2). Therefore U={1,v,−(v+2),t,−(t−1)}. Magnitude v+1 is absent from U: if it were t or t−1, the other magnitude would be v or v+2, contradicting distinct magnitudes. Also v≠1. The exceptional wraparound is treated below.
+If the pair ±(v+1) is absent, contract (1,v) to v+1. The remaining unpaired elements are v+1,−(v+2),t,−(t−1), in consecutive magnitude pairs. Split the first such pair between the two paths so that the original step v+1 is in the unshifted first path with positive sign. The alternating sign phase at that group can be chosen by choosing the common starting sign; the separation proof also works when both final steps are negative, by reflection. Magnitude v is absent, so expand v+1 to (v,1) with its new vertex beyond all earlier vertices, as in triple absorption. The expansion preserves the range and avoids the shifted second path.
+If the pair ±(v+1) is present, contract (−(v+1),1) to −v, making ±v a pair. The four unpaired magnitudes are again v+1,v+2,t,t−1. Assign v+1 to the first path with positive sign, splitting its consecutive opposite-sign partner into the second. The first path has consecutive steps −v,v+1 (the pair v precedes the group). Expand −v to (−(v+1),1), creating a new vertex one unit below the old minimum at that step. No earlier vertex can equal it. The following v+1 step goes to a new maximum. Any subsequent negative step has magnitude ≥v+3, since v+2 belongs to the other path, and the first subsequent new minimum is at least two below the old minimum; later minima decrease. Thus the inserted vertex is missed. If there is no subsequent negative step, only the minimum shifts down one, with final first-path magnitude v+1, and its span is at most v+2≤M. If a later negative step exists, the original extrema already enclose the new vertex. In either case the terminal extreme is unchanged (if the final step is negative there must be such a later negative step). Separation from the shifted second path and the total span bound ≤2M persist. Reflect the argument for the negative-final-step orientation if needed. This closes the occupied case.
+If the representatives summing to −2 wrap around, they must be M,M−1. Then U={1,M,M−1,t,−(t−1)}. Scale by −2: the first three become −2,1,3 with −2+3=1. If the other two now have integer sum −2, use normal case. If they again equal M,M−1, one obtains 2t=M+1 or M+2. Scaling original U by 4 produces {4,−2,−6,3,1}, with 3+(−2)=1 and 4−6=−2, normal for p≥13. For p=11, r=5 forces no symmetric padding and U is itself an atom. This completes the proof. The orientation detail above makes explicit a qualification implicit in the original presentation; an independent line-by-line audit of this five-element proof remains advisable before publication.
+Recorded tests (exhaustive normalized completions through p=19, selected/randomized thereafter):
+p
+Instances
+Failures
+11
+1
+0
+13
+10
+0
+17
+240
+0
+19
+880
+0
+23
+540
+0
+29
+1,320
+0
+31
+1,660
+0
+37
+2,920
+0
+41
+3,960
+0
+53
+820
+0
+71
+1,596
+0
+101
+3,812
+0
+Total
+17,759
+0
+ 
+Strict alternating-path limitation. In a maximal symmetric completion A=F_p^×\(−U), every magnitude occurs, so unpaired runs must break into opposite-sign consecutive magnitude pairs, with possibly one leftover at magnitude 1. Each pair has integer sum ±1. If r≡1 or 2 mod 4, the total integer sum would be odd and have magnitude &lt;p, hence could not be zero modulo p. This remains under all nonzero dilations. Thus strict alternating paths alone cannot solve these maximal completions; contraction/expansion or another construction is necessary.
+First residual family. At p=23, U={1,3,10,15,17} is a five-element zero-sum atom with no inverse pairs or relation a+b=c among distinct elements. Its maximal completion A has padding ±2,±4,±5,±7,±9,±11 (17 total elements). The word (1,21,4,18,7,14,11,9,16,5,19,2,3,10,15,17,12), residues (1,22,3,21,5,19,7,16,9,14,10,12,15,2,17,11,0), proves existence for that example. No such U was reported at p=11,13,17,19; p=23 has 22 remainders in one dilation orbit; p=29 has 308. The latest script reverified the orbit-completion counts for p=23,29,31. General five-unpaired sets lacking the additive relation are still the first unresolved asymmetry class in this research, with all primes and all padding quantified.
+For n=2q+5 and any partition into k atoms of which t are inverse pairs, 2t+3(k−t)≤2q+5, t≤q, so k≤q+1. The obvious q pairs plus U attain q+1. Every maximum partition has t≥q−2. Precisely the possible types are q pairs plus one quintuple, q−1 pairs plus a triple and quadruple, or q−2 pairs plus three triples. Thus at most nine elements occur in non-pair atoms of any maximum partition; all other complexity is interaction with many pairs. This is a structural fact, not an absorption proof.
+18. Universal algebraic reduction to symmetry
+Asymmetry-decreasing contraction theorem. For a zero-sum A with r≥3, there exist distinct x,y∈U with c=x+y∉U. If r=3 choose any pair, whose sum is the negative of the third. If r≥4, the Dias da Silva–Hamidoune theorem gives |U dot+ U|≥min(p,2r−3)&gt;r. c is nonzero since U contains no opposite pair. Three exhaustive cases:
+Location of c
+Operation
+New asymmetry
+c outside A∪(−A)
+x,y → c
+r−1
+c=−z for z∈U
+x,y → −z
+r−3
+c∈S
+x,−c → −y
+r−1
+ 
+In the last case −y was absent, y becomes paired, and c becomes unpaired. Each contraction preserves sum zero, distinct nonzero labels, and reduces cardinality by one. Repetition reaches a symmetric core. It does not ensure compatibility of any expanded ordering.
+Two-block symmetrization for r=5. In the sum-free five-element case choose any two-element X⊂U, Y=U\X, let c=ΣX=−ΣY. Then c∉U∪(−U)∪{0}: c∈U contradicts sum-free, c∈−U creates a zero triple leaving an inverse pair. If ±c absent, contract X→c and Y→−c; B=S∪{±c}. If ±c present, choose x∈X,y∈Y, contract D=(X\{x})∪{−c} to −x and E=(Y\{y})∪{c} to −y; B=(S\{±c})∪{±x,±y}. The two blocks have sizes two and three, so |B|=|A|−3, and expanding them requires exactly three additional vertices. This works for every choice of X, and every permitted x,y in the occupied case. It is entirely algebraic.
+Bounded-complexity symmetrization for all r. For any asymmetric U, if a pair has sum outside U∪(−U), use the same two-block construction with |Y|=r−2. (This situation cannot arise when r=3.) Otherwise the restricted sumset argument ensures a pair whose sum lies in −U, so contract it and decrease r by three. Repeat until symmetric or until a two-block construction applies. Composing operations yields a partition A=⊔_{b∈B}D_b with each block sum b, B symmetric and distinct nonzero, and
+|A|−|B| = Σ_{b∈B}(|D_b|−1) ≤ r−2.
+After t preliminary contractions r′=r−3t. If r′&gt;0, final two-block symmetrization costs r′−2, total t+r′−2≤r−2. If r′=0, t=r/3≤r−2. Number of nonsingleton blocks is also ≤r−2. The final inequality excludes r=0, which needs no contraction.
+Exact geometric expansion criterion. Given any such block partition and simple B-cycle with occupied vertices V and holes H=F_p\V, let u_b be the start of edge b. For an ordering (d₁,…,d_m) of D_b define P_b={u_b+d₁,…,u_b+Σ_{i&lt;m}d_i}. Simultaneous expansion is valid iff every P_b⊆H, |P_b|=|D_b|−1, and all P_b are pairwise disjoint. This follows because all core vertices remain unchanged and these are exactly the additional vertices. Thus for r=5 and the two-block contraction it is a packing problem with one singleton candidate and one two-element candidate. General r requires at most r−2 extra vertices. Every block is nonzero-sum, and the criterion includes checking repeated intermediate vertices within each block. Merely showing |H| is large enough does not establish the packing, since hole locations and edge origins are coupled.
+19. Magnitude-gap absorption for many asymmetric blocks
+Assume signed representatives lie in [−M,M], M=(p−1)/2. Suppose U is partitioned into integer-zero-sum blocks U_i. Let T_i be each block’s positive total, L_i⁺ and L_i⁻ its largest positive and negative magnitudes. Assume the T_i are distinct, ≤M, and absent as magnitudes in S. Form the symmetric core by adding virtual pairs ±T_i. Let b_i be the largest core magnitude below T_i, or zero. If b_i&lt;min(L_i⁺,L_i⁻) for all i, and the largest core magnitude belongs to the original symmetric padding, then A is rearrangeable.
+Proof. Construct two identical signed alternating paths on the core magnitudes. At virtual magnitude T_i, expand the first path using the positive group of U_i and the second using the magnitudes of its negative group when the step is positive; for negative steps exchange the two roles and negate. This ensures that, after following the first path forward and the second backward, exactly the original labels are used. Put the largest component first in each expanded block. The current start is the previous minimum for a positive step, with all earlier vertices at distance ≤b_i. The first component exceeds b_i, so all new vertices lie strictly beyond the previous occupied range, and they monotonically reach the original terminal extreme. Similarly for a negative step. Induction over magnitudes preserves the original extrema at each completed block and individual path simplicity. The common last step is a genuine padding element of magnitude L, not expanded. Choose orientation making it positive, and shift it to the start of the second path. All its internal vertices lie above T, the common terminal maximum of the unshifted first path, and total span ≤2L≤p−1. Traversing the two paths produces the desired cycle.
+Example: U={1,14,−2,−4,−9} is integer-zero-sum, with neither inverse pairs nor internal relations a+b=c among distinct elements. For p≥37 these properties remain true modulo p. T=15, L⁺=14,L⁻=9. Allow arbitrary symmetric padding of magnitudes 3,5,6,7,8 and 16,…,M, with at least one in the latter range. The preceding core magnitude is ≤8, so the theorem applies to every such choice. This is an infinite family in the previously unresolved sum-free five-element class, including density tending to one. It does not handle arbitrary padding at the magnitudes near T.
+Part IV. Computation and exact obstruction certificates
+20. The two canonical expansion algorithms
+The final turn supplied a standalone standard-library Python verifier, erdos475_asymmetry_audit.py. The exact source is available alongside this dossier. The algorithms are as follows.
+Algorithm I (one contraction). For each pair a,b of a weakly sum-free five-element remainder U, set c=a+b. If c∉A contract a,b→c. Otherwise try a,−c→−b and b,−c→−a. The resulting B has four unpaired elements. Enumerate the three possible pairings of its unpaired elements by pairing the first with each of the other three. Normalize each pair sum to 1, enumerate assignments of unpaired steps in the descending alternating-path criterion, and use both choices of which path is traversed first. Expand the one virtual step in both orders, checking full modular partial sums.
+Algorithm II (two-block canonical core). For each of the ten X⊂U of size two, let Y=U\X and c=ΣX. Use §18's missing-pair or occupied-pair construction; in the occupied case try all six choices x∈X,y∈Y. For each symmetric core, enumerate the alternating symmetric formula under scalar λ=1,…,(p−1)/2 and both global signs, then every permutation of D and E. Check that all new vertices are distinct holes and validate the expanded word. Negative dilation is accounted for by global sign. Reversal of a cycle adds no fundamentally new expansion candidate because reversing all block orders reverses the expanded cycle. These are complete searches over the stated templates, not all symmetric cycles.
+Reverified execution during this compilation: the command below completed successfully, using the actual script from the conversation. All 25,152 completions and both obstruction instances were checked again.
+python erdos475_asymmetry_audit.py --exhaustive
+p
+Scaling-orbit representatives
+Completions per orbit
+All completions checked
+Algorithm I failures
+23
+1
+64
+64
+0
+29
+11
+512
+5,632
+0
+31
+19
+1,024
+19,456
+0
+Total
+31
+—
+25,152
+0
+ 
+The per-orbit number is 2^((p−1)/2−5), because the five inverse-pair classes represented by U cannot appear as padding. Rechecking orbit enumeration is important: finite evidence at one prime or one padding does not transfer to all choices of the surrounding symmetric set.
+21. First template obstruction, and successful simultaneous expansion
+At p=211 take U={31,87,133,179,203}, A=F_211^×\(−U), size 205. Algorithm I fails. The earlier record gives 960 candidate expansions; the supplied verifier confirms the failure but does not print that candidate count. Algorithm II succeeds and its witness was reproduced verbatim by rerunning the script:
+X={31,133}; Y={87,179,203}; c=164.
+D=(47,31) → 78; E=(164,179,203) → 124.
+Here 47=−164, 78=−133 and 124=−87 mod 211. B=(A\(D∪E))∪{78,124} is symmetric of size 202. Take its canonical alternating word with dilation 44 and negative global orientation. In the coordinate system of the original residues, its holes are {8,20,30,32,82,94,114,126,207}. The two expansion orders introduce {20} and {82,114}. They are distinct and belong to the core hole set. The supplied verifier checks the final word is a permutation of A with 205 distinct nonempty partial sums. Thus replacing the single contraction by simultaneous expansion can succeed even when every instance of Algorithm I fails.
+22. Second template obstruction, p=503
+Take U={112,168,388,406,435}, A=F_503^×\(−U). U sums to 3p, has five distinct absolute magnitudes, and is weakly sum-free; A has 497 elements. Both Algorithm I and Algorithm II fail (reverified). Since A is maximally padded, every permissible pair sum c belongs to its symmetric padding, giving ten choices X and six x,y allocations. The second search space has 60×502×2!×3!=361,440 possible dilation/sign/block-order combinations; the implementation prunes incompatible initial block choices. The failure says that no candidate in these stated canonical families is valid. It does not justify inferring that arbitrary symmetric cycles fail.
+23. New audit result: the p=503 obstruction is repaired by one core switch
+During compilation of this continuation, a targeted search allowed one ordinary adjacent switch in a canonical symmetric core before expanding the two blocks. This found a valid 497-element cycle for the obstruction in §22. The result was separately checked using a direct partial-sum computation, without relying on the search's incremental collision test. This is a new positive certificate beyond the previous research turn.
+Reproducible witness
+Item
+Exact value
+Prime and remainder
+p=503; U={112,168,388,406,435}
+Split
+X={112,388}; Y={168,406,435}; c=500
+Virtual steps
+d=391=−112; e=68=−435
+Expansion orders
+D=(388,3); E=(500,168,406)
+Symmetric core
+B=(A\(D∪E))∪{391,68}, size 494
+Canonical cycle
+Dilation λ=51, global sign +
+Core modification
+Swap steps 214 and 215 (1-indexed), originally 479,241
+Changed vertex
+491 → 253
+Initial holes
+84,110,157,166,253,300,309,323,444
+Holes after switch
+84,110,157,166,300,309,323,444,491
+Start vertices of virtual steps
+u_391=56; u_68=326
+New expansion vertices
+56+388=444; 326+500=323; 323+168=491 (mod 503)
+Final holes
+84,110,157,166,300,309
+ 
+The canonical cycle convention is exact: sort positive magnitudes after scaling by 51; use x_i=(−1)^(i+1)a_i; take (x₁,…,x_k,−x_(k−1),…,−x₁,−x_k); multiply each step by 51⁻¹ modulo 503. Its 214th and 215th steps are 479 and 241. Before the swap, their intermediate vertex is 491; the new vertex is 491+241−479=253 mod 503. Because 253 is a hole, the switched core stays simple and 491 becomes a hole. The switch is away from both virtual edges (their 1-indexed positions are 319 and 52), leaving their origins fixed. The expansion of d requires only 444, while e requires 323 and 491. All are now holes. Direct validation confirms 497 different nonzero step labels, equality of the step set to A, total sum 0, and 497 distinct nonempty partial sums. The final six holes agree with the count p−497=6.
+Short independent verifier for this certificate
+from itertools import accumulate
+p = 503
+U = {112, 168, 388, 406, 435}
+A = set(range(1, p)) - {(-u) % p for u in U}
+D, E = (388, 3), (500, 168, 406)
+d, e = 391, 68
+B = (A - set(D) - set(E)) | {d, e}
+assert B == {(-b) % p for b in B}
+assert len(B) == 494
+lam = 51
+il = pow(lam, -1, p)
+mags = sorted({min(b*lam % p, -b*lam % p) for b in B})
+x = [a * (-1)**i for i, a in enumerate(mags)]
+w = [b*il % p for b in x + [-a for a in x[-2::-1]] + [-x[-1]]]
+assert w[213:215] == [479, 241]
+assert len({s % p for s in accumulate(w)}) == len(B)
+w[213], w[214] = w[214], w[213]
+assert len({s % p for s in accumulate(w)}) == len(B)
+out = [a for b in w for a in (D if b == d else E if b == e else (b,))]
+assert len(out) == len(A) == len(set(out)) == 497
+assert set(out) == A and sum(out) % p == 0
+V = {s % p for s in accumulate(out)}
+assert len(V) == 497
+assert set(range(p)) - V == {84, 110, 157, 166, 300, 309}
+New sufficient local repair lemma
+Fix a contracted core cycle, particular block expansion orders, and their pairwise distinct required new vertices K. Suppose exactly one member of K is occupied, say v at a cyclic boundary between consecutive steps a,b. Assume neither step is a contracted nonsingleton-block edge. If v+b−a is an unoccupied residue outside K, swap a,b. Only v changes, to v+b−a, freeing v while preserving all expansion edge origins. The modified core is simple; its new holes contain all of K. The fixed expansion orders now succeed. This is the exact mechanism of the p=503 certificate. It proves a sufficient repair condition, not that the condition can always be arranged. More generally, independent swaps at several occupied required vertices work if their destinations are distinct old holes outside K and no contracted edge is affected.
+The new certificate removes the p=503 instance as a potential obstruction to one-switch-expanded symmetric cores. It does not refute the earlier conclusion that canonical templates alone fail, nor establish universal one-switch repair. The next empirical target is to search for actual failures of a precisely specified expanded family rather than repeating checks of the already refuted canonical templates.
+Part V. Exact remaining theorem and proof program
+24. Current residual problem, with quantifiers
+For every odd prime p, every U⊆F_p^× such that U∩(−U)=∅ and ΣU=0, and every symmetric S disjoint from U∪(−U), prove there is a simple zero-sum cycle on S∪U. By the nonzero-sum transfer of §16, this suffices for all sets. Cases r=0,3,4 are established by the explicit constructions; r=1,2 cannot occur for a zero-sum set. The five-element case with an additive relation is covered by §17's construction (subject to the usual independent proof audit). Other subclasses in Parts I–III are also solved.
+The first unresolved uniform family can therefore be stated precisely: for any prime p, any weakly sum-free five-element atom U with U∩(−U)=∅ and any symmetric padding S disjoint from U∪(−U), find a valid cycle. Here “weakly sum-free” excludes a+b=c for three distinct elements of U, not relations using repeated summands. The obvious q-pair-plus-quintuple partition is maximum; possible alternatives break at most two pairs. Thus all non-pair complexity is bounded, but mixed zero-sums remain unrestricted. The computations through p=31, the isolated p=211 and p=503 examples, and the magnitude-gap family do not establish this universal five-element statement.
+In the general case, the strongest established algebraic reduction supplies a symmetric B and blocks D_b with ΣD_b=b and total expansion cost ≤r−2. The following sufficient target would finish the entire conjecture:
+Compatible symmetric expansion (CSE). For every zero-sum asymmetric A, there exists a block partition of the type in §18 and a simple cycle on its symmetric core B, together with block orderings, whose proper-prefix vertex sets are disjoint subsets of the core hole set.
+For r=5, CSE-5 asks this with the specific two-block symmetrization family (a two-step and a three-step block, three additional vertices). Both targets are stronger than Graham for their respective classes: a valid cycle need not place the proposed blocks consecutively, so a counterexample to CSE would not refute Graham. Conversely, proving CSE for arbitrary r directly solves the zero-sum conjecture, with no need for any other unproved fusion selection. Proving CSE-5 settles just the first residual asymmetry class; it does not imply the arbitrary-r statement.
+25. Necessary conditions for a hypothetical counterexample
+The following ledger combines proved reductions with external results. It is a list of necessary conditions, not a claim that they form a sufficient obstruction. Cardinality minimality is within the prime field, with all smaller original Graham instances assumed rearrangeable. The all-primes statement is universal, so a failure in any prime permits such a minimal counterexample.
+Feature
+Necessary condition or qualification
+Total
+Zero (by nonzero-sum transfer or symmetric extension)
+Size and prime
+n≥13 by the published small-size result [1]; n≤p−1−r
+Asymmetry
+r≥5; if r=5 the remaining proof target is weakly sum-free U
+Atom multiplicity
+At least 3 by the complete two-atom theorem
+Atom graph
+4-vertex-connected by separator theorem
+Anchor properties
+Distinct incidence columns; no proper anchor
+Rich elements
+At least ⌈(n−4)/2⌉, by pair-contraction obstruction
+Rational incidence rank
+Full n, by auxiliary-weight theorem
+Modular kernel
+Nontrivial, containing original residue vector
+Balanced auxiliary lifts
+No nonzero w preserving zero relations mod 1 with positive mass &lt;1
+Torsion
+Finite reduced relation group; τ bounded by §13
+Kernel classes
+No nonzero vector taking ≤2 nonzero values; no full-support three-valued vector; other bounds in §§13–14
+Contraction graph
+Every admissible smaller core and permitted independent expansion must fail
+Asymptotic results
+Outside the proven sufficiently-large-prime regime, and below the large-set threshold of [3] if its proof is accepted
+ 
+For r=5, n≥13 implies q≥4. Since n+r≤p−1, a potential minimal counterexample must have p≥19 (and for the sum-free five-remainder family the first enumerated prime is 23). No actual Graham counterexample is known from this work. The rank-one examples show that arithmetic necessary conditions are compatible with rearrangeability. The p=503 certificate shows that high density and canonical-template resistance are also compatible with rearrangeability.
+26. Priority 1: close the five-unpaired-element case completely
+The work should now prioritize geometry of the symmetric core rather than another universal theorem about fixed-cycle insertion. The following substeps have exact inputs and outputs.
+Step 1A. Fix the target family and enumerate all permitted algebraic reductions. Given p,U,S as above, use each of ten pair splits X,Y. If ±c are absent there is one core; otherwise there are six choices x,y. Record D,E,d,e and B. The task is finite per instance and the number of core types is ≤60, independent of padding. This algebraic step is already proved; do not rederive it as if it were the missing theorem.
+Step 1B. Write the packing constraint exactly. For a cycle on B with origins u_d,u_e, let D={α,β}, E={γ,η,θ}. For each of the two orders of D, the one required vertex is u_d+α or u_d+β. For each of six orders of E, the required pair is (u_e+γ, u_e+γ+η), with γ,η distinct chosen entries. Require these three residues to be distinct and disjoint from the core vertex set. Since n≤p−6, |B|=n−3≤p−9, giving at least nine core holes. Hole count is necessary resource information, not a proof of compatibility.
+Step 1C. Expand the admissible core family. The canonical alternating ordering, its dilations and both signs are inadequate (p=503). A one-switch extension succeeds there. Define a family F_t(B): all cycles reachable from a canonical dilation/sign cycle by at most t adjacent switches each preserving simplicity. Include rotation/reversal as equivalences, and allow switches touching contracted steps only if edge origins are recomputed. The exact new lemma in §23 handles the easiest case: one occupied required vertex at a switchable ordinary boundary. Test t=1 comprehensively on small-prime completions and adversarial large-prime maximal padding; record failure witnesses if they exist. No finite t has yet been proved sufficient uniformly. Do not assume that a large reachable component contains a solution; the earlier one-defect closed components warn against that inference.
+Step 1D. Develop a larger analytic family with a span guarantee. A useful extension of the alternating theorem is immediate: take any signed representative path P with distinct integer prefixes, ending with a positive step L (largest magnitude). Before that last step its terminal u is its unique minimum and all earlier vertices lie in [u,u+L). Then P ends at T=u+L, and shifting the last step to the beginning of the second identical path places all of its internal vertices above T. The combined span is ≤2L≤p−1. Thus this is a sufficient flexible symmetric family, without requiring every earlier step to alternate in increasing magnitude. A reflected negative version also works. This criterion was derived from the previous path proof and is a proposed search space for the next stage, not a demonstrated uniform absorption mechanism. Seek swaps of earlier representative steps preserving the prefix-span property, or independent path modifications with identical total. Characterize how these modify holes and the two virtual edge origins.
+Step 1E. Prove a uniform packing/repair lemma or find its exact counterexample. A sufficient theorem is: for every p,U,S in the residual five-set family, some allowed core, some valid cycle from the expanded family, and one of the 12 block-order pairs have all required vertices free, possibly after an allowed repair sequence. A useful narrower lemma would guarantee that one can choose a core with at most one blocked required vertex and a switch moving that boundary to an unreserved hole. To prove it, exploit all 60 contraction choices, not an arbitrary fixed pair or fixed cycle. If a candidate lemma fails, record p,U,S, all constraints searched and the exact scope of failure. The known p=503 case must be included as a regression test. Proving the full Step 1E theorem closes r=5, while a counterexample only rules out that family of constructions.
+Step 1F. Independently certify the five-element theorem. Once a proposed uniform argument exists, check small moduli, extreme padding, absent and occupied c, repeated intermediate vertices, re-rooting, dilations and wraparound. Supply a mathematical proof with all quantifiers. Verify that it covers every padding, including nonmaximal padding; deletion of symmetric pairs from a valid maximal-completion cycle is not known to preserve validity. The successful examples are checkpoints, not proof substitutes.
+27. Priority 2: extract the general expansion invariant
+Once r=5 is solved, identify which part of its proof depends specifically on five elements. A proof that succeeds merely by classifying ten splits need not scale. The desired reusable statement involves an arbitrary family of disjoint expansion blocks, their edge origins and the occupied vertex set.
+For paired blocks of size two, the exact graph criterion of §4 solves the fixed-core selection problem: each connected candidate component is a tree with ≤1 occupied vertex or a free unicyclic component. For blocks of size three or larger, the corresponding condition is a set-packing problem: choose one of the finite sets of proper-prefix vertices for each block, with all selected sets disjoint and avoiding occupied vertices. Hall for individual vertices is only a relaxation because choices within one block are coupled. A general proof must honor those correlations. A candidate repair mechanism is to vacate required vertices via switches away from block edges, preserving edge origins; for multiple independent switches, require distinct destinations in unused holes outside the desired packing. More complex moves may modify origins and must account for their new values.
+The algebraic cost bound is m=|A|−|B|≤r−2 and the hole budget satisfies |H|=p−|B|=p−n+m≥r+1+m. This is favorable in count alone, with at least r+1 surplus holes beyond the m insertions, but their locations may be wrong. A uniform proof should exploit this surplus together with geometry or arithmetic of the available switches. No theorem yet connects the surplus to enough reachable target holes. Avoid restating the packing criterion as though it were that theorem.
+28. Priority 3: close arbitrary asymmetry
+There are two viable sufficient routes, with distinct logical obligations.
+Route A: compatible one-step asymmetry induction. Assume all smaller asymmetries are solved for every prime and padding. By §18 at least one contraction reduces r. Prove the existence of a contraction and a valid smaller cycle for which one of the two expansion vertices is free. It is unnecessary and false in general to require that every valid smaller cycle expand. The earlier two-point obstruction and matching graph can guide the proof, but a new existential selection argument is required. The p=13 counterexample demonstrates why arbitrary-cycle expansion is too strong; the p=211 example shows even selecting from the canonical four-remainder template can fail. The exact sufficient induction hypothesis may need to preserve additional flexibility, with a proof that this invariant survives expansion. If such a hypothesis is used, verify both base and closure for every asymmetry, avoiding the earlier CMAS nonconfluence trap.
+Route B: bounded-complexity direct absorption. Use §18 to get a symmetric B with total expansion cost ≤r−2 and construct the cycle and all block permutations jointly. Prove CSE, possibly with a broader family of block partitions or controlled switches. The proof may instead allow a larger intermediate cycle or a temporary defect, provided the final word uses each original label once and all cyclic vertices are distinct. This avoids demanding compatibility at every step of a contraction sequence. The p=503 one-switch witness illustrates a working mechanism, while the p=19 strong-fusion counterexamples from the earlier report explain why old edge order must not be treated as sacrosanct. If CSE is false, abandon that stronger template and seek a direct asymmetric path construction.
+After either route is proved uniformly for all r, the conclusion is immediate: handle symmetric zero-sum sets by §15, arbitrary zero-sum asymmetric sets by the new theorem, all nonzero-sum sets by §16, p=2 and singletons trivially. This closes Graham for all primes. Nothing further in atom theory or torsion is logically necessary after that step.
+29. Parallel fallback paths and decision rules
+Effective asymptotic completion. Independently extract explicit constants from the four-paper large-prime theorem or the large-set preprint. Combine a verified large-set cutoff n₀ with the reduced determinant bound p≤d^(d/2) (or stronger torsion bound) to delimit a finite exceptional region. Verify every unresolved instance by a certificate or a theorem covering an entire class. A merely existential cutoff does not supply a usable verification, and an astronomical numerical cutoff may be impractical. Do not call this complete until the finite region has actually been discharged. A formal proof assistant may be useful for auditing dependencies and bounds, but formalization of an asymptotic statement is not itself a full all-primes proof.
+SMAF / rooted acyclicity fallback. The maximum-atom partition gives a rooted DAG and a finite vertex-selection condition. A true uniform SMAF theorem would also complete the conjecture, but it is stronger than required and previous fixed-cycle fusion principles failed. Continue this route only if there is a new proof of global selection, or a new structural obstruction exploiting maximum multiplicity. The existing thousands of finite checks do not justify treating it as established.
+Arithmetic fallback. The full-rank blocking theorem and short-lift constraints are genuine reductions but rank-one examples meet them. Continue only if a new theorem connects essential torsion to a *specific constructive ordering* or rules out all blocking families. Do not attempt to prove all incidence matrices torsion-free; this is false. The blocking family framework also suggests a certificate search: all cycles blocked and an exact modular solution with distinct nonzero coordinates would be a genuine counterexample, unlike a failed template.
+Stop rules. (i) A verified all-primes proof or genuine counterexample ends the primary research objective. (ii) An exact counterexample to a stronger conjecture ends that conjecture as a proof route unless weakened; it does not end Graham. (iii) Repeated finite success without a new uniform lemma should trigger a pivot, not another relabeling of the same gap. (iv) Audit any result on which induction rests before investing in further generalization.
+30. Audit ledger and handoff summary
+This report corrects scope and quantifiers where earlier language was too broad. In particular, canonical symmetric cycles, all symmetric cycles, and arbitrary Graham cycles are different families. The p=503 example refutes only the first templates; §23 now gives an explicit solution using a modified symmetric cycle. The two-block symmetrization proof is fully algebraic; geometric packing is the open obligation. Cardinality induction for auxiliary zero-weight elements must refer to the original Graham problem (or use the zero-sum reduction at the smaller cardinality first). The full-rank and local-kernel claims are necessary conditions of minimal counterexamples, not universal properties of legitimate zero-sum sets. The no-additive-relation qualifier in the r=5 frontier is tied to §17, whose detailed orientation/wraparound proof should receive a consolidated independent audit before publication. Computation counts prior to the retained script are historical research records, not new independent reproductions.
+Result
+Independent check in this compilation
+Uploaded predecessor
+Reopened final two pages to establish boundary
+p=17 one-defect trap
+Direct BFS: eight states, all D=1
+p=17 final repair word
+Distinct cyclic vertices verified
+p=13 and p=19 rank-one example words
+Partial sums rechecked; no new full matrix audit
+Local kernel thresholds
+Recomputed from factorial/binomial formula
+p=211 and p=503 canonical template outcomes
+Retained script rerun successfully
+p=23,29,31 five-set completions
+All 25,152 rerun successfully
+New p=503 one-switch certificate
+Search witness, then independent full partial-sum validation
+Remaining historical enumeration
+Preserved as recorded; scripts/logs not available for full rerun
+ 
+Final status. This continuation establishes a self-contained constructive symmetric theorem, a uniform asymmetry-reducing algebraic mechanism, a complete solution for asymmetry at most four, and further partial results for five and higher. The new audit moves the immediate frontier beyond the canonical p=503 obstruction: flexible core selection demonstrably helps. What remains is to prove a uniform compatible-expansion theorem, first for the residual five-element family and then for arbitrary asymmetry, or find an alternative uniform construction. The entire conjecture has not been proved.
+References and source record
+[0] Conversation research archive, “Erdős #475: Complete Research Dossier,” Nov 23, 2026, 48 pages, uploaded as Erdos_475_Complete_Chat_Research_Report(1).docx. Final pages summarize the earlier unresolved global selection problem. The current report begins after that upload.
+[1] Thomas F. Bloom, Erdős Problems #475, https://www.erdosproblems.com/475 ; problem history https://www.erdosproblems.com/history/475 . Checked during compilation. Source for the literature status, small-cardinality and near-full cases, and four-paper sufficiently-large-prime result.
+[2] Huy Tuan Pham and Lisa Sauermann, “On Graham's rearrangement conjecture,” arXiv:2602.15797, February 17, 2026. https://arxiv.org/abs/2602.15797 . The abstract states sufficiently-large-prime resolution when combined with earlier work.
+[3] Peiru Kuang and Yan Wang, “Graham's rearrangement conjecture in finite abelian groups,” arXiv:2610.34424, October 25, 2026. https://arxiv.org/abs/2610.34424 . Abstract claims the existence of an absolute large-set threshold for finite abelian groups; its detailed proof has not been independently audited for this report.
+[4] Dias da Silva and Hamidoune, restricted sumset (Erdős–Heilbronn) theorem: |U dot+ U|≥min(p,2|U|−3) for subsets of F_p. Standard result invoked in §§4 and 18. Other standard tools used: Hall's marriage theorem, Dirac's theorem, Smith normal form, Hadamard's determinant inequality and Minkowski's convex body theorem.
+[5] erdos475_asymmetry_audit.py, the retained conversation verifier. Default execution reproduces both canonical obstructions and the p=211 success; --exhaustive checks the 25,152 completions. The separate p=503 witness in §23 is self-contained and independently reproducible with Python's standard library.

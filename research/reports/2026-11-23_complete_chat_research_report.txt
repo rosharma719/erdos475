@@ -1,0 +1,1035 @@
+Erdős #475: Complete Research Dossier
+Graham’s rearrangement conjecture — full research record of the November 23, 2026 chat
+Compiled November 23, 2026 · Consolidated mathematical report and proof archive
+Scope. This single document brings together every substantive line of argument developed in this chat: proposed theorems, full written proofs from the retained research notes, finite certificates and test counts, counterexamples, superseded approaches, conjectural extensions, and the final unresolved induction. Fourteen original research notes are reproduced in full in Part II to preserve detailed proofs rather than paraphrase them away. The analytical summaries in Part I explain how the notes fit together.
+Outcome: The all-primes Graham rearrangement conjecture was not proved in this chat, nor was a counterexample to Graham produced. Several auxiliary assertions were proved in the working notes, some strong proposed fusion principles were refuted, and a coherent maximal-atom cycle selector was certified computationally through p = 23. Throughout this report, a finite computation is not promoted to a uniform theorem.
+Reading and verification caution. This is a conversation-derived research dossier, not a peer-reviewed mathematical publication. “Proved in a source note” means that a written argument was supplied in this conversation. It does not mean it has passed independent formal verification or external refereeing. The status of earlier, more complicated lemmas should be judged from their displayed hypotheses and proofs; later simpler results supersede some earlier arguments. Numerical counts are copied from the recorded executions and scripts unless marked as independently rechecked in this compilation.
+Guide to this document
+Part I — Unified research report: terminology, chronological proofs, exact computational results, counterexamples, and the unresolved all-primes induction.
+Part II — Full proof archive: fourteen original research notes, included in full with their original calculations and argumentation.
+Part III — Closing assessment: the exact boundary between proved subcases, finite evidence, and unproved conjectures.
+Section
+What it contains
+A01–A03
+p=19 and p=37 SF refutations; port invariants; coherent cycle selection through p=23
+A04–A09
+Swap injections; odd/small atoms; shadow and incidence proofs; size-ten contraction
+A10
+Two-hole greedy ordering and inverse-pair fusion for every atom size
+A11–A13
+Triple-atom fusion and five-step forbidden-sum proof
+A14
+Arbitrary-many inverse pairs with a unique signed relation; multi-atom experiments
+Navigation: Each major theorem and proof has a Word heading. Use the document outline or Navigation pane to jump to a section. The appendix labels identify the exact original note in the research record.
+Part I. Unified Research Report
+1. The problem, exact definitions, and proof target
+For a prime p and a nonempty set A contained in the nonzero residues F_p^×, Graham’s rearrangement conjecture asserts that some permutation (a₁,…,a_k) has pairwise distinct nonempty partial sums s_i = a₁+…+a_i modulo p (1 ≤ i ≤ k). If the sum of A is zero, this is equivalent to finding a directed simple cyclic walk with edge labels A, visiting 0 exactly once before returning to it. Equivalently, no proper nonempty cyclic interval of the ordering has zero sum.
+A minimal zero-sum atom B is a nonempty zero-sum set with no proper nonempty zero-sum subset. Every cyclic order of an atom is valid: any repeated vertex would identify a forbidden proper zero-sum interval. A zero-sum set A that is not an atom can be partitioned into atoms, but valid cycles of its pieces may not fuse in a prescribed way.
+For a disjoint atom B=(b₁,…,b_m) and valid complement cycle z=(z₁,…,z_n), the four-block fusion is a cyclic word of the form
+(b₁, z₁, b₂,…,b_m, z₂,…,z_n),
+where B can be permuted and z can be rotated or reversed. The chat alternated between three different quantifiers: (i) insertion into every complement cycle (SF/SF-max, false), (ii) insertion into a specially selected complement cycle (CMAS, observed through p = 23), and (iii) direct simultaneous construction of a cycle for many atoms (proved only for restricted families). These statements must not be conflated.
+A previously accepted one-element reduction for 2 ≤ |A| ≤ p−3 replaces an element x in a nonzero-sum A (total s ≠ 0) with y=x−s outside A ∪ {0}, forming a zero-sum B. A valid B-cycle rotated to begin with y transfers to a valid ordering of A when y is replaced by x; all nonfinal partial sums shift by s, so distinctness is preserved. The existence of such x is a separate combinatorial lemma with the stated range; dense boundary cases are handled elsewhere. The report thus concentrates on zero-sum sets, as did the research conversation.
+1.1 Literature boundary used in the discussion
+The supplied research ledger recorded work of Kravitz; Bedert–Kravitz; Pham–Sauermann; Müyesser–Pokrovskiy; and October 2026 large-set results in finite abelian groups. The working consensus in the chat was that the conjecture is known for sufficiently large primes, but not uniformly for every prime. Some small-set paper claims were also flagged in the ledger as having potential torsion/rank-certificate issues; the dossier makes no new assertion resolving those audits. This document preserves the literature context without treating it as a proof of the all-primes statement.
+2. Executive results matrix
+Label / scope
+Claim or construction
+Status in this chat
+Consequence and limitation
+SF, SF-max
+A suitable atom fuses into every valid cycle of the complement
+REFUTED, p = 19; also p = 37 certificates
+Universal-cycle induction cannot work
+Four-block port criterion
+Pair {c,−c} inserts iff some edge has both translated endpoints in the holes
+Written elementary proof
+Exact inverse-pair test on a fixed cycle
+P_spread
+Small translate overlap can guarantee insertion
+Sufficient in a counting range, not a complete invariant
+Same vertex set can support both compatible and incompatible cycles
+P_all
+A cycle admits every atom insertion and this property survives fusion
+REFUTED, p = 11 nonconfluence
+Successive insertion may destroy all remaining ports
+CMAS / P_max
+One coherent selected cycle per zero-sum set, robust to maximum atoms
+Finite certificate p ≤ 23; UNPROVED uniformly
+Central cycle-selection candidate
+Port budgets
+An inserted atom of size m destroys at most 4m+2 inverse-pair port/sign choices
+Written counting proof
+Multi-pair insertion when enough ports remain
+Near-balanced two-atom exchange
+Every proper zero-sum subset has near-half cardinality
+Accepted in initial handoff; proof sketch in notes
+Certain two-atom unions fuse by protected swaps
+Asymptotic sparse-complement
+A sufficiently large atom fuses into every valid complement cycle when n ≲ √(m/log m)
+Conditional on a cited anticoncentration bound; written proof
+Does not reach dense complements
+Small and odd atoms
+Inverse-pair fusion through sizes 2–10 and odd sizes
+Written combinatorial proofs; ultimately superseded
+Useful independent proof techniques
+Two-hole avoidance
+Distinct nonzero steps can avoid {c,c+T} at proper prefixes in odd-order groups
+Short complete greedy/last-three proof
+Supplies arbitrary-size pair absorption
+Universal inverse-pair absorption
+Every minimal atom absorbs a disjoint inverse pair at a prescribed atom edge
+Written elementary proof
+Solves all atom + 2-atom cases
+Four-step / G5 avoidance
+Four- or five-step set avoids three prescribed partial-sum residues under hypotheses
+Written finite combinatorial proofs
+Handles triple-atom insertion into a single atom
+Uniform atom + triple
+Any disjoint atom and three-element atom have a valid cycle in odd-order groups
+Written case-split proof
+Solves atom + 3-atom, not arbitrary multi-atom
+Three inverse pairs
+Any three distinct inverse pairs have a valid cycle
+Written signed-word proof
+First unrestricted 3-atom family
+One signed relation
+Arbitrarily many inverse pairs with ≤1 signed zero-sum relation
+Written half-cycle proof
+Does not handle many-relation symmetric sets
+Flexible atom interleaving
+No adjacent steps from the same atom
+Passed enumerated triple-atom cases, UNPROVED generally
+Candidate simultaneous global construction
+Zero-sum-free six-step avoidance
+Six distinct zero-sum-free steps avoid any five forbidden prefix points in F_23
+Finite exhaustive report only
+Possible generalized grasshopper lemma
+3. Chronological research narrative
+3.1 Initial premises: Φ-extremal partitions and Strong Fusion
+The initial handoff accepted three results from earlier work: (1) a near-balanced theorem asserting that if every proper zero-sum subset has cardinality ⌊n/2⌋ or ⌈n/2⌉, a valid cycle exists by boundary swaps; (2) for an atom partition maximizing the number of atoms and then Φ=Σ|A_i|², every proper zero-sum subset of the union of atoms B,C has size between |B| and |C|; and (3) a short-relation four-block fusion theorem excluding certain mixed windows. The strongest proposed missing lemma, SF-max, asked for a maximum atom that could be inserted into every complement cycle. The existence of arbitrarily large disparities between atom sizes and of multiple atoms was the main advertised gap.
+These original inputs were independently reported as checked by another model in the handoff, but this compilation does not possess all of those original proofs line by line; the later research notes expand the equal-size protected-swap argument and exact insertion conditions.
+3.2 Refutation of the universal-cycle induction
+The key discovery was a p = 19 obstruction with A = F_19^×. Every minimal zero-sum atom B has at least one valid complementary cycle z such that every allowed four-block fusion fails. The atom classification has 447 atoms in 26 multiplicative scaling classes, distributed by sizes 2/3/4/5/6 as 9/42/126/198/72. For B={1,18}, one obstructing complement cycle is
+(11,4,9,8,10,3,13,16,14,2,15,12,6,7,5,17).
+For this particular pair, all 64 prescribed four-block words fail. Moreover all 9,792 cyclic order-preserving shuffles of {1,18} with that complement order fail. The note records 108,748 four-block checks across the 26 scaling classes. A previous p = 37 obstruction found 1,296 maximum atoms of size eight in 36 scaling classes, each with a resistant complement cycle. The p = 19 result is the sharper counterexample.
+Logical conclusion: These counterexamples refute only the quantifier “every valid complement cycle.” They are not counterexamples to Graham; the full nonzero set at p = 19 has valid cycles.
+3.3 Exact port formula and failed cycle invariants
+Let V be the vertices of a valid zero-sum cycle z and H=F_pits holes. For an inverse pair {c,−c}, insertion is possible exactly if some directed cycle edge u→v satisfies {u+c,v+c}⊆H or {u−c,v−c}⊆H. Defining N_c(z) to count these directed edge/sign choices exposes a quantitative resource. If an atom of size m is inserted by a valid fusion, it occupies m old holes and deletes one old edge, so
+N_c(z_new) ≥ N_c(z_old) − (4m+2).
+The corollary is a finite budget theorem: r disjoint inverse pairs can be inserted in any order if their initial port counts all exceed 10(r−1). The hypothesis is too strong for very dense cycles.
+A vertex-only spread invariant fails to distinguish compatible and incompatible cycles. At p = 11 the two cycles (2,3,7,5,9,4,6,8) and (3,5,9,6,4,8,2,7) use exactly the same vertices {0,1,2,3,4,5,6,8}, but only the second admits insertion of {1,10}. The stronger P_all assertion also lacks inductive closure: z=(3,4,5,7,8,6) accepts both {1,10} and {2,9}, yet after fusing either pair no resulting four-block cycle can absorb the other (10 and 2 first-step fusion choices, respectively).
+3.4 Selected-cycle invariant P_max and p = 23 certification
+Define P_max(z) by requiring z to absorb every disjoint atom B that is maximum-sized in Z∪B. The proposed CMAS theorem would select a P_max cycle z_A for every nonempty zero-sum A, with z_A obtained recursively from a maximum atom and the previously selected complementary cycle. This is weaker than refuted SF-max because only selected cycles must work.
+Exact finite certification recorded 18,073 nonempty zero-sum sets and 44,036 maximal-atom insertion obligations over p=3,5,7,11,13,17,19. At p=19, three intermediate cycle choices had to be repaired. The p=23 extension built cycles for 182,361 sets; a first-success selector left 183 failing robustness obligations, repaired through alternative fusion choices. The final audit reported 1,620,080/1,620,080 successful maximal-atom obligations. Randomized closure testing at p=23 passed 10,000 cases, but that is not an exhaustive proof of universal closure.
+Remaining quantifier gap: For arbitrary p, show there exists a coherent family of compatible cycles, or prove a local transformation that can repair the necessary simultaneous insertion ports. The finite certificate is not an inductive proof for unbounded p.
+3.5 Analytic counting, odd atoms, and size-by-size pair fusion
+A random permutation of an atom B of size m hits a prescribed residue c among its proper prefix sums with probability
+μ_B(c) = Σ_{∅≠S⊊B, ΣS=c} 1/C(m,|S|).
+If μ_B(c)&lt;1/2, averaging the cycle’s translate overlaps produces an edge u→v for which u+c and v+c are both holes. This yields inverse-pair fusion. The source notes developed several ways to force μ&lt;1/2: a Schur-free boundary-swap injection, a more complicated odd-atom collision bound, and pair/triple/subset-shadow counting through sizes 5,6,7,8,9 and 10. The ten-element recorded uniform bound was μ≤1161/2360&lt;1/2. These techniques are retained in full because they are independently interesting, although the later two-hole greedy theorem renders all atom-size limits unnecessary for inverse-pair fusion.
+A separate asymptotic method, using the stated Pham–Sauermann subset-sum anticoncentration estimate and the Dias da Silva–Hamidoune restricted-sum theorem, gave
+μ_B(c) ≤ 4/m + 2√2 C √(log m/m).
+For sufficiently large m this is below one half. A union bound also gave a four-block fusion theorem for a large atom B into every fixed complement cycle when |Z|≤c₀√(m/log m), for suitable absolute c₀ and sufficiently large m. The source’s application of the published anticoncentration statement should be rechecked against its exact published hypotheses before being cited externally.
+3.6 The decisive elementary two-hole theorem
+The most economical inverse-pair argument is a greedy ordering lemma. Let R be distinct nonzero elements in an abelian group, T=ΣR, and let c be a group element. If −c∉R, greedily select elements to keep each proper partial sum outside {c,c+T}. With at least three elements left, at most two next steps are bad. At the only possible final two-step dead end, the remaining pair would have to contain −c; this is excluded.
+In an abelian group with no nonzero two-torsion, the lemma holds even without −c∉R. In the final-two dead end, undo the previously selected nonzero step z and rearrange the final triple as (x,y,z) or (y,x,z). The second-to-last landing point is automatically safe; the first of the two proposed landing points must be safe because a nonzero translation of order other than two cannot stabilize a two-point forbidden set.
+Apply the simple version with R=B{b}, T=−b, and c,−c disjoint from a minimal atom B. The resulting order of R avoids {c,c−b}. The atom cycle (b,R) therefore omits both translated edge endpoints c and b+c, allowing the edge b to be replaced by (c,b,−c). This proves all-size, prescribed-edge inverse-pair absorption for any abelian group where the inverse pair consists of two distinct elements. The full proof is retained in Appendix A10.
+3.7 Three-element atoms and the five-step G5 theorem
+For a zero-sum triple C={z,x,y}, insertion into an atom B at a step b is described by the word
+(z,b,y,x,r₁,…,r_{m−1}), with R=B{b},
+provided the proper prefix sums of R avoid the three values F={z,z−b,−x}. An initial four-step avoidance lemma covered atoms of size at most five under first/last-step availability conditions. The next obstacle was the G5 statement: every zero-sum-free set of five distinct nonzero elements in an odd-order abelian group has an ordering whose four proper prefix sums avoid any three prescribed values.
+The G5 proof has two parts. (i) In a zero-sum-free five-set, each prescribed nonzero or zero subset-sum target has at most three nonempty proper subset representations. Four would force an impossible pattern of two disjoint pairs and two crossing triples and hence 2r₅=0. Therefore three forbidden residues rule out at most nine subset masks. (ii) The inclusion graph between the ten two-element subsets and ten three-element subsets of a five-set is 3-regular and has a perfect matching. Any family of blocked complete chains must contain at least ten forbidden subset masks after accounting for allowed singleton and four-set ends. Since at most nine are forbidden, an avoiding order exists.
+G5 extends to arbitrarily many zero-sum-free steps by greedy reduction to the final five. It provides a valid triple-atom fusion into any atom B of size ≥6. The separate case analysis for |B|=2,3,4,5 (including opposite elements across atoms) then yields a uniform two-atom theorem: if B,C are disjoint minimal zero-sum sets in an odd-order abelian group and one has size three, B∪C has a valid zero-sum cycle. Full written proofs are in Appendices A11–A13.
+3.8 First direct multi-atom theorems
+For three distinct inverse pairs {±a,±b,±c}, choose signed representatives x,y,z and use
+(x,y,z,−x,−y,−z).
+Every length-two cyclic interval is nonzero. The only additional possible zero-sum cyclic intervals have length three, and their sign patterns (up to overall negation) are x+y+z, −x+y+z, and −x−y+z. At most one of the four signed triple relations can hold; orient/order the representatives so the existing relation, if any, is the omitted pattern x−y+z. This gives a valid cycle.
+The idea generalizes. If W∩(−W)=∅ and the signed subset-sum equation Σ ε_i a_i=0, ε_i∈{−1,0,1}, has at most one nonzero solution up to global sign, then the antipodal word (x₁,…,x_r,−x₁,…,−x_r) can be oriented and permuted so that this unique relation has at least two sign changes. Every proper cyclic interval in such a word yields a coefficient vector with at most one sign change. Thus the word is valid. A first-moment inequality involving the number N_s of signed relations of each support size supplies another sufficient condition; details are preserved in Appendix A14.
+These are genuinely multi-atom families for arbitrarily many inverse pairs. They do not handle unrestricted sets with many signed relations, or atoms of arbitrary sizes.
+3.9 Simultaneous interleaving and the latest unfinished round
+A fixed periodic B,C,D,B,C,D,… interleaving of three zero-sum triples fails in explicit examples at p=13,17,19. Allowing an arbitrary interleaving with no two adjacent steps from the same atom succeeded in all 2,340 tested disjoint triple-partitions across p=13,17,19; all 33,340 four-triple families enumerated across p=17,19,23; and all 30,936 five-triple families at p=19,23. Samples involving six triple atoms at p=31 also passed. This suggests a new global invariant, but no uniform exchange lemma was derived.
+The latest attempted adjacent-swap descent (after the packaged notes) failed: mod 11, the cyclic word (3,1,7,8,4,10) has a repeated partial-sum vertex but no adjacent swap decreases the selected collision-count potential. A separate exploratory computation found that every zero-sum-free six-step set in F_23 can avoid any five prescribed proper-prefix residues, while six forbidden residues can block all first steps. This is a finite result only, and the six-step universal lemma has not been proved. No additional all-primes theorem was obtained after these observations.
+4. Negative results and invalid induction principles
+Attempt
+Counterexample / failure mode
+Exact lesson
+SF and SF-max
+p=19, all atom classes have a bad complementary cycle
+Cannot quantify over every complement cycle
+Any order-preserving shuffle of a fixed complement cycle
+p=19, B={1,18}, 9,792 shuffles fail
+Some valid larger cycles require reordering old steps
+Vertex-set-only P_spread as complete criterion
+Two p=11 cycles share V but differ in fusion success
+Directed edges, not just occupied vertices, matter
+P_all closed under fusion
+p=11 diamond; either successful insertion blocks the other
+No greedy monotone local universality
+Fixed round-robin triple interleaving
+p=13 three-triple partition
+Flexible atom-label scheduling required
+Mirrored half-cycle insertion
+p=11, W={1,2,3} plus {±5}
+Antipodal cycles may require global reordering
+Adjacent-swap collision descent
+p=11 local trap in latest round
+Collision count is not a universal monotone potential
+General three-forbidden avoidance without zero-sum-free hypotheses
+Composite group Z_15 example
+Group structure and subset restrictions matter
+5. Proof architecture that would finish the conjecture
+The strongest unresolved goal is an all-primes coherent cycle-selection theorem. One viable statement is CMAS: choose a valid P_max cycle z_A for every zero-sum A, such that each nonatom z_A arises by fusing a maximum atom into the chosen cycle of its complement. This would give Graham for zero-sum sets and, with the one-element reduction and boundary cases, the general problem.
+Alternative sufficient directions are (i) a simultaneous atom-interleaving theorem for arbitrary partitions, (ii) a much stronger zero-sum-free avoidance theorem used globally rather than one atom at a time, or (iii) a cycle-space exchange/repair theorem that can replace incompatible selected cycles while preserving the compatibility of all required future atom attachments.
+Precise gap: No proof in this conversation shows that such a selector or global interleaving always exists. The confirmed p=19 and p=11 obstructions prevent simpler universal-extension claims from being substituted. The question “Graham for every prime?” therefore remains unanswered by this chat.
+6. Audit and reproducibility ledger
+All exact computational counts in the source notes are preserved in Part II, together with filenames of the associated Python/C++ checkers. The underlying scripts and full finite certificates were generated during the chat as separate archives, but this single document contains the proofs and result records rather than inlining every source-code implementation.
+Subject
+Named verifier / package in the conversation
+SF counterexamples
+strong_fusion_counterexamples_p19_p37.zip; verify_strong_fusion19.py; verify_cycle_choice19.py
+P_max through p=19
+graham_cycle_selection_p19.zip; cycle_selection_p19.py; p11_diamond.py
+P_max at p=23
+graham_475_p23_cmas_research.zip; independent_p23_audit_standalone.py
+Protected swap and odd atoms
+erdos475_protected_swap_verify.py; erdos475_odd_atom_fusion_research.zip
+Small atom and size-ten bounds
+erdos475_atom_fusion_v3.zip; erdos475_size10_fusion.zip
+Universal pair
+erdos475_universal_inverse_pair_fusion.zip; greedy_edge_fusion_audit.py; two_hole_greedy_any.py
+G5 and triple fusion
+erdos475_G5_triple_fusion_proof_and_verifiers.zip; erdos475_G5_verifier.py
+Uniform triple two-atom theorem
+erdos475_uniform_triple_fusion_research.zip; atom_triple_all_primes_verifier.cpp
+Multiatom experiments
+erdos475_multiatom_audit_source.zip; antipodal and interleaving scripts
+7. Consolidated unresolved list
+UNPROVED U1. CMAS (coherent maximal-atom cycle-selection) for every prime p.
+UNPROVED U2. A global interleaving theorem for an arbitrary partition into many atoms, possibly of unequal sizes.
+UNPROVED U3. A universal exchange/reordering lemma that repairs a bad complement cycle while protecting all other required atom insertions.
+UNPROVED U4. The proposed extension of five-step avoidance to m distinct zero-sum-free steps and m−1 arbitrary forbidden prefix points in arbitrary suitable groups. The size-six, five-forbidden instance is a finite test only.
+UNPROVED U5. A uniform all-primes proof or a counterexample to the original Graham rearrangement conjecture.
+Part II. Complete Original Proof Notes
+The following fourteen documents are included as drafted in the chat’s working directory, with headings shifted down to preserve one hierarchy. They retain detailed calculations, full proofs, explicit witnesses, conditional estimates, finite counts and internal audit commands. Earlier notes may be superseded by later ones; their inclusion records the development rather than independently revalidating every assertion. This is intentional: removing the superseded proofs would defeat the request for a complete research record.
+A01. Strong Fusion counterexamples, p = 19 and p = 37
+Original working note: STRONG_FUSION_COUNTEREXAMPLE_README.md *Record type:** Exact finite certificate *Provenance:** generated earlier in this chat; preserved as written.
+Counterexample to Strong Fusion for Graham’s rearrangement problem
+Date: 2026-11-23Status: Complete finite certificate, independently checked by two algorithms (direct permutations and subset-mask reachability).Scope: Refutes the Strong Fusion lemma and the maximum-atom strengthening. It does not refute Graham’s rearrangement conjecture.
+Proposition (counterexample)
+Let p = 19 and A = {1,...,18} = F_19^*. For every minimal nonempty zero-sum subset B of A, there exists a valid cyclic ordering z of Z=A\B for which no choice of:
+a permutation (b1,...,bm) of B, and
+a rotation or reversal (z1,...,zn) of z,
+makes the four-block word
+(b1, z1, b2, ..., bm, z2, ..., zn)
+a valid cycle modulo 19.
+This disproves the quantifier pattern forall A, exists atom B, forall valid z, exists fusion. In particular, choosing B of maximum size cannot rescue this assertion.
+A representative obstruction
+B = (1, 18), and the complementary valid cycle is
+Z = (11, 4, 9, 8, 10, 3, 13, 16, 14, 2, 15, 12, 6, 7, 5, 17).
+For this pair, all 2! * 2 * 16 = 64 stipulated four-block words fail.
+A stronger fact holds: every way of inserting the two steps 1 and 18 into a rotation/reversal of this Z without changing the cyclic order of its 16 steps fails. There are 2 * 16 * binom(18,2) * 2 = 9,792 such candidate words, independently exhausted by the verifier.
+Why 26 rows settle the universal claim
+Every atom B is determined by a zero-sum-free set S and one final element b=-sum(S) distinct from the elements of S. A sorted depth-first enumeration of zero-sum-free subsets, using a 19-bit mask of available subset sums, gives:
+Atom size
+Number of atoms
+Scaling orbits
+2
+9
+1
+3
+42
+3
+4
+126
+7
+5
+198
+11
+6
+72
+4
+Total
+447
+26
+No zero-sum-free six-element subset exists, hence no atom has more than six elements. Each line pair in strong_fusion19_obstructions.txt supplies one atom-orbit representative and one valid obstructing complementary cycle.
+Multiplying every element of A, B, and z by a nonzero scalar preserves zero-sum minimality, cycle validity, and the existence/nonexistence of every allowed fusion. Therefore the 26 representatives cover all 447 atoms.
+The Python verifier enumerates every B ordering and every rotation/reversal of each displayed Z ordering, and rejects 108,748 candidate four-block words. It also independently checks the atom classification and scaling-orbit coverage.
+Reproduction
+From the extracted ZIP directory:
+python3 verify_strong_fusion19.py strong_fusion19_obstructions.txt
+The script requires only Python 3’s standard library. It runs in a few seconds on a typical machine.
+The larger p=37 certificate is provided as an independent supplementary cross-check. It uses a different exact algorithm (subset-state dynamic programming) for its 1,508 certificates, covering all 54,246 minimal zero-sum atoms of F_37^*.
+Graham remains true for this particular A
+For instance, 2 is a primitive root modulo 19, so the ordering of all nonzero powers of 2,
+(1, 2, 4, 8, 16, 13, 7, 14, 9, 18, 17, 15, 11, 3, 6, 12, 5, 10)
+is a valid cycle. Its nonfinal partial sums are 2^j - 1 (mod 19) and are distinct. The obstruction concerns the proposed induction mechanism, not the underlying conjecture.
+Exact quantifier diagnosis: every atom also has a successful complement
+The additional file strong_fusion19_compatible.txt supplies, for all 26 atom-orbit representatives, another valid Z-cycle together with an explicit B ordering and a Z rotation/reversal that does produce a valid four-block fusion. This is checked with:
+python3 verify_cycle_choice19.py
+Thus the full-set example establishes the sharper statement
+for every minimal atom B, there exist both a fusable and a nonfusable valid cycle of A\B.
+This shows that the universal-z requirement is the source of failure. In this example, the weaker quantifier order forall B, exists good z actually holds.
+A separate rigorously proved positive fragment (two-atom case)
+Let B be a minimal zero-sum set in an abelian group and let C={c,-c} be a disjoint two-element zero-sum atom. Suppose some b1 in B is difference-isolated, meaning no two distinct elements x,y in B\{b1} satisfy x-y=b1. Then, for either orientation (c,-c), an order of B exists for which (b1,c,b2,...,bm,-c) is a valid fused cycle.
+Proof. In any order of B beginning with b1, let s_j=b1+...+b_j. Minimality makes the proper prefix sums s_1,...,s_(m-1) distinct and nonzero. The only possible new collisions in the fused word arise when s_j equals -c or b1-c. Put T={-c,b1-c}. As B and C are disjoint, s_1=b1 misses T. For any j&gt;=2 with s_j in T, interchange the adjacent elements b_j,b_(j+1). Exactly s_j changes, by b_(j+1)-b_j, which is nonzero and cannot equal +b1 or -b1 by difference isolation. The two members of T differ by b1, so the changed s_j lies outside T. Every other prefix sum is unchanged. Each swap decreases the number of collisions by one; iterate to zero. QED.
+This sufficient condition works for atoms of arbitrary size. It does not resolve the general two-atom case, because many atoms have no difference-isolated element.
+Open mathematical obligations
+UNPROVED: A weaker fusion statement with a freely chosen complementary valid cycle (forall A, exists B, exists z) might suffice if a compatible induction could be established. This is not addressed by the counterexample.
+UNPROVED: A local replacement principle that can significantly reorder the complementary cycle (rather than merely rotate/reverse or preserve its step order).
+UNPROVED: The original all-primes Graham conjecture. The published large-prime/large-set results do not yield a computable finite verification of the exceptional primes.
+Research consequence: No proof can use the original SF statement, SF-max, or a universally applicable order-preserving shuffle as an induction lemma without additional hypotheses.
+A02. Cycle-selection invariants through p = 19
+Original working note: CYCLE_SELECTION_RESEARCH_NOTE.md *Record type:** Proofs, finite data, obstructions *Provenance:** generated earlier in this chat; preserved as written.
+Graham’s rearrangement conjecture — maximal-atom cycle selection (2026-11-23)
+Status: rigorous elementary port lemmas, exact finite enumeration for primes up to 19, and explicit counterexamples to two stronger local invariants. NOT a proof of the all-primes conjecture. The results concern zero-sum subsets; the existing zero-sum reduction can be used separately.
+Definitions
+A cycle for zero-sum S ⊂ F_p^* means a permutation of S for which 0 and all nonfinal partial sums are pairwise distinct. A minimal atom B is a nonempty zero-sum subset of F_p^* with no proper nonempty zero-sum subset. For disjoint atom B and valid cycle z of Z, Fuse(B,z) denotes any valid four-block cycle (b1,z1,b2,...,bm,z2,...,zn), where b is a permutation of B and z can be rotated or reversed.
+Call an atom B maximal in A if |B| is as large as any atom contained in A. Define the following property on a single valid cycle z:
+P_max(z): for every atom B disjoint from the step set Z of z, provided B is maximal among the atoms of Z∪B, there exists a four-block fusion Fuse(B,z).
+This differs from the refuted SF-max assertion because P_max is required only of specially selected cycles. Also define P_all(z) as the identical statement with no maximality restriction.
+Exact finite result (selected cycles, all p ≤ 19)
+Select one cycle z_A recursively for every nonempty zero-sum subset A⊂F_p^*:
+If A is an atom, take its ascending order (every order is valid).
+Otherwise choose its largest-cardinality atom B, with the smallest 1-indexed bitmask as tie-breaker. Set Z=A.
+Enumerate the B-orders and oriented Z-ports in fixed deterministic order and take the first valid four-block fusion of B into the already selected z_Z.
+At p=19 for three specified intermediate 12-element sets, replace the first fusion by an explicitly listed alternative fusion using the same maximal atom and the same selected z_Z (three entries in cycle_selection_p19.py).
+The script verifies that every recursive step is legal and that every selected z_A satisfies P_max, not merely that the chosen B succeeds. The counts below are exhaustive over all nonempty zero-sum sets, with no multiplicative-orbit reduction and no randomness.
+p
+Zero-sum nonempty A
+Tested (A,B) with B a maximal atom of non-atomic A
+Failures
+3
+1
+0
+0
+5
+3
+2
+0
+7
+9
+8
+0
+11
+93
+107
+0
+13
+315
+402
+0
+17
+3,855
+7,928
+0
+19
+13,797
+35,589
+0
+Total
+18,073
+44,036
+0
+Why the three exceptions matter: before lookahead repairs the deterministic first-success rule produced exactly three failing maximal-atom choices out of the 35,589 p=19 tests. They all occurred for A=F_19^*. Each old complementary cycle passed full validity checks but was nonfusable with the given maximal atom; this was independently checked by all 17,280 four-block candidate words for each pair. All three replacement cycles are themselves valid recursive fusions. Recomputing every larger selected cycle using the replacements yields the zero-failure table. This provides a genuinely tested cycle-selection candidate with a small amount of lookahead.
+Important quantifier limitation: the result is not the universal implication for every P_max cycle z and every suitable B, some fusion also has P_max. It proves existence of a specifically selected, recursively compatible P_max cycle for each tested finite set. A general theorem guaranteeing the existence of this selection is the major open task.
+Inverse-pair port theorem (unconditional)
+Let z be a valid zero-sum cycle with vertex set V (0 and n−1 nonfinal prefix sums) and holes H=F_p. For B={c,−c} disjoint from Z, B admits a four-block fusion into some rotation/reversal of z if and only if there exists an edge u→v of z with
+{u+c,v+c} ⊂ H  OR  {u−c,v−c} ⊂ H.
+Proof: inserting (c,w,−c) at an edge u→v with step w adds exactly two vertices u+c,v+c and preserves every original vertex. Reversing the cycle exchanges the sign of the necessary translation. Both conditions are thus necessary and sufficient.
+Define N_c(z) as the total number of these directed edge/sign pairs, counted with multiplicity. This is the exact 2-atom port count.
+Quantitative port-depletion lemma (new positive fragment)
+Suppose a valid atom fusion of m steps expands z to z’. It replaces one old edge by m+1 edges and adds exactly m new vertices, all drawn from the old hole set H. Then for every inverse-pair candidate {c,−c} disjoint from the expanded step set,
+N_c(z') ≥ N_c(z) − (4m + 2).
+Proof: each newly filled hole h can invalidate at most two original candidate edges for the +c translation (incoming/outgoing at h−c) and at most two for the −c translation (incoming/outgoing at h+c). This costs at most 4m marked ports. The single deleted original edge can contribute at most two more (one per sign). All other original candidate edges remain available. Extra edges can only help.
+Corollary. If a valid base cycle z has r disjoint inverse-pairs outside its steps, and each has N_c(z)&gt;10(r−1), the r pairs can be fused into z in any order, maintaining validity. Each pair insertion costs at most 4·2+2=10 ports for every other pair, so the budget remains positive until its turn. This is a genuine induction invariant in the sufficiently-many-ports regime. It does not cover arbitrary dense sets.
+Obstruction I: vertex-only statistics cannot distinguish fusion
+At p=11 with B={1,10}, take
+bad: z=(2,3,7,5,9,4,6,8);
+good: z=(3,5,9,6,4,8,2,7).
+Both cycles use exactly the same step set Z and exactly the same vertex set V={0,1,2,3,4,5,6,8}, with holes H={7,9,10}. The first has no four-block fusion of B; the second has one. Consequently no invariant depending only on V (including the statistic r(V)=max_{t≠0}|V∩(V+t)|) can distinguish every good cycle from every bad cycle. This does not* rule out using r* as a restrictive sufficient condition when r* is small.
+Also, if |V|=n then r*(V) ≥ max(0,2n−p). Thus r* is necessarily large in the dense regime, independently of cycle choice.
+Obstruction II: P_all is not closed, even along a successful P_all construction
+At p=11, take z=(3,4,5,7,8,6), which is valid. Its complement contains exactly two atom subsets: B={1,10} and C={2,9}. Both fuse into z, so P_all(z) holds. Direct exhaustive enumeration gives:
+exactly 10 distinct valid four-block fusions of B into z; none can subsequently fuse C;
+exactly 2 distinct valid four-block fusions of C into z; none can subsequently fuse B.
+Even worse for a proposed single-cycle induction, z is reached from the atom (5,6) by first fusing (3,8), then (4,7), and every intermediate cycle has P_all. Therefore P_all already fails closure along a legitimate previously successful path.
+This obstruction involves only inverse pairs, with every sum and candidate ordering verified by p11_diamond.py.
+Strongest defensible next conjecture
+Canonical maximal-atom selection conjecture (CMAS). There exists a deterministic choice of a valid cycle z_A for every zero-sum set A⊂F_p^*, such that (1) each atom has a valid chosen cycle; (2) every nonatom A’s chosen cycle is a four-block fusion of a maximum-size atom B into its chosen complement cycle; and (3) every chosen cycle has P_max.
+The constructed choices certify CMAS in the above finite range. The definition currently has an existential/cycle-selection aspect and is not yet derived from a structural theorem. To prove it for all p, we need a mechanism to select cycles maintaining P_max under an admissible max-atom fusion, likely by keeping a small reservoir of compatible cycles or a port-profile monotone potential. The p=11 nonconfluence means P_all alone will not do it.
+Explicit UNPROVED list
+GAP (all-primes): Prove CMAS for all primes using a noncircular cycle-selection lemma; arbitrary P_max cycles may not have a P_max-preserving extension.
+GAP (general closure): Decide whether P_max is preserved for every P_max cycle and a suitable maximum atom. Finite verification of every possible z was completed only for p≤13; the p=17,19 audit is exhaustive over sets and maximal atoms for one selected cycle per set, not over all valid cycles.
+GAP (quantitative dense): Establish a port-profile or switching theorem strong enough to restore depleted ports when |V| is near p.
+GAP (base in all groups): Prove every minimal atom has at least one order with P_max for all p (verified for atom bases in the finite selector, and individually over all atoms in p≤19).
+GAP (original problem): Graham’s rearrangement conjecture for every prime remains unsolved by this argument.
+Reproduce the finite check
+From this package directory, with Python 3 and no third-party modules:
+python3 p11_diamond.pypython3 cycle_selection_p19.py 11python3 cycle_selection_p19.py 13python3 cycle_selection_p19.py 17python3 cycle_selection_p19.py 19
+Optionally, python3 closure_max_research.py 11 and python3 closure_max_research.py 13 exhaust all valid cycles with a fixed smallest first step (hence all cycles up to rotation), confirming the general P_max property and its closure for every such cycle in those two primes. The p=13 run checked 87,374 valid rooted cycles and 3,282 admissible B-cycle closure requests.
+The exact verifier enumerates every zero-sum subset mask, every contained minimal atom, and all required order/port choices with no probabilistic shortcuts. It separately checks the chosen cycle is a valid cyclic ordering.
+A03. Maximal-atom research and p = 23 certification
+Original working note: GRAHAM_475_FUSION_RESEARCH_2026-11-23.md *Record type:** Finite certificate plus conditional analytic bounds *Provenance:** generated earlier in this chat; preserved as written.
+Graham’s rearrangement conjecture (Erdős #475): maximal-atom cycle selection
+Research update, November 23, 2026. The all-primes conjecture has NOT been proved. This note records new independently checkable finite evidence and rigorous general lemmas; it distinguishes the two.
+1. Definitions and exact induction target
+Let p be prime. For a zero-sum set A ⊆ F_p^×, a valid cycle is an ordering of A whose vertices 0,s_1,...,s_(|A|-1) are pairwise distinct. An atom is a minimal nonempty zero-sum subset; every ordering of an atom is a valid cycle.
+For an atom B and a valid cycle z on disjoint Z, a four-block fusion is a valid cycle of the form (b1,z1,b2,...,bm,z2,...,zn), for some permutation of B and some rotation/reversal of z.
+A minimal atom B⊆A is maximum if its size is largest among the atoms contained in A. Define P_max(z) for a valid cycle on Z: every disjoint atom B that is maximum in Z∪B can be fused into z. The cycle-selection assertion (CMAS) is that a coherent family of cycles {z_A} may be chosen, one for each nonempty zero-sum A, so that each nonatom z_A is a four-block fusion of a maximum atom into the chosen cycle of its complement and every z_A satisfies P_max.
+CMAS for all primes would imply Graham for all primes, in combination with the separately proved nonzero-sum-to-zero-sum reduction. This implication does not prove CMAS.
+Known obstruction: Strong Fusion with ∀ over all valid complementary cycles is false at p=19, even if the atom is selected freely; see prior p=19/p=37 counterexample package. CMAS protects a selected complementary cycle only.
+2. Exact finite theorem: CMAS at p=23 (computed)
+Computer-verified theorem. For p=23 there is a coherently chosen family of cycles for every nonempty zero-sum subset of F_23^×, satisfying the recursive construction and P_max simultaneously.
+A deterministic first-fusion selector built every cycle, but yielded 183 failing maximal-atom obligations in the audit: one obligation with 19-element target and 182 with the full 22-element target. There were 183 distinct offending complementary sets: one of size 13, 182 of size 16.
+For each offending complement, an alternative legal fusion using the same chosen maximum atom and the same previously selected complementary cycle was found. Rebuilding in increasing cardinality and performing all tests again eliminated every failure.
+Summary:
+Item
+Count
+Nonempty zero-sum subsets
+182,361
+Minimal atoms, all sizes
+1,485
+Atom sizes 2,3,4,5,6
+11, 66, 264, 616, 528
+Maximal-atom insertion tests
+1,620,080
+Test failures after 183 repairs
+0
+The audit was also repeated independently using subset-mask dynamic programming for fusion, instead of the permutation depth-first search that produced the choices. It recomputes all zero-sum subsets, all atoms, the maximum-atom size for each set, validity of each cycle, each literal recursive fusion, and every required insertion. The standalone audit prints:
+INDEPENDENT AUDIT PASSED 182361 sets 1620080 Pmax insertions
+Certificate: p23_cmas_certificates.jsonl.gz, one JSON record per zero-sum set, fields [subset_mask, selected_cycle, chosen_atom, complement_mask_or_null]. Verification script: independent_p23_audit_standalone.py; fusion checker: independent_fusion_dp.py. In the unzipped directory run python3 independent_p23_audit_standalone.py. Python standard library only. The portable certificate is data; the audit does not execute it as code.
+Scope: A finite result for p=23, not a uniform theorem. The full Graham conjecture was already known computationally through p=37; this certificate establishes a stronger recursive compatibility property for p=23.
+3. The general port-depletion theorem (rigorous)
+For any valid zero-sum cycle z and any disjoint zero-sum atom D of size k, let N_D(z) be the number of successful triples (orientation, directed-edge port, order of D) realizing a four-block fusion. Count both orientations and all k! orders, so 0 ≤ N_D(z) ≤ 2 |z| k!.
+Theorem. If a different atom C of size m is successfully fused into z, giving z', while D remains disjoint from its step set, then
+N_D(z') ≥ N_D(z) − 2 k! (k m + 1).
+Proof. Fix an oriented old edge u→v with edge step w. For a fixed ordering (d1,...,dk), fusion of D inserts exactly k additional vertices: u+d1 and v+(d1+...+dj) for 1≤j&lt;k. For a particular new occupied vertex h, the equation u+d1=h holds for at most one original oriented edge; each of the k−1 equations v+Σ_{i≤j}di=h likewise holds for at most one, since the origins and endpoints of old directed edges are individually distinct. Thus filling one old hole invalidates at most k successful choices of port for each fixed D-order and orientation. The C-fusion fills m old holes and removes one original directed edge (and its reversed counterpart). For each orientation, at most k!·(km+1) previously successful configurations are lost. The other original edges remain, and their candidate insertions are still valid unless one of their new vertex locations has been occupied. Sum the loss over both orientations. QED.
+Corollary (port-reservoir absorption). Suppose atoms D_1,...,D_r are pairwise disjoint and disjoint from the steps of a valid base cycle z, with |D_i|=k_i. If, for each i,
+N_{D_i}(z) &gt; 2 k_i! Σ_{j≠i}(k_i k_j+1),
+then all r atoms may be fused in any chosen order. The theorem guarantees the port count for each uninserted atom stays positive through every earlier insertion. The resulting cycle is valid. This is uniform in p and valid for any finite abelian group; its large port requirements generally fail in the dense regime.
+4. A new subset-sum route to the inverse-pair case (rigorous reduction)
+Let B be a minimal zero-sum atom of size m≥3 in an odd-prime cyclic group, and c≠0. Define
+μ_B(c)=Σ_{S⊊B, S≠∅, ΣS=c} 1 / binom(m,|S|).
+Because B is minimal, a uniformly random ordering encounters c as a proper prefix sum at most once, so μ_B(c) is precisely the probability that its vertex set contains c.
+Let r_c(V)=|V∩(V−c)| for the vertex set of a B-cycle. Rotating a fixed cyclic order among its m possible roots makes c occur as a vertex in exactly r_c(V) roots. Therefore
+E_order r_c(V) = m μ_B(c).
+Inverse-pair insertion lemma. If μ_B(c) &lt; 1/2, then there is an ordering of B into which the inverse pair {c,−c} can be inserted by four-block fusion (provided the pair is disjoint from B).
+Proof. Some cycle on B has r_c(V)&lt;m/2. The set T={u∈V:u+c∈V} has size &lt;m/2. Every vertex cover of a cycle on m vertices has at least ceil(m/2) vertices. Hence some cycle edge u→v has both u,v∉T, so u+c,v+c∉V. The pair (c,−c) can be inserted at that edge, creating exactly the two unused vertices u+c and v+c. Reversal and cyclic rotation of the fused word give a four-block fusion of B into the two-element cycle (c,−c). QED.
+What is unproved: The natural assertion μ_B(c)&lt;1/2 for every minimal distinct atom B of size m≥3 and every c≠0 has not been proved. Direct enumeration of all atoms through p=29 with sizes up to 7 found no violation; this is finite evidence, not a theorem. For m=3 the bound holds with μ≤1/3. For m=4 one has μ≤5/12, as follows: at ranks 1 and 3 there is at most one contribution in total (otherwise B contains ±c), contributing ≤1/4; at rank 2 there is at most one pair summing c (two such disjoint pairs would sum to 2c=0), contributing ≤1/6.
+Combinatorial interpretation. Each fixed-sum fiber {S⊊B:ΣS=c} is an antichain in the Boolean lattice, because comparable equal-sum subsets would yield a forbidden proper zero-sum subset. Additionally no two such subsets have Hamming distance 2: exchanging one element changes the sum, and adding/removing two cannot preserve it in an atom of size ≥3. Therefore the potential μ_B(c)&lt;1/2 lemma is a weighted Lubell (random maximal-chain) inequality for a restricted binary error-correcting code. This may offer a structural rather than case-based route for the two-atom inverse-pair problem.
+5. Equal-size two-atom fusion (rigorous, sharpening a previously accepted case)
+Suppose A=B⊔C, with |B|=|C|=m≥2, and every proper zero-sum subset of A has size m. Fix an arbitrary cyclic order (c1,...,cm) of C and an arbitrary order (b1,...,bm) of B. Consider
+W=(b1,c1,b2,...,bm,c2,...,cm).
+Only length-m cyclic windows can sum to zero. A swap of adjacent entries modifies exactly one complementary pair of length-m windows, as a cyclic window of length m contains exactly one of the two exchanged adjacent entries only at its boundary; the two affected windows are complementary. The two window pairs corresponding to the boundaries (b1,c1) and (c1,b2) have sums c1−b1 and c2−b1 (up to sign), which are nonzero because B and C are disjoint. Every other complementary window pair can be repaired by one swap between adjacent B-elements within the long B-block (b2,...,bm). Such a swap changes the zero sum by the nonzero difference of the two swapped B-elements and leaves every other pair of m-windows unchanged. Processing these m−2 coordinates one by one yields a valid word while preserving the order of C. This proves two-atom SF-max for equal-size atoms whenever the Φ-extremal size restriction holds.
+6. Explicit unresolved statements
+GAP 1 (the all-primes gap). Prove CMAS for all primes or find a counterexample. The p=23 finite certificate alone cannot prove the infinite statement.
+GAP 2 (local closure). Show that every valid P_max cycle admits a P_max-preserving insertion of any atom maximal in the enlarged set, or identify an obstruction. The finite audits include all cycles through p=13 and selected-cycle data through p=23, with random closure tests at p=23, but are not an all-p closure proof.
+GAP 3 (dense port restoration). The port-depletion theorem requires positive port reserves. In dense cases a valid complementary cycle may have zero ports for a given atom. A theorem must select or transform the cycle to restore simultaneous port availability.
+GAP 4 (two-atom imbalance). The equal-size theorem does not handle general two-atom partitions of widely different sizes. Proving μ_B(c)&lt;1/2 would settle a noteworthy inverse-pair subclass, not general imbalanced fusion.
+STATUS: The research has advanced the testable induction candidate to p=23 and furnished two new general reductions, but Graham’s rearrangement conjecture for every prime remains OPEN.
+7. Asymptotic inverse-pair fusion is a theorem (new uniform consequence)
+Theorem. There exists an absolute integer M such that, for every prime p, every minimal zero-sum atom B⊂F_p^× with |B|≥M, and every inverse pair {c,−c} disjoint from B, the two atoms have a valid four-block fusion preserving either given cyclic order of the two-element atom.
+Proof. Let m=|B|≥3, and define the prefix-hitting probability μ_B(c) as in Section 4. Pham–Sauermann, On Graham’s rearrangement conjecture (arXiv:2602.15797, Corollary 1.4), with ε=1/2, gives an absolute constant C such that for every 1≤r≤m/2, a uniformly random r-subset of B has any prescribed sum with probability at most 1/p + C sqrt(log m)/(m sqrt(r)). For m/2&lt;r&lt;m, use the complementary subset, which sums to −c because ΣB=0, obtaining the same bound with r replaced by m−r. Thus
+μ_B(c) ≤ (m−1)/p + (C sqrt(log m)/m) Σ_{r=1}^{m−1} 1/sqrt(min(r,m−r))
+≤ (m−1)/p + 2 sqrt(2) C sqrt(log m/m).
+By the restricted sumset theorem of Dias da Silva–Hamidoune (Erdős–Heilbronn), the set of all r-term subsums of m distinct residues has size at least min(p,r(m−r)+1). For an atom B, zero is absent from every proper-rank subsum set. Therefore r(m−r)+1&lt;p; taking r=floor(m/2) yields p≥floor(m²/4)+2 and m/p≤4/m. Hence
+μ_B(c) ≤ 4/m + 2 sqrt(2) C sqrt(log m/m).
+The right-hand side is &lt;1/2 for every sufficiently large m, independently of p,B,c. Apply the inverse-pair insertion lemma in Section 4. QED.
+Scope. This is a rigorous all-primes result for sufficiently long minimal atoms in the inverse-pair two-atom regime, assuming the published Pham–Sauermann Corollary 1.4 and the classical restricted-sumset theorem. It is more specific than the published large-set sequencing result because it forces a four-block atom fusion. It does not handle the other two-atom cases or the multi-atom induction, and the published constant C yields no convenient numerical threshold M here.
+Final theorem status
+The all-primes Graham conjecture remains unproved in this work. The strongest proved structural pieces are the general port depletion theorem, the equal-atom protected-swap theorem, and the asymptotic inverse-pair fusion theorem; plus the independently verified finite p=23 coherent cycle-selection certificate.
+8. Uniform sparse-complement strong fusion (new theorem)
+Theorem. There exist absolute constants c&gt;0 and M such that, for every prime p, every minimal zero-sum atom B⊂F_p^× of size m≥M, and every disjoint zero-sum Z of size n≤c sqrt(m/log m), every prescribed valid Z-cycle can be fused with B in the four-block pattern while fixing the Z-order, orientation, and starting edge.
+Proof. Fix z=(w,z2,...,zn) with vertex set V (|V|=n) and choose an independent uniform random permutation (b1,...,bm) of B. Let s_j=Σ_{i≤j}b_i. The inserted vertices in the candidate word (b1,w,b2,...,bm,z2,...,zn) are precisely b1 and w+s_j for 1≤j&lt;m. Atomicity implies the s_j are distinct, so the only possible collisions are:
+b1 ∈ V, probability ≤n/m, since b1 is uniform in B;
+w+s_j ∈ V for some 1≤j&lt;m;
+w+s_j=b1 for some 1≤j&lt;m.
+For each j, s_j is the sum of a uniform j-subset of B. By the uniform subset-sum estimate of Pham–Sauermann Corollary 1.4 with ε=1/2, and by complementing for j&gt;m/2, summing the union bound over j and over the n forbidden residues of V−w, the probability of event (2) is at most
+n [(m−1)/p+K sqrt(log m/m)]
+for an absolute K. Event (3) is impossible at j=1 because w≠0. For j≥2 it is equivalent to b2+...+bj=−w. Conditional on b1, the tail (b2,...,bm) is a uniform permutation of the set T=B\{b1} of size m−1. Applying the same estimate to T (and complementing when necessary) bounds event (3) by
+(m−2)/p+K' sqrt(log m/m).
+From the Dias da Silva–Hamidoune restricted-sumset bound for minimal atoms, p≥floor(m²/4)+2, hence m/p≤4/m. Thus
+Pr[fusion fails] ≤ (5n+4)/m+O((n+1) sqrt(log m/m)).
+If n≤c sqrt(m/log m), choosing c sufficiently small and then m sufficiently large forces this upper bound below 1. Hence a permutation of B gives a valid four-block fusion, with the original oriented Z-cycle and original first edge unchanged. QED.
+Limits. This improves the large-atom inverse-pair theorem in §7 (n=2) and handles arbitrary zero-sum complements of size O(sqrt(m/log m)); it leaves intermediate and dense complements and the simultaneous selection/closure property unresolved. It relies on the published Pham–Sauermann bound, with uncomputed constants, so no numerical M or c is claimed.
+A04. Protected-swap mechanism
+Original working note: erdos475_protected_swap_round.md *Record type:** Earlier proof stage; superseded for pair fusion *Provenance:** generated earlier in this chat; preserved as written.
+Erdős #475: protected-swap theorem and precise gap
+November 23, 2026. This note contains a proved structural subclass, a quantitative combinatorial inequality, a finite verifier, and the remaining open problem. It does not prove the complete all-primes conjecture.
+Definitions
+Let p be an odd prime and B ⊂ F_p^× be a minimal nonempty zero-sum set (an atom) of cardinality m≥3. For c≠0, put
+H_c = {permutations π=(b_1,...,b_m) of B with some proper prefix summing to c}.
+Since B is an atom, each permutation has at most one such prefix. Put μ_B(c)=|H_c|/m!. Let T(B) count the ordered triples (x,y,z) of pairwise distinct elements of B satisfying x+z=y (mod p).
+Theorem 1: quantitative boundary-switch inequality
+For every c≠0,
+μ_B(c) ≤ 1/2 + T(B)/(2m(m−1)).
+Proof. For each π∈H_c let r be its unique hitting rank. Exchange entries r and r+1. All other prefixes are unchanged, and the rank-r sum changes because the entries are distinct. Thus the image permutation is outside H_c.
+For a non-hitting permutation τ, if swapping at rank r creates a hit, then the modified rank-r prefix subset is T_r={τ_1,…,τ_{r−1},τ_{r+1}} and sums to c. If two swaps r&lt;s create a hit and s≥r+2, then T_r⊊T_s. Their difference would be a forbidden nonempty proper zero-sum subset of B. Thus s=r+1. Equality of sums for these two candidate subsets forces τ_{r+1}=τ_r+τ_{r+2}, a distinct-element Schur triple.
+Consequently each image has at most two preimages, and an image with two preimages contains one of the ordered Schur triples in consecutive positions. There are at most T(B)(m−2)(m−3)!=T(B)(m−2)! such images. Counting edges from H_c into its complement gives |H_c|≤(m!−|H_c|)+T(B)(m−2)! and hence the stated bound. QED.
+Theorem 2: odd Schur-free atom + inverse pair always fuses
+Assume m is odd and T(B)=0. For every c≠0 with {c,−c}∩B=∅ there exist orders of B and the inverse pair such that
+(b_1,c_1,b_2,...,b_m,c_2)
+is a valid zero-sum cycle, where {c_1,c_2}={c,−c}.
+Proof. By Theorem 1, μ_B(c)≤1/2. For a uniformly random cyclic permutation π of B, let V_π be its m-vertex cycle and r_c(V_π)=|V_π∩(V_π−c)|. Each cyclic interval summing to c corresponds to exactly one ordered pair of vertices differing by c. Averaging over all permutations gives E[r_c(V_π)]=m μ_B(c)≤m/2. Because m is odd and r_c is an integer, some π satisfies r_c(V_π)≤(m−1)/2.
+Mark each u∈V_π for which u+c∈V_π. There are at most (m−1)/2 marked vertices, whereas every vertex cover of a cycle of odd length m has at least (m+1)/2 vertices. Thus some cycle edge u→v has u+c,v+c outside V_π. If its step is b, replace b by (c,b,−c). The only new vertices are u+c and v+c, both fresh, so the resulting cycle is valid. Cyclic rotation gives the stated four-block word. QED.
+Explicit example
+p=101, B=(1,3,9,27,61) (positive integers summing to 101, so B is an atom), c=4, c_2=97. B has no distinct-element Schur triple. A valid fusion is
+(1,4,3,9,27,61,97)
+whose proper partial sums mod 101 are 1,5,8,17,44,4 (all distinct), and final sum is 0.
+Exact limitations
+If T(B)&gt;0, Theorem 1 gives only μ≤1/2+T/(2m(m−1)), which need not force fusion. A second switching/augmentation argument is necessary.
+For even m, μ≤1/2 is insufficient for the odd-cycle vertex-cover counting step; strict μ&lt;1/2 would suffice.
+Even a complete inverse-pair theorem would not settle fusion of two large atoms or simultaneous compatibility in multi-atom constructions. The coherent maximal-atom cycle-selection conjecture (CMAS) remains unproved for arbitrary primes.
+Published results of Pham–Sauermann (arXiv:2602.15797) and Kuang–Wang (arXiv:2610.34424) cover sufficiently-large-prime/large-set regimes, respectively, not the uniform all-primes target.
+A05. Odd-atom inverse-pair proof
+Original working note: erdos475_odd_atom_pair_fusion.md *Record type:** Earlier proof stage; superseded *Provenance:** generated earlier in this chat; preserved as written.
+Erdős #475: every odd minimal zero-sum atom absorbs an inverse pair
+Research record: November 23, 2026. This is a proof of a structural subclass of Graham’s rearrangement conjecture, not a proof of the full conjecture for all primes. The proof uses the classical Cauchy–Davenport and Vosper theorems.
+Statement
+Let (p) be an odd prime. Let (BF_p^) be an inclusion-minimal zero-sum subset of odd size (m). Let (cF_p^) with ({c,-c}B=). Then there are a cyclic order ((b_1,,b_m)) of (B) and a sign (d{c,-c}) such that
+[ (b_1,d,b_2,,b_m,-d) ]
+is a valid zero-sum cycle: all proper partial sums are distinct. In fact the sign can be prescribed by exchanging (c) and (-c) in the construction.
+Lemma 1: a sum-defect graph is connected
+For a set (BF_p^) with (2m=|B|p-3), define its bad-sum graph (G_B) on vertices (B), with ({x,y}) an edge iff (xy) and (x+yB). Then (G_B) is connected.
+Proof. Suppose not. Let (X) be the vertex set of one component and (Y=BX). Then (X,Y) are nonempty, disjoint, and (X+YB). Set (X_0=X{0}) and (Y_0=Y{0}). We have (X_0+Y_0B{0}). Cauchy–Davenport gives
+[ |X_0+Y_0|{p,|X_0|+|Y_0|-1}=m+1. ]
+Since the containing set also has (m+1) elements, equality holds. As (m+1p-2), and both (X_0,Y_0) contain at least two elements, Vosper’s theorem says they are arithmetic progressions with a common step (d). Their intersection is exactly ({0}). Two nontrivial cyclic intervals with the same step, whose union has fewer than (p) elements and whose intersection is ({0}), must have (0) as an endpoint and extend in opposite directions. Thus one contains (d) and the other (-d). Consequently (0=d+(-d)X+YB), contradiction. ()
+For a zero-sum atom (B) with (m), (mp-3): size (p-2) is impossible since its complement in (F_p^) would be a nonzero singleton, and the full size (p-1) is not minimal since it contains a proper inverse pair. Hence the lemma applies.
+Write (T(B)) for the number of ordered triples of pairwise distinct elements ((x,y,z)B^3) satisfying (x+z=y). Every unordered pair ({x,z}) with sum in (B) contributes exactly two triples. Lemma 1 therefore implies
+[ T(B)=m(m-1)-2|E(G_B)|(m-1)(m-2). ]
+Lemma 2: exact boundary-swap collision count
+Let (H_c) be the set of permutations of (B) whose proper prefix sums contain the nonzero residue (c). Since (B) is an atom, any permutation has at most one such prefix. For each (H_c), swap the entries just before and after that prefix. This is a map (f:H_cS_mH_c), because only the hitting-rank prefix changes and the swapped entries are distinct.
+For an image (=(_1,,_m)), a preimage obtained by swapping positions (r,r+1) must satisfy
+[ 1++{r-1}+_{r+1}=c. ]
+There are at most two such indices (r). If there are two, they must be (r,r+1); otherwise the two subsets witnessing (2) would be strictly nested with a nonempty proper zero-sum difference. At adjacent indices, the equality is equivalent to the Schur triple
+[ x+z=y,(x,y,z)=(r,{r+1},_{r+2}). ]
+Let (D_c) be the number of non-hitting images with exactly two preimages. Equivalently,
+[ D_c={} {}|S|!,(m-3-|S|)!. ]
+In (4), (S) consists of the elements before the triple. Each configuration determines a non-hitting permutation with two boundary-swap preimages, and conversely, with no overcount because no image has three preimages.
+Lemma 3: strict collision bound
+For each Schur triple (x+z=y), let (R=B{x,y,z}), and (t=c-y). Since (B) is a zero-sum atom, (R) is zero-sum-free and (R=-2y). As ({c,-c}B=), we have (cy,-y), so (t,R).
+The normalized inner sum in (4), divided by ((m-3)!), is the probability that a random ordering of (R) has a prefix (including the empty and full prefix) of sum (t). This probability is strictly less than (1): if any proper prefix attains (t), swap the two entries across its boundary; the resulting ordering misses (t), since two different prefixes attaining (t) would give a zero-sum subset of (R). If no proper prefix can attain (t), the probability is zero. Therefore, when (T(B)&gt;0),
+[ D_c&lt;T(B)(m-3)!(m-1)!. ]
+If (T(B)=0), then (D_c=0&lt;(m-1)!) directly. Thus unconditionally
+[ . ]
+Counting the edges of the map (f), each non-hitting permutation has at most one preimage except for the (D_c) double-preimage cases. Consequently
+[ |H_c|m!-|H_c|+D_c,  . ]
+Completion: odd-cycle vertex-cover argument
+Choose a random cyclic order () of (B), and let (V_) be its vertex set (its (m) partial sums, one of them zero). Write
+[ r_c(V_)=|{uV_:u+cV_}|. ]
+Every pair of vertices at displacement (c) corresponds to a unique proper cyclic interval of steps summing to (c). Each of the (m) cyclic starts has the same probability (_B(c)) of such a hit. Therefore
+[ E[r_c(V_)]=m_B(c)&lt;(m+1)/2. ]
+Because (r_c) is integer and (m) is odd, there is an order with (r_c(V_)(m-1)/2). Mark a vertex (u) when (u+cV_). The marked vertices cannot cover all the edges of an odd cycle, whose minimum vertex cover has size ((m+1)/2). Choose an uncovered edge (uv), with step (b). We have (u+c,v+cV_). Replace this single original step by ((c,b,-c)). The new vertices are exactly (u+c,v+c), outside the original vertex set; all other original vertices remain. The resulting cycle is valid. Rotate it to start at (b), obtaining ((b,-c,B,c)), the desired four-block fusion. ()
+Concrete atom outside the earlier difference-isolated hypothesis
+In (F_{19}) take (B={6,10,11,14,16}). Its ordinary integer sum is (57=3), and it is minimal zero-sum by exact subset check. None of its five elements is difference-isolated; each is the difference of two other elements of (B) mod 19. The bad-sum graph has 7 edges, and (T(B)=6). For the disjoint pair ({2,17}), a valid fusion is
+[ (11,17,14,16,6,10,2), ]
+whose proper partial sums are (11,9,4,1,7,17), all distinct modulo 19.
+odd_atom_fusion_audit.py exhaustively checks this example, derives the double-preimage count independently two ways for each disjoint pair, checks the permutation-hit inequality, verifies each witness, and enumerates every odd atom of cardinality (3,5,7) through (p=19), confirming the connected-graph inequality.
+The full-conjecture GAP
+The theorem handles one odd atom plus an inverse pair. It does not handle even atoms, two nontrivial atoms of sizes (), or selecting compatible cycles through repeated atom fusions. A uniform all-primes proof of Graham’s conjecture is still missing. The prior coherent maximal-atom cycle selector was tested through (p=23) but remains unproved for arbitrary primes. None of the results in this note closes that gap.
+A06. Small-atom shadow lemmas, initial
+Original working note: erdos475_small_atom_fusion_note.md *Record type:** Earlier proof stage *Provenance:** generated earlier in this chat; preserved as written.
+Graham’s rearrangement conjecture: small-atom inverse-pair fusion
+Research note, November 23, 2026. This does not prove the full conjecture.
+Theorem (uniform for atoms of size at most seven)
+Let G be an abelian group of odd order. Let B ⊂ G \ {0} be a finite, inclusion-minimal nonempty zero-sum subset of cardinality 2 ≤ m ≤ 7. Let c ≠ 0 with {c,−c} ∩ B = ∅. Then there exists an ordering of B whose cyclic word admits a valid insertion of (c,b,−c) in place of some original step b; equivalently, there is a cyclic order (b₁,c,b₂,…,b_m,−c) of B ∪ {c,−c} with all proper partial sums distinct. The sign c may be prescribed.
+In fact, with μ_B(c) denoting the probability that a uniform random ordering of B has a proper prefix sum c, the following bounds hold:
+m
+Upper bound for μ_B(c)
+2
+0
+3
+0
+4
+1/3
+5
+3/10
+6
+9/20
+7
+17/35
+Thus every bound is strictly below 1/2.
+Lemma A: From a prefix probability below one half to fusion
+All orders of an atom are valid zero-sum cycles. Let V be the m distinct vertices of the cycle, including 0. Define r_c(V) = |{u∈V : u+c∈V}|. Counting ordered cyclic intervals, E[r_c(V)] = m μ_B(c): each of the m starting edges is equally likely to have a proper subsequent interval with sum c, and there is at most one such interval from each start (otherwise the difference between two prefix intervals would be a proper zero-sum subset of B).
+If μ_B(c)&lt;1/2, an ordering has r_c(V)&lt;m/2. Mark u∈V when u+c∈V. This marking has fewer than m/2 vertices and therefore cannot cover all the edges of the m-cycle (τ(C_m)=⌈m/2⌉). Find an edge u→v with both endpoints unmarked. Replacing its step b=v−u by (c,b,−c) introduces exactly the two new vertices u+c and v+c, neither previously visited. The expanded cycle is valid. Rotating it and, when necessary, switching c↔−c gives the required form.
+Lemma B: Pair-sum matchings
+For t∈G, put N_r(t) = |{S⊆B: |S|=r and ∑S=t}|. Since the elements of B are distinct, the pairs counted by N₂(t) form a matching: an element belongs to at most one pair with sum t.
+For m=5,6,7, put k=N₂(c) and l=N₂(−c). Claim: k+l≤3.
+Pairs from the opposite matchings always meet: if an edge summing to c were disjoint from an edge summing to −c, their union would be a proper nonempty zero-sum subset of B, contradicting minimality (m≥5).
+Each matching has at most ⌊m/2⌋≤3 edges. If one has three edges, the other is empty, since a two-element edge cannot meet three disjoint edges. If they both have at least two edges, select two disjoint edges {a,b},{d,e} from the first and two disjoint edges from the second. Every edge of the second must cross the first two. After relabeling, the second edges are {a,d},{b,e}. Equalities a+b=d+e and a+d=b+e imply 2(b−d)=0. Odd group order forces b=d, contradicting distinctness. Hence both matchings cannot have at least two edges. This proves k+l≤3.
+Lemma C: Triple-sum bounds
+For any set of m distinct group elements and any t, a given unordered pair {x,y} belongs to at most one triple with sum t, since the third element must be t−x−y. Counting pair incidences shows 3 N₃(t) ≤ binom(m,2).
+For m=6, this gives N₃(c)≤5.
+For a zero-sum set B of size seven, N₃(t)≤6 when the group has odd order. Otherwise N₃(t)=7, and the 7 triples use all 21 pairs exactly once, forming a 2-(7,3,1) design. Fix x∈B. Exactly three triples contain x, and their other six entries are precisely B\{x}. Summing these three equalities gives 3t=3x+∑_{y≠x}y=2x because ∑B=0. The same argument for every x∈B forces 2x=3t for all seven distinct elements, impossible since multiplication by 2 is injective. Thus N₃(t)≤6.
+Completion of proof
+For any minimal zero-sum atom B and c∉B∪(−B), its singleton and codimension-one subsets cannot sum to c. Also N_{m-r}(c)=N_r(−c) by complementation, and
+μ_B(c) = Σ_{r=1}^{m−1} N_r(c) / binom(m,r).
+m=2,3: no proper subset sums to c, so μ=0.
+m=4: μ=N₂(c)/6≤2/6=1/3 by the matching bound.
+m=5: μ=(N₂(c)+N₂(−c))/10≤3/10 by Lemma B.
+m=6: μ=(N₂(c)+N₂(−c))/15+N₃(c)/20≤3/15+5/20=9/20.
+m=7: μ=(N₂(c)+N₂(−c))/21+(N₃(c)+N₃(−c))/35≤3/21+12/35=17/35.
+All are &lt;1/2, so Lemma A completes the theorem. QED.
+A genuine parity trap (but not a counterexample to fusion)
+Modulo 19, take the six-element atom ordered as
+B=(10,12,17,8,14,15).
+Its cyclic vertices are (0,10,3,1,9,4). For c=1, the vertices marked by +c are {0,3,9}, alternating around the cycle, while the vertices marked by −c are {10,1,4}, the complementary alternating set. Thus neither sign can be inserted into this particular ordering, despite r_c(V)=m/2. The size-six theorem ensures another ordering works, and one valid fused ordering is
+(8,18,10,12,14,15,17,1) (mod 19),
+with proper partial sums (8,7,17,10,5,3,1).
+This proves that eliminating the even-parity extremal case for each individual ordering is not a valid strategy.
+Exact computational audit
+The standard-library script erdos475_inverse_pair_small_atoms.py enumerates every atom and every eligible c for odd primes p≤23. Across these primes it checks 23,672 atom/c cases (with full coverage of atom sizes ≤7), obtaining maximum observed μ_B(c)=3/10. It also verifies the parity trap by independent residue arithmetic. The empirical checks validate the implementation; the theorem above is algebraic and applies to all odd-order abelian groups.
+Explicit gaps
+GAP 1: Prove a uniform bound μ_B(c)&lt;1/2 for atoms of arbitrary size; this would finish all inverse-pair fusions, although still not general atom fusion.
+GAP 2: Prove a two-atom fusion theorem for atoms of general sizes, including when the smaller atom is not an inverse pair.
+GAP 3: Find an inductive cycle-selection mechanism for three or more atoms. The earlier SF and SF-max assertions for arbitrary complementary cycles are false, with explicit counterexamples already at p=19.
+GAP 4: Complete Graham’s conjecture for every prime. This does not follow from the theorem in this note.
+A07. Small-atom shadow lemmas, through eight
+Original working note: erdos475_small_atom_fusion_v2.md *Record type:** Earlier proof stage *Provenance:** generated earlier in this chat; preserved as written.
+Graham’s rearrangement conjecture: atom–inverse-pair fusion through size eight
+Research note, November 23, 2026. This does not prove the full conjecture.
+Theorem (uniform for atoms of size at most eight)
+Let G be an abelian group of odd order. Let B ⊂ G \ {0} be a finite, inclusion-minimal nonempty zero-sum subset of cardinality 2 ≤ m ≤ 8. Let c ≠ 0 with {c,−c} ∩ B = ∅. Then there exists an ordering of B whose cyclic word admits a valid insertion of (c,b,−c) in place of some original step b; equivalently, there is a cyclic order (b₁,c,b₂,…,b_m,−c) of B ∪ {c,−c} with all proper partial sums distinct. The sign c may be prescribed.
+In fact, with μ_B(c) denoting the probability that a uniform random ordering of B has a proper prefix sum c, the following bounds hold:
+m
+Upper bound for μ_B(c)
+2
+0
+3
+0
+4
+1/3
+5
+3/10
+6
+9/20
+7
+17/35
+8
+45/91
+Thus every bound is strictly below 1/2.
+Lemma A: From a prefix probability below one half to fusion
+All orders of an atom are valid zero-sum cycles. Let V be the m distinct vertices of the cycle, including 0. Define r_c(V) = |{u∈V : u+c∈V}|. Counting ordered cyclic intervals, E[r_c(V)] = m μ_B(c): each of the m starting edges is equally likely to have a proper subsequent interval with sum c, and there is at most one such interval from each start (otherwise the difference between two prefix intervals would be a proper zero-sum subset of B).
+If μ_B(c)&lt;1/2, an ordering has r_c(V)&lt;m/2. Mark u∈V when u+c∈V. This marking has fewer than m/2 vertices and therefore cannot cover all the edges of the m-cycle (τ(C_m)=⌈m/2⌉). Find an edge u→v with both endpoints unmarked. Replacing its step b=v−u by (c,b,−c) introduces exactly the two new vertices u+c and v+c, neither previously visited. The expanded cycle is valid. Rotating it and, when necessary, switching c↔−c gives the required form.
+Lemma B: Pair-sum matchings
+For t∈G, put N_r(t) = |{S⊆B: |S|=r and ∑S=t}|. Since the elements of B are distinct, the pairs counted by N₂(t) form a matching: an element belongs to at most one pair with sum t.
+For m=5,6,7, put k=N₂(c) and l=N₂(−c). Claim: k+l≤3.
+Pairs from the opposite matchings always meet: if an edge summing to c were disjoint from an edge summing to −c, their union would be a proper nonempty zero-sum subset of B, contradicting minimality (m≥5).
+Each matching has at most ⌊m/2⌋≤3 edges. If one has three edges, the other is empty, since a two-element edge cannot meet three disjoint edges. If they both have at least two edges, select two disjoint edges {a,b},{d,e} from the first and two disjoint edges from the second. Every edge of the second must cross the first two. After relabeling, the second edges are {a,d},{b,e}. Equalities a+b=d+e and a+d=b+e imply 2(b−d)=0. Odd group order forces b=d, contradicting distinctness. Hence both matchings cannot have at least two edges. This proves k+l≤3.
+Lemma C: Triple-sum bounds
+For any set of m distinct group elements and any t, a given unordered pair {x,y} belongs to at most one triple with sum t, since the third element must be t−x−y. Counting pair incidences shows 3 N₃(t) ≤ binom(m,2).
+For m=6, this gives N₃(c)≤5.
+For a zero-sum set B of size seven, N₃(t)≤6 when the group has odd order. Otherwise N₃(t)=7, and the 7 triples use all 21 pairs exactly once, forming a 2-(7,3,1) design. Fix x∈B. Exactly three triples contain x, and their other six entries are precisely B\{x}. Summing these three equalities gives 3t=3x+∑_{y≠x}y=2x because ∑B=0. The same argument for every x∈B forces 2x=3t for all seven distinct elements, impossible since multiplication by 2 is injective. Thus N₃(t)≤6.
+Lemma D: rank-three, rank-four and rank-five shadows (size eight)
+Let m=8, and set q=N₂(c)+N₂(−c), s=N₃(c)+N₃(−c), and f=N₄(c). The two pair-sum matchings are cross-intersecting (a disjoint c-pair and −c-pair would be a proper zero-sum four-set), and in an odd-order group two disjoint cross pairs on each side cannot coexist. Consequently q≤4.
+At rank three, the six extensions of each c-summing pair are all distinct (pairs form a matching), and the four rank-three faces of each c-summing four-set are all distinct (a triple determines at most one fourth entry summing to c). These shadows are disjoint from each other and from the c-summing triples: otherwise two nested sets of distinct cardinalities would have the same sum, yielding a proper nonempty zero-sum difference. Hence 6N₂(c)+N₃(c)+4f ≤ binom(8,3)=56. Apply complementation at rank five to obtain 6N₂(−c)+N₃(−c)+4f ≤ 56. Summing gives 6q+s+8f ≤112.
+At rank four, the upper shadows of the c-summing triples consist of exactly 5N₃(c) distinct four-sets; the lower shadows of the c-summing five-sets consist of exactly 5N₅(c)=5N₃(−c) distinct four-sets. They are disjoint from one another and from F₄(c) by the same atomicity argument, so 5s+f≤binom(8,4)=70.
+The exact coefficient identity
+q/28+s/56+f/70 = (6q+s+8f)/728 + 3(5s+f)/910 + 5q/182
+therefore yields
+μ_B(c) ≤ 112/728 + 210/910 + 20/182 = 45/91 &lt; 1/2.
+Completion of proof
+For any minimal zero-sum atom B and c∉B∪(−B), its singleton and codimension-one subsets cannot sum to c. Also N_{m-r}(c)=N_r(−c) by complementation, and
+μ_B(c) = Σ_{r=1}^{m−1} N_r(c) / binom(m,r).
+m=2,3: no proper subset sums to c, so μ=0.
+m=4: μ=N₂(c)/6≤2/6=1/3 by the matching bound.
+m=5: μ=(N₂(c)+N₂(−c))/10≤3/10 by Lemma B.
+m=6: μ=(N₂(c)+N₂(−c))/15+N₃(c)/20≤3/15+5/20=9/20.
+m=7: μ=(N₂(c)+N₂(−c))/21+(N₃(c)+N₃(−c))/35≤3/21+12/35=17/35.
+m=8: μ=q/28+s/56+f/70≤45/91 by Lemma D.
+All are &lt;1/2, so Lemma A completes the theorem. QED.
+A genuine parity trap (but not a counterexample to fusion)
+Modulo 19, take the six-element atom ordered as
+B=(10,12,17,8,14,15).
+Its cyclic vertices are (0,10,3,1,9,4). For c=1, the vertices marked by +c are {0,3,9}, alternating around the cycle, while the vertices marked by −c are {10,1,4}, the complementary alternating set. Thus neither sign can be inserted into this particular ordering, despite r_c(V)=m/2. The size-six theorem ensures another ordering works, and one valid fused ordering is
+(8,18,10,12,14,15,17,1) (mod 19),
+with proper partial sums (8,7,17,10,5,3,1).
+This proves that eliminating the even-parity extremal case for each individual ordering is not a valid strategy.
+Exact computational audit
+The standard-library script erdos475_inverse_pair_small_atoms.py enumerates every atom and every eligible c for odd primes p≤23. Across these primes it checks 23,672 atom/c cases (with full coverage of atom sizes ≤8, since no atoms of size eight occur at those primes), obtaining maximum observed μ_B(c)=3/10. It also verifies the parity trap by independent residue arithmetic. The empirical checks validate the implementation; the theorem above is algebraic and applies to all odd-order abelian groups.
+Explicit gaps
+GAP 1: Prove a uniform bound μ_B(c)&lt;1/2 for atoms of arbitrary size (the rank-shadow relaxation alone stops giving this bound at size nine); this would finish all inverse-pair fusions, although still not general atom fusion.
+GAP 2: Prove a two-atom fusion theorem for atoms of general sizes, including when the smaller atom is not an inverse pair.
+GAP 3: Find an inductive cycle-selection mechanism for three or more atoms. The earlier SF and SF-max assertions for arbitrary complementary cycles are false, with explicit counterexamples already at p=19.
+GAP 4: Complete Graham’s conjecture for every prime. This does not follow from the theorem in this note.
+A08. Small-atom shadow lemmas, through nine
+Original working note: erdos475_small_atom_fusion_v3.md *Record type:** Earlier proof stage *Provenance:** generated earlier in this chat; preserved as written.
+Graham’s rearrangement conjecture: atom–inverse-pair fusion through size nine
+Research note, November 23, 2026. This does not prove the full conjecture.
+Theorem (uniform for atoms of size at most nine)
+Let G be an abelian group of odd order. Let B ⊂ G \ {0} be a finite, inclusion-minimal nonempty zero-sum subset of cardinality 2 ≤ m ≤ 9. Let c ≠ 0 with {c,−c} ∩ B = ∅. Then there exists an ordering of B whose cyclic word admits a valid insertion of (c,b,−c) in place of some original step b; equivalently, there is a cyclic order (b₁,c,b₂,…,b_m,−c) of B ∪ {c,−c} with all proper partial sums distinct. The sign c may be prescribed.
+In fact, with μ_B(c) denoting the probability that a uniform random ordering of B has a proper prefix sum c, the following bounds hold:
+m
+Upper bound for μ_B(c)
+2
+0
+3
+0
+4
+1/3
+5
+3/10
+6
+9/20
+7
+17/35
+8
+45/91
+9
+125/252
+Thus every bound is strictly below 1/2.
+Lemma A: From a prefix probability below one half to fusion
+All orders of an atom are valid zero-sum cycles. Let V be the m distinct vertices of the cycle, including 0. Define r_c(V) = |{u∈V : u+c∈V}|. Counting ordered cyclic intervals, E[r_c(V)] = m μ_B(c): each of the m starting edges is equally likely to have a proper subsequent interval with sum c, and there is at most one such interval from each start (otherwise the difference between two prefix intervals would be a proper zero-sum subset of B).
+If μ_B(c)&lt;1/2, an ordering has r_c(V)&lt;m/2. Mark u∈V when u+c∈V. This marking has fewer than m/2 vertices and therefore cannot cover all the edges of the m-cycle (τ(C_m)=⌈m/2⌉). Find an edge u→v with both endpoints unmarked. Replacing its step b=v−u by (c,b,−c) introduces exactly the two new vertices u+c and v+c, neither previously visited. The expanded cycle is valid. Rotating it and, when necessary, switching c↔−c gives the required form.
+Lemma B: Pair-sum matchings
+For t∈G, put N_r(t) = |{S⊆B: |S|=r and ∑S=t}|. Since the elements of B are distinct, the pairs counted by N₂(t) form a matching: an element belongs to at most one pair with sum t.
+For m=5,6,7, put k=N₂(c) and l=N₂(−c). Claim: k+l≤3.
+Pairs from the opposite matchings always meet: if an edge summing to c were disjoint from an edge summing to −c, their union would be a proper nonempty zero-sum subset of B, contradicting minimality (m≥5).
+Each matching has at most ⌊m/2⌋≤3 edges. If one has three edges, the other is empty, since a two-element edge cannot meet three disjoint edges. If they both have at least two edges, select two disjoint edges {a,b},{d,e} from the first and two disjoint edges from the second. Every edge of the second must cross the first two. After relabeling, the second edges are {a,d},{b,e}. Equalities a+b=d+e and a+d=b+e imply 2(b−d)=0. Odd group order forces b=d, contradicting distinctness. Hence both matchings cannot have at least two edges. This proves k+l≤3.
+Lemma C: Triple-sum bounds
+For any set of m distinct group elements and any t, a given unordered pair {x,y} belongs to at most one triple with sum t, since the third element must be t−x−y. Counting pair incidences shows 3 N₃(t) ≤ binom(m,2).
+For m=6, this gives N₃(c)≤5.
+For a zero-sum set B of size seven, N₃(t)≤6 when the group has odd order. Otherwise N₃(t)=7, and the 7 triples use all 21 pairs exactly once, forming a 2-(7,3,1) design. Fix x∈B. Exactly three triples contain x, and their other six entries are precisely B\{x}. Summing these three equalities gives 3t=3x+∑_{y≠x}y=2x because ∑B=0. The same argument for every x∈B forces 2x=3t for all seven distinct elements, impossible since multiplication by 2 is injective. Thus N₃(t)≤6.
+Lemma D: rank-three, rank-four and rank-five shadows (size eight)
+Let m=8, and set q=N₂(c)+N₂(−c), s=N₃(c)+N₃(−c), and f=N₄(c). The two pair-sum matchings are cross-intersecting (a disjoint c-pair and −c-pair would be a proper zero-sum four-set), and in an odd-order group two disjoint cross pairs on each side cannot coexist. Consequently q≤4.
+At rank three, the six extensions of each c-summing pair are all distinct (pairs form a matching), and the four rank-three faces of each c-summing four-set are all distinct (a triple determines at most one fourth entry summing to c). These shadows are disjoint from each other and from the c-summing triples: otherwise two nested sets of distinct cardinalities would have the same sum, yielding a proper nonempty zero-sum difference. Hence 6N₂(c)+N₃(c)+4f ≤ binom(8,3)=56. Apply complementation at rank five to obtain 6N₂(−c)+N₃(−c)+4f ≤ 56. Summing gives 6q+s+8f ≤112.
+At rank four, the upper shadows of the c-summing triples consist of exactly 5N₃(c) distinct four-sets; the lower shadows of the c-summing five-sets consist of exactly 5N₅(c)=5N₃(−c) distinct four-sets. They are disjoint from one another and from F₄(c) by the same atomicity argument, so 5s+f≤binom(8,4)=70.
+The exact coefficient identity
+q/28+s/56+f/70 = (6q+s+8f)/728 + 3(5s+f)/910 + 5q/182
+therefore yields
+μ_B(c) ≤ 112/728 + 210/910 + 20/182 = 45/91 &lt; 1/2.
+Lemma E: cross-intersecting triple packings (size nine)
+Let m=9. Put k=N₂(c), l=N₂(−c), a=N₃(c), b=N₃(−c), f=N₄(c), g=N₄(−c), and set q=k+l, s=a+b, t=f+g.
+(i) If both a and b are positive, then a,b≤10. Fix a collection H of 11 triples, any two sharing at most one vertex, on the nine-element vertex set B. Its 11 triples cover exactly 33 of the 36 unordered pairs. Every vertex has even degree in the graph of the three uncovered pairs, since there are eight pairs incident to it and each triple containing it covers exactly two pairs. A simple graph with three edges and all degrees even must be a triangle R of three missing pairs. Thus the hypergraph degrees are 3 at the vertices of R and 4 elsewhere.
+Any three-element set T meets at most ten triples of H. To prove this, count meeting triples by inclusion-exclusion. If T=R, it meets exactly 9. Otherwise T contains at least two covered pairs. If T∈H, all three pairs of T are covered and the count is at most 3·4−3+1=10; if T∉H, the count is at most 3·4−2=10.
+Applied to H⊆F₃(c), this means an F₃(−c) triple cannot intersect all 11 members. Yet two disjoint triples with sums c and −c would create a proper zero-sum 6-subset of the nine-element atom. Therefore if a≥11, then b=0. Symmetrically if b≥11, then a=0. Hence a,b&gt;0 implies s≤20.
+(ii) The pair bound. The c-pairs and −c-pairs form matchings and cross-intersect by atomicity. In an odd-order group two matchings of two or more edges cannot cross-intersect. Thus q≤4. If q=4, the four pairs must all have the same sum sign: any pair from the other matching would fail to intersect four disjoint edges, and the 2+2 alternative is also excluded. A triple of the opposite sum would likewise need to meet all four pairs, impossible. Consequently a,b&gt;0 implies q≤3.
+(iii) Rank shadows. At rank four, the upper shadows of the a c-summing triples have 6a distinct members. The lower shadows of the g c-summing five-sets have 5g distinct members. These shadows and the f c-summing four-sets are pairwise disjoint by atomicity, giving 6a+f+5g≤126. At rank five, analogously, 5f+g+6b≤126. Adding yields s+t≤42.
+By complementation, the prefix-hit mass is
+μ_B(c)=q/36+s/84+t/126 = q/36+(s+t)/126+s/252.
+If a,b&gt;0, parts (i)–(iii) give
+μ_B(c)≤3/36+42/126+20/252=125/252&lt;1/2.
+If at least one of a,b is zero, then s≤12 (each triple family contains at most binom(9,2)/3=12 members) and parts (ii)–(iii) give
+μ_B(c)≤4/36+42/126+12/252=31/63=124/252&lt;1/2.
+Therefore in all cases μ_B(c)≤125/252&lt;1/2.
+Completion of proof
+For any minimal zero-sum atom B and c∉B∪(−B), its singleton and codimension-one subsets cannot sum to c. Also N_{m-r}(c)=N_r(−c) by complementation, and
+μ_B(c) = Σ_{r=1}^{m−1} N_r(c) / binom(m,r).
+m=2,3: no proper subset sums to c, so μ=0.
+m=4: μ=N₂(c)/6≤2/6=1/3 by the matching bound.
+m=5: μ=(N₂(c)+N₂(−c))/10≤3/10 by Lemma B.
+m=6: μ=(N₂(c)+N₂(−c))/15+N₃(c)/20≤3/15+5/20=9/20.
+m=7: μ=(N₂(c)+N₂(−c))/21+(N₃(c)+N₃(−c))/35≤3/21+12/35=17/35.
+m=8: μ=q/28+s/56+f/70≤45/91 by Lemma D.
+m=9: μ≤125/252 by Lemma E.
+All are &lt;1/2, so Lemma A completes the theorem. QED.
+A genuine parity trap (but not a counterexample to fusion)
+Modulo 19, take the six-element atom ordered as
+B=(10,12,17,8,14,15).
+Its cyclic vertices are (0,10,3,1,9,4). For c=1, the vertices marked by +c are {0,3,9}, alternating around the cycle, while the vertices marked by −c are {10,1,4}, the complementary alternating set. Thus neither sign can be inserted into this particular ordering, despite r_c(V)=m/2. The size-six theorem ensures another ordering works, and one valid fused ordering is
+(8,18,10,12,14,15,17,1) (mod 19),
+with proper partial sums (8,7,17,10,5,3,1).
+This proves that eliminating the even-parity extremal case for each individual ordering is not a valid strategy.
+Exact computational audit
+The standard-library script erdos475_inverse_pair_small_atoms.py enumerates every atom and every eligible c for odd primes p≤23. Across these primes it checks 23,672 atom/c cases (with full coverage of atom sizes ≤9, since no atoms of size eight or nine occur at those primes), obtaining maximum observed μ_B(c)=3/10. It also verifies the parity trap by independent residue arithmetic. The empirical checks validate the implementation; the theorem above is algebraic and applies to all odd-order abelian groups.
+Explicit gaps
+GAP 1: Prove a uniform bound μ_B(c)&lt;1/2 for atoms of arbitrary size (the the simple rank-shadow relaxation alone ceases to give this bound at size ten); this would finish all inverse-pair fusions, although still not general atom fusion.
+GAP 2: Prove a two-atom fusion theorem for atoms of general sizes, including when the smaller atom is not an inverse pair.
+GAP 3: Find an inductive cycle-selection mechanism for three or more atoms. The earlier SF and SF-max assertions for arbitrary complementary cycles are false, with explicit counterexamples already at p=19.
+GAP 4: Complete Graham’s conjecture for every prime. This does not follow from the theorem in this note.
+A09. Atom size ten and protected contraction
+Original working note: erdos475_atom_size10_proof.md *Record type:** Earlier proof stage; some statements conditional *Provenance:** generated earlier in this chat; preserved as written.
+Erdős #475 — Size-ten atom/inverse-pair fusion
+Research note, November 23, 2026. This note proves an infinite special case of Graham’s rearrangement conjecture. It is not a proof of the conjecture for all primes. The previously established atom sizes ≤9 are not re-proved here.
+Theorem
+Let p be an odd prime. Let B be a set of ten distinct nonzero elements of F_p, minimal among nonempty zero-sum subsets (so ∑ B = 0, but no proper nonempty subset sums to 0). Fix a nonzero c∈F_p such that neither c nor −c lies in B. Then a cyclic ordering of B admits insertion of (c,b,−c) in place of one edge-step b. Equivalently, B ∪ {c,−c} has a valid zero-sum cyclic ordering of the form (b₁,c,b₂,…,b₁₀,−c).
+More precisely, for a uniformly random ordering of B, let μ_B(c) be the probability that one of its proper prefix sums equals c. Then
+μ_B(c) ≤ 1161/2360 = 0.4919491525... &lt; 1/2.
+1. Prefix-to-port lemma
+For any atom B of size m, each order of B is a simple zero-sum cycle. Let V be its set of m vertices (one vertex is 0). Let r_c(V) = |{u∈V : u+c∈V}|. Counting cyclic intervals gives E r_c(V) = m μ_B(c) when a random ordering is chosen. If μ_B(c)&lt;1/2, some order has fewer than m/2 vertices u satisfying u+c∈V. Those vertices cannot meet every edge of a cycle: a vertex cover has at least ceil(m/2) vertices. Hence there is an edge u → v for which u+c,v+c∉V. Replace its original edge step b=v−u by (c,b,−c): the only new vertices are u+c,v+c, so the expanded cycle is simple. Rotate the cycle to obtain the displayed four-block form.
+Thus it suffices to prove the probability bound.
+2. Subset families and ranks
+Let N_r(t) be the number of r-subsets of B with sum t. Since c,-c are not in B, singleton and codimension-one subsets cannot have sum c. By complementation N_{10-r}(c)=N_r(−c).
+Write
+q = N₂(c)+N₂(−c)s = N₃(c)+N₃(−c)t = N₄(c)+N₄(−c)h = N₅(c) = N₅(−c).
+Then
+μ_B(c) = q/45 + s/120 + t/210 + h/252.       (1)
+For any fixed residue d, the r-subsets with sum d form a packing: an (r−1)-subset is contained in at most one such r-set; an (r+1)-set contains at most one such r-set. Moreover an r-set and an s-set of the same sum cannot be nested if r≠s, because their set difference would be a proper nonempty zero-sum subset of B.
+Apply these statements at rank 4: the upper shadows of d-summing triples contribute 7N₃(d) distinct four-sets, the d-summing four-sets contribute N₄(d), and the lower shadows of d-summing five-sets contribute 5N₅(d). These three classes are disjoint, so
+7 N₃(d) + N₄(d) + 5 N₅(d) ≤ C(10,4)=210.
+Sum this for d=c,-c and use N₅(c)=N₅(−c):
+7s + t + 10h ≤ 420.                            (2)
+At rank 5, upper shadows of c-summing four-sets and lower shadows of c-summing six-sets are disjoint from the c-summing five-sets. Thus
+6 N₄(c)+N₅(c)+6N₆(c) ≤ C(10,5)=252.
+By complementation N₆(c)=N₄(−c), hence
+6t+h ≤ 252.                                     (3)
+The positive linear combination of (2) with coefficient 2/6195 and (3) with coefficient 11/14868 yields
+t/210+h/252 ≤ (2/6195)(420−7s)+(11/14868)252.
+Substituting in (1) and simplifying gives the master bound
+μ_B(c) ≤ 19/59 + q/45 + (43/7080)s.             (4)
+3. Pair and triple packing bounds
+Pair matchings. The c-summing pairs constitute a matching M₊; the −c-summing pairs constitute a matching M₋. Any edge of one must meet every edge of the other, or their union would be a proper four-element zero-sum subset of B. In an odd-order group, both matchings cannot contain two edges: if two disjoint edges from each matching cross, the equal-sum equations force 2(x−y)=0 for two distinct vertices. Thus if both signs occur, their total pair count is ≤3. If only one occurs, q≤5; equality q=5 means five disjoint pairs partition B, all summing to the same sign of c. Summing their five equalities gives 0=∑ B=±5c. Since p≥11, this is impossible. Therefore q≤4.
+Triple packing. For any fixed target sum d, no unordered pair of vertices belongs to two d-summing triples. Thus the triple hypergraph is linear. On ten vertices a vertex belongs to at most four triples: each triple uses two of its nine neighbors, without repetitions. In particular the graph of uncovered pairs has at least one edge incident to each vertex (degree 9−2deg≥1). It therefore has at least five edges. As each triple covers three different pairs,
+3N₃(d) ≤ C(10,2)−5=40,N₃(d) ≤ 13.                                        (5)
+Cross-intersection. Every c-summing triple must intersect every −c-summing triple, since disjoint opposite-sum triples would form a proper zero-sum 6-subset. Likewise a c-summing pair must intersect every −c-summing triple, and vice versa.
+Transversal lemma. A linear triple hypergraph on ten vertices containing at least 12 edges cannot have a 3-vertex transversal. Indeed, each vertex has degree at most 4. A transversal of three vertices meets at most 12 edges. If it meets exactly 12, each of its vertices has degree exactly 4 and no hyperedge contains two of the transversal vertices. But a degree-4 vertex participates in eight of its nine incident pairs, leaving only one unused pair, whereas its two pairs to the other transversal vertices are both unused. Contradiction. Consequently, when both the c- and −c-summing triple families are nonempty, each has size at most 11, so s≤22.
+Now classify by the pair count q:
+q=4: Four disjoint pairs all have the same signed sum. An opposite-sum triple cannot meet all four pairs, so one triple family vanishes. Hence s≤13.
+q=3: If all three pairs have the same signed sum, any opposite-sum triple must meet all three disjoint pairs, using one vertex from each. Its first two vertices (four possibilities) determine the third, so there are at most four such triples. Thus s≤13+4=17. If two pairs have one sign and one pair the other, the first sign’s triples meet the opposing pair and number at most 4+4=8. The other sign’s triples meet both disjoint pairs and number at most five (at most four using one vertex of each pair, plus at most one using all of one pair and one vertex of the other; that last vertex must be ∓2c). Thus s≤8+5=13, so s≤17 universally.
+q=2: With both signs present, each triple family meets an opposing pair, yielding s≤8+8=16. With both pairs on the same sign, the opposite-sign triple family has at most five members by the preceding argument, and the same-sign family has at most 13. Thus s≤18.
+q=1: If both triple families are nonempty, the transversal lemma gives s≤22; otherwise s≤13. Hence s≤22.
+q=0: Equation (5) gives s≤26.
+We have proved
+(q,s) ≤ one of (4,13), (3,17), (2,18), (1,22), (0,26),
+where the comparison is understood case by case.
+4. Final exact arithmetic
+Insert each bound into (4):
+q
+bound on s
+bound on μ
+4
+13
+2081/4248
+3
+17
+1161/2360
+2
+18
+5053/10620
+1
+22
+1015/2124
+0
+26
+1699/3540
+Every fraction is strictly less than 1/2, the largest being 1161/2360. By the prefix-to-port lemma this completes the theorem. QED.
+Explicit example
+For p=59, let B={1,2,3,4,5,6,7,8,9,14}. It has ordinary integer sum 59, hence is a minimal zero-sum atom in F_59 (all proper nonempty subset sums lie strictly between 0 and 59). Let c=23. The valid four-block word
+(2,23,3,4,5,6,7,8,9,14,1,36)
+has 12 distinct cyclic vertices. Here 36=−23 mod 59.
+What this does and does not establish
+The theorem closes size ten in the atom-plus-inverse-pair fusion program, extending the previous size-≤9 results. It does not address arbitrary two-atom fusions, arbitrary complement cycles, or the existence of a coherent all-size cycle-selection invariant. Graham’s conjecture for all primes remains unproved by this argument. Published work proves it for all sufficiently large primes; an all-primes proof or effective threshold with full finite verification remains outstanding.
+Further reduction: lifting odd-atom ports through a contraction
+This lemma is valid for all even atom sizes and may be more useful for the remaining general case than extending the rank computations one size at a time.
+Protected contraction-port lemma. Let B be a minimal zero-sum set of even size in a finite abelian group; choose distinct x,y∈B such that z=x+y is nonzero and not in B. Then D=(B\{x,y})∪{z} is a minimal zero-sum atom of odd size. Fix c with ±c disjoint from B∪{z}. Suppose a valid cyclic order of D has an edge with step b∈D\{z} such that:
+both endpoints of that edge, translated by c, are absent from the cycle’s vertex set; and
+b≠x−y and b≠y−x.
+Then B∪{c,−c} admits a four-block fusion.
+Proof. Replace the edge b by (c,b,−c), introducing exactly two new vertices u+c,v+c to the original D-cycle. At the different edge z, replace step z by x,y or by y,x. Each split preserves all original D vertices and introduces exactly one intermediate vertex, respectively t+x or t+y, where t precedes the z-edge. Both potential intermediate vertices are outside the original D-cycle: otherwise splitting z in that order would contradict the fact that every order of the original atom B is a simple cycle. If both potential intermediate vertices coincided with the two new translated vertices, their difference x−y would equal ±b. This is excluded. Hence at least one splitting order creates a fresh vertex, producing a valid four-block fusion of B and {c,−c}. QED.
+The lemma is conditional: the existence of a port at an edge other than z with the displayed difference restriction is not proved for arbitrary atoms. Thus the lemma is a precise route for extending odd-atom fusion to even sizes, rather than a solution of the general case.
+For illustration take p=79, B={1,2,3,4,5,6,7,8,9,10,11,13}, split pair {11,13} with z=24, and c=30. The contracted atom D={1,...,10,24} has its ascending cycle with a good +30 port at step 1. Since 1≠±(11−13), the lemma yields the valid 14-step cycle
+(30,1,49,2,3,4,5,6,7,8,9,10,11,13).
+Rotation gives an equivalent four-block word.
+Finite test of the contraction criterion. For all minimal zero-sum atoms of size six, and each disjoint inverse pair modulo sign, an independent Python search found a protected contraction-port witness: p=17: 32/32; p=19: 216/216; p=23: 2,640/2,640. This tests the conditional lemma, but no general protected-port existence theorem has been established. See test_odd_contraction_port.py in the package.
+Unconditional existence of a legal contraction (for even atoms of size at least eight). In the protected contraction-port lemma, the pair x,y satisfying z=x+y∉B∪{0,c,−c} always exists once |B|=m≥8 in a prime field. To prove this, the Dias da Silva–Hamidoune restricted-sum theorem gives |2^∧B|≥min(p,2m−3). Since B is an atom, its restricted r=⌊m/2⌋-sumset omits zero. The same theorem therefore implies p≥r(m−r)+2&gt;m+3 for m≥8. Hence min(p,2m−3)&gt;m+3=|B∪{0,c,−c}|, and some pair sum lies outside this forbidden set. GAP: choosing that contraction with a protected insertion port is still unproved generally.
+A10. Universal two-hole and inverse-pair absorption
+Original working note: erdos475_universal_inverse_pair_fusion.md *Record type:** Constructive proof *Provenance:** generated earlier in this chat; preserved as written.
+Erdős #475: Universal inverse-pair fusion and the two-hole lemma
+Date: 2026-11-23Status: Complete proofs of two auxiliary theorems. The full Graham rearrangement conjecture is not proved here.
+Theorem 1: Two-hole avoidance
+Let G be an abelian group with no nonzero element of order two (in particular, any finite abelian group of odd order). Let R be a finite set of distinct nonzero elements, and let T=sum(R). For every c∈G, there is an ordering r1,...,rk of R such that no proper prefix sum lies in {c,c+T}.
+Proof. Greedily choose a next element avoiding both forbidden values. With three or more remaining distinct elements, at most two choices are blocked. With one remaining, append it; the full sum T is unrestricted.
+If two elements x,y remain and both next moves are blocked, then s+x=T-y and s+y=T-x, so {x,y}={-c,T-c}. In particular s=2c. If the full set consists of these two elements, their sum being T gives 2c=0, hence c=0, forcing x=0, contrary to the assumption on R.
+Otherwise let z≠0 be the previously chosen element. Immediately before z, the partial sum was 2c-z. Undo z and use (x,y,z) or (y,x,z) as the final three steps. After its first two steps the partial sum becomes T-z, which is neither c nor c+T, because z differs from x=-c and y=T-c. The two possible first landing points are c-z and c+T-z. They cannot both lie in {c,c+T}: if T=0, they coincide and z≠0 excludes the forbidden value; if T≠0, that would make translation by the nonzero element z stabilize the two-element set {c,c+T}, requiring 2z=0, impossible. Thus one order works. All earlier prefixes stay unchanged. ∎
+Simpler version (no group restriction)
+If -c∉R, the original greedy algorithm can never get stuck: at the only possible last-two trap the remaining pair would have to contain -c. Hence the same avoidance conclusion holds in every abelian group, without any last-three repair.
+Theorem 2: All-size, edge-prescribed inverse-pair fusion
+Let G be an abelian group, B⊆G\{0} an inclusion-minimal zero-sum set, and let c≠0 with c≠-c and {c,-c}∩B=∅. For every prescribed b∈B there exists a valid cyclic ordering of B with an edge labeled b whose two endpoints, translated by +c, are not vertices. Inserting (c,b,-c) at that edge gives a valid cyclic ordering of B∪{c,-c}.
+Proof. Put R=B\{b}, with total T=-b. Since -c∉R, the simpler version of Theorem 1 orders R=(r1,...,r_{m-1}) so its proper prefixes avoid {c,c-b}. Every cyclic order of B is simple: a repeated vertex would give a proper nonempty zero-sum subset of B, contradicting minimality.
+Consider the cycle (b,r1,...,r_{m-1}) rooted at the initial vertex 0. Its vertices are 0, b, and b+S_j, where S_j ranges over the proper prefixes of R. Both c and b+c avoid 0,b, because ±c∉B and c≠0. They also avoid each interior vertex by the two-hole property: b+S_j=c would give S_j=c-b, while b+S_j=b+c would give S_j=c.
+Thus replacing the first edge 0→b by 0→c→c+b→b introduces exactly two new vertices, both previously unoccupied. The resulting cyclic word is (c,b,-c,r1,...,r_{m-1}). Reversing and rotating its step list gives the explicit standard four-block form
+(b,c,r_{m-1},...,r1,-c).
+Both reversals and rotations preserve simplicity of a zero-sum cycle. ∎
+Scope
+This proves inverse-pair absorption for all minimal zero-sum atoms, all sizes, without the parity, finite-size, anticoncentration, or protected-contraction hypotheses of earlier attempts. The two-element inverse pair must consist of distinct elements, as required for the union to be a set.
+It does not prove strong fusion of two atoms of sizes at least three or a coherent induction across three or more atoms. Earlier counterexamples show that a prescribed arbitrary complementary cycle may be nonfusable. The all-primes Graham conjecture therefore remains open within this argument.
+Exact independent checks
+greedy_edge_fusion_audit.py: exhaustive over all minimal zero-sum atoms, every eligible c, and every specified atom edge b, at p=19 (17,352 tests, 447 atoms) and p=23 (87,032 tests, 1,485 atoms). All constructed words verified simple.
+two_hole_greedy_any.py: exhaustive over every nonempty subset R⊆Z_n\{0} and every nonzero c, including composite odd n: n=11 (10,230), 13 (49,140), 15 (229,362), 17 (1,048,560). No failures.
+triple_fusion_via_pair.py: a proposed stronger three-element-atom construction passes 5,664 cases at p=17, 19,872 at p=19, and 177,672 at p=23, totaling 203,208 instances (with opposite pairs excluded across the two atoms). This is experimental only; the corresponding three-hole selection theorem is UNPROVED.
+Explicit remaining gap
+GAP (all primes): Given a zero-sum set partitioned into several atoms of size at least three, construct a valid cycle, perhaps via selecting a compatible cycle of the complement and fusing an atom while preserving an invariant. This is not implied by Theorem 2. In particular, the earlier SF and SF-max universal-cycle statements have genuine counterexamples at p=19.
+A11. Triple-fusion and five-step reduction
+Original working note: erdos475_triple_fusion_round.md *Record type:** Intermediate proof stage *Provenance:** generated earlier in this chat; preserved as written.
+Erdős #475: Three-element atom fusion and a five-step reduction
+Date: 2026-11-23. Status: rigorous partial results; the all-primes Graham conjecture remains open.
+Theorem 1: A four-step avoidance lemma
+Let G be an abelian group with no element of order 2. Let R be a four-element set of distinct group elements, T=sum(R), and F a forbidden set of size at most 3. Assume at least 3 elements a in R satisfy a∉F, and at least 2 elements ell in R satisfy T−ell∉F. There is a permutation (a,s,t,ell) of R with all its proper nonempty prefix sums outside F.
+Proof. Let X={a∈R:a∉F}, L={ell∈R:T−ell∉F}. For a∈X, ell∈L, a≠ell, the first and third prefixes are good; a successful word exists exactly when at least one of the two choices s∈R{a,ell} satisfies a+s∉F. Assume no such word exists.
+Call a∈X qualifying if |L{a}|≥2. For two distinct choices ell∈L{a}, their sets R{a,ell} together cover all three elements R{a}. The failure assumption consequently gives a+(R{a})⊆F. These are three distinct points, so F has size 3, equality holds, and summing gives ΣF=2a+T. Since 2 is injective on G, at most one a can qualify.
+If |L|≥3, all members of X (at least three) qualify: impossible. Thus |L|=2, say L={u,v}. Because X has at least 3 points, Xis nonempty. If it has two points, both qualify, impossible. Consequently X={u,v,w}, and R={u,v,w,d} with d∉X. The unique qualifying a=w satisfies F={w+u,w+v,w+d}.
+For first=u and last=v, the two middle-step candidates w,d must both be blocked; u+d∈F. As u+d differs from w+u and w+d, it equals w+v. Similarly choosing first=v and last=u gives v+d=w+u. Subtraction yields 2(u−v)=0, forcing u=v, contradiction. ∎
+For |R|=2, avoiding a forbidden F with |R|≥1 is immediate (one proper prefix). For |R|=3, if |X|≥2 and |L|≥1, choose distinct a∈X and ell∈L and place the remaining element between them; the two proper prefixes are a and T−ell.
+Theorem 2: Edge-prescribed absorption of a zero-sum triple
+Let G be a finite abelian group of odd order. Let B,C be disjoint minimal zero-sum sets, 3≤m=|B|≤5, |C|=3, and B∩(−C)=∅. Fix any b∈B and any ordered labeling (z,x,y) of C. Then there is a permutation (r₁,…,r_{m−1}) of R=B{b} such that the word
+(z,b,y,x,r₁,…,r_{m−1})
+is a valid simple zero-sum cycle.
+Proof. Let T=ΣR=−b and F={z,z+T,−x}. Since B is disjoint from C and −C, z,−x,−z∉R, so |R|≥m−2 (at most one member of R can be z+T) and |{r∈R:T−r∉F}|≥m−3 (the values T−z and T+x can occur but −z cannot). If m=3 or 4 apply the preceding 2- or 3-step observation. If m=5 apply Theorem 1. Thus R can be ordered with all proper prefixes outside F.
+Any cyclic ordering of B is simple because no nonempty proper subset of B sums to 0. The old cycle (b,r₁,…,r_{m−1}) visits the vertices 0,b and b+S_j for proper prefixes S_j of R. Replacing the step b by (z,b,y,x) introduces the new vertices z, z+b and b−x (using z+x+y=0). They are pairwise distinct and avoid 0,b under B∩(C∪(−C))=∅. The conditions b+S_j∉{z,z+b,b−x} are equivalent to S_j∉{z−b,z,−x}=F. Hence all vertices of the fused cycle are distinct. ∎
+Example in F₂₃: B={1,2,3,4,13}, C={5,6,12}. Take b=1, (z,x,y)=(5,6,12), and R=(2,4,3,13). The fused word is (5,1,12,6,2,4,3,13), with successive vertices 0,5,6,18,1,3,7,10,0.
+Lemma 3: Five-step local finishing would settle arbitrary-size triple absorption
+UNPROVED FIVE-STEP LEMMA: In any abelian group of odd order, every five-element zero-sum-free set H can be ordered so its four proper nonempty prefix sums avoid any prescribed set of at most three group elements.
+Proved reduction. Suppose this lemma holds. Let B be any minimal zero-sum atom of size m≥6 and C any disjoint three-element atom with B∩(−C)=∅. Fix b∈B and a labeling (z,x,y) of C. Let R=B{b}, F={z,z−b,−x}. Greedily choose any safe element from the currently remaining set while more than five elements remain. At each such stage at least six elements are available, and at most three choices would hit F, so a safe choice exists. Let H be the five elements left at the end of this greedy prefix. Translate F by the negative current sum and apply the five-step lemma to H. The final sum of R is unrestricted. This supplies the same R-ordering used in Theorem 2 and therefore gives fusion for arbitrary m.
+The zero-sum-free requirement on H holds because it is a subset of the minimal atom B.
+This would not prove Graham #475. Fusing arbitrary multicomponent zero-sum sets and selecting compatible cycles would remain open.
+Computational verification and a necessary caution
+erdos475_triple_small_atom_audit.py: exact full enumeration in F₁₃, F₁₇, F₁₉ of every eligible B (3≤|B|≤5), three-element atom C, prescribed b, and all six ordered labelings of C; checks the candidate prefix avoidance and the full fused cycle. Results: p=13: 144, p=17: 9,408, p=19: 35,424, total 44,976 tests; 0 failures.
+fholes_zsf.cpp, run in the accompanying session, exhaustively found no five-step three-mine failure among zero-sum-free sets in Z₁₅ and Z₂₁ (18,200 and 2,968,560 set/forbidden-set cases respectively); evidence, not a proof of the five-step lemma.
+Unrestricted five-step lemma is false in an odd group. In Z₁₅, R={1,4,5,6,11}, F={1,6,11}, no permutation has all four proper prefix sums outside F. This is independently checkable by 120 permutations. Here R is not zero-sum-free (4+11≡0 mod 15). All 32 exact failures among five-element R and three-element F in Z₁₅ have a nontrivial translational stabilizer of F. These facts suggest the zero-sum-free hypothesis matters.
+Explicit gaps
+GAP 1: Prove or refute the five-step local lemma for arbitrary odd-order abelian groups (or just prime fields). The brute-force evidence is limited; no uniform proof was established in this round.
+GAP 2: Even the full triple-atom absorption theorem, if obtained, does not yield a valid-cycle construction for three or more atoms. The earlier strong-fusion universal-cycle induction is false.
+GAP 3: An all-primes proof of Graham’s rearrangement conjecture is still missing. The 2026 literature establishes sufficiently-large-prime/sufficiently-large-set theorems without a complete effective verification of all remaining primes.
+A12. Five-step three-forbidden theorem (G5)
+Original working note: erdos475_G5_and_triple_fusion.md *Record type:** Constructive and counting proof *Provenance:** generated earlier in this chat; preserved as written.
+Erdős #475: Five-step three-mine theorem and triple-atom fusion
+November 23, 2026. Status: Two new uniform auxiliary theorems, proved below. Graham’s conjecture for all primes is not thereby proved; multicomponent cycle selection remains open.
+Theorem 1 (G5, proved)
+Let G be a finite abelian group of odd order and R={r1,…,r5} a set of distinct nonzero elements having no nonempty zero-sum subset. For every F⊆G with |F|≤3, there exists an ordering (a1,…,a5) of R such that its four proper nonempty prefix sums are not in F.
+Proof, part A: a subset-sum fiber has at most 3 members
+Fix t∈G. Let C_t be the collection of nonempty proper subsets S⊊R with sum(S)=t. If S⊊U both belong to C_t, then Uis a forbidden nonempty zero-sum subset. Thus C_t is an antichain. Two members of the same cardinality that differ in one element would imply two distinct members of R are equal. In particular, C_t has at most one singleton, one 4-set, two pairs (which, if both present, are disjoint), and two triples (their complements are disjoint pairs).
+If C_t contained a singleton {i}, all other supports would avoid i. On the remaining four indices, no two distinct triples can have the same sum, and the only possibility for three more mutually incomparable equal-sum supports would be two disjoint pairs and one triple; every triple on four indices contains one of the two pairs. Contradiction. By complementation, no 4-set occurs in a four-member C_t either.
+If |C_t|≥4, the four supports must therefore comprise two disjoint pairs and two triples. Relabel the pairs {1,2} and {3,4}. Each triple must contain index 5 and one point from each pair. The two triples must differ in at least two positions, so after relabeling they are {1,3,5} and {2,4,5}. All four equalities imply r1+r2=r3+r4=r1+r3+r5=r2+r4+r5. The latter two equalities give r2=r3+r5 and r1=r4+r5, and substitution into the first gives 2r5=0. Odd group order and r5≠0 contradict this. Hence |C_t|≤3.
+Consequently the set of ‘forbidden’ nonempty proper subset masks U with sum(U)∈F has size at most 3|F|≤9.
+Proof, part B: every full-chain blocker needs at least 10 masks
+Write a,b,c,d for the number of forbidden subsets of sizes 1,2,3,4 respectively. Because all five elements of R are distinct, a≤|F|≤3; the sums of the five 4-subsets are T−r (T=ΣR), likewise distinct, hence d≤3.
+The incidence graph between the ten 2-subsets and ten 3-subsets of [5] (edges P⊂Q) is 3-regular and bipartite. Hall’s theorem gives a perfect matching M of size 10. One explicit matching indexes the steps by 0,1,2,3,4 modulo 5 and maps each pair {i,j} to {i,j,3(i+j) mod 5}; all ten resulting triples are distinct.
+A matched pair (P,Q) is eligible if P includes an allowed singleton and Q extends to an allowed 4-subset. At most C(a,2)≤a pairs fail the former condition: both elements of P must be forbidden singleton masks. At most C(d,2)≤d pairs fail the latter: both possible 4-supersets of Q are forbidden. Thus at least 10−a−d matching pairs are eligible.
+For an eligible pair (P,Q), choose the first element in P with singleton sum outside F, then its second element, then Q, then the element outside Q chosen so that the rank-4 prefix is allowed, then the last element. This produces a chain with ranks 1 and 4 allowed. If every ordering were blocked, P or Q must be forbidden. Distinct matching pairs have distinct P and distinct Q, so b+c≥10−a−d, whence a+b+c+d≥10, contradicting part A’s ≤9.
+Therefore some complete ordering avoids F at all four proper prefixes. QED.
+Corollary (arbitrary-length three-mine avoidance)
+Every zero-sum-free set R of distinct nonzero elements with |R|≥5 in a finite abelian group of odd order can be ordered to avoid any 3 prescribed points at every proper prefix: greedily choose safe steps until five remain (at least six choices versus at most three forbidden next points), then apply Theorem 1 to the translated forbidden set.
+Theorem 2 (uniform insertion of a zero-sum triple into an atom, proved)
+Let G be a finite abelian group of odd order. Let B,C⊆G{0} be disjoint minimal zero-sum sets, with |B|=m≥6 and C={z,x,y} of size 3 (z+x+y=0). Pick any b∈B(−C), which exists since m≥6&gt;3. Then there is an ordering (r1,…,r_{m−1}) of B{b} such that
+(z,b,y,x,r1,...,r_{m−1})
+is a valid cyclic ordering of B∪C.
+Indeed, put R=B{b} and F={z−b,z,−x}. R is zero-sum-free. If |R|&gt;5, greedily build a prefix avoiding F until five elements remain; at each stage there are at least six choices and at most three bad landing values. Translate F by the negative current prefix sum and apply Theorem 1 to the five remaining elements (still zero-sum-free). The resulting order of R has all its proper prefix sums outside F.
+The original B-cycle (b,R) is simple by minimality. Its vertices are 0,b and b+proper-prefix(R). Replacing the b-edge with (z,b,y,x) introduces precisely z, b+z, b−x. They are distinct from each other and from 0,b because C consists of three distinct nonzero elements, B∩C=∅ and b∉−C. They avoid all other original vertices because proper-prefix(R) avoids F. The expanded word is therefore simple. QED.
+A fully explicit six-element symmetric case
+If C={x,y,−x−y} and B=−C, the order
+(x,y,−x,−x−y,−y,x+y)
+has vertex set 0,x,x+y,y,−x,−x−y. These six residues are distinct under the assumption that B,C are disjoint sets each of cardinality 3, so it is valid.
+What remains unproved
+GAP 1: Arbitrary zero-sum sets can have atoms of size ≥4 and many components. Theorem 2 fuses one triple with one minimal atom, and does not preserve the hypotheses when another atom is inserted.
+GAP 2: Earlier SF/SF-max statements requiring successful insertion into every complementary cycle are false (verified examples at p=19). A coherent compatible-cycle selection theorem is still needed, or a different proof architecture.
+GAP 3: No proof of the all-primes Graham rearrangement conjecture follows from the two theorems above. The finite checks through p≤37 and sufficiently-large-prime literature do not bridge the missing uniform middle.
+A13. Uniform atom-plus-triple fusion
+Original working note: erdos475_uniform_triple_two_atom_fusion.md *Record type:** Complete claimed two-atom theorem *Provenance:** generated earlier in this chat; preserved as written.
+Erdős #475: Uniform fusion of a minimal zero-sum triple with another atom
+Research note, November 23, 2026. This proves an auxiliary theorem for every finite abelian group of odd order. It does not prove Graham’s rearrangement conjecture for arbitrary zero-sum sets.
+Main theorem
+Let G be a finite abelian group of odd order and let B,C be disjoint inclusion-minimal zero-sum sets, with |C|=3 and |B|&gt;=2. Then B ∪ C admits a cyclic ordering whose proper partial sums are distinct. In particular, this is uniform in the cardinality of B, with no cross-opposite exclusion B∩(-C)=∅.
+The proof is constructive and separates |B|=2,3,4,5,&gt;=6.
+Preliminary: insertion and forbidden-prefix criterion
+Write C={z,x,y} with z+x+y=0, choose b∈B with b∉-C, let R=B\{b}, and put T=∑R=-b. If an ordering r_1,...,r_{m-1} of R has every proper prefix sum outside
+F={z,z-b,-x},
+then the cyclic word
+(z,b,y,x,r_1,...,r_{m-1})
+is valid. Indeed, the old minimal-atom cycle (b,R) is simple; the insertion creates three vertices z,b+z,b-x. These are distinct from one another and from 0,b because C has three distinct nonzero elements, B∩C=∅, and b∉-C. They avoid all other old vertices b+prefix(R) by the three stated exclusions.
+Two finite avoidance facts are used:
+Three-step observation: For three distinct elements with total T, if at least two qualify as first steps outside F, and at least one qualifies as a last step (T−last∉F), choose distinct qualifying first/last steps. The middle step is determined. Both proper prefixes are safe.
+Four-step avoidance lemma (proved in the previous research record): For four distinct elements in a group without nonzero two-torsion, if at least three are allowed first steps and at least two are allowed last steps, then some ordering has all three proper prefixes outside F, provided |F|≤3. The short proof assumes failure, switches the first/last choices and deduces 2(u−v)=0 for two distinct elements.
+G5 (proved in the previous research record): Every five-element zero-sum-free set in a finite abelian group of odd order admits an ordering avoiding any three prescribed prefix-sum values. The Hall-matching argument provides ten possible rank-2/rank-3 subset pairs. Greedy reduction extends this to any zero-sum-free set of at least five elements.
+Case 1: |B|=2
+B={c,-c}. Apply the previously proved two-hole avoidance lemma to the minimal atom C with an edge b prescribed and R=C\{b}. Because ±c∉C, the two new vertices of the inserted segment (c,b,-c) are unoccupied. This gives a valid cycle for B∪C.
+Case 2: |B|=3 (an especially simple proof)
+Place the three elements of B and three elements of C around a six-cycle in strictly alternating positions. Adjacent opposite pairs are the only forbidden two-step intervals. The forbidden cross edges b ↔ -b form a partial matching of K_{3,3} (each step has at most one opposite). Extend it to a perfect matching and use the complement, which is a spanning six-cycle. This arranges the steps alternately with no adjacent inverse pair.
+Every cyclic interval of three consecutive steps contains two steps of one atom and one from the other. Since the total of each atom is zero, such an interval could sum to zero only if the step from the other atom equaled the third step of the first atom, contradicting disjointness. The remaining proper interval lengths 4 and 5 are complements of lengths 2 and 1. Thus the alternating word is valid.
+This case works in any abelian group.
+Cases 3 and 4: |B|=4 or 5
+Let t=|B∩(-C)|. Because B is minimal and |B|&gt;3, necessarily t≤2: otherwise -C would be a proper zero-sum subset of B.
+If t≤1: Choose two different z,x∈C such that -z,-x∉B (possible as at least two of the three satisfy this), take y as the remaining element of C, and choose any b∈B\(-C). Put R=B\{b} and F={z,z-b,-x}.
+z and -x are not in R, so at most one element of R is a forbidden first step (namely a potential z-b).
+The potential forbidden last steps are -b-z, -z, -b+x; the middle value -z is not in R, so at most two are forbidden.
+For |R|=3, there are at least two safe first steps and at least one safe last step; the three-step observation applies. For |R|=4, there are at least three safe first steps and at least two safe last steps; the four-step avoidance lemma applies. The insertion criterion finishes the case.
+If t=2: Write C={-u,-v,w} with u,v∈B and w=u+v (because ∑C=0). Put E=B\{u,v}. Then ∑E=-w; also -w∉B, since u+v-w=0 would be a proper zero-sum subset of B.
+We claim there exists b∈E such that w-b is not in E\{b}.
+When |E|=2, if no such b existed the two elements of E would sum to w, contradicting ∑E=-w and 2w≠0.
+When |E|=3, if no such b existed, the involution e↦w-e would give a fixed-point-free involution of a three-element set, impossible.
+Choose this b and set z=w, x=-u, y=-v. The forbidden prefix set is F={w,w-b,u}. Among R=B\{b}, w is absent by disjointness, w-b is absent by the choice of b (it also cannot equal u or v because then b=v or u), so only u can be a forbidden first step. The potential forbidden last steps are -b-w,-w,-b-u, and -w∉B; at most two are forbidden. Invoke the three-step or four-step avoidance fact, then the insertion criterion.
+This settles all cross-opposite configurations for |B|=4,5.
+Case 5: |B|&gt;=6
+Since |C|=3, choose b∈B\(-C). Set R=B\{b} and F={z,z-b,-x} for any labeling (z,x,y) of C. Every nonempty subset of R has nonzero sum, because B is minimal zero-sum. With |R|&gt;=5, apply G5, greedily moving from |R| to five remaining elements when necessary. The resulting order avoids F at every proper prefix. The insertion criterion completes the proof.
+Combining all cases proves the main theorem. ∎
+Exhaustive independent check
+atom_triple_all_primes_verifier.cpp is a standard C++17 standalone program. It enumerates every minimal zero-sum atom, every triple atom, and every disjoint pair for each prime tested; it then constructs the cycle using the case distinctions above (with an exact small permutation subroutine for the 3-/4-step base cases and the explicit ten-candidate G5 construction for five steps). It verifies all partial sums modulo p are distinct.
+Prime
+Minimal atoms
+Triple atoms
+Disjoint atom/triple pairs
+Failed constructions
+7
+5
+2
+2
+0
+11
+27
+10
+70
+0
+13
+58
+16
+288
+0
+17
+232
+32
+2,816
+0
+19
+447
+42
+7,590
+0
+23
+1,485
+66
+44,198
+0
+g++ -O3 -std=c++17 atom_triple_all_primes_verifier.cpp -o check &amp;&amp; ./check 23
+The finite test is a check on the proof, not the source of its generality.
+Explicit open gap for Erdős #475
+The theorem handles a union of two minimal zero-sum atoms, one a triple. If a third atom is added, the already fused set is not minimal, so the zero-sum-free prefix lemma used in Case 5 is no longer available. The stronger assertion that every prescribed valid cycle of a multicomponent complement admits fusion has previously been refuted at p=19. To prove Graham for all primes would require a compatible cycle-selection invariant or a global construction that does not insist on preserving the previously chosen cycle.
+No all-primes proof is claimed.
+A14. Multi-atom analysis and antipodal construction
+Original working note: erdos475_multiatom_research_2026-11-23.md *Record type:** Auxiliary proofs, finite data, counterexamples *Provenance:** generated earlier in this chat; preserved as written.
+Erdős #475: multi-atom induction audit (November 23, 2026)
+Status: No proof or counterexample for the all-primes Graham rearrangement conjecture is obtained. The results below are exact auxiliary theorems and finite tests. This record deliberately distinguishes proved statements from conjectures.
+Problem
+For every prime p and every nonempty A ⊆ F_p^×, find a permutation with pairwise distinct partial sums. For zero-sum A this is a simple directed cycle using every step once. The atom-fusion induction remains blocked because insertion into an arbitrary valid complementary cycle is false (explicit p=19 certificates in the preceding research package).
+Theorem 1: three inverse-pair atoms
+Let G be an abelian group and let a,b,c have six distinct elements ±a,±b,±c. Then {±a,±b,±c} has a valid cyclic ordering.
+Proof: In the word (x,y,z,−x,−y,−z), zero proper 2-windows are impossible because the inverse pairs are distinct; 4-windows and 5-windows are complements of 2- and 1-windows. Three-windows, up to sign, have sums x+y+z, −x+y+z, and −x−y+z. Of the four signed triple relations modulo simultaneous negation, at most one can hold, since two would imply 2x=0, 2y=0, or 2z=0, violating distinctness of the inverse pairs. Choose orientations and order so that the sole potential relation is x−y+z=0, the omitted pattern. If none holds, choose any representatives. Every proper cyclic window then has nonzero sum.
+Independent computational check: all 249,900 three-pair subsets of the odd cyclic groups of orders 7 through 101 passed a constructive verifier.
+Theorem 2: arbitrarily many inverse pairs and at most one signed relation
+Let W={a_1,…,a_r} be nonzero elements of an abelian group with W∩(−W)=∅. Assume that the relations Σ ε_i a_i=0 with ε_i∈{−1,0,1} consist of zero and at most one nonzero pair ±ε. Then A=W∪(−W) has a valid cyclic ordering.
+Proof: Consider a signed ordering x_1,…,x_r and the length-2r word (x_1,…,x_r,−x_1,…,−x_r). Every proper nonempty cyclic interval has a nonzero coefficient vector δ∈{−1,0,1}^r: the positions of +x_i and −x_i are antipodally paired, and no nontrivial proper circular interval is a union of full antipodal pairs. Moreover, after its zero coefficients are deleted, δ has at most one sign transition. This is clear for an interval inside either half. An interval crossing the halves has a negative prefix and positive suffix, possibly with a canceled middle; wrapping intervals give the negative of this pattern.
+If no signed relation exists, the word is valid for any signed ordering. Otherwise the unique nonzero relation must have support ≥3, since W contains no zero or inverse pair. Choose three support elements, orient and order them so their relation signs are +,−,+, then append the other elements in any order. Its sign sequence has at least two transitions and cannot be a proper interval vector (nor can its negative). Thus the word is valid.
+An exact separate verifier checked this construction in all applicable subsets of the cyclic groups Z_7,Z_9,…,Z_23 (0 failures).
+A first-moment extension (conditional sufficient criterion)
+For a fixed r-element inverse-pair transversal W, let N_s be the number of nonzero signed subset-sum relations ε∈{−1,0,1}^r supported on exactly s elements (counting both ε and −ε). After choosing uniformly random orientations and permutation of W, every given relation has probability exactly 2r/[2^s * C(r,s)] of matching one of the distinct proper cyclic interval coefficient vectors in the antipodal word. Indeed, for every support size s there are exactly 2r distinct such coefficient vectors: 2(r−s+1) contiguous same-sign intervals and 2(s−1) prefix/suffix opposite-sign patterns (including the appropriate endpoint cases); for s=r the same count holds through one-transition sign patterns.
+Consequently, by the union bound, the sufficient condition
+Σ_{s=1}^r N_s * 2r/[2^s*C(r,s)] &lt; 1
+implies existence of an antipodal valid cycle. This is only a sufficient condition. Dense relation-rich sets need not satisfy it. Note that the signed relation vectors ε and −ε are counted separately as required by this formula.
+Explicit obstruction to an insertion-only induction
+In Z_11, let W={1,2,3}, with three inverse pairs, and attempt to add the pair {5,6}. All 12 valid antipodal half-cycle lists for W were enumerated. For none of them does inserting either +5 or −5 in one of the four half-list positions (and inserting the opposite at the mirrored position in the second half) yield a valid antipodal eight-cycle. Yet the expanded symmetric set has the valid antipodal cycle:
+(1,9,3,5,10,2,8,6),
+with proper partial sums 1,10,2,7,6,8,5 (all distinct). Thus reordering the old three representatives is essential, even inside this highly structured subclass.
+A still stronger universal deletion-order property for complete prime sets was also checked and failed at p=11.
+Exact simultaneous interleaving experiments
+For three disjoint zero-sum triples B,C,D, fixed periodic atom order B,C,D,B,C,D,B,C,D fails for four of the 20 disjoint-triple partitions at p=13, 64/560 at p=17, and 54/1760 at p=19. An explicit failed fixed-pattern instance at p=13 is:
+B={1,2,10}, C={3,4,6}, D={5,9,12}.
+Nonetheless the interleaved word (1,3,2,4,12,6,9,10,5) is valid, with partial sums (1,4,6,10,9,2,11,8,0). Its adjacent elements always belong to different atoms. Search found a no-equal-adjacent-atom valid order in all 2340 three-triple partitions at p=13,17,19.
+Four triple atoms: all 276 partitions at p=17, 1824 at p=19 and 31240 at p=23 succeeded with no equal-adjacent-atom restriction. Five triple atoms: all 312 p=19 cases and 30624 p=23 cases passed. Samples of 10,000 five-triple instances at p=29 and 10,000 six-triple instances at p=31 also passed. THESE ARE FINITE COMPUTATIONS, not uniform proofs.
+Strong symmetric-set evidence, not a proof
+For any W⊆{1,…,(p−1)/2}, search over signs and permutations found a valid antipodal half-cycle for all 262,143 nonempty W at p=37; similarly all such W at p≤31. This is stronger evidence than ordinary existence of an unrestricted cycle, but the insertion obstruction at p=11 rules out the naive hereditary argument. It does not prove the all-primes conjecture.
+Exact remaining gap
+An arbitrary zero-sum set can contain an unbounded number of atoms of unequal sizes. No theorem above constructs a compatible cycle from such a partition. Inserting into every prescribed complementary cycle is false (p=19), and requiring all antipodal half-cycles to extend is false (p=11). We have not proved a uniform exchange/selection lemma that repairs these obstructions, nor an alternative direct construction. Therefore Graham’s rearrangement conjecture for all primes remains unproved here.
+Part III. Closing Summary
+What is firmly established versus still missing
+The strongest constructive simplification is the two-hole greedy avoidance proof, yielding atom-plus-inverse-pair fusion for atoms of every size. The five-step G5 counting proof supports insertion of a zero-sum triple into a single minimal atom, and the uniform triple two-atom theorem removes the small-atom cases. The signed antipodal construction handles arbitrarily many inverse pairs when there is at most one signed zero-sum relation. Each theorem addresses a constrained structural subcase.
+The all-primes conjecture is a statement about arbitrary zero-sum sets, where many nontrivial atoms interact. Universal-cycle strong fusion is disproved; therefore a successful induction must choose or transform cycles globally. Computation supplies substantial evidence through p=23 but cannot certify unbounded primes.
+Final conclusion of this conversation: Neither Graham’s rearrangement conjecture for every prime nor a counterexample was obtained. The report records a sequence of constructive advances, exact finite refutations of overstrong lemmas, and a well-defined unresolved global selection problem. Any claim of a complete all-primes proof would require a new argument resolving that global step.
+Suggested reading order
+Read Part I §§1–5 for the unified logical chain. Then consult Appendix A01 for the precise SF counterexample, A02–A03 for the selected-cycle invariant and its finite proof certificates, A10 for the short universal inverse-pair proof, A12–A13 for G5 and triple fusion, and A14 for the multi-atom constructions and obstruction. Appendices A04–A09 preserve alternative proof routes and their mathematical details.

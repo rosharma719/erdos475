@@ -69,3 +69,13 @@ RATIONALE:
   - For |A| ≥ 7, G_n depends on the set and vanishes mod p at a rate of about 1/p (exhaustive over scaling orbits, p = 13, 17, 19).
   - The weighted joint version never failed. But proving it reduces to a per-size Nullstellensatz certificate whose bad primes would have to be ≤ n + 2: the same unstructured problem as CN_ALL_K.
 - **Programme A algebraic route: parked.** Do not reopen without a structural handle on the prime content of per-size certificates. The next round should go to Programme C (IRC) or to the cycle-choice/flexibility direction.
+
+## 2026-11-24 IRC1 (Claude, interactive) -> continue
+NEXT: continue
+
+RATIONALE:
+- **New self-strengthening G\*** (rooted window, exact exception list) with very strong data. Rooting at the maximum has no failures.
+- **The induction gap is now one precise statement:** a lift that produces middle roots (`claims/rooted_window_irc.md`, GAP).
+- **Next round:**
+  - (a) Look for a middle-root lift, for example merging the step after the root, or a two-step lift through max P.
+  - (b) Give an explicit two-block zigzag family for the tight-family template, starting with a = 2.

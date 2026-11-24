@@ -780,3 +780,203 @@ Claude L35: X bridge + core LR(M,a,k) = path on [0,M−1]\{k+1,k+a} from k with 
 Four-block fusion theorem, two-triple corollary (2156/2156), switching lemma: accepted. Claude: Strong Fusion (some atom B fuses with EVERY valid cycle of A\B in four-block form) implies Graham for all p by induction; exhaustive 0 failures p=11 (all), p=13 (|A|<=8), p=17 (|A|<=7). Prompt: prompts/gpt_round_fusion.md.
 ## 2026-11-23 Claude L38: Strong Fusion — counting lemma (proved) + MAX-ATOM rule, 0 failures in 5264 sets
 Edge-insertion form of four-block fusion; counting lemma (n > m·r* + m − 1 suffices for a given cycle). Exhaustive: inserting a MAXIMUM-size atom into EVERY valid cycle of the rest never fails (p=11,13 all sets; p=17 |A|<=8; p=19 |A|<=7); inverse-pair atoms do fail. Prompt addendum in prompts/gpt_round_fusion.md.
+
+
+## 2026-11-23 External dossier added (not yet audited)
+`research/reports/2026-11-23_complete_chat_research_report.docx` is a chat research dossier. A plain-text extraction sits next to it as `.txt`.
+- **Its own verdict:** no all-primes proof and no counterexample.
+- **Claims it makes:**
+  - SF and SF-max (atom fusion into every complement cycle) are refuted at p = 19 and p = 37.
+  - P_all is refuted at p = 11.
+  - CMAS, a coherent maximal-atom cycle selector, is certified for p ≤ 23 but unproved in general.
+  - Inverse-pair and triple-atom fusion results, including a five-step three-mine theorem.
+  - An explicit list of unproved items, U1 onwards.
+- **Status:** all of its content is unaudited here. Treat it as `candidate` until checked.
+
+## 2026-11-24 External dossier, Volume II, added (not yet audited)
+`research/reports/2026-11-24_research_continuation_and_proof_roadmap.docx` continues the Nov 23 dossier. A plain-text extraction sits next to it as `.txt`.
+- **Its own verdict:** the full conjecture is unresolved.
+- **Claims it makes:**
+  - A complete two-atom theorem.
+  - An explicit construction for every symmetric set in an odd cyclic group.
+  - An asymmetry-preserving zero-sum reduction.
+  - An algebraic reduction to a symmetric case.
+  - A 497-element expansion certificate.
+  - The remaining "uniform expansion theorem", stated precisely as the open target.
+- **Status:** all of its content is unaudited here. Treat it as `candidate`.
+
+## 2026-11-24 Claude: audit of "bounded-span reduction / independent-switch closure" submission (claims/bounded_span_switch_audit.md)
+- **Not a new reduction.** The "bounded-span conjecture" (span ≤ P+Q) is IRC with its bound weakened by 1. It lies between IRC and IRC+, and the balanced lift is the existing integer reduction. Its 103,129-set table reproduces.
+- **New candidates.**
+  - The independent-switch closure theorem, checked by hand.
+  - Switch-budget examples, reproduced: p = 1009 needs 2 switches, p = 2003 needs 4.
+
+## 2026-11-24 Claude: rooted-window IRC round (claims/rooted_window_irc.md)
+- **G\*.** Every root r ∈ P admits a valid cycle in the window (−max N, max P], except an explicit list E (sizes ≤ 3+3 and d·{1, …, 5}). Values ≤ 15: 9.68M instances and 63.25M roots; every failure lies in E.
+- **Root at max P:** 0 failures. Unlike zigzag Z1, it has no exceptional family.
+- **Max-root lift lemma:** proved. It reduces root-max to G\* at a middle root of a smaller instance; 2.8% of instances admit no lift.
+- **Open:** a lift for middle roots.
+- **Tight family.** Reduced exactly to the rooted symmetric problem S = [1, M] ∖ {b} rooted at a. A half-walk template is solved for M ≤ 20 (a = 3 with M ≥ 18 undetermined). No explicit all-M family yet; a single zigzag block is impossible.
+- **Referee gates:** not run. No Anthropic API key in this cloud session; a key can only be supplied as an environment variable.
+
+## 2026-11-24 Claude: BS handoff audit + top-gap lift (claims/bs_handoff_audit.md)
+- **Handoff results.** The two-path separation lemma, the |P| ≤ 2 BS theorem and the safe-contraction criterion are accepted, and their computations rerun exactly. The |P| ≤ 2 case is already covered, with the stronger IRC bound, by the repo's index ≤ 2 theorem.
+- **k ≥ 3 path separation is false.** An explicit 3-path counterexample is recorded.
+- **New, proved: top-gap lift.** If p₁ > q₁, p₁ − p₂ > q₂ and p₁ − q₁ ∉ P, then G\* at every root reduces to a smaller instance. Verified on 3,001 lifted walks.
+- **What remains of the G\* induction:** pairs with no top gap on either side (the dense case). Conjecture still open.
+
+## 2026-11-24 Claude: peak-removal round audited (claims/peak_removal_audit.md)
+- **Accepted:** the two-path separation from 0 (Thm 1), peak removal, and the optimal span max(P, Q) when T < P + Q. Thm 1 passes 61,854 exhaustive cases.
+- **Scope:** sparse and moderate mass only. The dense case is still open.
+
+## 2026-11-24 Claude: inverse-pair lift tested (claims/inverse_pair_lift.md)
+- The robust reinsertion of ±x fails for 12% of reduced walks.
+- The existential version fails only on 18 tiny symmetric cases.
+- Same cycle-choice obstruction as before; no proof route for the dense case.
+
+## 2026-11-24 Claude: rooted symmetric theorem (claims/rooted_symmetric.md)
+- **Proved: rooting criterion** for the symmetric half-walk, giving RS+ (root +r, window [−M, M]).
+- **Proved: two explicit templates.**
+  - (a) Spiral-after-root, for r not an alternating prefix sum of S ∖ {M, r}.
+  - (b) Outward spiral, for r ∈ {b₂, b₃}.
+- **Proved corollary: IRC+ for one-merge near-symmetric pairs** P = (S ∖ {r}) ∪ {r + y}, N = S ∪ {y} with r + y > M, for arbitrary (including dense) S. This is the first proved dense asymmetric family with unbounded index in the IRC route.
+- **Open:** RS+ for all roots. Data shows half-walks are not enough. The tight family is the key case.
+
+## 2026-11-24 Claude: protected-path round audited (claims/protected_paths_audit.md)
+- **Forbidden-height lemma:** this is the grasshopper theorem (IMO 2009 P6).
+- **Unequal-cardinality, reserved-block and localization results:** accepted as candidates. The 28,582-instance table reproduces.
+- **Proved: run-count obstruction.** A cycle with span ≤ D needs ≥ ⌈T/D⌉ ascending runs. So peak removal and protected paths only reach T ≤ P + 2Q, and the dense case needs Ω(n)-run constructions.
+- **Direction:** spirals and RS+, not path separation.
+
+## 2026-11-24 Claude: protected two-path theorem (two-frontier greedy) audited (claims/protected_greedy_audit.md)
+- **Accepted as a candidate theorem:** BS for P ≠ Q and T ≤ P + Q + min(P, Q). The core greedy and trap analysis were checked by hand. The 28,743 + 18,421 + 7,560 + 19,079 runs reproduce.
+- **Proved: k-frontier invariant.** Greedy can fail only in tail traps.
+- **Dense regime:** segments have O(1) steps, so every step lies in a tail. A multi-bridge theorem needs arithmetic tail analysis or spirals. Still open.
+
+## 2026-11-24 Claude: simultaneous-contraction round audited (claims/simultaneous_contraction_audit.md)
+- **Accepted:** reverse-rank contraction, the exact pseudoforest expansion criterion plus interval refinement, and the high-mass family (dominant-padding type).
+- **Verified:** the three-edge {±50} obstruction.
+- **Not reproduced:** the 8.49M exhaustive claim (no code supplied).
+- **Gaps:** the contraction does not iterate (contracted sets have unequal sign counts), and core selection is the known cycle-choice obstruction.
+
+## 2026-11-24 Claude: reverse-rank core selection audited (claims/reverse_rank_audit.md)
+- **Accepted:** Lemma 1, the degree ≤ 2 / one-double-edge core theorem, and Thms 2–3. The obstruction and repair are verified, and the rerun matches exactly.
+- **Scope:** everything needs t < K, which holds for 0% of spread-out sets with k ≥ 4. These results cover clustered sets, not the dense regime. Still open.
+
+## 2026-11-24 Claude: flexible-pairing round audited (claims/flexible_pairing_audit.md)
+- **Accepted:** the compact-core theorem with flexible pairing (|X| = |Y|, t < K), the inverse-pair extension (candidate), and the congruence-separated theorem. All examples verified.
+- **Scope:** two-monotone-path cores need t ≤ D, the run-count ceiling. Dense sets need many-climb (spiral) cores. Still open.
+
+## 2026-11-24 Claude: quotient-block lifting audited (claims/quotient_blocks_audit.md)
+- **Accepted:** the interval-walk lemma and quotient-block lifting (a safe expansion: every bounded core cycle lifts). The triple-block family (T/D → ∞, unequal sign counts) and the band solution of the X_s family are verified.
+- **Proved ceiling:** n ≤ D/2 + 1. Quotient separation cannot apply to any A ⊆ F_p with |A| > (p + 1)/2.
+- **Dense regime:** still open.
+
+## 2026-11-24 Claude: overlapping quotient lifting audited (claims/overlap_lifting_audit.md)
+- **Accepted:** the weighted-overlap theorem with peeling, mixed-sign reflection capacity, and the forest exact criterion. The ±1-containing family and the incompatible forest core are verified.
+- **Verified negative result:** {−7, −6, −5, −4, 2, 3, 4, 6, 7} has no admissible quotient partition for any g. Universal quotient contraction is false.
+- **Status:** dense regime still open, and the cycle-choice problem is back.
+
+## 2026-11-24 Claude: modulus-free contraction + zero-pair absorption audited (claims/modulus_free_audit.md)
+- **Accepted:**
+  - Thm 1: the only contraction-resistant sets are {±g, …, ±kg}.
+  - Thm 2: P ≠ Q ⇒ an admissible extreme contraction exists (mod-D translation argument).
+  - The equal-extreme classification.
+  - Zero-pair absorption, Thm 3 (16,026 brute-force cases) and Thm 4.
+- **Scope:** zero-pair absorption needs the smaller cycle span < 4M/3, which is stronger than induction gives. Targets A and B are the cycle-choice / compression problem. Still open.
+
+## 2026-11-24 Claude: unequal-extreme rectification + extreme compatibility audited (claims/extreme_compatibility_audit.md)
+- **Proved / accepted:** every asymmetric zero-sum A ⊆ F_p has a dilation whose balanced lift has P ≠ Q. So Graham ⇐ BS for unequal-extreme sets, plus the symmetric theorem.
+- **Accepted:** the arc-translation expansion criteria and the q_M ≤ 1 absorption theorem.
+- **Rerun:** exhaustive search for Targets A and B through magnitude 10, 19,825 instances, 0 failures.
+- **Open:** Targets A and B (cycle choice).
+
+## 2026-11-24 Claude: two-sign compatibility audited (claims/two_sign_compatibility_audit.md)
+- **Accepted as candidates:** Theorems A and B (compatible extreme contraction and maximum-pair insertion) for sets with ≤ 2 elements of one sign. The implemented constructions were verified on 22,829 + 60,007 cases.
+- **Reproduced:** the exhaustive check of the unrestricted Targets A and B through magnitude 15, 11,688,147 instances, 0 counterexamples. Also the q = 2 fixed-order obstruction.
+- **Open:** Targets A and B with ≥ 3 elements of each sign.
+
+## 2026-11-24 Claude: compatibility Theorems A–D audited (claims/moderate_mass_compatibility_audit.md)
+- **Accepted:** Theorems A and B (compatible contraction and ±M insertion for T ≤ P + Q, arbitrary cardinalities), and Theorem C (higher mass, three inequalities). Proofs hand-checked.
+- **Theorem D:** read; its example is verified.
+- **Consequence:** Targets A and B are proved for moderate mass.
+- **Open:** GAP A and GAP B (high mass, the dense regime), still at the run-count wall.
+
+## 2026-11-24 Claude: diameter-controlled contraction audited (claims/diameter_controlled_audit.md)
+- **Accepted:**
+  - Theorem 1, a safe extreme contraction (every bounded core expands) under two diameter inequalities.
+  - Rules A and B.
+  - Theorem 3, cardinality-free ±M insertion for M ≥ max(P + 1, Q + h).
+- **Verified:** the minimum-span-core obstruction.
+- **Scope:** the safe rules need a dominant top element. The dense, closely spaced extremes regime is still open.
+
+## 2026-11-24 Claude: band-compatibility round audited (claims/band_compatibility_audit.md)
+- **Accepted:** Theorems 1–3 (compatible contraction and ±M insertion in the compact band, and congruence elimination). The family is verified for s ≤ 7.
+- **Proved scope lemma:** the compact band (t < K) forces n < 4√D. So this regime is sparse (|A| = O(√p)), not dense.
+- **Open:** dense regime.
+
+## 2026-11-24 Claude: multiscale gluing round audited (claims/multiscale_gluing_audit.md)
+- **Accepted:** interval and lattice gluing, compatibility preserved under gluing (candidate), compact-band absorption, and Thm 5 (insertion exceptions removed when 2t + H < 2K).
+- **Verified for m ≤ 200:** the dense no-cut family A_m (n/D → 1/2), with explicit compatible contraction and insertion. It disproves universal zero-sum band decomposition.
+- **Scope:** gluing needs a lattice or compact-band scale separation, so generic dense sets are still open (GAP A).
+
+## 2026-11-24 Claude: imbalance/core-selection round audited (claims/imbalance_core_audit.md)
+- **Verified:** a counterexample to GAP B as stated. A prescribed compact flexible-pairing core can be unrepairable, while another core of the same set works.
+- **Accepted:** singleton-group insertion, the block-extrema theorem and its √D imbalance barrier, and constant-modulus triple lifting (dense constructed families).
+- **Open:** compatible decomposition of a *given* dense set. This is the conjecture.
+
+## 2026-11-24 Claude: modular repair round audited (claims/modular_repair_audit.md)
+- **Accepted:** the dissociated block-repair theorems (chain avoidance; minimum obstructions are the singleton and complement layers; union bound). The minimal-counterexample conditions only constrain blocks of size ≤ log₂ p.
+- **Verified:** the short-window trap (p = 23, n = 19) and the det −29 rational-rank flaw. The flaw itself was already recorded 2026-11-22 (det −17); this is a second instance.
+- **Accepted:** the torsion-aware certificate and the symbolic search, sound in outline, run for n ≤ 6.
+- **Best concrete next step on this line:** a sound re-verification of CDFV |A| ≤ 20.
+
+## 2026-11-24 Claude: singular-projection round audited (claims/singular_projection_audit.md)
+- **Correct (hand-checked):** singular-projection elimination, single-defect swap repair, the permanent/Nullstellensatz certificate, and forced chord relations. The verifier is reproduced.
+- **Scope:** for random zero-sum sets, dim K = 1 in 100% of cases once n ≳ 12 (p = 23, 31, 37). So the rank-one case is the generic dense case, and the method is confined to n ≈ log₂ p.
+
+## 2026-11-24 Claude: spiral contraction (claims/spiral_contraction.md)
+- **SC2:** every zero-sum A is a ≤2-block contraction of a symmetric half-walk. SC2 for all p ⇒ Graham.
+- **Independently verified exhaustive:** p = 19 (804/804) and p = 23 (8,384/8,384), for every size. GPT reports p = 29 (331,184/331,184); not re-run here.
+- **Structure:** the minimal number of merges is always ⌈q/3⌉ (parity-adjusted) or that +2; it equals the bound for 90–96% of orbits.
+- **Open:** prove SC2 (symmetric expansion plus realisation of prescribed adjacent pairs in one half-walk).
+
+## 2026-11-24 Claude: compact SC2 refuted (p = 59), refined (claims/spiral_contraction.md update)
+- **Verified:** the imbalance obstruction (compact spiral contractions have I(A) ≤ 1). Q₅₉ has I = 3, so compact SC2 is false. The modular half-walk certificate for Q₅₉ checks out.
+- **Verified:** the triple-packing lower bound. The p = 101 example refutes the lb + 2 rule.
+- **New:** random half-density sets have I = 0. Failures are quadratic-residue-type sets, and I(Q_p) = h(−p) at p = 59 and 83.
+- **Revised target:** SC2-I (compact SC2 for all A with I(A) ≤ 1) plus a separate structural treatment of I ≥ 2.
+
+## 2026-11-24 Claude: SC2-I refuted; compact-spiral route closed (claims/spiral_contraction.md, update 2)
+- **Verified:**
+  - the extreme-label obstruction and two SC2-I counterexamples at p = 59;
+  - symmetric-padding invariance, with a 4.1·10¹²-set exceptional family at p = 181 having trivial stabilizers;
+  - I(Q_p) = h(−p) for p ≡ 3 (mod 8), on 22 primes.
+- **Closed:** the compact-spiral route, per the stop rule. Its obstruction theory is kept as a result.
+
+## 2026-11-24 Claude: literature correction, the dense regime is already proved
+- NTV (arXiv:2610.40712, Thm 1.5) and Kuang–Wang (arXiv:2610.34424, Thm 1.6) prove that every S ⊆ G ∖ {0} with |S| ≥ C (absolute, non-explicit) in every finite abelian group is rearrangeable.
+- So Erdős #475 reduces to **bounded size**: make C explicit, plus prove Graham for |A| < C at all primes. See `STRATEGY.md` §5.
+- The dense-regime programmes (IRC, BS, spiral) target a case that is already proved.
+- **Correction (same day).** NTV §6 fixes ε = 10⁻⁵ and D = 4·10⁵. The local-repair condition needs q ≲ 2^(−40D), so C ≳ 2^(1.6·10¹²). The proof architecture also forces C ≥ about e^(10⁵). So the "finite check" is infeasible, and dense sets below C (all practical sizes) remain open. See STRATEGY §5.
+
+## 2026-11-24 Claude: effective-threshold round audited (claims/effective_threshold_audit.md)
+- **Verified against the NTV text:** the Z_p simplifications (ε < 1/28500), the local-repair constants (Lemma 4.4 has 2^(26D²)), and the retuned sparse threshold 2^(9.4·10¹⁰).
+- **Blocked:** Theorem B.1 (MP, very dense sets) is non-explicit.
+- **Conditional explicit range:** 2^(9.4·10¹⁰) ≤ |A| < p − p^(1 − 2^(−20)).
+- **This cannot finish the conjecture:** sizes below about 2^(9.4·10¹⁰) stay open. Next target if continuing: an explicit near-complete theorem for polynomially small complements.
+
+## 2026-11-24 Claude: G* safe-reduction round audited (claims/rooted_window_irc.md update)
+- **G\*:** survives GPT's adversarial tests, including the Q₅₉ lifts.
+- **Safe-reduction induction is refuted (verified):** P = {1, 2, 5, 6}, N = {2, 3, 4, 5}, r = 2 has 2 walks, and the best lifting fraction over the full menu is 1/7.
+- **The cycle-choice step is unavoidable for G\*.** A uniform positive lifting fraction (LF) is open.
+
+## 2026-11-24 Claude: LF counting round audited (rooted_window_irc.md update 2)
+- **Verified:** five extremal lifting fractions (1/7 nonsymmetric; 1/37 and 16/183 for ±[1..m]).
+- **Proved:** fiber bounds, the hole criterion, and the arithmetic-chain decomposition for inverse-pair lifts.
+- **Status:** LF neither proved nor refuted. Weak LF is nearly circular. The open estimate is the hole/chain distribution among rooted walks.
+
+## 2026-11-24 Claude: forced-vertex route (claims/forced_vertex_FV.md)
+- **FV** (one-point avoidance for t-rooted cycles, x ∉ {0, t, t/2}) holds **exhaustively for every p ≤ 31, every size**: 485M tests at p = 31, 0 failures. FV ⇒ Graham via one contraction.
+- **Two-point avoidance fails, but rarely** (4 / 180,908 at p = 17, sizes 5–12, one structured set). FV needs a structured induction.
+- **Primary thread now:** the minimal-counterexample form (all admissible splits forced at once).
