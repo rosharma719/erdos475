@@ -856,3 +856,9 @@ Offsets c with (2M+3)/3 <= c < M are impossible for tight half-walks; small a mu
 - **Accepted as candidates:** Theorems A and B (compatible extreme contraction and maximum-pair insertion) for sets with ≤ 2 elements of one sign. The implemented constructions were verified on 22,829 + 60,007 cases.
 - **Reproduced:** the exhaustive check of the unrestricted Targets A and B through magnitude 15, 11,688,147 instances, 0 counterexamples. Also the q = 2 fixed-order obstruction.
 - **Open:** Targets A and B with ≥ 3 elements of each sign.
+
+## 2026-11-24 Claude: compatibility Theorems A–D audited (claims/moderate_mass_compatibility_audit.md)
+- **Accepted:** Theorems A and B (compatible contraction and ±M insertion for T ≤ P + Q, arbitrary cardinalities), and Theorem C (higher mass, three inequalities). Proofs hand-checked.
+- **Theorem D:** read; its example is verified.
+- **Consequence:** Targets A and B are proved for moderate mass.
+- **Open:** GAP A and GAP B (high mass, the dense regime), still at the run-count wall.
