@@ -63,3 +63,19 @@ Then W = (+(M+1), −b, δ_2, …, δ_last, +M, −δ^rev, −M) is a valid orde
 - **G\* and H:** finite evidence only, with exact data as above.
 - **Tight family for a ≥ 2:** still open as an explicit all-M construction; the computations now settle M ≤ 20.
 - **Full conjecture:** not proved.
+
+## Update (2026-11-24): adversarial tests and safe-reduction census (GPT round, audited by Claude)
+- **G\* survives adversarial tests** (GPT-reported, finite):
+  - all pairs with magnitudes ≤ 20 and total size ≤ 8 (4.98M rooted cases);
+  - tight-interval perturbations;
+  - random no-top-gap dense pairs;
+  - all balanced lifts of Q₅₉ and its SC2-I perturbation (870 rooted cases).
+
+  The spiral obstructions do **not** transfer to G\* on these instances. These runs were not repeated here.
+- **The universal safe-reduction menu is FALSE: VERIFIED** (`safe_reduction_counterexample.py`, plus an independent DFS).
+  - Counterexample P = {1, 2, 5, 6}, N = {2, 3, 4, 5}, r = 2: no top gap, nonsymmetric, T = 14 > 11 = max P + max N.
+  - It has exactly 2 G-walks.
+  - Over all 17 admissible reductions (opposite-sign contraction, same-sign contraction, inverse-pair removal) and every reduced root, the best lifting fraction is **1/7**. No reduction is safe.
+- **Census** (exact, GPT; not re-run): safe reductions exist for 82% (magnitudes ≤ 5), 71% (≤ 6) and 76% (≤ 7, size ≤ 9) of rooted cases. All three menu items are needed.
+- **Counting inequality** (proved): lift fraction ≤ |W(A, r)| / |W(B, s)|, because expansion is injective. Smallest observed best-fractions: 1/37 (symmetric P = N = {1, 2, 3, 4}) and 1/7 (nonsymmetric). Whether a uniform positive bound exists is open.
+- **Consequence.** An induction for G\* cannot avoid choosing the smaller cycle with this menu. The cycle-choice obstruction is now confirmed directly for G\*. G\* itself remains open, and so does a counting route (a uniform positive lifting fraction, conjecture LF).

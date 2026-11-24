@@ -926,3 +926,8 @@ Offsets c with (2M+3)/3 <= c < M are impossible for tight half-walks; small a mu
 - **Blocked:** Theorem B.1 (MP, very dense sets) is non-explicit.
 - **Conditional explicit range:** 2^(9.4·10¹⁰) ≤ |A| < p − p^(1 − 2^(−20)).
 - **This cannot finish the conjecture:** sizes below about 2^(9.4·10¹⁰) stay open. Next target if continuing: an explicit near-complete theorem for polynomially small complements.
+
+## 2026-11-24 Claude: G* safe-reduction round audited (claims/rooted_window_irc.md update)
+- **G\*:** survives GPT's adversarial tests, including the Q₅₉ lifts.
+- **Safe-reduction induction is refuted (verified):** P = {1, 2, 5, 6}, N = {2, 3, 4, 5}, r = 2 has 2 walks, and the best lifting fraction over the full menu is 1/7.
+- **The cycle-choice step is unavoidable for G\*.** A uniform positive lifting fraction (LF) is open.
