@@ -62,3 +62,19 @@ If A is a minimum counterexample, then **for every** admissible split (x, y) we 
 - The double-petal condition is automatic at density > 1/2, so only petal *counts* carry force.
 
 **Assessment (Claude).** The counting bounds are relaxations of identity (1). Making them "compatibility-aware" converges to computing c(B_e) exactly, which is tautological. New force must come from **structure**, not sharper counting: either a proof of SIA, or a structure theorem for minimal counterexamples followed by an explicit treatment of structured sets.
+
+## Update 3 (2026-11-24, Claude): every inner pair works, and the domino hierarchy (DOM)
+Code: `mult.c` (per-pair census), `afv2.c` (two pairs), `afvk.c` (k pairs or maximal families). All runs are exhaustive over zero-sum B with |B| ≥ 5, t = 1 after dilation, and every external split x + y = 1 with x, y ∉ B.
+
+| statement | p = 17 | p = 19 |
+|---|---|---|
+| **AFV**: *each* admissible inner pair (u, v) is adjacent in some x-avoiding t-cycle | 23,602 / 23,602 pairs | 136,907 / 136,907 pairs |
+| AFV, 2 disjoint pairs | 35,154 tests, 0 failures | |
+| AFV, 3 disjoint pairs | 10,476 tests, 0 failures | |
+| AFV, maximal disjoint families | 45,286 tests, 0 failures | running |
+
+Here "admissible" means the pair sums are distinct and outside B ∪ {0, x, y}. The tests were also run at p = 13 with 0 failures.
+
+**DOM (domino conjecture).** For zero-sum B, t ∈ B, and an external split x + y = t, *any* family Π of disjoint admissible pairs in B ∖ {t} (distinct sums, outside B ∪ {0, x, y}) is realised as adjacencies in some valid t-rooted cycle avoiding x. Π = ∅ is restricted FV; |Π| = 1 is AFV, which is far stronger than SIA.
+
+**Induction structure (proved, easy).** Let π = (u, v) ∈ Π and C_π = (B ∖ π) ∪ {s}. Then Π ∖ {π} stays admissible in C_π, and expansion preserves the other adjacencies. So DOM(B, Π) ⟺ [some cycle of C_π realising Π ∖ {π} and avoiding x also has its s-step expandable]. Since expandability is exactly "π adjacent", the naive induction on |Π| is circular. A proof needs a mechanism that *chooses* the C_π-cycle: this is the simultaneous-expansion (pseudoforest) problem of the reverse-rank rounds, now in F_p with no span constraint.
