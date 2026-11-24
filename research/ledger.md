@@ -845,3 +845,9 @@ Offsets c with (2M+3)/3 <= c < M are impossible for tight half-walks; small a mu
   - The equal-extreme classification.
   - Zero-pair absorption, Thm 3 (16,026 brute-force cases) and Thm 4.
 - **Scope:** zero-pair absorption needs the smaller cycle span < 4M/3, which is stronger than induction gives. Targets A and B are the cycle-choice / compression problem. Still open.
+
+## 2026-11-24 Claude: unequal-extreme rectification + extreme compatibility audited (claims/extreme_compatibility_audit.md)
+- **Proved / accepted:** every asymmetric zero-sum A ⊆ F_p has a dilation whose balanced lift has P ≠ Q. So Graham ⇐ BS for unequal-extreme sets, plus the symmetric theorem.
+- **Accepted:** the arc-translation expansion criteria and the q_M ≤ 1 absorption theorem.
+- **Rerun:** exhaustive search for Targets A and B through magnitude 10, 19,825 instances, 0 failures.
+- **Open:** Targets A and B (cycle choice).
