@@ -827,3 +827,8 @@ Offsets c with (2M+3)/3 <= c < M are impossible for tight half-walks; small a mu
 ## 2026-11-24 Claude: flexible-pairing round audited (claims/flexible_pairing_audit.md)
 - **Accepted:** the compact-core theorem with flexible pairing (|X| = |Y|, t < K), the inverse-pair extension (candidate), and the congruence-separated theorem. All examples verified.
 - **Scope:** two-monotone-path cores need t ≤ D, the run-count ceiling. Dense sets need many-climb (spiral) cores. Still open.
+
+## 2026-11-24 Claude: quotient-block lifting audited (claims/quotient_blocks_audit.md)
+- **Accepted:** the interval-walk lemma and quotient-block lifting (a safe expansion: every bounded core cycle lifts). The triple-block family (T/D → ∞, unequal sign counts) and the band solution of the X_s family are verified.
+- **Proved ceiling:** n ≤ D/2 + 1. Quotient separation cannot apply to any A ⊆ F_p with |A| > (p + 1)/2.
+- **Dense regime:** still open.
