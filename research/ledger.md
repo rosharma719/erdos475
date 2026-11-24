@@ -851,3 +851,8 @@ Offsets c with (2M+3)/3 <= c < M are impossible for tight half-walks; small a mu
 - **Accepted:** the arc-translation expansion criteria and the q_M ≤ 1 absorption theorem.
 - **Rerun:** exhaustive search for Targets A and B through magnitude 10, 19,825 instances, 0 failures.
 - **Open:** Targets A and B (cycle choice).
+
+## 2026-11-24 Claude: two-sign compatibility audited (claims/two_sign_compatibility_audit.md)
+- **Accepted as candidates:** Theorems A and B (compatible extreme contraction and maximum-pair insertion) for sets with ≤ 2 elements of one sign. The implemented constructions were verified on 22,829 + 60,007 cases.
+- **Reproduced:** the exhaustive check of the unrestricted Targets A and B through magnitude 15, 11,688,147 instances, 0 counterexamples. Also the q = 2 fixed-order obstruction.
+- **Open:** Targets A and B with ≥ 3 elements of each sign.
