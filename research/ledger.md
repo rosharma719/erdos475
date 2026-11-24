@@ -813,3 +813,9 @@ Offsets c with (2M+3)/3 <= c < M are impossible for tight half-walks; small a mu
 - **Accepted as a candidate theorem:** BS for P ≠ Q and T ≤ P + Q + min(P, Q). The core greedy and trap analysis were checked by hand. The 28,743 + 18,421 + 7,560 + 19,079 runs reproduce.
 - **Proved: k-frontier invariant.** Greedy can fail only in tail traps.
 - **Dense regime:** segments have O(1) steps, so every step lies in a tail. A multi-bridge theorem needs arithmetic tail analysis or spirals. Still open.
+
+## 2026-11-24 Claude: simultaneous-contraction round audited (claims/simultaneous_contraction_audit.md)
+- **Accepted:** reverse-rank contraction, the exact pseudoforest expansion criterion plus interval refinement, and the high-mass family (dominant-padding type).
+- **Verified:** the three-edge {±50} obstruction.
+- **Not reproduced:** the 8.49M exhaustive claim (no code supplied).
+- **Gaps:** the contraction does not iterate (contracted sets have unequal sign counts), and core selection is the known cycle-choice obstruction.
