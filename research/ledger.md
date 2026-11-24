@@ -765,3 +765,9 @@ Offsets c with (2M+3)/3 <= c < M are impossible for tight half-walks; small a mu
   - A 497-element expansion certificate.
   - The remaining "uniform expansion theorem", stated precisely as the open target.
 - **Status:** all of its content is unaudited here. Treat it as `candidate`.
+
+## 2026-11-24 Claude: audit of "bounded-span reduction / independent-switch closure" submission (claims/bounded_span_switch_audit.md)
+- **Not a new reduction.** The "bounded-span conjecture" (span ≤ P+Q) is IRC with its bound weakened by 1. It lies between IRC and IRC+, and the balanced lift is the existing integer reduction. Its 103,129-set table reproduces.
+- **New candidates.**
+  - The independent-switch closure theorem, checked by hand.
+  - Switch-budget examples, reproduced: p = 1009 needs 2 switches, p = 2003 needs 4.
