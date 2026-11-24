@@ -789,3 +789,8 @@ Offsets c with (2M+3)/3 <= c < M are impossible for tight half-walks; small a mu
 ## 2026-11-24 Claude: peak-removal round audited (claims/peak_removal_audit.md)
 - **Accepted:** the two-path separation from 0 (Thm 1), peak removal, and the optimal span max(P, Q) when T < P + Q. Thm 1 passes 61,854 exhaustive cases.
 - **Scope:** sparse and moderate mass only. The dense case is still open.
+
+## 2026-11-24 Claude: inverse-pair lift tested (claims/inverse_pair_lift.md)
+- The robust reinsertion of ±x fails for 12% of reduced walks.
+- The existential version fails only on 18 tiny symmetric cases.
+- Same cycle-choice obstruction as before; no proof route for the dense case.
