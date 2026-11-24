@@ -808,3 +808,8 @@ Offsets c with (2M+3)/3 <= c < M are impossible for tight half-walks; small a mu
 - **Unequal-cardinality, reserved-block and localization results:** accepted as candidates. The 28,582-instance table reproduces.
 - **Proved: run-count obstruction.** A cycle with span ≤ D needs ≥ ⌈T/D⌉ ascending runs. So peak removal and protected paths only reach T ≤ P + 2Q, and the dense case needs Ω(n)-run constructions.
 - **Direction:** spirals and RS+, not path separation.
+
+## 2026-11-24 Claude: protected two-path theorem (two-frontier greedy) audited (claims/protected_greedy_audit.md)
+- **Accepted as a candidate theorem:** BS for P ≠ Q and T ≤ P + Q + min(P, Q). The core greedy and trap analysis were checked by hand. The 28,743 + 18,421 + 7,560 + 19,079 runs reproduce.
+- **Proved: k-frontier invariant.** Greedy can fail only in tail traps.
+- **Dense regime:** segments have O(1) steps, so every step lies in a tail. A multi-bridge theorem needs arithmetic tail analysis or spirals. Still open.

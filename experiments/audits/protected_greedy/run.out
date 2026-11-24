@@ -1,0 +1,8 @@
+12 17468
+TOTAL 28743 special d=h cases 754
+RANDOM 18421 special 9
+h>Q: 7560
+Equal extreme cases: 19079
+Insertion obstruction: Counter({'collision': 21, 10: 8, 9: 1})
+
+[exited with code 0]
