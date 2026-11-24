@@ -891,3 +891,7 @@ Offsets c with (2M+3)/3 <= c < M are impossible for tight half-walks; small a mu
 - **Verified:** the short-window trap (p = 23, n = 19) and the det −29 rational-rank flaw. The flaw itself was already recorded 2026-11-22 (det −17); this is a second instance.
 - **Accepted:** the torsion-aware certificate and the symbolic search, sound in outline, run for n ≤ 6.
 - **Best concrete next step on this line:** a sound re-verification of CDFV |A| ≤ 20.
+
+## 2026-11-24 Claude: singular-projection round audited (claims/singular_projection_audit.md)
+- **Correct (hand-checked):** singular-projection elimination, single-defect swap repair, the permanent/Nullstellensatz certificate, and forced chord relations. The verifier is reproduced.
+- **Scope:** for random zero-sum sets, dim K = 1 in 100% of cases once n ≳ 12 (p = 23, 31, 37). So the rank-one case is the generic dense case, and the method is confined to n ≈ log₂ p.
