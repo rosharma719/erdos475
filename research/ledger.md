@@ -785,3 +785,7 @@ Offsets c with (2M+3)/3 <= c < M are impossible for tight half-walks; small a mu
 - **k ≥ 3 path separation is false.** An explicit 3-path counterexample is recorded.
 - **New, proved: top-gap lift.** If p₁ > q₁, p₁ − p₂ > q₂ and p₁ − q₁ ∉ P, then G\* at every root reduces to a smaller instance. Verified on 3,001 lifted walks.
 - **What remains of the G\* induction:** pairs with no top gap on either side (the dense case). Conjecture still open.
+
+## 2026-11-24 Claude: peak-removal round audited (claims/peak_removal_audit.md)
+- **Accepted:** the two-path separation from 0 (Thm 1), peak removal, and the optimal span max(P, Q) when T < P + Q. Thm 1 passes 61,854 exhaustive cases.
+- **Scope:** sparse and moderate mass only. The dense case is still open.
