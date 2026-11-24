@@ -802,3 +802,9 @@ Offsets c with (2M+3)/3 <= c < M are impossible for tight half-walks; small a mu
   - (b) Outward spiral, for r ∈ {b₂, b₃}.
 - **Proved corollary: IRC+ for one-merge near-symmetric pairs** P = (S ∖ {r}) ∪ {r + y}, N = S ∪ {y} with r + y > M, for arbitrary (including dense) S. This is the first proved dense asymmetric family with unbounded index in the IRC route.
 - **Open:** RS+ for all roots. Data shows half-walks are not enough. The tight family is the key case.
+
+## 2026-11-24 Claude: protected-path round audited (claims/protected_paths_audit.md)
+- **Forbidden-height lemma:** this is the grasshopper theorem (IMO 2009 P6).
+- **Unequal-cardinality, reserved-block and localization results:** accepted as candidates. The 28,582-instance table reproduces.
+- **Proved: run-count obstruction.** A cycle with span ≤ D needs ≥ ⌈T/D⌉ ascending runs. So peak removal and protected paths only reach T ≤ P + 2Q, and the dense case needs Ω(n)-run constructions.
+- **Direction:** spirals and RS+, not path separation.
