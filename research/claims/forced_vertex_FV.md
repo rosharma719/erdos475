@@ -78,3 +78,18 @@ Here "admissible" means the pair sums are distinct and outside B ∪ {0, x, y}. 
 **DOM (domino conjecture).** For zero-sum B, t ∈ B, and an external split x + y = t, *any* family Π of disjoint admissible pairs in B ∖ {t} (distinct sums, outside B ∪ {0, x, y}) is realised as adjacencies in some valid t-rooted cycle avoiding x. Π = ∅ is restricted FV; |Π| = 1 is AFV, which is far stronger than SIA.
 
 **Induction structure (proved, easy).** Let π = (u, v) ∈ Π and C_π = (B ∖ π) ∪ {s}. Then Π ∖ {π} stays admissible in C_π, and expansion preserves the other adjacencies. So DOM(B, Π) ⟺ [some cycle of C_π realising Π ∖ {π} and avoiding x also has its s-step expandable]. Since expandability is exactly "π adjacent", the naive induction on |Π| is circular. A proof needs a mechanism that *chooses* the C_π-cycle: this is the simultaneous-expansion (pseudoforest) problem of the reverse-rank rounds, now in F_p with no span constraint.
+
+## Update 4 (2026-11-24): DOM, the orientation graph, and switching (GPT round, audited)
+- **Cross-check.** GPT's independent SIA census matches mine exactly: 23,602 pairs at p = 17 and 136,907 at p = 19.
+- **DOM with maximal families at p = 19: exhaustive, 436,183 tests, 0 failures** (`afvk.c`, Claude).
+- **GPT samples:** 500,000 maximal and common-difference-biased matchings at p = 23 and 29, all succeed; one node-capped case was resolved explicitly.
+- **Accepted (hand-checked).**
+  - The exact polynomial encoding.
+  - The **orientation-graph criterion**: for a fixed contracted cycle, simultaneous expansion is possible iff each component is a tree with ≤ 1 forbidden vertex or unicyclic with none. This is the pseudoforest theorem of `simultaneous_contraction_audit.md`, now in F_p.
+  - The **closed count** N = 2^|U|·∏_{T ∈ 𝒯₀} |V(T)|. Every factor is < p, so N ≢ 0 (mod p) iff N > 0.
+- **Verified obstructions** (`dom_certificates.py`):
+  - the joint top Nullstellensatz coefficient vanishes (p = 13);
+  - the total witness count is 22 ≡ 0 (mod 11);
+  - two dominoes can each be expandable but not together (p = 13);
+  - a contracted cycle can be isolated under all 21 tail transpositions, while a 4-segment reversal escapes it (p = 13).
+- **Exact remaining gap.** Some valid x-avoiding contracted cycle of C must have a feasible orientation graph. This is cycle selection again, now with an exact feasibility test.
