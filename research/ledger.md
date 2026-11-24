@@ -832,3 +832,8 @@ Offsets c with (2M+3)/3 <= c < M are impossible for tight half-walks; small a mu
 - **Accepted:** the interval-walk lemma and quotient-block lifting (a safe expansion: every bounded core cycle lifts). The triple-block family (T/D → ∞, unequal sign counts) and the band solution of the X_s family are verified.
 - **Proved ceiling:** n ≤ D/2 + 1. Quotient separation cannot apply to any A ⊆ F_p with |A| > (p + 1)/2.
 - **Dense regime:** still open.
+
+## 2026-11-24 Claude: overlapping quotient lifting audited (claims/overlap_lifting_audit.md)
+- **Accepted:** the weighted-overlap theorem with peeling, mixed-sign reflection capacity, and the forest exact criterion. The ±1-containing family and the incompatible forest core are verified.
+- **Verified negative result:** {−7, −6, −5, −4, 2, 3, 4, 6, 7} has no admissible quotient partition for any g. Universal quotient contraction is false.
+- **Status:** dense regime still open, and the cycle-choice problem is back.
