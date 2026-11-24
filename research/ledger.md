@@ -920,3 +920,9 @@ Offsets c with (2M+3)/3 <= c < M are impossible for tight half-walks; small a mu
 - So Erdős #475 reduces to **bounded size**: make C explicit, plus prove Graham for |A| < C at all primes. See `STRATEGY.md` §5.
 - The dense-regime programmes (IRC, BS, spiral) target a case that is already proved.
 - **Correction (same day).** NTV §6 fixes ε = 10⁻⁵ and D = 4·10⁵. The local-repair condition needs q ≲ 2^(−40D), so C ≳ 2^(1.6·10¹²). The proof architecture also forces C ≥ about e^(10⁵). So the "finite check" is infeasible, and dense sets below C (all practical sizes) remain open. See STRATEGY §5.
+
+## 2026-11-24 Claude: effective-threshold round audited (claims/effective_threshold_audit.md)
+- **Verified against the NTV text:** the Z_p simplifications (ε < 1/28500), the local-repair constants (Lemma 4.4 has 2^(26D²)), and the retuned sparse threshold 2^(9.4·10¹⁰).
+- **Blocked:** Theorem B.1 (MP, very dense sets) is non-explicit.
+- **Conditional explicit range:** 2^(9.4·10¹⁰) ≤ |A| < p − p^(1 − 2^(−20)).
+- **This cannot finish the conjecture:** sizes below about 2^(9.4·10¹⁰) stay open. Next target if continuing: an explicit near-complete theorem for polynomially small complements.
