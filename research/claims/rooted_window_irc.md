@@ -79,3 +79,30 @@ Then W = (+(M+1), −b, δ_2, …, δ_last, +M, −δ^rev, −M) is a valid orde
 - **Census** (exact, GPT; not re-run): safe reductions exist for 82% (magnitudes ≤ 5), 71% (≤ 6) and 76% (≤ 7, size ≤ 9) of rooted cases. All three menu items are needed.
 - **Counting inequality** (proved): lift fraction ≤ |W(A, r)| / |W(B, s)|, because expansion is injective. Smallest observed best-fractions: 1/37 (symmetric P = N = {1, 2, 3, 4}) and 1/7 (nonsymmetric). Whether a uniform positive bound exists is open.
 - **Consequence.** An induction for G\* cannot avoid choosing the smaller cycle with this menu. The cycle-choice obstruction is now confirmed directly for G\*. G\* itself remains open, and so does a counting route (a uniform positive lifting fraction, conjecture LF).
+
+## Update 2 (2026-11-24): the counting route LF (GPT round, audited)
+**Definition.** L(A, r) is the maximum, over admissible reductions ρ and compatible roots, of the fraction of valid reduced walks that lift.
+
+**Verified** (`lf_extremal_verifier.py` reproduces all five extremal cases exactly, with certificates):
+
+| Instance | Root | L | Best reduction |
+|---|---|---|---|
+| {−5, −4, −3, −2, 1, 2, 5, 6} | 2 | 1/7 | (−2, 6): 2 of 14 reduced walks lift |
+| {−9, −8, −6, −2, −1, 7, 9, 10} | 7 | 5/9 | |
+| {−12, −11, −9, −7, 2, 4, 6, 8, 9, 10} | 9 | 59/76 | |
+| ±[1..4] | 2 | 1/37 | |
+| ±[1..7] | 1 | 16/183 | |
+
+**Census (GPT, not re-run).**
+- The minimum over nonsymmetric no-top-gap pairs is 1/7 at magnitudes ≤ 7 (exhaustive). The magnitude-10 and 12 samples are capped at ≤ 10 steps.
+- Dense samples at magnitudes 10–12 are mostly node-capped, so they are inconclusive.
+- **No evidence of decay, and no evidence of a uniform bound.**
+
+**Proved (hand-checked).**
+1. *LF needs only nonemptiness of the smaller walk set:* ⌈η·D_ρ⌉ ≥ 1. Correct.
+   - **Caveat (Claude).** "Weak LF" (L > 0) is nearly equivalent to G\* itself. Compressing a valid walk by a contraction always gives a simple walk of B that lifts back to it. Its only possible failure is leaving B's smaller window. So the content of the counting route is the uniform constant η.
+2. *Compression-fiber bounds:* C_ρ / (M_ρ·D_ρ) ≤ L_ρ ≤ C_ρ / D_ρ, with M_ρ = 2 for contractions and k(k − 1) for inverse pairs.
+3. *Hole criterion:* a window-preserving contraction lifts iff v + x or v + y is a hole, where |H| = h + 1 and h is the window slack.
+4. *Inverse-pair arc criterion:* K + d ⊆ J ∪ H. **Chain decomposition:** the arc splits into at most h + 2 arithmetic chains of difference d, each ending at a distinct hole. When h = 0 there are exactly two chains, and |K| ≤ (h + 2)⌊(W − 1)/x⌋.
+
+**Open gap.** The distribution of holes and arithmetic-chain arcs among valid rooted walks with a given step set. This is the counting estimate LF needs, in the bounded-slack (dense) regime.

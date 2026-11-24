@@ -931,3 +931,8 @@ Offsets c with (2M+3)/3 <= c < M are impossible for tight half-walks; small a mu
 - **G\*:** survives GPT's adversarial tests, including the Q₅₉ lifts.
 - **Safe-reduction induction is refuted (verified):** P = {1, 2, 5, 6}, N = {2, 3, 4, 5}, r = 2 has 2 walks, and the best lifting fraction over the full menu is 1/7.
 - **The cycle-choice step is unavoidable for G\*.** A uniform positive lifting fraction (LF) is open.
+
+## 2026-11-24 Claude: LF counting round audited (rooted_window_irc.md update 2)
+- **Verified:** five extremal lifting fractions (1/7 nonsymmetric; 1/37 and 16/183 for ±[1..m]).
+- **Proved:** fiber bounds, the hole criterion, and the arithmetic-chain decomposition for inverse-pair lifts.
+- **Status:** LF neither proved nor refuted. Weak LF is nearly circular. The open estimate is the hole/chain distribution among rooted walks.
