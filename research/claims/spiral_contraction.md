@@ -74,3 +74,19 @@ GPT follow-up round, pasted in chat. The inline verifier was rerun here (`v59.py
    - Consistent with all data: p ≤ 23 exhaustive, GPT's p = 29 certificates, and the p = 31 sample.
 2. **Sets with I(A) ≥ 2** (every dilation unbalanced by ≥ 2p): a structured, rare class (quadratic-residue-like). Classify them, then treat them separately, for example by modular half-walks (MSC2) or algebraic constructions.
 3. **Caution on MSC2.** A modular half-walk is no longer an explicit construction: finding δ with distinct D mod p and D ∩ (D + M) = ∅ is itself a Graham-type sequencing problem. MSC2 loses the "no collision analysis" advantage. Prefer SC2-I plus a structural treatment of I ≥ 2.
+
+## Update 2 (2026-11-24): SC2-I refuted; compact-spiral route CLOSED
+GPT round pasted in chat. Its inline verifier was rerun, together with a class-number check (`v_sc2i.py`).
+
+**Verified or proved:**
+- **I(Q_p) = h(−p) for p ≡ 3 (mod 8), and 0 otherwise.** Checked on 22 primes up to 251 (h up to 7); this follows from Dirichlet's formula.
+- **Symmetric-padding invariance** (I depends only on the asymmetric part). The quartic subgroup H ⊆ F₁₈₁^× with any 23 of the 45 free inverse pairs gives I = 3, a trivial stabilizer, and C(45, 23) ≈ 4.1·10¹² sets.
+  - So exceptional sets need **not** be near multiplicative subgroups. My suggested classification was wrong.
+- **Extreme-label obstruction: CORRECT (hand-checked).** If F = +1, both crossing blocks represent positive labels, so −m ∉ A. Symmetrically for F = −1. This holds for any block lengths.
+- **SC2-I counterexamples:** (Q₅₉ ∖ {15, 21, 26}) ∪ {2, 8, 52} and (Q₅₉ ∖ {22, 36, 49}) ∪ {2, 13, 33}. Each has I = 1, and every eligible dilation contains the forbidden extreme label. **VERIFIED.**
+- **Exchange stability:** |I(A) − I(B)| ≤ k − 1. CORRECT.
+- **The Q₅₉ three-exchange census** (837 counterexample orbits) and the p = 29 pair-only coverage (331,184/331,184) were not re-run here.
+
+**Verdict:** compact spiral contraction (SC, SC2, SC2-I) is **closed** as a universal route, under the agreed stop rule. Its failures come from the two-layer geometry, which longer blocks cannot fix.
+- **Reusable results:** the obstruction theory (the imbalance and extreme-label invariants, padding invariance, exchange stability, the class-number link), the triple-packing bound, the |A| ≥ p − 5 re-proof, and exhaustive SC2 coverage at p ≤ 29.
+- **MSC2 (modular half-walks) was not pursued:** it reintroduces a Graham-type avoidance problem.

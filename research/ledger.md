@@ -907,3 +907,10 @@ Offsets c with (2M+3)/3 <= c < M are impossible for tight half-walks; small a mu
 - **Verified:** the triple-packing lower bound. The p = 101 example refutes the lb + 2 rule.
 - **New:** random half-density sets have I = 0. Failures are quadratic-residue-type sets, and I(Q_p) = h(−p) at p = 59 and 83.
 - **Revised target:** SC2-I (compact SC2 for all A with I(A) ≤ 1) plus a separate structural treatment of I ≥ 2.
+
+## 2026-11-24 Claude: SC2-I refuted; compact-spiral route closed (claims/spiral_contraction.md, update 2)
+- **Verified:**
+  - the extreme-label obstruction and two SC2-I counterexamples at p = 59;
+  - symmetric-padding invariance, with a 4.1·10¹²-set exceptional family at p = 181 having trivial stabilizers;
+  - I(Q_p) = h(−p) for p ≡ 3 (mod 8), on 22 primes.
+- **Closed:** the compact-spiral route, per the stop rule. Its obstruction theory is kept as a result.
