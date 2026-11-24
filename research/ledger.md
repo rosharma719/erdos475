@@ -885,3 +885,9 @@ Offsets c with (2M+3)/3 <= c < M are impossible for tight half-walks; small a mu
 - **Verified:** a counterexample to GAP B as stated. A prescribed compact flexible-pairing core can be unrepairable, while another core of the same set works.
 - **Accepted:** singleton-group insertion, the block-extrema theorem and its √D imbalance barrier, and constant-modulus triple lifting (dense constructed families).
 - **Open:** compatible decomposition of a *given* dense set. This is the conjecture.
+
+## 2026-11-24 Claude: modular repair round audited (claims/modular_repair_audit.md)
+- **Accepted:** the dissociated block-repair theorems (chain avoidance; minimum obstructions are the singleton and complement layers; union bound). The minimal-counterexample conditions only constrain blocks of size ≤ log₂ p.
+- **Verified:** the short-window trap (p = 23, n = 19) and the det −29 rational-rank flaw. The flaw itself was already recorded 2026-11-22 (det −17); this is a second instance.
+- **Accepted:** the torsion-aware certificate and the symbolic search, sound in outline, run for n ≤ 6.
+- **Best concrete next step on this line:** a sound re-verification of CDFV |A| ≤ 20.
