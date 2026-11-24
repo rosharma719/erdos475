@@ -837,3 +837,11 @@ Offsets c with (2M+3)/3 <= c < M are impossible for tight half-walks; small a mu
 - **Accepted:** the weighted-overlap theorem with peeling, mixed-sign reflection capacity, and the forest exact criterion. The ±1-containing family and the incompatible forest core are verified.
 - **Verified negative result:** {−7, −6, −5, −4, 2, 3, 4, 6, 7} has no admissible quotient partition for any g. Universal quotient contraction is false.
 - **Status:** dense regime still open, and the cycle-choice problem is back.
+
+## 2026-11-24 Claude: modulus-free contraction + zero-pair absorption audited (claims/modulus_free_audit.md)
+- **Accepted:**
+  - Thm 1: the only contraction-resistant sets are {±g, …, ±kg}.
+  - Thm 2: P ≠ Q ⇒ an admissible extreme contraction exists (mod-D translation argument).
+  - The equal-extreme classification.
+  - Zero-pair absorption, Thm 3 (16,026 brute-force cases) and Thm 4.
+- **Scope:** zero-pair absorption needs the smaller cycle span < 4M/3, which is stronger than induction gives. Targets A and B are the cycle-choice / compression problem. Still open.
