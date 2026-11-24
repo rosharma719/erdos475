@@ -823,3 +823,7 @@ Offsets c with (2M+3)/3 <= c < M are impossible for tight half-walks; small a mu
 ## 2026-11-24 Claude: reverse-rank core selection audited (claims/reverse_rank_audit.md)
 - **Accepted:** Lemma 1, the degree ≤ 2 / one-double-edge core theorem, and Thms 2–3. The obstruction and repair are verified, and the rerun matches exactly.
 - **Scope:** everything needs t < K, which holds for 0% of spread-out sets with k ≥ 4. These results cover clustered sets, not the dense regime. Still open.
+
+## 2026-11-24 Claude: flexible-pairing round audited (claims/flexible_pairing_audit.md)
+- **Accepted:** the compact-core theorem with flexible pairing (|X| = |Y|, t < K), the inverse-pair extension (candidate), and the congruence-separated theorem. All examples verified.
+- **Scope:** two-monotone-path cores need t ≤ D, the run-count ceiling. Dense sets need many-climb (spiral) cores. Still open.
