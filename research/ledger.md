@@ -914,3 +914,8 @@ Offsets c with (2M+3)/3 <= c < M are impossible for tight half-walks; small a mu
   - symmetric-padding invariance, with a 4.1·10¹²-set exceptional family at p = 181 having trivial stabilizers;
   - I(Q_p) = h(−p) for p ≡ 3 (mod 8), on 22 primes.
 - **Closed:** the compact-spiral route, per the stop rule. Its obstruction theory is kept as a result.
+
+## 2026-11-24 Claude: literature correction, the dense regime is already proved
+- NTV (arXiv:2610.40712, Thm 1.5) and Kuang–Wang (arXiv:2610.34424, Thm 1.6) prove that every S ⊆ G ∖ {0} with |S| ≥ C (absolute, non-explicit) in every finite abelian group is rearrangeable.
+- So Erdős #475 reduces to **bounded size**: make C explicit, plus prove Graham for |A| < C at all primes. See `STRATEGY.md` §5.
+- The dense-regime programmes (IRC, BS, spiral) target a case that is already proved.

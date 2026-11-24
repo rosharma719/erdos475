@@ -70,3 +70,25 @@ These carry the strongest data in the repo, and the open step is stated exactly.
 
 ## 4. Recommendation
 Run the rank-1 experiment next. It is a single, well-defined computation with a clear stop rule. It builds on the only construction class that has ever produced dense-regime proofs, and it turns the problem from cycle choice into a covering question. Pursue rank 3 in parallel regardless, since it yields durable value whether or not the conjecture falls.
+
+## 5. Update (2026-11-24): the true endgame is bounded size, so the dense regime is already settled
+Primary sources were read from arXiv; erdosproblems.com returned 403 and was not read.
+- **Nguyen–Tran–Vu, arXiv:2610.40712, Thm 1.5:** "There is an absolute constant C such that … for every finite abelian group G, any set S ⊆ G∖{0} of size at least C has a valid ordering." Also: "the constant C is independent of the ambient group G."
+- **Kuang–Wang, arXiv:2610.34424, Thm 1.6:** the same statement, with an absolute n₀.
+- **Neither gives a numerical value.** Their internal constants are non-explicit ("c_D sufficiently small", C ≥ 10²⁵, |G|^(−1/9500)-type bounds; taken from the fetch's summary of the full text, not verbatim).
+
+**Consequence.** Graham holds for every |A| ≥ C at every prime. The dense regime that all integer, spiral and contraction routes targeted is **already proved** (non-effectively). The remaining problem is exactly:
+
+> **(E) make C explicit, and (F) prove Graham for all |A| < C at every prime.**
+
+**Tools for (F):**
+- per-size certificates valid in every characteristic: CN c_k (done for k ≤ 13, `polynomial_cn.md`) and the torsion-aware symbolic search (`modular_repair_audit.md`);
+- CDFV's |A| ≤ 20 claim for all abelian groups, which needs a sound re-verification (ledger 2026-11-22);
+- the effective small-set theorems (Kravitz) for p large relative to k.
+
+**The conjecture is finished if C can be pushed down to the verified small-size range (about 13–20) and that range is soundly certified.** The obstacle is (E): the proved C is non-explicit and almost certainly astronomically large.
+
+**Revised ranking:**
+1. Quantify (E): extract an explicit C from NTV, the cleaner "absolute C" proof, or at least its order of magnitude. Identify which lemma dominates and whether a structural argument could replace it for moderate sizes.
+2. Push (F) upward: soundly re-verify CDFV (k ≤ 20), and extend the all-characteristic per-size certificates as far as feasible.
+3. Dense-regime constructions are now of independent interest only. They no longer advance the all-primes problem.
