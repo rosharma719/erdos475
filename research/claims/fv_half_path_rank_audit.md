@@ -150,4 +150,16 @@ A union bound over shared vertices proves (ii) only when rs ≪ p, i.e. in the s
 - 0 failures for all zero-sum sets in [−9, 9] at n = 3…8, in [−12, 12] at n = 6, and in [−11, 11] at n = 7, for every t and every admissible x.
 - With the 2x ≠ t exclusion removed, the code correctly reports the forced midpoints of symmetric sets.
 
-**Status.** Proof of PA: in progress.
+**Structure found (`fv_integers_signsorted.py`).** It is always enough to put the tail after t in sign-sorted order: all positives then all negatives, or all negatives then all positives. Checked: K = 7, n ≤ 6, 51,544 (B, t, x) tests, 0 failures. This is the integer argument of Kravitz (arXiv:2407.01835, Thm 1.3) with one extra point to avoid.
+
+**Reduction.** Take t > 0, positives P and negative magnitudes N. Let Q be P in reversed order, w = t + ΣP − x, and write Q_k, N_j for prefix sums. The positives-first order works iff these sets are pairwise disjoint and all different from w:
+- the nonempty prefix sums Q_1, …, Q_a of Q;
+- the proper prefix sums N_1, …, N_{b−1} of N.
+
+The negatives-first order is the mirror image, and covers x = t + ΣP.
+
+**Proof status.** Kravitz's induction removes the last element of the side with the larger sum. It goes through except in a two-element degenerate case, which needs two-point monotone avoidance; that can fail, e.g. X = {1, 2} with F = {1, 2}. Not finished.
+
+**Priority: low.** Via the transfer lemma, this only covers n ≲ 2 log p / log log p, which is the Kravitz range. Hole absorption H(ε) is the main target.
+
+**L at p = 23, final.** Every instance at n = 7–18 is certified (n = 17: 17,680; n = 18: 4,320), with 0 inconclusive. n = 19 is still running.
