@@ -51,6 +51,6 @@ A **graceful-segment lemma**, stated for every r ≥ r₀: every set W of 6 nonz
   - Cause: large differences are rigid in a graceful permutation. r − 1 must join 1 and r; r − 2 must join (1, r − 1) or (2, r); and so on.
 - **Dilation removes the large differences.**
   - The lemma only needs W = λH ∪ {s} for *some* unit λ. By Minkowski / Dirichlet simultaneous approximation, some λ makes every |λh| ≤ C·p^{4/5} = o(r).
-  - With magnitudes ≤ r/3, prefix completion already succeeds in 21/30 trials at r = 30 under the same small node budget (`gcomp2.c`). Larger r is still running.
+  - With magnitudes ≤ r/3, prefix completion already succeeds in 21/30 trials at r = 30 under the same small node budget (`gcomp2.c`). Runs at r = 40 and 60 timed out at 15 minutes each without finishing: the brute-force search over all orders × starts × completions is too slow there, so they give no data.
 - **Revised lemma (the target).** For r ≥ r₀, every 6-set W of signed differences with distinct magnitudes ≤ εr occurs as consecutive differences in some graceful permutation of [1..r], with free choice of order, start point and position.
 - **Natural construction to try.** Run the zigzag through the large differences first; it uses them rigidly at the ends. Then place W in the central interval among the small differences. This needs a local graceful completion on the central interval.
