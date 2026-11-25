@@ -85,3 +85,23 @@
 **What a proof of L needs.** A lower bound on the dimension of the exterior span of path interior sets, i.e. a rank bound for "path matroid"-type configurations. That is a genuine algebraic-combinatorics problem and not obviously easier than FV itself.
 
 **Cheapest falsification test.** Run `half_path_rank.py` at p = 23 (all n) and at larger p for the dense sizes n ≈ p − 4, where the pigeonhole requirement is tightest.
+
+## 6. Proof-direction data (Claude, 2026-11-25)
+
+Scripts are in `experiments/exploration/forced_vertex/`: rankstat, halfstat, splitfrac, allsplit.
+
+**L at p = 23 (new).** Every instance at n = 7–16 is certified with 0 inconclusive (1,756,860 instances). n = 17–19 is still running.
+
+**The rank test is very lossy, and the choice of split is where it loses.**
+- `splitfrac.py`: the fraction of admissible balanced splits that the rank inequality certifies can be as low as 1/52 (p = 13, n = 9) or 1/15 (p = 17, n = 7).
+- `halfstat.py`: "some split has both ranks > D/2" fails for a few instances (3 out of 350 at p = 13, n = 7). No instance has every split certified. A proof of L would therefore have to locate rare good splits.
+- `rankstat.py`: one half is never full-rank in the odd-n cases (r = s), apart from a single instance at p = 17, n = 11.
+- **Diagnosis.** The inequality ρ_A + ρ_E > C(r+s, r) is exactly Lovász's exterior-algebra bound for cross-intersecting families. It ignores all path structure.
+
+**The exact split statement is robust (`allsplit.py`).** Call a balanced split *good* if some A-path and some E-path have disjoint interiors. Every split certified by L is good, but most good splits are not certified by L.
+- The fraction of good splits never drops below 5/7 at p ≤ 17, n = 5–11, and it rises with n: 0.80, 0.71, 0.76, 0.89, 0.95, 0.97, 0.98 for n = 5…11 at p = 17.
+- Worst cases the rank test misses entirely: at p = 13, n = 9, 52/52 splits are good while L certifies 1. At p = 17, n = 11, 207/207 are good while L certifies 24.
+
+**Revised target (SPLIT).** For every admissible instance, more than half of the admissible balanced splits are good. Any positive fraction would already imply FV.
+- Data: the minimum fraction is ≥ 0.71 at all p ≤ 17.
+- A failing split means the A-interior and E-interior families are cross-intersecting. The natural proof is then a counting or averaging argument over splits, exploiting the path structure, rather than a per-split dimension bound.
