@@ -76,7 +76,7 @@
   |---|---|---|---|---|---|---|---|---|---|---|---|---|
   | sets | 30,622 | 50,348 | 181,744 | 375,145 | 522,836 | 965,524 | 2,184,436 | 4,481,116 | 5,592,614 | 10,390,904 | 15,195,736 | 18,217,681 |
 
-- p = 157: PENDING.
+- p = 157: PENDING. (A first chunked run used a 128-bit vertex mask, which overflows at p = 157 and produced spurious "failures"; for example B = {1,2,3,4,5,6,8,128}, x = 29 has the valid ordering (1,2,3,4,5,6,128,8). That run was discarded. The code now uses 256-bit sets and reproduces the p ≤ 73 results exactly.)
 
 ## 5. Assessment of L
 
