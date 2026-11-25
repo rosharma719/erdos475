@@ -163,3 +163,21 @@ The negatives-first order is the mirror image, and covers x = t + ΣP.
 **Priority: low.** Via the transfer lemma, this only covers n ≲ 2 log p / log log p, which is the Kravitz range. Hole absorption H(ε) is the main target.
 
 **L at p = 23, final.** Every instance at n = 7–18 is certified (n = 17: 17,680; n = 18: 4,320), with 0 inconclusive. n = 19 (|B| = p − 4) was stopped at the 2-hour background limit without a result, and is not being rerun.
+
+**Kravitz lemma with one avoided value (KLw), `kravitz_avoid.py`.**
+
+*Statement.* For finite sets X, Y of positive integers and w > 0, there are orderings of X and Y such that:
+- (1) X_i ≠ Y_j for all (i, j) except (0, 0), and except (|X|, |Y|) when the two totals are equal;
+- (2) w is not an interior prefix sum of either ordering.
+
+KLw is exactly what construction A (positives first) needs, with X = the positives in reversed order and Y = N.
+
+*Data, elements ≤ 9.* Exceptions occur only at total size ≤ 6, with shapes (1,2): 72, (2,2): 232, (2,3): 90, (3,3): 2. There are none at total size 7.
+
+*But there is an infinite exception family that the bound K ≤ 9 hid.* Let L be the side with the larger sum and S the other side. If L = {ΣS, w}, both orderings of L fail:
+- (ΣS, w) collides with S at the index pair (1, |S|);
+- (w, ΣS) has w as an interior prefix sum.
+
+So KLw alone cannot prove FV over ℤ. A proof must combine construction A, the mirror construction B, and choosing which element to remove in Kravitz's induction so as to steer away from this family. That is case analysis, still unfinished.
+
+*Small n are covered by the finite results.* Reducing an integer counterexample modulo a large prime gives an F_p counterexample. So FV over ℤ for n ≤ 7 follows from FV at every prime for n ≤ 7.
