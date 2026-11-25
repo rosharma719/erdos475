@@ -1054,3 +1054,12 @@ Source: GPT PDF with 16 embedded files, now in `experiments/checks/cycle_selecti
   - `fv_fixed_size.c`, p = 67, n = 7: 1,232,819 sets, 0 failures. With the p ≤ 31 census, **FV holds for |B| = 7 at all primes.**
   - n = 8: 0 failures at every prime from 29 to 73; p = 157 is pending.
 - **Open:** lemma L, a pigeonhole-strength rank inequality for every n ≥ 7.
+
+## 2026-11-25 FV proved for |B| ≤ 8 at every prime (claims/fv_half_path_rank_audit.md)
+- **Method.** Prime reduction: D_8 ⊆ {primes ≤ 73} and q_8 = 157.
+- **Checks, all with 0 failures.**
+  - Every prime from 29 to 73.
+  - p = 157: 2,367,618,494 sets, which equals C(155,7)/157 exactly.
+  - Primes p ≤ 31 were already covered by the earlier census.
+- **Bug fix.** An earlier p = 157 run used a 128-bit vertex mask, which overflowed and produced spurious failures. It was discarded. The fixed code (`fv_fixed_size.c`, 256-bit sets) reproduces every p ≤ 73 result.
+- **Complement-5 programme** (claims/complement5_graceful.md). Contractions of graceful-permutation cycles cover every zero-sum 5-hole orbit at p ≤ 31. What remains is a graceful-segment lemma, which has been sent to Astra.

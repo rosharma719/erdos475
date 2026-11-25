@@ -76,7 +76,8 @@
   |---|---|---|---|---|---|---|---|---|---|---|---|---|
   | sets | 30,622 | 50,348 | 181,744 | 375,145 | 522,836 | 965,524 | 2,184,436 | 4,481,116 | 5,592,614 | 10,390,904 | 15,195,736 | 18,217,681 |
 
-- p = 157: PENDING. (A first chunked run used a 128-bit vertex mask, which overflows at p = 157 and produced spurious "failures"; for example B = {1,2,3,4,5,6,8,128}, x = 29 has the valid ordering (1,2,3,4,5,6,128,8). That run was discarded. The code now uses 256-bit sets and reproduces the p ≤ 73 results exactly.)
+- **p = 157 (q_8): 2,367,618,494 sets, 0 failures.** This is all 40 chunks of the corrected 256-bit run. The count equals C(155,7)/157 exactly, so every zero-sum 8-set containing 1 was checked. An earlier 128-bit run overflowed and was discarded.
+- **Hence FV holds for every |B| = 8 at every prime, and so FV is proved for all |B| ≤ 8.**
 
 ## 5. Assessment of L
 
