@@ -1046,3 +1046,11 @@ Source: GPT PDF with 16 embedded files, now in `experiments/checks/cycle_selecti
 - **Counterexample.** p = 13, B = {1, 3, 4, 5, 7, 9, 10}, t = 1, x = 2.
 - **Reproduction.** The script and the census through p = 19 (6,076 failures out of 7,186,240) both reproduce.
 - **Status.** Minor result; FV is still open.
+
+## 2026-11-25 Astra: FV reduced to a half-path rank lemma L; FV proved for |B| = 7 at every prime (claims/fv_half_path_rank_audit.md)
+- **Half-path rank criterion and prime reduction: both proofs checked, both correct.** A size-n FV failure at any prime transfers to a prime in D_n ∪ {q_n}.
+- **Verifier reproduced exactly:** 133,000/133,000 at p ≤ 19, and 70,356/70,356 at p = 29 with n = 6.
+- **Claude.**
+  - `fv_fixed_size.c`, p = 67, n = 7: 1,232,819 sets, 0 failures. With the p ≤ 31 census, **FV holds for |B| = 7 at all primes.**
+  - n = 8: 0 failures at every prime from 29 to 73; p = 157 is pending.
+- **Open:** lemma L, a pigeonhole-strength rank inequality for every n ≥ 7.
