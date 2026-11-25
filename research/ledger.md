@@ -1016,3 +1016,18 @@ Patch `erdos475_changes.patch`, extracted from the uploaded PDF. It adds `experi
 - **Infinite family (proved; extension lemma hand-checked).** U_a = {−2, −3, 4, −a, a + 1}, 5 ≤ a < a + 1 ≤ (p − 1)/2, with *any* disjoint symmetric padding, via the two-path extension P′ = (u, −Q), Q′ = (v, −P) for u, v > d. Python check: 18,434 orderings at odd moduli 13–31. It generalises to 4j + 5 unpaired labels.
 - **Centered lifts.** Every zero-sum five-set has a dilation whose centered representatives sum to 0 in ℤ, for p ≥ 29 (Minkowski bound (192/115)^{1/4} p^{3/4}); the only small-p exception is the p = 11 orbit of {1, 3, 4, 5, 9}. Census reproduced at p ≤ 23.
 - **Obstruction.** The inner labels {6, −3, −4, 5, −5} admit no two-path representation in [0, 6].
+
+## 2026-11-25 Cycle-selection round audited (claims/cycle_selection_audit.md)
+Source: GPT PDF with 16 embedded files, now in `experiments/checks/cycle_selection/`. **All 10 verifiers reproduce exactly.**
+
+- **Gap-capacity theorem (proof checked).** It covers any |U| and any radius. Suppose U's positive labels and its negative magnitudes can each be packed into gaps between paired magnitudes above L, with each gap's sum ≤ its capacity. Then A has a valid ordering, with an admissible contraction marked.
+  - Five labels: two gaps of capacity ≥ L and ≥ max(L, ⌊(4L−2)/3⌋) suffice.
+- **Radius-12 five-unpaired theorem (computer-assisted, certificates verified).** Suppose a dilation makes U integer-zero-sum and weakly sum-free with radius ≤ 12. Then A has a valid ordering, with arbitrary padding and at every odd modulus.
+  - The 46 tight-width obstructions are closed by doubling, symbolic joining words and the terminal-gap argument.
+  - 145,106 small-modulus completions were checked, with 0 missing profiles.
+- **Dissociated-block theorem, 16k > 7n (proof checked line by line).** It replaces 9k ≥ 4n + 1. Since 2^k ≤ p, it only bites for small n.
+- **Prefix-avoidance lemma (h ≤ 9, exact Kós-type coefficients) and atom attachment (atom ≥ 2|Z| + 4, |Z| ≤ 8), both checked.** The attachment cannot handle dense five-hole cores.
+- **Prescribed split of any symmetric core (checked).** Every external split x + y = t with x, y ∉ B has a rooted witness avoiding x.
+- **Constructions.** The five-hole family F_N^× ∖ {3, 4, 8, 16, −31} for odd N ≥ 63, and explicit k-hole families for every k ≥ 5.
+- **No fixed radius captures all five-label remainders (correct).**
+- **Open:** dense asymmetric padding with no gap of capacity about L in any dilation, and remainder radius > 12. The general simultaneous-blocking step is still open.

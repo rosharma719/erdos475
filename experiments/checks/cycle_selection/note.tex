@@ -1,0 +1,71 @@
+\documentclass[11pt]{article}
+\usepackage[margin=0.9in]{geometry}
+\usepackage{amsmath,amssymb,booktabs,hyperref,fancyvrb}
+\usepackage[T1]{fontenc}
+\setlength{\parindent}{0pt}\setlength{\parskip}{5pt}
+\newcommand{\F}{\mathbb F_p}
+\newcommand{\V}{\mathcal V}
+\begin{document}
+{\small ERD\H OS PROBLEM 475 \hfill RESEARCH NOTE}\par
+{\LARGE Choosing a cycle that admits expansion}\par
+\textbf{Outcome.} The all-primes conjecture remains unresolved here. Two results address the choice of cycle. First, a local reversal on four consecutive vertices strengthens the sufficient bound for dissociated-block contraction to $16k>7n$. Second, every externally prescribed two-step split of every edge of a symmetric contracted set has a valid rooted witness. The latter covers arbitrarily dense symmetric cores. Both arguments are given below. The supplied defect certificate, a witness checker, and the earlier research and verification report follow in this file.
+
+\section*{1. What a minimal counterexample would force}
+For $A\subseteq\F^\times$, Graham asks for an ordering with distinct nonempty partial sums. If $\sum A=0$, an ordering is valid exactly when its successive vertices before the final return to zero are distinct. Write $V$ for those vertices, including zero. A cycle rooted at $t$ starts with the step $0\to t$.
+
+Take a zero-sum $A$ and distinct $x,y\in A$ for which $t=x+y\notin A\cup\{0\}$. Contract them to $t$, giving $B$. Inserting $x,y$ for the root edge adds exactly one vertex, $x$. Consequently this expansion succeeds precisely when $x\notin V$. Reversing the tail of a rooted cycle sends $V$ to $t-V$. In particular avoidance of $x$ and of $y$ are equivalent existence claims. If $A$ is a minimum-size counterexample at a fixed prime, then \emph{every} valid rooted cycle of \emph{each} admissible contraction contains both $x$ and $y$. The arguments below exploit this universal quantifier.
+
+The supplied finite certificate illustrates its importance. For $A=\mathbb F_{53}^{\times}\setminus\{12,41\}$, contracting $48+46=41$ admits both a blocked cycle and a successful one. I reran the supplied enumeration. Modulo cyclic rotation the indicated closed component contains ten defect-one states, ten undirected edges and zero exits to defect zero among all $\binom{50}{2}=1225$ transpositions at each state. The certified label swaps $(1,8),(29,37),(11,24),(49,6)$ give successive defects $2,2,1,0$. This proves the minimum barrier is two for that starting state. It leaves the all-witness question alive.
+
+\section*{2. A stronger dissociated-block bound}
+\textbf{Theorem.} Let $|A|=n$, $\sum A=0$, and let $S\subseteq A$ have $k\ge5$ elements with all $2^k$ subset sums distinct. Suppose $t=\sum S\notin A\cup\{0\}$ and $B=(A\setminus S)\cup\{t\}$ admits a valid cycle. If $16k>7n$, then $A$ admits a valid cycle.
+
+\textbf{Separator.} Suppose $A$ has no valid cycle. For each $t$-rooted $B$-cycle the family of proper nonempty subsets of $S$ whose sums lie in $V$ meets every maximal chain. Otherwise the corresponding ordering expands $t$ successfully. The sums $0,t$ come only from the empty and full subsets. Thus the family has at most $|B|-2=n-k-1$ members. A subset of size $j$ occurs on a uniformly random maximal chain with probability $1/\binom{k}{j}\le1/k$, so $n-k-1\ge k$. Put $r=n-2k-1\ge0$. The size hypothesis is equivalent to $2k>7(r+1)$, which gives $2r<k-3$.
+
+Let $a,b,c$ count forbidden singletons, co-singletons and intermediate subsets, respectively. The union bound and the size bound give
+\[
+ k\le a+b+\frac{2c}{k-1},\qquad
+ a+b+c\le k+r,\qquad c\le\frac{r(k-1)}{k-3}.
+\]
+If a singleton is missing, condition on starting the chain there. Each remaining eligible forbidden subset has conditional probability at most $1/(k-1)$, whence $b+c\ge k-1$. A missing co-singleton likewise implies $a+c\ge k-1$. Together they imply $c\ge k-2-r$ and hence $2r\ge k-3$, a contradiction. Therefore each rooted cycle contains all of $S$ or all of $t-S$. Tail reversal lets us start with a cycle containing $S$. These two layers are disjoint by dissociation (singleton and co-singleton are different subsets).
+
+\textbf{The four-vertex observation.} Consider an interval inside a consecutive run of vertices from $S$. Reversing the order of the steps between endpoints $u,v$ sends each interior vertex $s$ to $w=u+v-s$. Such a $w$ cannot be zero, since $u+v=s$ contradicts dissociation. If $w\in S$ then $w=s$: any distinct $w$ would give equal subset sums from distinct pairs, since $w=u$ or $v$ is impossible. The reflected vertices within the interval stay distinct. For a two-edge interval its single interior vertex moves, since otherwise its edge labels would be equal. For a three-edge interval at least one of the two interior vertices moves, since $2s=u+v$ has at most one solution in odd characteristic.
+
+If one of these reversals yields a simple cycle, it still has the root edge and now misses a member of $S$. Originally at most $r$ vertices could be in $t-S$ (besides $S$ the vertices are $0,t$ and $r$ others, and $0,t\notin t-S$). The reversal changes at most two, so at most $r+2<k$ vertices belong to $t-S$. This contradicts the separator. Thus every such reversal hits an occupied vertex outside $S\cup\{0\}$. Call it a blocker.
+
+For consecutive $a,b,c,d\in S$, the two shorter reversals require blockers $a+c-b$ and $b+d-c$. If these coincide at $h$, the reversal between $a,d$ requires a blocker among $a+d-b,a+d-c$. The first differs from $a+c-b$ and the second differs from $b+d-c$. Thus the four vertices require at least two distinct blockers. Three consecutive vertices require at least one.
+
+\textbf{Packing intervals.} In each run of $L$ vertices, take successive pieces of three edges, sharing just their endpoints. If two edges remain, take them as a last piece. Distinct pieces, including pieces from different runs, cannot share a blocker. Indeed, equality $u+v-s=u'+v'-s'$ would imply $u+v+s'=u'+v'+s$. Neither interior center occurs in the other piece, and the two triples on the two sides are distinct subsets of $S$ (they contain different interior centers). Dissociation forbids the equality. This reasoning applies regardless of which of the eligible reversals in a piece produced the blocker.
+
+A run therefore requires at least $\lfloor2(L-1)/3\rfloor\ge(2L-4)/3$ blockers. Between $t$ and the return to zero there are $k$ vertices of $S$ and $r$ others, giving at most $r+1$ runs. At most $r+1$ blockers are available, including $t$. Summing the run bounds gives
+\[
+ r+1\ \ge\ \sum_{\text{runs}}\left\lfloor\frac{2(L-1)}3\right\rfloor
+ \ \ge\ \frac{2k-4(r+1)}3.
+\]
+This contradicts $2k>7(r+1)$, proving the theorem. For $p=2$ the hypotheses are empty.\hfill$\square$
+
+A minimal counterexample must thus satisfy $k\le\lfloor 7n/16\rfloor$ for every admissible dissociated block of size at least five. The previous sufficient condition $9k\ge4n+1$ implies $16k>7n$. As an integer-bound comparison, $n=50,k=22$ satisfies the new test and misses the old one. Dissociation still entails $2^k\le p$, which limits how this can constrain dense counterexamples.
+
+\section*{3. Prescribing the split of a symmetric core}
+\textbf{Theorem.} Let $p$ be odd, $B=-B\subseteq\F^\times$, $t\in B$, and $x,y\in\F^\times\setminus B$ distinct with $x+y=t$. There is a simple $B$-cycle rooted at $t$ that avoids $x$. In particular one can realize either prescribed order of the two new labels. The repository's triple-absorption construction selects a suitable pair from a triple. Here the edge and its two summands are given in advance.
+
+\textbf{Proof.} Scale by $x^{-1}$, put $M=(p-1)/2$, and take $b=y/x$ in $[-M,M]$. Magnitudes $1,|b|$ are absent from the scaled symmetric core. If $b>0$, then $b<M$ (otherwise $1+b=-b$ in the core). The positive root magnitude is $d=b+1$, with $d-1$ absent. If $b<0$, then $b\le-2$. Negate the scaled configuration and write $d=-b-1$. The root is now $d$, with split $(-1,d+1)$ and magnitude $d+1$ absent.
+
+Construct a path $P$ taking the core magnitudes once each in increasing order, alternating signs with phase chosen so that $d$ is positive. Each step after the first goes from one extreme to a fresh opposite extreme, because its magnitude exceeds the entire previous span. Let $Q$ take the same steps with the last moved to the front. Both paths go from $0$ to the same integer $T$. For a positive last step $D$, its starting point is the minimum $T-D$ of $P$, uniquely attained. The interior points of $Q$ are $D$ plus prefixes of $P$ strictly before that minimum, hence lie above $T$. For a negative last step the inequalities reverse. If the last magnitude is $D$ and the preceding span is $E$ (zero for a one-step path), the union has span at most $D+E$: in the positive case its minimum is the old minimum and its maximum is at most $D$ plus the old maximum. Reflection gives the negative case. Hence the union has span less than $p$. Following $P$ and returning along $Q$ gives a simple modular cycle, using both signs of every magnitude.
+
+Write $u$ for the starting vertex of $+d$. In the positive-$b$ case, insert $(d-1,1)$. The old span before this step is less than $d-1$, so $u+d-1$ lies strictly between the previous maximum and $u+d$. Later extrema skip it. The range of $P$ is unchanged.
+
+In the negative-$b$ case insert $(-1,d+1)$. The new point $u-1$ lies just below the preceding minimum. If a next step exists, its magnitude is at least $d+2$, and it lands at or below $u-2$. Later extrema skip the inserted point. In this case the ultimate range of $P$ is unchanged. If $d$ was last, the positive terminal maximum $T$ is unchanged and the new minimum is one smaller. The union span increases by at most one to $d+E+1\le 2M$, and the interior of $Q$ is still above $T$. Thus the expanded cycle is simple also modulo $p$. Contracting the two steps and rooting at $d$ now gives a witness avoiding the first summand that was used. Tail reversal provides the other orientation. Undo the scaling.\hfill$\square$
+
+\textbf{Direct checks.} The verifier following the note constructs the specified rooted witness for every symmetric core and every ordered eligible split at $p=3,5,7,11,13,17,19,23$. The respective counts were $0,0,12,240,768,6144,16128,101376$; each constructed word passed exact label, avoidance and partial-sum checks.
+
+\section*{4. The outstanding implication}
+The two theorems constrain different contractions. To finish the minimal-counterexample argument one still has to rule out simultaneous blocking when every available core is asymmetric and all admissible dissociated blocks fall below the sufficient threshold. Neither the separator proof nor the symmetric construction imposes a contradiction on those witnesses. I found no resolution of that implication or all-primes counterexample. The finite defect calculation tests a particular transition graph; the two theorems above use analytical arguments. No priority claim is made.
+
+\textbf{Sources.} R. Sharma et al., \href{https://github.com/rosharma719/erdos475}{erdos475}, especially \texttt{research/claims/forced\_vertex\_FV.md} and the November 24 continuation report. Supplied November 24 nonlocal-barrier certificate, reproduced below. T. Bloom, \href{https://www.erdosproblems.com/475}{Erd\H os Problem 475}, records the sufficiently-large-primes result. The earlier bundled report retains its original section and page numbering.
+
+\newpage\section*{Verifier for the prescribed split}
+\VerbatimInput[fontsize=\scriptsize]{check.py}
+\newpage\section*{Supplied nonlocal-barrier certificate}
+\VerbatimInput[fontsize=\scriptsize]{barrier.py}
+\end{document}
