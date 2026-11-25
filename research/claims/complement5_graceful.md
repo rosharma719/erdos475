@@ -42,3 +42,15 @@ A **graceful-segment lemma**, stated for every r ≥ r₀: every set W of 6 nonz
 - Multi-block patterns (e.g. five 2-blocks) relax the lemma to *five separated* pairs of consecutive differences, which is presumably far easier to complete.
 
 **Status.** The architecture is validated computationally at p ≤ 31. A parametric proof (the completion lemma) is not yet done.
+
+## Update: the single 6-block with more samples, and graceful completion
+- **The single 6-block with 3,000 cycles.** It covers every orbit at p = 31 (154/154) and every inverse-free orbit at p = 29. The only orbit it misses is the paired set {1, 3, 11, 17, 26} at p = 29. So for inverse-free H, the simplest gadget (H ∪ {s} as 6 consecutive differences of a graceful α) works at every prime tested.
+- **Completion from an arbitrary prescribed prefix usually fails** (`gcomp.c`).
+  - Setup: W is 6 random signed differences with magnitudes up to r − 1. Every order of W and every start point is tried, followed by a depth-first completion (20k nodes).
+  - Results: completed 1/40 at r = 12, 2/40 at 15, 3/40 at 20, 3/40 at 25, and 4/40 at 30.
+  - Cause: large differences are rigid in a graceful permutation. r − 1 must join 1 and r; r − 2 must join (1, r − 1) or (2, r); and so on.
+- **Dilation removes the large differences.**
+  - The lemma only needs W = λH ∪ {s} for *some* unit λ. By Minkowski / Dirichlet simultaneous approximation, some λ makes every |λh| ≤ C·p^{4/5} = o(r).
+  - With magnitudes ≤ r/3, prefix completion already succeeds in 21/30 trials at r = 30 under the same small node budget (`gcomp2.c`). Larger r is still running.
+- **Revised lemma (the target).** For r ≥ r₀, every 6-set W of signed differences with distinct magnitudes ≤ εr occurs as consecutive differences in some graceful permutation of [1..r], with free choice of order, start point and position.
+- **Natural construction to try.** Run the zigzag through the large differences first; it uses them rigidly at the ends. Then place W in the central interval among the small differences. This needs a local graceful completion on the central interval.
