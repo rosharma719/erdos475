@@ -105,3 +105,19 @@ Scripts are in `experiments/exploration/forced_vertex/`: rankstat, halfstat, spl
 **Revised target (SPLIT).** For every admissible instance, more than half of the admissible balanced splits are good. Any positive fraction would already imply FV.
 - Data: the minimum fraction is ≥ 0.71 at all p ≤ 17.
 - A failing split means the A-interior and E-interior families are cross-intersecting. The natural proof is then a counting or averaging argument over splits, exploiting the path structure, rather than a per-split dimension bound.
+
+**Why splits fail (`failclass.py`).** Every failing split has one half that is poor:
+- either one half has **no** simple path at all (one side empty, never both);
+- or both families are tiny and cross-intersecting. Typical examples have (1, 3), (2, 2), (1, 7), (8, 1) and (4, 20) paths.
+
+| p, n | A empty | E empty | cross-intersecting |
+|---|---|---|---|
+| 13, 7 | 85 | 85 | 98 |
+| 17, 9 | 364 | 364 | 288 |
+| 17, 11 | 11 | 11 | 174 |
+
+**Consequence for a proof.** The obstruction lives in half-paths that are *scarce*: few paths from u to v with a fixed label set avoiding J. A proof of SPLIT needs two ingredients:
+- (i) a lower bound on half-path counts that holds for most splits;
+- (ii) a lemma that rich families (with path structure) cannot be cross-intersecting.
+
+A union bound over shared vertices proves (ii) only when rs ≪ p, i.e. in the sparse regime n ≲ 2√p. The dense regime needs a structural argument.
