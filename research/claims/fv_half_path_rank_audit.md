@@ -121,3 +121,12 @@ Scripts are in `experiments/exploration/forced_vertex/`: rankstat, halfstat, spl
 - (ii) a lemma that rich families (with path structure) cannot be cross-intersecting.
 
 A union bound over shared vertices proves (ii) only when rs ≪ p, i.e. in the sparse regime n ≲ 2√p. The dense regime needs a structural argument.
+
+## 7. Minimum number of FV orderings (`fvcount.c`, t = 1, minimum over B and admissible x)
+
+| n | 4 | 5 | 6 | 7 | 8 |
+|---|---|---|---|---|---|
+| min #FV orderings | 1 | 5 | 4 | 48 | 95 |
+
+- **Stability in p.** The minimum is independent of p once p ≥ 11, except at n = 7 (stable from p ≥ 17) and n = 8 (stable from p ≥ 13).
+- **Where the minimum is attained.** At even n the minimiser is symmetric, e.g. {±1, ±7, ±8} and {±1, ±7, ±8, ±9} mod 23. At odd n it is nearly symmetric. Symmetric sets are exactly the case already proved by explicit construction.
