@@ -130,3 +130,24 @@ A union bound over shared vertices proves (ii) only when rs ≪ p, i.e. in the s
 
 - **Stability in p.** The minimum is independent of p once p ≥ 11, except at n = 7 (stable from p ≥ 17) and n = 8 (stable from p ≥ 13).
 - **Where the minimum is attained.** At even n the minimiser is symmetric, e.g. {±1, ±7, ±8} and {±1, ±7, ±8, ±9} mod 23. At odd n it is nearly symmetric. Symmetric sets are exactly the case already proved by explicit construction.
+
+## 8. Companion target: FV over ℤ, and transfer to every large prime (Claude)
+
+**Transfer lemma (proof).** This uses the same kernel argument as Astra's prime reduction, but over ℚ.
+- Suppose FV fails at size n at a prime p ∉ D_n. Then R (the set of Boolean rows orthogonal to z modulo p) has the same rank over ℚ as over F_p.
+- Each admissibility form w lies outside rowspace_{F_p}(R). Hence rank_ℚ [R; w] ≥ b + 1, so w lies outside rowspace_ℚ(R).
+- Choose a rational z′ ∈ ker_ℚ R that avoids the finitely many hyperplanes cut out by these forms. Scaled to integers, z′ gives distinct nonzero integer labels with an integer x.
+- Every permutation is still obstructed, because R z′ = 0 exactly. So z′ is an FV counterexample over ℤ.
+
+**Consequence.** FV over ℤ at size n implies FV at size n at every prime p ∉ D_n, in particular at every p > H_n = (n+1)^{(n+1)/2} / 2^n. That gives an explicit sparse regime: n ≲ 2 log p / log log p.
+
+**Equivalent form over ℤ (path avoidance, PA).**
+- Let R ⊂ ℤ ∖ {0} be finite with σ = ΣR ≠ 0 and −σ ∉ R. Then for every y ∉ {0, σ} with 2y ≠ σ, some ordering of R has prefix sums 0, …, σ that are pairwise distinct and all different from y.
+- To get this form, take R = B ∖ {t} and translate by −t, so that y = x − t.
+- The exclusion 2y = σ is forced by reversal symmetry: reversing the order sends each prefix sum v to σ − v.
+
+**Data (`fv_integers.c`).**
+- 0 failures for all zero-sum sets in [−9, 9] at n = 3…8, in [−12, 12] at n = 6, and in [−11, 11] at n = 7, for every t and every admissible x.
+- With the 2x ≠ t exclusion removed, the code correctly reports the forced midpoints of symmetric sets.
+
+**Status.** Proof of PA: in progress.
