@@ -162,4 +162,4 @@ The negatives-first order is the mirror image, and covers x = t + ΣP.
 
 **Priority: low.** Via the transfer lemma, this only covers n ≲ 2 log p / log log p, which is the Kravitz range. Hole absorption H(ε) is the main target.
 
-**L at p = 23, final.** Every instance at n = 7–18 is certified (n = 17: 17,680; n = 18: 4,320), with 0 inconclusive. n = 19 is still running.
+**L at p = 23, final.** Every instance at n = 7–18 is certified (n = 17: 17,680; n = 18: 4,320), with 0 inconclusive. n = 19 (|B| = p − 4) was stopped at the 2-hour background limit without a result, and is not being rerun.
