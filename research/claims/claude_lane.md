@@ -460,3 +460,31 @@ WHICH ATOM (exhaustive, experiments/audits/fusion/sf_which.py, sf_fast.py):
   - SF itself (some atom) also 0 failures for p=17 |A|<=9, p=19 |A|<=7.
 CONJECTURE SF-max: for every zero-sum non-atom A ⊆ F_p^× and every maximum-size atom B ⊂ A with A\B zero-sum, every valid
 cycle of A\B admits the edge insertion of B. SF-max ⇒ Graham for all p.
+
+## L39. AUDIT: GPT near-balanced fusion round — ACCEPTED (experiments/audits/fusion/audit_nearbal.py)
+- Thm 1 (all proper zero-sum subsets of size ⌊n/2⌋ or ⌈n/2⌉ ⇒ valid cycle, any abelian group): local boundary-swap proof
+  re-derived (even: swap kills I and its complement only; odd: (R),(L) both ⇒ a_s = a_{s+m−1}). Own repair code: 3345
+  repairs on EVERY near-balanced set, p<=17, n<=8, all terminate valid. The 1/(m+1) counting proof (even case) also checked.
+- Thm 2 (max-r then max-Φ partition ⇒ mixed zero subsets of B∪C have size in [|B|,|C|]): proof checked (convexity);
+  exhaustive p=11,13, n=6..9: 626 atom pairs, 0 violations. Corollary: atoms with sizes differing by <=1 always fuse.
+- Thm 3 (|B|>=3, |C|>=6, only short mixed relations ⇒ four-block word): six mixed 3-windows + four 2-windows enumerated and
+  exclusion counts 4,3,3,5,5 verified; 3000 random layouts.
+- Transposition trap mod 11 and both examples verified.
+RELATION TO SF-max (L38): GPT's stated remaining gap — atoms of very different sizes, and >=3 atoms — is exactly what
+SF-max covers (insert a LARGEST atom into EVERY valid cycle of the rest; 0 failures in 5264 sets). Thm 2 supplies the
+structural input for the two-atom case of SF-max: in a Φ-extremal pair all mixed zero intervals have length in [u,v].
+
+## L40. RETRACTION of SF / SF-max (L37, L38) — GPT counterexample VERIFIED; fusable-fraction data
+GPT's counterexample checked by own code (experiments/audits/fusion/audit_sfcx.py): p=19, A=F_19^×, B={1,18},
+Z=(11,4,9,8,10,3,13,16,14,2,15,12,6,7,5,17) is a valid cycle; all four-block fusions fail; all 9792 order-preserving
+insertions of {1,18} into rotations/reversals fail. Atoms of F_19^×: 447 in 26 scaling classes (max size 6) — confirmed;
+own random search finds an obstructing valid complementary cycle for ALL 26 classes. Hence SF and SF-max are FALSE
+(my exhaustive tests stopped at |A|<=7 for p=19 and missed the dense full-set regime). The p=37 claims (every one of the
+54,246 atoms obstructed) are consistent but not independently re-run.
+Accepted (proof checked): GPT's difference-isolated lemma — C={c,−c}, b1 ∈ B with b1 ∉ (B\{b1}) − (B\{b1}): adjacent swaps
+inside B move each colliding prefix sum s_j ∈ {−c, b1−c} out of that set (the two targets differ by b1), so
+(b1,c,b2,...,bm,−c) is valid for a suitable order.
+DATA (own sampling, A = F_p^×): fraction of random valid complementary cycles admitting four-block fusion of atom B:
+  p=13: 0.58 (pairs) .. 1.0 (size 5); p=17: 0.53 .. 1.0 (size 6); p=19: 0.49 (pairs), 0.52-0.59 (3,4), 0.65-0.80 (5), 0.96-0.97 (6).
+So fusion fails for a MINORITY of complementary cycles, more often for small atoms and growing p. Any fusion-based
+induction must CHOOSE the complementary cycle (build it), i.e. carry an invariant through the construction.

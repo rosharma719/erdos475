@@ -780,6 +780,10 @@ Claude L35: X bridge + core LR(M,a,k) = path on [0,M−1]\{k+1,k+a} from k with 
 Four-block fusion theorem, two-triple corollary (2156/2156), switching lemma: accepted. Claude: Strong Fusion (some atom B fuses with EVERY valid cycle of A\B in four-block form) implies Graham for all p by induction; exhaustive 0 failures p=11 (all), p=13 (|A|<=8), p=17 (|A|<=7). Prompt: prompts/gpt_round_fusion.md.
 ## 2026-11-23 Claude L38: Strong Fusion — counting lemma (proved) + MAX-ATOM rule, 0 failures in 5264 sets
 Edge-insertion form of four-block fusion; counting lemma (n > m·r* + m − 1 suffices for a given cycle). Exhaustive: inserting a MAXIMUM-size atom into EVERY valid cycle of the rest never fails (p=11,13 all sets; p=17 |A|<=8; p=19 |A|<=7); inverse-pair atoms do fail. Prompt addendum in prompts/gpt_round_fusion.md.
+## 2026-11-23 GPT near-balanced fusion round audited — ACCEPTED (Claude L39)
+Near-balanced theorem (local swaps), Φ-extremal exchange bound [u,v], short-relation four-block fusion, mod-11 trap: all verified by own code. GPT's open gap (unequal sizes, >=3 atoms) = SF-max (L38); see prompts/gpt_round_fusion.md.
+## 2026-11-23 SF and SF-max REFUTED (GPT counterexample p=19, verified by Claude L40)
+A=F_19^×: every atom class has a valid complementary cycle admitting no four-block (or order-preserving) insertion. L37/L38 conjectures retracted. Difference-isolated pair lemma accepted. Fusable fraction of random complementary cycles ~0.5–0.97 (by atom size): fusion induction must select the cycle.
 
 
 ## 2026-11-23 External dossier added (not yet audited)
