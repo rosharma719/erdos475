@@ -114,3 +114,33 @@ U = {1, T, 3T, −2T + 1, −2T − 2} with p > max(9T + 6, (T + 1)K) has no dil
 **Minimal counterexample, five-unpaired case.** Every remainder dilation has radius > 12, and the gap-capacity condition (two gaps, T1) fails in every dilation. That means the padding is dense above L, with no gap of capacity about L, in every coordinate system.
 
 **The general open step is unchanged.** Every admissible contraction must be simultaneously blocked while all cores are dense and asymmetric, with no large atom and no large dissociated block. The next thing to prove is T1 with **small total capacity**: absorb U's mass across many small gaps, or across gaps in a different dilation, when no single gap holds L. Equivalently, replace the finite radius-12 tables by a construction whose radius grows with p.
+
+## Update (2026-11-25): equal pair sums (Astra round, audited)
+
+**Theorem.** Let A be zero-sum mod p with exactly five unpaired labels U and arbitrary symmetric padding. If two distinct pairs in U have equal sums, then A has an admissible contraction with a rooted witness, so A has a valid ordering. There is no radius bound.
+
+**Proof checked by hand. It is correct.**
+
+- **Normalisation.**
+  - The two pairs are disjoint and share a sum s ≠ 0, so the fifth label is −2s.
+  - Scaling by s⁻¹ makes both pairs integer pairs {−j, j + 1}. A wrapped sum would need two copies of −M.
+  - Every j ≥ 3, because −2 occupies magnitude 2.
+- **Path rule.** Each ordinary group (−ej, e(j + 1)) goes onto a single path as (σj, −σ(j + 1)). This leaves σ unchanged, and both paths stay at the −σ extreme.
+- **Closure.** The last jump of Y is rotated to the front, giving span < 2M.
+- **Vacant case.** Contract (−k, −2) → −(k + 2), so X gets −(k + 2) and Y gets −(k + 1). The inserted vertex u − k lies strictly between the old and new minima.
+- **Occupied case.** Contract (−2, k + 2) → +k, with Y getting (−(k + 1), k + 2). The inserted vertex is m − 2, and the next X-jump has magnitude ≥ k + 3, landing ≤ m − 3.
+- **Boundary case.** The groups occupy [M − 3, M − 2] and [M − 1, M]. After doubling, the five labels become {7, −5, 3, −1, −4}, and only magnitudes 2 and 6 are optional within radius 7. The four explicit path pairs cover these, and the separator closure handles everything beyond.
+
+**Verifier** (`equal_sums.py`, reproduced, 10 s):
+- through N = 35: vacant 270,336, occupied 270,336, boundary 8,190, total 548,862;
+- higher asymmetry through N = 27: 1,208 / 1,208 / 392;
+- 900 larger random cycles;
+- the p = 211 and p = 503 obstructions have 10 distinct pair sums.
+
+**Consequence.** Any five-unpaired minimal counterexample has U with all ten pair sums distinct, in addition to the earlier constraints:
+- radius > 12 in every dilation;
+- the gap-capacity condition fails in every dilation.
+
+**Extension (construction checked, verified through N = 27).** U = {−2} together with pairs of sums ±1, with two more positive groups than negative, works with arbitrary padding.
+
+**Assessment.** This is a correct, clean new sufficient condition. It is another family of the kind the FV prompt asked Astra to avoid. FV itself was not attacked.

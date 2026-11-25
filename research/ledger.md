@@ -1031,3 +1031,8 @@ Source: GPT PDF with 16 embedded files, now in `experiments/checks/cycle_selecti
 - **Constructions.** The five-hole family F_N^× ∖ {3, 4, 8, 16, −31} for odd N ≥ 63, and explicit k-hole families for every k ≥ 5.
 - **No fixed radius captures all five-label remainders (correct).**
 - **Open:** dense asymmetric padding with no gap of capacity about L in any dilation, and remainder radius > 12. The general simultaneous-blocking step is still open.
+
+## 2026-11-25 Equal pair sums close the five-unpaired case for non-Sidon remainders (Astra; claims/cycle_selection_audit.md update)
+- **Theorem (proof checked, verifier reproduced on 548,862 inputs through N = 35).** Suppose exactly five unpaired labels U, with any padding at any prime. If two distinct pairs in U have equal sums, then A has a valid ordering via an admissible contraction with a rooted witness.
+- **Consequence.** A five-unpaired counterexample must have all 10 pair sums of U distinct. This covers the "no fixed radius" family, since 1 + T = 3T + (1 − 2T).
+- **Not addressed:** Theorem FV.
