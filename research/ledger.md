@@ -1036,3 +1036,9 @@ Source: GPT PDF with 16 embedded files, now in `experiments/checks/cycle_selecti
 - **Theorem (proof checked, verifier reproduced on 548,862 inputs through N = 35).** Suppose exactly five unpaired labels U, with any padding at any prime. If two distinct pairs in U have equal sums, then A has a valid ordering via an admissible contraction with a rooted witness.
 - **Consequence.** A five-unpaired counterexample must have all 10 pair sums of U distinct. This covers the "no fixed radius" family, since 1 + T = 3T + (1 − 2T).
 - **Not addressed:** Theorem FV.
+
+## 2026-11-25 FV log, run 1: orientation shortcut refuted (claims/forced_vertex_FV.md update 5)
+- **What was refuted.** The candidate "pair orientations can be fixed in advance up to one global reversal".
+- **Counterexample.** p = 13, B = {1, 3, 4, 5, 7, 9, 10}, t = 1, x = 2.
+- **Reproduction.** The script and the census through p = 19 (6,076 failures out of 7,186,240) both reproduce.
+- **Status.** Minor result; FV is still open.
