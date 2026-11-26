@@ -61,7 +61,7 @@ Checkpoint 1. All 32 selected inputs at height 15 have verified witnesses. Exact
 python3 experiments/exploration/complement5/it5_samples.py --lo 15 --hi 15 --output experiments/exploration/complement5/it5_samples.jsonl --per-stratum 4 --budget 120 --seconds 20
 ```
 
-Checkpoint 2. The selected domain has 599 distinct inputs at M=15 through 30. At per-path budgets 120, 1800, and 10000, respectively 592, 598, and 598 have verified witnesses. The single remaining input under the four sign patterns is (−25,−21,9,18,19). Exact commands:
+Checkpoint 2. The selected domain has 599 distinct inputs at M=15 through 30. At per-path budgets 120, 1800, and 10000, respectively 592, 598, and 598 have verified witnesses. The single remaining input under those four sign patterns was (−25,−21,9,18,19). Exact commands:
 
 ```sh
 python3 experiments/exploration/complement5/it5_samples.py --output experiments/exploration/complement5/it5_samples.jsonl --per-stratum 4 --budget 120 --seconds 75
@@ -86,6 +86,13 @@ Checkpoint 6. Across the full normalized census, 46 accepted inverse-free bases 
 ```sh
 python3 experiments/exploration/complement5/it5_affine.py --manifest experiments/exploration/complement5/it5_rays.jsonl --census /private/tmp/it5-nested-census --seconds 45
 python3 experiments/exploration/complement5/it5_affine.py --manifest experiments/exploration/complement5/it5_rays.jsonl
+```
+
+Checkpoint 7. Allowing one flipped common sign produces the missing height-25 certificate; all 599 sampled inputs are now verified. The first program now also supports complete enumeration and ties the result to the actual signed pattern. Exact commands for the completed sample and bounded full-census run:
+
+```sh
+python3 experiments/exploration/complement5/it5_samples.py --output experiments/exploration/complement5/it5_samples.jsonl --per-stratum 4 --budget 120 --flip-one --seconds 45
+python3 experiments/exploration/complement5/it5_samples.py --all --output /private/tmp/it5-all-15-30.jsonl --budget 120 --flip-one --seconds 60
 ```
 
 ## (e) Next step

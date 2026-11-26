@@ -58,7 +58,7 @@ def find_path(M, start, labels, budget=None):
     return path
 
 
-def seed(H, M, budget=None):
+def seed(H, M, budget=None, *, common_choices=None):
     paired = [j for j in range(1, M + 1) if j not in H and -j not in H]
     singles = [-h for h in sorted(H) if -h not in H]
     alternating = tuple(v if i % 2 == 0 else -v for i, v in enumerate(paired))
@@ -68,6 +68,8 @@ def seed(H, M, budget=None):
     all_signs = (tuple(v if bits & (1 << i) else -v for i, v in enumerate(paired))
                  for bits in range(1 << len(paired)))
     choices = preferred if budget is not None else chain(preferred, all_signs)
+    if common_choices is not None:
+        choices = common_choices
     for common in choices:
         for bits in range(1 << len(singles)):
             first = common + tuple(a for i, a in enumerate(singles) if bits & (1 << i))
