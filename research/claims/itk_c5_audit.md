@@ -1,0 +1,44 @@
+# Audit of Astra's IT(k) / C5 round (Claude, 2026-11-26; branch codex/itk-counterexample @ 46842af, fast-forwarded into claude/amazing-maxwell-wfz06f)
+
+## Hand-checked, correct
+1. **IT(k) cut counterexample** (`integer_two_path_cut.md`).
+   - Setup: k = M = 31, with T = {−18..−1} ∪ {5..15} ∪ {30, 31}.
+   - Every step 16..29 must cross the cut [0,15] | [16,31] upward. Only the 13 negative labels −19..−31 can cross downward. A closed walk crosses the cut equally often in each direction, so no closed walk exists.
+   - **My unrestricted IT(k) is false.** It had been tested only for M ≤ 13 and k ≤ 7, where k ≪ M.
+2. **One-step extension.** Set P′ = (0) ‖ (q − Q) and Q′ = (0) ‖ (q − P).
+   - Both paths stay simple, and their common endpoint is q − y > 0.
+   - The labels become I_q ∖ T.
+   - The converse also holds for q > M: both ±q present forces the first edge 0 → q on both paths.
+3. **Closure.** Go P, then +r, then r + rev(Q), then −r.
+   - The two halves lie in the disjoint intervals [0, r−1] and [r, 2r−1].
+   - The labels are I_r ∖ T, which is F_p^× ∖ λH.
+4. **Dilation for k = 5.**
+   - Some integer coordinate sum occurs more than 7r⁴/24 times. This follows from the variance (5(r² − 1)/12) and Chebyshev's inequality.
+   - 7r⁴/24 > (2r + 1)³ for r ≥ 30.
+   - Pigeonhole over the p³ translation orbits of the sum hyperplane then gives an integer difference ≡ λH. That difference is zero-sum with height ≤ r − 1.
+   - Hence the result holds for every p ≥ 61.
+5. **General-k dilation.**
+   - Condition (1) gives a slice larger than p^{k−2}.
+   - Rescaling by d = ⌈2k/m⌉ ≤ 4 gives height in [2k, 4k) ⊂ [2k, r − 1].
+   - Bernoulli's inequality gives the closed-form range p ≥ max{8k + 1, k·2^{k−1} + k − 1}.
+6. **Graceful-segment refutation** (`c5_two_blocks.md`). W = {1, 3, 7, −2, −4, −5} sums to 0, so it cannot be a run of consecutive differences.
+   - The C5 gadget only needs ΣW = s ≠ 0, so this does not affect C5.
+   - Separately, the paired orbit {1, 3, 11, 17, 26} at p = 29 has no six-window at all (exhaustive, no cutoff). The two-block lemma replaces the six-window.
+
+## Verifiers re-run here
+- `verify_integer_two_path_cut.py`:
+  - the 31-hole obstruction has net crossing in [1, 5] for every placement;
+  - the 11-hole example has minimum width 9 over all 120 orders.
+- `verify_interval_lift.py --height 14`: every integer 5-set has a seed at every height M ≤ 14 (2,154 sets).
+- `verify_two_blocks.py` and `verify_interval_lift.py --primes 67…113`: results below.
+
+## Status after this round
+- **C5 holds for every prime p ≤ 113.** The certificates cover all 7,174,166 zero-sum five-sets.
+- **C5 for all primes ⇐ IT(5) at every height M ≥ 15.** Heights M ≤ 14 are verified exhaustively.
+  - IT(5) (the "boundary seed assertion"): every zero-sum integer 5-set T has two paths in [0, M], both from 0 to a common y > 0, whose labels are exactly I_M ∖ T.
+  - The cut obstruction cannot occur for k = 5 once M ≥ 10, since the dense hypothesis M ≥ 2k then holds.
+- **Complement-k at every prime p ≥ max{8k + 1, k·2^{k−1} + k − 1} ⇐ the dense integer two-path conjecture (M ≥ 2k).**
+  - That conjecture would give an explicit dense-regime theorem for |H| ≲ log₂ p.
+  - This is better than the log p / log log p I had estimated.
+
+**Next proof target:** IT(5) for M ≥ 15. It is a single p-free statement about five integers, and its proof finishes C5 at every prime.
