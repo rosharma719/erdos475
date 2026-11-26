@@ -33,4 +33,4 @@ T ranges over all zero-sum k-sets with max |t| = M. Sets containing ± pairs are
 - **What it does not buy.** The range log p / log log p ≲ |H| ≲ εp, and the middle densities, remain without any explicit mechanism.
 
 ## Status
-IT(k) is unproved for unbounded M at every k ≥ 3. The k = 2 case is the zigzag (P = Q). This is the next proof target.
+The universal assertion is false. A 31-hole example with M = 31 rules out even a closed walk, and the k = 2 base case needs M ≥ 2. The reported finite censuses stand. A revised conjecture with M ≥ 2k still suffices for the prime application. [Counterexamples, verifier, and corrected reduction](integer_two_path_cut.md)
