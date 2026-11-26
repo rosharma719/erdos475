@@ -33,7 +33,7 @@ Negation preserves IT5. If P,Q certify T, the combined multiset for Q,P is the n
 
 ## (c) Refuted
 
-No new refutation in this run.
+**The common nested tail cannot cover the balanced 1+4 region.** Let T={−M,a,b,c,d}, with 2≤a<b<c<d<M/3 and a+b+c+d=M. The first path's prefix must include +M, since the second path could only contribute this label by taking −M into the already visited zero. The other prefix has only positive steps, so its endpoint y is at least 2; if the first prefix uses any negative step, y≤M−2. Since M−1 is present in the common tail, such an interior y cannot be its start. Hence the prefixes are (0,M) and an increasing four-step path from 0 to M. From M the common tail is forced to use −(M−1), +(M−2), … down through magnitude d+1. Its odd-numbered vertices are 1,2,… up to at least d because M−d−1≥2d. Thus it visits whichever of a,b,c,d was the first intermediate vertex of the increasing prefix. This rules out the entire normal form. The examples T=n·{−46,10,11,12,13}, n≥3, have all five magnitudes mutually separated by at least three. This is a refutation of the construction only.
 
 ## (d) Data
 
@@ -59,6 +59,12 @@ Checkpoint 4. The direct arithmetic test and a separate step-by-step constructio
 python3 experiments/exploration/complement5/it5_nested.py --lo 15 --hi 15 --seconds 25 --output /private/tmp/it5-nested-census
 ```
 
+Checkpoint 5. The 1+4 refutation is by the parameterized proof in (c). The arithmetic test computed 26,059 further normalized inputs in heights 16…30, with 1,452 accepted, using the following resumable command:
+
+```sh
+python3 experiments/exploration/complement5/it5_nested.py --lo 16 --hi 30 --seconds 45 --output /private/tmp/it5-nested-census
+```
+
 ## (e) Next step
 
-Select an inverse-free accepted input with separated magnitudes and use the affine run-endpoint inequalities to prove an unbounded region where its prefix order always works.
+Turn the accepted inverse-free prefixes into explicit unbounded classes by verifying the affine slopes of every band endpoint and every forbidden prefix vertex.
