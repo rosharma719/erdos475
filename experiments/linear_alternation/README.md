@@ -16,3 +16,10 @@ Source: uploaded by the repo owner from an external session (2026-11-26); not pr
 
 ## Logic
 Theorem 3 (p ∤ g_m ⇒ every (m+1)-subset of F_p^× is orderable) is sound under the repo's convention that intervals starting at position 1 are exempt: put a_0 first, with Σ−a_0 ≠ 0. Since every prime dividing g_m is ≤ m+1 < p, this gives |A| ≤ 15 for all p, *provided m=11..14 are right*. Overlaps with Hicks–Ollis–Schmitt (≤ m=10) and Costa–Pellegrini (m=11); it is not new below that. The all-m statement ("LAC": every prime factor of g_m ≤ m+1) is unproved.
+
+## Split-jet / coinvariant programme (second upload, 2026-11-26)
+- `split_jet_check.py` (uploaded) — exact reduction in R_7 ⊗ F_3 (Artin-basis normal forms). Rerun here: output in `split_jet_out.txt` matches the report's table (all value packets A_j = 0; only cut j=4 has a nonzero jet, 10 coordinates, coefficient 1 on u2·u3²·u4²·u5³·u6⁵·u7⁶). This confirms the script reproduces the report; it does not test the reductions behind the script.
+- `check_sec5_identity.py` (written here, independent) — tests λ_{m+1}(t^{m−d}·W·G_{m+1}) = −K_m(W) for random monomials W, m=3,4,5 (18 cases): exact integer alternation vs. complex roots-of-unity evaluation. All agree.
+- Read-through (not machine-checked): Q_n = F_{n−1} as polynomials, cyclic-rotation invariance of Q_n up to sign, socle argument ([Q_n]≠0 ⇔ [G_n]≠0), the Ann(xy)=(h_{n−2}) route, Sym² decomposition and the D(d) matrix algebra all look correct. Note p=3 ≤ m+1 at m=7, so the split-jet run is a stress test, not an instance of Graham.
+- Still open (as the report says): the first-order transfer theorem (A_j=0 ∀j, V_m≠0 ⇒ ∃j B_j≠0). No evidence beyond the single m=7, p=3 run.
+- ProofAtlas overlap and the higher-degree-W criterion's novelty are unchecked.
