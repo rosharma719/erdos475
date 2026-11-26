@@ -1,0 +1,117 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=.9in]{geometry}
+\usepackage{amsmath,amssymb,booktabs,array,microtype,xcolor,fancyhdr}
+\usepackage[hidelinks]{hyperref}
+\definecolor{ink}{HTML}{193A54}
+\pagestyle{fancy}\fancyhf{}\lhead{\small Graham's rearrangement conjecture}\rhead{\small Research note, 24 November 2026}\cfoot{\thepage}
+\setlength{\headheight}{14pt}\setlength{\parindent}{0pt}\setlength{\parskip}{5pt}
+\newcommand{\F}{\mathbb F}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\sect}[1]{\section*{\color{ink}#1}}
+\newcommand{\subh}[1]{\par\smallskip\textbf{#1}\par\nobreak}
+\begin{document}
+{\Large\bfseries\color{ink} Erd\H{o}s 475: finite verification and an infinite family with arbitrary symmetric padding}\par
+\smallskip
+\textit{Continuation of the research in \texttt{rosharma719/erdos475}, revision \texttt{a065b84}.}
+\sect{1. Results and their scope}
+For a prime $p$ and a nonempty $A\subseteq\F_p^\times$, Graham asks for an ordering of $A$ whose \emph{nonempty} partial sums are pairwise distinct. Write
+\[
+ U=A\setminus(-A),\quad r=|U|,\quad M=(p-1)/2\quad(p\text{ odd}).
+\]
+The other elements of $A$ form inverse pairs, called symmetric padding. For a zero-sum set, a valid ordering is a simple cycle: starting from zero, every vertex before the final return is distinct.
+\begin{itemize}
+\item \textbf{Finite theorem.} Every nonempty subset has a valid ordering at every prime $p\le43$. At $p=47,53$ the same holds for every subset with $r\le5$. Each enumerated word was checked for its precise label set, total and vertices. The reduction and coverage checks appear in Sections 2 and 3.
+\item \textbf{Infinite family.} For every odd $p$, $5\le a<a+1\le M$, and every choice of symmetric padding disjoint in absolute magnitude from the five elements,
+\[
+ U_a=\{-2,-3,4,-a,a+1\}
+\]
+admits a valid cycle with that padding. Section 4 constructs the ordering and gives a version for arbitrarily many unpaired elements. The construction works over odd composite moduli as well.
+\item \textbf{Centered lifts.} For every $p\ge29$, every zero-sum five-set admits a nonzero dilation whose five centered representatives sum to zero in $\Z$. Their maximum magnitude can be bounded by $(192/115)^{1/4}p^{3/4}$. Section 5 gives the proof and a sufficient gap condition for incorporating padding.
+\end{itemize}
+The November 24 dossier reduces arbitrary asymmetry to expansion of a cycle on a symmetric set. A zero-sum, inverse-free five-set with no relation $x+y=z$ among distinct elements is its first residual family. For $a\ge9$ and $p>3(a+1)$, $U_a$ belongs to this family: inspection of the ten pair sums excludes an integer relation, and the size bound excludes modular wraparound. Maximal padding is allowed, giving $|A|=p-6$.
+
+\subh{The remaining problem}
+For a general five-set the centered lift does not supply the two paths of Section 4. Section 5 gives an explicit obstruction to one proposed way of obtaining them. A proof for arbitrary remainders and arbitrary padding is still missing. Pham and Sauermann with earlier work cover sufficiently large primes. The theorems of Kuang--Wang and Nguyen--Tran--Vu cover sufficiently large set sizes, uniformly in the group. These quantifiers leave exceptional instances to settle. The finite theorem above does not exhaust them.
+\newpage
+\sect{2. Why checking zero-sum sets suffices}
+\textbf{Same cardinality.} Suppose $s=\sum A\ne0$ and $2\le k=|A|\le p-3$. Some $x\in A$ has $y=x-s\notin A\cup\{0\}$. Otherwise every element except possibly $s$ has its predecessor under subtraction by $s$ in $A$. In the order $0,s,2s,\dots,(p-1)s$, the occupied terms must then be the initial nonzero segment $s,\dots,ks$. Summing gives $(k-1)(k+2)=0\pmod p$, impossible in the stated range. The replacement set $B=(A\setminus\{x\})\cup\{y\}$ has sum zero. Rotate a simple cycle on $B$ to start with $y$ and restore $x$. This adds $s$ to every nonempty partial sum. Singletons are immediate. For sizes $p-2$ and $p-1$ use a prefix of the powers $1,g,\ldots,g^{p-2}$ of a primitive root. The sums $(g^j-1)/(g-1)$ are distinct, and a dilation places the omitted element wherever required. The case $p=2$ is immediate.
+
+\textbf{Preserving the asymmetry bound.} For the restricted runs at $p=47,53$ we use the dossier's stronger reduction. Suppose $r\ge2$ and $s\ne0$. Replacing $u\in U$ by $u-s$ when it is outside $A\cup\{0\}$ does not increase $r$. Replacing an element $s-u\in A$ by $-u$ also does not increase $r$: it pairs $u$, and removing its predecessor creates at most one unpaired element. When $s-u=u$, replacing $u$ by its opposite simply preserves $r$.
+
+If no such move exists, each $u\in U\setminus\{s\}$ has $u-s\in A$ and $s-u\notin A$, hence $u-s\in U$. The same initial-segment argument gives $U=\{s,2s,\ldots,rs\}$. Since $\sum U=s$, $(r-1)(r+2)=0\pmod p$, impossible for $2\le r\le M$ at these primes. Thus a zero-sum set of no larger asymmetry suffices. For $r=1$, write $A=S\cup\{a\}$ with $S$ symmetric. If $S$ is nonempty, let $V$ be the vertices of its simple cycle. Some $v\in V$ has $v+a\notin V$, since a nonzero translation generates $\F_p$ and $|V|<p$. Start the cycle at $v$ and append $a$. Its new final sum $a$ is outside the old nonempty sums $V-v$. An empty $S$ gives a singleton. For $r=0$ the total is already zero.
+
+\subh{Numbers from the completed runs}
+\begin{center}
+\begin{tabular}{r l r r}\toprule
+$p$ & Scope & Nonempty words checked & Zero-sum sets covered$^{*}$\\\midrule
+37 & All subsets & 51,887,394 & 1,857,283,156\\
+41 & All subsets & 671,485,056 & 26,817,356,776\\
+43 & All subsets & 2,437,679,510 & 102,280,151,422\\
+47 & $r\le5$ & 181,927,935 & 7,991,197,696\\
+53 & $r\le5$ & 2,111,832,063 & 106,392,715,264\\\bottomrule
+\end{tabular}
+\end{center}
+$^{*}$Includes the empty set. Nontrivial dilations account for the difference between the two columns. Some symmetric padding choices are equivalent under a stabilizer and are checked separately.
+\newpage
+\sect{3. Enumeration and reproduction}
+Each zero-sum $A$ has a unique inverse-free remainder $U$ with sum zero. For $U\ne\varnothing$, normalize a member to $1$. In primitive-root coordinates, use a bit mask on $p-1$ exponents. For each opposite pair of exponents $i,i+M$ choose neither, the first, or the second. The final pair is determined by the requirement that the total be zero, or has no legal completion. Among rotations whose mask contains exponent zero, keep only the least mask. Multiplying a seed by a unit rotates the mask, so exactly one representative survives for each orbit. If its stabilizer has order $h$, its orbit has $(p-1)/h$ members.
+
+For each representative, visit all $2^{M-r}$ choices of the unused magnitude classes as symmetric padding. The recursion adds pairs in increasing order so each choice occurs once. To insert $\{b,-b\}$ at an edge $u\to v$, try replacing its label $e$ by $(b,e,-b)$ or $(-b,e,b)$. The two shifted vertices must be free. When that fails, a seeded backtracking search seeks a fresh word. Every accepted word, including the seeds, is checked directly against the expected label mask, zero total and pairwise distinct vertices. A search budget exhaustion stops the program with an error. Symmetric sets are enumerated separately using the repository's explicit alternating walk. Nothing depends on the search selecting a random representative sample.
+
+\textbf{Independent coverage counts.} Each asymmetric remainder orbit contributes $((p-1)/h)2^{M-r}$ zero-sum subsets. In additive coordinates compute a second count: for each class $\{b,-b\}$, a state $(r,s)$ of asymmetry and sum has two transitions to $(r,s)$ and one each to $(r+1,s+b)$ and $(r+1,s-b)$. Start at $(0,0)$ and total the final states with $s=0$ in the given scope. The program requires equality with the orbit-weighted count. In the unrestricted run it also requires equality with $(2^{p-1}+p-1)/p$, obtained by a roots-of-unity filter: at each nontrivial $p$th root $\zeta$, $\prod_{j=1}^{p-1}(1+\zeta^j)=1$.
+
+\textbf{Reproduction.} From the root of the patched repository, use GCC or Clang and Python 3, with standard libraries. The first four commands reproduce the main table and the small-prime checks.
+\begin{verbatim}
+g++ -std=c++17 -O3 experiments/checks/padding_check.cpp -o /tmp/p475
+/tmp/p475 11 13 17 19 23 29 31 37 41 43
+/tmp/p475 --at-most-five 47 53
+python3 experiments/checks/padding_paths.py
+/tmp/p475 --five 23 29 31 37 41 43 47
+\end{verbatim}
+The optional last run isolates weakly sum-free five-element remainders. At $p=47$ it gives 203 normalized remainders and 53,215,232 checked completions. For $p=23,29,31$ the counts of 64, 5,632 and 19,456 reproduce the earlier dossier. The Python checker also directly enumerates all subsets at $p=2,3,5,7$ and runs the construction of Section 4 on 18,434 small inputs.
+\newpage
+\sect{4. A construction with arbitrary symmetric padding}
+Let $P,Q$ be lists of signed integer steps. Each path starts at zero, has distinct vertices on its own, and stays in $[0,d]$. The represented labels are the multiset of steps of $P$ together with the negatives of the steps of $Q$. The paths may intersect. Their endpoint difference equals the sum of the represented labels.
+
+\textbf{Extension.} For positive integers $u,v>d$, use the two new step lists
+\[
+        P'=(u,-Q),\qquad Q'=(v,-P),
+\]
+where the minus sign negates steps in place. This adds the labels $u,-v$. After their initial zero the new vertex sets are $u-V(Q)$ and $v-V(P)$, respectively. Each consists of distinct positive integers, so the new paths satisfy the same hypotheses with bound $D=\max(u,v)$. At least one path begins with $D$. In particular $u=v$ permits any larger symmetric pair; $u\ne v$ permits a controlled change in endpoint difference.
+
+\textbf{Closing the cycle.} If the represented labels have sum zero, both paths end at the same $t$. Suppose $P$ begins with $D$ and both paths are nonempty in $[0,D]$. Move that first step to the end of $P$. The resulting path still ends at $t$. Every interior vertex is now strictly negative: it is an old vertex after the initial $D$, translated by $-D$, and the old path cannot revisit $0$ or $D$. Every interior vertex of $Q$ is strictly positive. Both paths are simple and $t>0$, so traversing the modified $P$ forward and $Q$ backward gives a simple integer cycle. For a largest first step on $Q$, exchange the paths and negate the resulting word. The combined span is at most $2D$, hence modular reduction preserves distinctness whenever $2D<p$.
+
+\textbf{Construction for $U_a$.} In magnitudes at most four the sole optional pair is $\{1,-1\}$. Start with the appropriate row:
+\begin{center}
+\begin{tabular}{lll}\toprule
+Padding & $P$ & $Q$\\\midrule
+without $\{1,-1\}$ & $(4,-2)$ & $(3)$\\
+with $\{1,-1\}$ & $(4,-1,-2)$ & $(3,-1)$\\\bottomrule
+\end{tabular}
+\end{center}
+Both rows fit in $[0,4]$, represent the required inner labels and have endpoint difference $-1$. For each padded magnitude $4<b<a$ in increasing order use $(u,v)=(b,b)$. Next use $(a+1,a)$, adding the last two unpaired labels and making the endpoints equal. Any remaining padding has magnitude bigger than $a+1$ and is attached in increasing order. The last extension has $D\le M$. The closing argument gives the claimed cycle, for every padding choice.
+
+The same proof allows any number of disjoint consecutive magnitude pairs above four, each carrying opposite signs. Pass them in increasing order, using $u$ for the positive magnitude and $v$ for the negative magnitude. If their signed differences sum to $1$, they cancel the inner endpoint difference. Any symmetric padding on the unused magnitudes is permitted. Choosing $2j+1$ such pairs gives examples with $4j+5$ unpaired labels for every $j\ge0$.
+\newpage
+\sect{5. Centering a five-set and the limit of the construction}
+For a zero-sum five-set $U=\{a_1,\ldots,a_5\}$, set
+\[
+ L=\{x\in\Z^4:x\bmod p\in\F_p(a_1,a_2,a_3,a_4)\}.
+\]
+This lattice has index $p^3$. Append $x_5=-\sum_{i=1}^4x_i$. The centrally symmetric convex body given by $|x_i|\le H$ for all five coordinates has four-dimensional volume $(2H)^4\cdot115/192$. To see the factor, scale to four independent uniform coordinates in $[-1/2,1/2]$. For their sum to lie in that interval, four uniform $[0,1]$ variables must sum to a number between $3/2$ and $5/2$. By symmetry the excluded volume is twice $((3/2)^4-4(1/2)^4)/24$, by inclusion-exclusion for a simplex.
+
+Minkowski's convex body theorem supplies a nonzero lattice point when this volume exceeds $16p^3$. Taking the closed-body limit gives the bound $H=(192/115)^{1/4}p^{3/4}$. For $p>3072/115$, this is strictly below $p/2$. A nonzero point cannot reduce to zero, so its reduction is a nonzero scalar multiple of the input. Its five coordinates are exactly the centered representatives, and their integer sum is zero. For the smaller primes, direct enumeration of inverse-free zero-sum five-sets leaves only one exceptional orbit, represented by $\{1,3,4,5,9\}$ at $p=11$. That orbit contains $1+3=4$. Thus every weakly sum-free remainder in the five-element frontier can be centered with integer total zero.
+
+\textbf{A gap sufficient for general remainders.} Suppose in a chosen dilation the centered unpaired labels sum to zero as integers. Let $T$ be their positive mass. Split the padding into lower magnitudes of maximum $b$ (take $b=0$ if empty) and a nonempty upper group of minimum $c>T+b$. Start one increasing path with the positive labels, the other with the absolute negative labels. Both end at $T$. Append to both the same decreasing list of lower magnitudes with alternating signs, starting positive. Its nonempty partial sums are distinct in $(0,b]$: the even sums strictly increase, the odd sums strictly decrease, and every even sum is below every odd sum. Thus each path remains simple in $[0,T+b]$. Attach the upper pairs by Section 4 and close. For a centered five-set, $T\le 2H$ since at least one sign has at most two terms.
+
+\textbf{An obstruction.} Consider inner labels $\{6,-3,-4,5,-5\}$. They admit no two paths starting at zero in $[0,6]$ in the representation of Section 4. The label $+6$ forces $P$ to start with $6$: using $-6$ on $Q$ would revisit zero. The label $+5$ cannot go on $P$, since $0\to5$ requires a second start and $1\to6$ revisits $6$. Hence $Q$ must use $-5$ from $6$ to $1$. Before that step its available increments are drawn from $3,4,5$, no subset of which sums to $6$. This obstructs a tight inner construction, even though $\{6,-3,-4,-12,13\}$ has sum zero and no internal additive triple modulo $47$. A uniform ordering for all five-sets still requires additional geometry.
+
+\small
+\textbf{Sources.} Project dossier, November 24, Sections 15--19 and 24--28.
+\href{https://www.erdosproblems.com/475}{Erd\H{o}s Problems 475}.
+\href{https://arxiv.org/abs/2602.15797}{Pham--Sauermann (2026)}.
+\href{https://arxiv.org/abs/2610.34424}{Kuang--Wang, Theorem 1.6}.
+\href{https://arxiv.org/abs/2610.40712}{Nguyen--Tran--Vu, Theorem 1.5}.
+\end{document}

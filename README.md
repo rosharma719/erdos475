@@ -2,6 +2,10 @@
 
 Goal: a complete, human-readable proof of Erdős #475. Each round must shrink a defined gap, find a new mechanism, or rigorously eliminate an approach.
 
+## Verification and constructions, November 24
+
+The [research note](research/reports/padding_and_finite_verification.tex) and its reproducible checks cover every subset at all primes through 43, and every subset with at most five unpaired elements at 47 and 53. The note also gives an explicit infinite five-element family with arbitrary symmetric padding. The all-primes conjecture remains open in this project.
+
 ## Quick start
 ```bash
 python3 -m venv .venv && .venv/bin/pip install -e '.[dev]'

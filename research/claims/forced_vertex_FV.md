@@ -93,3 +93,17 @@ Here "admissible" means the pair sums are distinct and outside B ∪ {0, x, y}. 
   - two dominoes can each be expandable but not together (p = 13);
   - a contracted cycle can be isolated under all 21 tail transpositions, while a 4-segment reversal escapes it (p = 13).
 - **Exact remaining gap.** Some valid x-avoiding contracted cycle of C must have a feasible orientation graph. This is cycle selection again, now with an exact feasibility test.
+
+## Update 5 (2026-11-25): fixed orientation up to global reversal is refuted (Astra FV log, audited)
+- **Candidate statement.** Prescribe a direction for every admissible pair in Π. Then some ordering of the blocks works with those directions, or with all of them reversed.
+- **Counterexample, verified (`orientation_refutation.py`).** p = 13, B = {1, 3, 4, 5, 7, 9, 10}, t = 1, x = 2, with blocks (3,5), (7,4), (9,10).
+  - Successful block orders per orientation, in bit order 000 … 111: 0, 0, 1, 0, 1, 2, 1, 0.
+  - Both global choices fail.
+  - The mixed orientation 010 gives (1, 9, 10, 4, 7, 3, 5).
+- **Census (`orientation_census.cpp`, reproduced in 1.8 s).** Failed / total:
+
+  | p | 7 | 11 | 13 | 17 | 19 |
+  |---|---|---|---|---|---|
+  | failed / total | 0/8 | 0/364 | 16/4,688 | 180/551,000 | 6,076/7,186,240 |
+
+- **Significance: minor.** The orientations must remain individually free. This is consistent with the orientation-graph criterion, under which the orientations are chosen per component. DOM and FV are unaffected.

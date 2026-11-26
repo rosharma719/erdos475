@@ -44,9 +44,9 @@ Nov 21, 2026 · @Rohan Sharma
 
 **Cross-checks of GPT's p = 29 certificate:** 9,256,396 zero-sum subsets and 331,185 zero-sum orbits are both exact, but both include the empty set (nonempty: 9,256,395 sets). The certificate zip itself has not been seen by Claude.
 
-**Combined:** every prime ≤ **37** is verified (Archdeacon et al. ≤ 25, plus 29, 31 and 37 here). Priority for 29, 31 and 37 is unchecked.
+**Combined:** every prime ≤ **43** is verified (Archdeacon et al. ≤ 25, plus 29, 31 and 37 here; 41 and 43 added 2026-11-24 by `experiments/checks/padding_check.cpp`, reproduced; see the entry of that date). At p = 47 and 53, all subsets with ≤ 5 unpaired elements are verified. Priority for 29–43 is unchecked.
 
-**Next feasible:** p = 41 (2⁴⁰ subsets, ≈ 2.7·10¹⁰ orbits, \~14× the p = 37 work). Feasible on a multi-core machine with `graham4`; a zigzag-first checker would be faster.
+**Next feasible:** p = 47 (all subsets). p ≤ 43 is done with the padding checker.
 
 **All abelian groups of order ≤ 27 (Claude, `seqgrp.c`).**
 
@@ -984,3 +984,82 @@ A=F_19^×: every atom class has a valid complementary cycle admitting no four-bl
 - **FV** (one-point avoidance for t-rooted cycles, x ∉ {0, t, t/2}) holds **exhaustively for every p ≤ 31, every size**: 485M tests at p = 31, 0 failures. FV ⇒ Graham via one contraction.
 - **Two-point avoidance fails, but rarely** (4 / 180,908 at p = 17, sizes 5–12, one structured set). FV needs a structured induction.
 - **Primary thread now:** the minimal-counterexample form (all admissible splits forced at once).
+
+## 2026-11-24 Claude: forced-vertex route, rounds 2–5 (claims/forced_vertex_FV.md, updates 1–4)
+- **Two-edge exchange: refuted (verified at p = 11).**
+  - Frozen-cut theorem: an exchanged cycle collides whenever the arc sums equal the negated new labels.
+  - In the example, all 6 blocked source cycles fail to exchange.
+- **Structured avoidance and global blocking (verified, reproduced).**
+  - SIA never fails (exhaustive p ≤ 17, sampled p = 19 and 23).
+  - Counting identities verified through p = 13; the combined counting criterion covers every nonsymmetric set at p ≤ 13.
+  - Double-petal theorem proved.
+  - The counting bounds fail on a dense set at p = 17 (GPT; not re-run). Petal existence is generic for random dense sets, so the petal route is closed.
+  - Theorems 2–3 (every element has an admissible partner; a minimal counterexample has ≥ (n − 4)/2 hubs) proved.
+- **AFV: every admissible inner pair works.**
+  - p ≤ 19 exhaustive: 23,602 / 23,602 pairs at p = 17 and 136,907 / 136,907 at p = 19.
+  - Cross-verified by GPT's independent implementation.
+- **DOM: any admissible matching is realised as adjacencies of an x-avoiding cycle.**
+  - p = 17: 2, 3 and maximal families exhaustive.
+  - **p = 19 maximal families exhaustive: 436,183 tests, 0 failures.**
+  - GPT: 500,000 sampled maximal matchings at p = 23 and 29, all succeed.
+  - The naive induction is circular, since expandable in C is the same as adjacent in B.
+- **Orientation-graph criterion and closed orientation count proved** (the pseudoforest criterion in F_p).
+- **Refuted:** the joint top Nullstellensatz coefficient, nonzero total witness count mod p, independent-to-simultaneous expandability, and transposition-only switching.
+- **Open:** choosing a contracted cycle with a feasible orientation graph (the cycle-selection gap).
+- **AFV at p = 23:** the exhaustive run was stopped twice at the 2-hour time limit (no result). Exhaustive AFV coverage ends at p = 19; p = 23 has only GPT's sampled tests.
+
+## 2026-11-24 Finite verification extended to p ≤ 43, plus a five-unpaired family (external patch, audited by Claude)
+Patch `erdos475_changes.patch`, extracted from the uploaded PDF. It adds `experiments/checks/padding_check.cpp`, `experiments/checks/padding_paths.py` and `research/reports/padding_and_finite_verification.tex`, and edits the README.
+
+- **Every nonempty subset at every prime p ≤ 43 has a valid ordering.**
+  - Reproduced here (2 min 40 s at p = 43): 2,437,679,510 words, each checked directly for labels, total and distinct vertices. They cover 102,280,151,422 zero-sum sets (including ∅), which equals (2⁴² + 42)/43. An independent additive-coordinate DP count also agrees.
+  - p = 37 and 41 reproduce too: 1,857,283,156 and 26,817,356,776 sets.
+  - Non-zero-sum sets follow by the one-element reduction. Sizes p − 2 and p − 1 are handled by powers of a primitive root.
+  - **This extends the repo's p ≤ 37 to p ≤ 43.**
+- **p = 47 and 53, every subset with ≤ 5 unpaired elements:** reproduced (181,927,935 and 2,111,832,063 words).
+- **Infinite family (proved; extension lemma hand-checked).** U_a = {−2, −3, 4, −a, a + 1}, 5 ≤ a < a + 1 ≤ (p − 1)/2, with *any* disjoint symmetric padding, via the two-path extension P′ = (u, −Q), Q′ = (v, −P) for u, v > d. Python check: 18,434 orderings at odd moduli 13–31. It generalises to 4j + 5 unpaired labels.
+- **Centered lifts.** Every zero-sum five-set has a dilation whose centered representatives sum to 0 in ℤ, for p ≥ 29 (Minkowski bound (192/115)^{1/4} p^{3/4}); the only small-p exception is the p = 11 orbit of {1, 3, 4, 5, 9}. Census reproduced at p ≤ 23.
+- **Obstruction.** The inner labels {6, −3, −4, 5, −5} admit no two-path representation in [0, 6].
+
+## 2026-11-25 Cycle-selection round audited (claims/cycle_selection_audit.md)
+Source: GPT PDF with 16 embedded files, now in `experiments/checks/cycle_selection/`. **All 10 verifiers reproduce exactly.**
+
+- **Gap-capacity theorem (proof checked).** It covers any |U| and any radius. Suppose U's positive labels and its negative magnitudes can each be packed into gaps between paired magnitudes above L, with each gap's sum ≤ its capacity. Then A has a valid ordering, with an admissible contraction marked.
+  - Five labels: two gaps of capacity ≥ L and ≥ max(L, ⌊(4L−2)/3⌋) suffice.
+- **Radius-12 five-unpaired theorem (computer-assisted, certificates verified).** Suppose a dilation makes U integer-zero-sum and weakly sum-free with radius ≤ 12. Then A has a valid ordering, with arbitrary padding and at every odd modulus.
+  - The 46 tight-width obstructions are closed by doubling, symbolic joining words and the terminal-gap argument.
+  - 145,106 small-modulus completions were checked, with 0 missing profiles.
+- **Dissociated-block theorem, 16k > 7n (proof checked line by line).** It replaces 9k ≥ 4n + 1. Since 2^k ≤ p, it only bites for small n.
+- **Prefix-avoidance lemma (h ≤ 9, exact Kós-type coefficients) and atom attachment (atom ≥ 2|Z| + 4, |Z| ≤ 8), both checked.** The attachment cannot handle dense five-hole cores.
+- **Prescribed split of any symmetric core (checked).** Every external split x + y = t with x, y ∉ B has a rooted witness avoiding x.
+- **Constructions.** The five-hole family F_N^× ∖ {3, 4, 8, 16, −31} for odd N ≥ 63, and explicit k-hole families for every k ≥ 5.
+- **No fixed radius captures all five-label remainders (correct).**
+- **Open:** dense asymmetric padding with no gap of capacity about L in any dilation, and remainder radius > 12. The general simultaneous-blocking step is still open.
+
+## 2026-11-25 Equal pair sums close the five-unpaired case for non-Sidon remainders (Astra; claims/cycle_selection_audit.md update)
+- **Theorem (proof checked, verifier reproduced on 548,862 inputs through N = 35).** Suppose exactly five unpaired labels U, with any padding at any prime. If two distinct pairs in U have equal sums, then A has a valid ordering via an admissible contraction with a rooted witness.
+- **Consequence.** A five-unpaired counterexample must have all 10 pair sums of U distinct. This covers the "no fixed radius" family, since 1 + T = 3T + (1 − 2T).
+- **Not addressed:** Theorem FV.
+
+## 2026-11-25 FV log, run 1: orientation shortcut refuted (claims/forced_vertex_FV.md update 5)
+- **What was refuted.** The candidate "pair orientations can be fixed in advance up to one global reversal".
+- **Counterexample.** p = 13, B = {1, 3, 4, 5, 7, 9, 10}, t = 1, x = 2.
+- **Reproduction.** The script and the census through p = 19 (6,076 failures out of 7,186,240) both reproduce.
+- **Status.** Minor result; FV is still open.
+
+## 2026-11-25 Astra: FV reduced to a half-path rank lemma L; FV proved for |B| = 7 at every prime (claims/fv_half_path_rank_audit.md)
+- **Half-path rank criterion and prime reduction: both proofs checked, both correct.** A size-n FV failure at any prime transfers to a prime in D_n ∪ {q_n}.
+- **Verifier reproduced exactly:** 133,000/133,000 at p ≤ 19, and 70,356/70,356 at p = 29 with n = 6.
+- **Claude.**
+  - `fv_fixed_size.c`, p = 67, n = 7: 1,232,819 sets, 0 failures. With the p ≤ 31 census, **FV holds for |B| = 7 at all primes.**
+  - n = 8: 0 failures at every prime from 29 to 73; p = 157 is pending.
+- **Open:** lemma L, a pigeonhole-strength rank inequality for every n ≥ 7.
+
+## 2026-11-25 FV proved for |B| ≤ 8 at every prime (claims/fv_half_path_rank_audit.md)
+- **Method.** Prime reduction: D_8 ⊆ {primes ≤ 73} and q_8 = 157.
+- **Checks, all with 0 failures.**
+  - Every prime from 29 to 73.
+  - p = 157: 2,367,618,494 sets, which equals C(155,7)/157 exactly.
+  - Primes p ≤ 31 were already covered by the earlier census.
+- **Bug fix.** An earlier p = 157 run used a 128-bit vertex mask, which overflowed and produced spurious failures. It was discarded. The fixed code (`fv_fixed_size.c`, 256-bit sets) reproduces every p ≤ 73 result.
+- **Complement-5 programme** (claims/complement5_graceful.md). Contractions of graceful-permutation cycles cover every zero-sum 5-hole orbit at p ≤ 31. What remains is a graceful-segment lemma, which has been sent to Astra.
