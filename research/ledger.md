@@ -1063,3 +1063,9 @@ Source: GPT PDF with 16 embedded files, now in `experiments/checks/cycle_selecti
   - Primes p ≤ 31 were already covered by the earlier census.
 - **Bug fix.** An earlier p = 157 run used a 128-bit vertex mask, which overflowed and produced spurious failures. It was discarded. The fixed code (`fv_fixed_size.c`, 256-bit sets) reproduces every p ≤ 73 result.
 - **Complement-5 programme** (claims/complement5_graceful.md). Contractions of graceful-permutation cycles cover every zero-sum 5-hole orbit at p ≤ 31. What remains is a graceful-segment lemma, which has been sent to Astra.
+
+## 2026-11-26 Astra: IT(k) refuted; C5 proved for p ≤ 113 and reduced to IT(5) at heights M ≥ 15 (claims/itk_c5_audit.md)
+- **IT(k) refuted.** The unrestricted IT(k) fails by a cut obstruction at k = M = 31. It is revised to M ≥ 2k.
+- **C5 for all p ≤ 113.** This covers 7,174,166 five-sets and was re-run here: two-block certificates for p ≤ 61 and interval-lift certificates for p = 67–113.
+- **Reduction, proofs hand-checked.** The dilation counting gives the result for every p ≥ 61, and the extension and closure steps are proved. So C5 for all primes follows from IT(5) at heights M ≥ 15. Heights M ≤ 14 are verified (2,154 sets).
+- **General k.** For every p ≥ max{8k+1, k·2^{k−1}+k−1}, complement-k follows from the dense two-path conjecture (M ≥ 2k).

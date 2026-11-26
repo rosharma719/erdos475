@@ -1,4 +1,4 @@
-# Audit of Astra's IT(k) / C5 round (Claude, 2026-11-26; branch codex/itk-counterexample @ 46842af, fast-forwarded into claude/amazing-maxwell-wfz06f)
+# Audit of Astra's IT(k) / C5 round (complete) (Claude, 2026-11-26; branch codex/itk-counterexample @ 46842af, fast-forwarded into claude/amazing-maxwell-wfz06f)
 
 ## Hand-checked, correct
 1. **IT(k) cut counterexample** (`integer_two_path_cut.md`).
@@ -30,7 +30,9 @@
   - the 31-hole obstruction has net crossing in [1, 5] for every placement;
   - the 11-hole example has minimum width 9 over all 120 orders.
 - `verify_interval_lift.py --height 14`: every integer 5-set has a seed at every height M ≤ 14 (2,154 sets).
-- `verify_two_blocks.py` and `verify_interval_lift.py --primes 67…113`: results below.
+- `verify_two_blocks.py`: every orbit is certified at every prime p ≤ 61. At p = 61 that is 1,493/1,493 orbits (89,532 sets).
+- `verify_interval_lift.py --primes 67 … 113`: every orbit is certified at every one of these primes, from p = 67 (2,021/2,021) to p = 113 (10,600/10,600). All counts match Astra's table.
+- **Hence C5 is confirmed for every prime p ≤ 113.**
 
 ## Status after this round
 - **C5 holds for every prime p ≤ 113.** The certificates cover all 7,174,166 zero-sum five-sets.
