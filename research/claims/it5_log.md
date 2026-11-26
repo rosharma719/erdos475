@@ -4,8 +4,8 @@ IT5 asks for two simple paths from zero to the same positive endpoint in [0,M], 
 
 | Case | Status |
 |---|---|
-| Both outer signs are holes | open |
-| One outer hole and an interior opposite pair | open |
+| Both outer signs are holes | proved when the asymmetric triple contains a unit; other triples open |
+| One outer hole and an interior opposite pair | proved when the asymmetric triple contains a unit; other triples open |
 | Inverse-free, 1+4 signs | open |
 | Inverse-free, 2+3 signs with −M on the two-element side | open |
 | Inverse-free, 2+3 signs with −M on the three-element side | open |
@@ -20,6 +20,11 @@ Negation preserves IT5. If P,Q certify T, the combined multiset for Q,P is the n
 **Stretch at an internal width.** Suppose a certificate for T of height M is given and 1≤d<M. On each path choose a prefix ending at x and a suffix beginning there. For that path choose [A,B] of width d with x=A or x=B. Both paths must choose the same side, but their intervals may differ. Require all suffix vertices in [A,B], all prefix vertices in [0,A] or [B,M], and the opposite boundary absent from the prefix. Require a prefix edge to run between the two outside intervals exactly when its magnitude exceeds d. For every integer t≥0 the holes obtained by adding 2t to the magnitude of every hole larger than d and leaving the other holes fixed have an IT5 certificate at height M+2t.
 
 **Proof.** Leave the lower prefix vertices fixed and translate the upper prefix vertices by 2t. Translate the entire suffix by t. For an anchor x=A bridge the gap by following A, B+2t, A+1, B+2t−1, A+2, …, B+t+1, A+t, then follow the translated suffix from its initial A+t. For x=B reflect this prescription in the map v↦A+B+2t−v, giving a bridge from B+2t to B+t. When t=0 use the original path. All vertices lie in [0,M+2t]. The translated suffix lies in [A+t,B+t]. Apart from its final vertex the bridge avoids that interval. Its only possible intersection with the transformed prefix beyond the starting anchor would be the opposite outside endpoint, which the hypothesis excludes. For t>0 the prefix and translated suffix are disjoint. The two paths still begin at zero (if A=0 it belongs to the lower prefix) and end at the original common endpoint plus t. Each old step of magnitude above d increases in magnitude by 2t, with its sign unchanged; every other old step is unchanged. The new bridge takes precisely the magnitudes d+1 through d+2t, in descending order and alternating signs. The two bridges have identical signed lists because their anchor sides agree. Reading the second backwards supplies the opposite signed copy of every new magnitude. This proves the label identity and simplicity for every t.
+
+
+**Paired holes with a unit in the asymmetric triple.** Up to negation these are exactly T={−h,h,1,c−1,−c}, with c≥3 and h distinct from 1,c−1,c. Every admissible h is allowed.
+
+**Proof.** First take h<c. Begin P at (0,c) and Q at (0,1,c). From their shared vertex c attach the same tail to both paths. Use the magnitudes in {2,…,c−2} except h in decreasing order, taking the first jump down, the next up, and alternating thereafter. If the first magnitude is v, the tail stays in [c−v,c]⊆[2,c] and is simple. Indeed every new vertex after the first edge lies strictly between the ends of the preceding edge since the sign alternates and the magnitude decreases, giving nested intervals with no vertex revisited. An empty tail is also valid. The two initial pieces supply +c,−1,−(c−1); all other required magnitudes occur in both signs on the shared tail. The tail avoids both 0 and 1, and its endpoint is positive. When h>c, first use the same construction at height c without omitting a tail magnitude. To add a symmetric magnitude q from c+1 through h−1, replace the pair by (0) followed by q−Q and (0) followed by q−P, with pointwise reflection. The reflected vertices are positive; the exchange preserves old combined labels and the two initial jumps add ±q. The new endpoint q−y is positive. At the end both paths lie in [0,h−1] and use exactly the required labels for height h with both ±h absent. This covers every placement of an opposite pair for this triple type.
 
 ## (c) Refuted
 
@@ -45,4 +50,4 @@ python3 experiments/exploration/complement5/it5_samples.py --output experiments/
 
 ## (e) Next step
 
-Construct interval-compatible prefixes and suffixes symbolically for outer paired holes and an arbitrary remaining triple; validate internal stretches independently on the stored witnesses.
+For a paired set with asymmetric triple {a,b,−(a+b)}, a<b, calculate exactly which partial sums of the shared decreasing tail are skipped and whether either a or b can be used before the tail.
