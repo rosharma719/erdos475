@@ -6,9 +6,9 @@ IT5 asks for two simple paths from zero to the same positive endpoint in [0,M], 
 |---|---|
 | Both outer signs are holes | proved when the asymmetric triple contains a unit; other triples open |
 | One outer hole and an interior opposite pair | proved when the asymmetric triple contains a unit; other triples open |
-| Inverse-free, 1+4 signs | open |
-| Inverse-free, 2+3 signs with −M on the two-element side | open |
-| Inverse-free, 2+3 signs with −M on the three-element side | open |
+| Inverse-free, 1+4 signs | proved on the arithmetic class below, including six certified unbounded rays; otherwise open |
+| Inverse-free, 2+3 signs with −M on the two-element side | proved on the arithmetic class, including 34 certified unbounded rays; otherwise open |
+| Inverse-free, 2+3 signs with −M on the three-element side | proved on the arithmetic class, including five certified unbounded rays; otherwise open |
 
 The cut-stretch construction below is proved for every certificate satisfying its stated interval test. The five case rows describe the remaining generality.
 
@@ -30,6 +30,22 @@ Negation preserves IT5. If P,Q certify T, the combined multiset for Q,P is the n
 **Arithmetic criterion for synchronized prefixes and a common nested tail (all five cases).** Put U={−t : t∈T and −t∉T}, K=max{|u| : u∈U}, and F={|t| : t∈T and |t|≤K}. Test all orders of U and all their nonempty proper cuts. From zero, use the first part as P's steps and the negatives of the second part as Q's steps. Require each prefix simple and in [0,K], and their common endpoint y positive. Let V be the union of the two prefixes' vertices before y. Partition [1,K] outside F into descending maximal consecutive runs. For each of the two choices of sign, test the following inequalities. At the beginning of a run h,…,l let the current vertex be z and current sign ε. Put n=h−l+1. Take the integer intervals with endpoints (z,z+ε⌊n/2⌋) and (z+εh,z+ε(h−⌊(n−1)/2⌋)). Require both inside [0,K] and disjoint from V. Continue from the last even or odd vertex according to n, flipping ε exactly when n is odd. Acceptance of any prefix and sign implies IT5 at the original height. The test uses at most 480 ordered cuts and two signs, and at most six runs per sign, independently of M. It describes an explicit arithmetic class of five-sets.
 
 **Proof.** The two prefix sums agree because U sums to zero. Their combined signed steps are precisely U. Append the same jumps of descending magnitude in [1,K] outside F to each path, alternating signs throughout. In a consecutive run the vertex after 2i steps is z+εi, and after 2i+1 steps it is z+ε(h−i), by grouping adjacent terms. The two integer intervals are exactly all visited vertices, so the tests are necessary and sufficient for these tails to remain in bounds and avoid both prefixes before y. The alternating tail is simple by strict nesting, as proved above. The endpoint cannot be zero since zero is in V. Each magnitude outside F occurs once with each sign. If K<M, both outer holes are ±M, and the reflection-and-exchange extension from the preceding proof supplies ±(K+1),…,±(M−1). If K=M, no extension is required. This accounts for every label and both endpoints. Conversely any construction of precisely this stated form passes the inequalities using its prefix and initial sign, so rejection describes the exact remaining cases for this construction, not a failure of IT5.
+
+
+**Affine certificates at unbounded height.** Fix an accepted inverse-free input B and its ordered prefixes. Write T(n)=B+2nD coordinatewise for an integer direction D of sum zero having the same entry signs and the same strict magnitude order as B. Require the base magnitudes and their consecutive gaps to be at least two at the bottom and between magnitudes, respectively. Keep the prefix steps attached to the same signed input coordinates. Form the signed comparison list consisting of the common prefix endpoint, each prefix coordinate and its distance from M, every within-prefix coordinate difference, each tail interval's lower bound and distance from its upper bound to M, and both bounds of each interval minus each forbidden prefix vertex. For every comparison require that its value at n=1 has moved weakly away from zero in its sign at n=0, keeping an initial zero fixed. Then T(n) has a certificate for every integer n≥0.
+
+**Proof.** Increments are even, so every consecutive run keeps its length parity; the ordering and positive gaps ensure the same runs exist for all n. The run formulas in the preceding proof show by induction that all their endpoints, and hence all listed comparisons, are affine integer functions of n. Ordering the two ends of a run interval is consistent for all n since its direction is fixed and its length stays positive. The single slope test preserves every initial sign and equality. Therefore every prefix remains simple and within bounds, every forbidden vertex stays outside every tail interval, and the final two-path construction still works. This also proves every row with a direction in the finite manifest, using exact integer arithmetic. Since all direction magnitudes are positive and strictly ordered, even the minimum magnitude and every gap tend to infinity.
+
+**Hand-checkable inverse-free certificate.** For every integer N≥1 let M=26N−1 and T={−M,2N,6N−1,8N,10N}. Start P=(0,M), Q=(0,8N,14N−1,16N−1,M), and append to both the same alternating descending tail from M. For clarity, its missing vertices can be computed without searching. Start with L=0, R=M, current side high. At each magnitude k=M−1,…,1 the current interval has width k+1. If the current side is high, increment L; otherwise decrement R. For a present magnitude jump to that new frontier and switch sides, an edge of length k. For a missing magnitude skip that frontier and keep the side. Pairing consecutive updates in each present run gives the following states just before skipping.
+
+| k | L | R | Current side | Skipped vertex |
+|---:|---:|---:|---|---:|
+| 10N | 8N−1 | 18N | high | 8N |
+| 8N | 9N | 17N+1 | low | 17N |
+| 6N−1 | 10N | 16N | low | 16N−1 |
+| 2N | 12N−1 | 14N | low | 14N−1 |
+
+The fronts move inwards, so none of the skipped vertices is later visited. Zero is also outside the tail. This excludes all three intermediate Q vertices, and the prefix labels in the combined orientation are +M,−8N,−(6N−1),−2N,−10N. The shared tail supplies both signs of all remaining magnitudes. This is a primitive class since gcd(2N,6N−1)=1. For N≥2 the magnitudes are pairwise at distance at least three.
 
 ## (c) Refuted
 
@@ -65,6 +81,13 @@ Checkpoint 5. The 1+4 refutation is by the parameterized proof in (c). The arith
 python3 experiments/exploration/complement5/it5_nested.py --lo 16 --hi 30 --seconds 45 --output /private/tmp/it5-nested-census
 ```
 
+Checkpoint 6. Across the full normalized census, 46 accepted inverse-free bases have minimum magnitude and minimum gap at least two. The verifier found certified strictly separating directions of height at most 24 for 45 of them (six 1+4, 34 with −M on the two-element side, five with −M on the three-element side). One base, (−27,2,4,7,14), had no direction found under that cap and prefix. The checked manifest contains every base and direction. Exact discovery and replay commands:
+
+```sh
+python3 experiments/exploration/complement5/it5_affine.py --manifest experiments/exploration/complement5/it5_rays.jsonl --census /private/tmp/it5-nested-census --seconds 45
+python3 experiments/exploration/complement5/it5_affine.py --manifest experiments/exploration/complement5/it5_rays.jsonl
+```
+
 ## (e) Next step
 
-Turn the accepted inverse-free prefixes into explicit unbounded classes by verifying the affine slopes of every band endpoint and every forbidden prefix vertex.
+For the balanced 1+4 region 2≤a<b<c<d<M/3, let the two paths place some symmetric labels in different orders before sharing a tail, and test those placements against the frontier inequalities.
