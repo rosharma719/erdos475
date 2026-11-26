@@ -18,7 +18,10 @@ Today DIT is applied only for k ≲ log₂ p. If it holds up to k ≈ M/2, and c
      - k ≤ 0.75M at M = 24: 1,500 sets.
 3. **Actual path search for M ≥ 14.**
    - The hand-written DFS (`cw.c`) is too weak: it is inconclusive at M ≥ 14, and with random label orders even at M = 12.
-   - An exact SAT encoding (`twopath_sat.py`, CaDiCaL) is written. Its runs were still in progress at the time of writing.
+   - An exact SAT encoding (`twopath_sat.py`, CaDiCaL) settles the question instance by instance.
+   - Sanity check: it rejects both known counterexamples and accepts {−6, −5, −4, 7, 8} at M = 8.
+   - **At k = M/2, every random T has paths:** M = 12, 20/20; M = 16, 20/20. Every model is re-verified independently (`verify`).
+   - Larger M (20, 24) and adversarial run-structured T (`adv_sat.py`) are still running.
 
 ## Reading
 - No counting obstruction appears anywhere near the boundary k = M/2. The only known obstructions need k > M/2.
