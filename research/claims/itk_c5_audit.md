@@ -44,3 +44,18 @@
   - This is better than the log p / log log p I had estimated.
 
 **Next proof target:** IT(5) for M ≥ 15. It is a single p-free statement about five integers, and its proof finishes C5 at every prime.
+
+## IT5 checkpoints 1–7 (Astra; merged from codex/itk-counterexample), audited by Claude
+- **Hand-checkable family, verified independently for N = 1..59, all valid.** The family is M = 26N − 1 with T = {−M, 2N, 6N−1, 8N, 10N}. Each instance was checked by rebuilding both paths and recomputing their labels.
+- **Paired holes with a unit triple, proved and checked by building the paths.** The family is T = {±h, 1, c−1, −c}. All 2,072 cases with 3 ≤ c < 40 and h < 60 are valid.
+- **Affine rays, re-checked independently.** 45 certified rays: `it5_affine.py --manifest` replays them all.
+  - I rebuilt the paths myself at n = 0..40, 100, 333 and 1000: 1,980/1,980 valid.
+  - The ray argument (affine comparisons with slopes that preserve their sign) is accepted.
+- **Refutation of the common nested tail on the balanced 1+4 region: correct.** In that region the forced alternating tail visits the first intermediate prefix vertex.
+- **Status.** IT5 is proved for:
+  - the paired unit-triple family;
+  - the arithmetic nested-tail class at the heights checked: 1,515 of 26,435 normalised inputs at M = 15..30;
+  - 45 infinite rays;
+  - one explicit infinite family.
+
+  The general case is open. The balanced 1+4 region (2 ≤ a < b < c < d < M/3) needs a different construction.
