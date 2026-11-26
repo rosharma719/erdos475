@@ -23,3 +23,20 @@ Theorem 3 (p ∤ g_m ⇒ every (m+1)-subset of F_p^× is orderable) is sound und
 - Read-through (not machine-checked): Q_n = F_{n−1} as polynomials, cyclic-rotation invariance of Q_n up to sign, socle argument ([Q_n]≠0 ⇔ [G_n]≠0), the Ann(xy)=(h_{n−2}) route, Sym² decomposition and the D(d) matrix algebra all look correct. Note p=3 ≤ m+1 at m=7, so the split-jet run is a stress test, not an instance of Graham.
 - Still open (as the report says): the first-order transfer theorem (A_j=0 ∀j, V_m≠0 ⇒ ∃j B_j≠0). No evidence beyond the single m=7, p=3 run.
 - ProofAtlas overlap and the higher-degree-W criterion's novelty are unchecked.
+
+## Quadratic packets / content recurrence (third upload, 2026-11-26)
+- `exact_quadratic_packets.py` (uploaded) — exact integer linear (A), first-order (B) and quadratic-kernel (T) contents. Ranks 4–8 rerun here (`quad_out_to8.txt`, 29 s for n ≤ 8):
+
+| rank n | A (= g_n) | B matrix content (= b_n) | T matrix content (= d_n) |
+|---|---|---|---|
+| 4 | 1 | 2 | 1 |
+| 5 | 2 | 2 | 1 |
+| 6 | 4 | 2 | 2 |
+| 7 | 6 | 2 | 2 |
+| 8 | 12 | 2 | 2 |
+
+  The A column matches the c_{m,r} gcds from the brute force (g_4..g_8 = 1,2,4,6,12). The table matches the report's table, and the recurrence d_{m+1} = gcd(g_m, b_m) (report Thm 3) holds for m = 4..7 (d_5..d_8 = 1,2,2,2). That is a numerical check of 4 instances, not a proof of Thm 3.
+- Rank 7 cut 4 is the only cut whose B content is not divisible by 3 (matrix content 2 vs 6), consistent with the earlier split-jet run.
+- Read-through of the report's analytics: Thm 4 (residual detection) re-derived by hand and sound (needs p ∤ (m−1)(m−2)); the §9 harmonic example (cyclic sum of 5-variable Vandermondes) checks out; Thm 1's dimension count (2(n−1)! − (n−2)!) is consistent. The proofs of Thm 1 and Thm 3 were not re-derived line by line.
+- Unreconciled: the report quotes ProofAtlas quadratic contents "1,1,2,2,2,2,2 for ranks 3..9", while the table above gives d_4..d_8 = 1,1,2,2,2 — apparently shifted by one rank (different indexing). Unchecked.
+- Open and unchanged: d_m ∈ (g_m, r_m)·Z[1/(m+1)!]. No uniform proof; no counterexample.
