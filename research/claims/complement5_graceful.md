@@ -54,3 +54,14 @@ A **graceful-segment lemma**, stated for every r ≥ r₀: every set W of 6 nonz
   - With magnitudes ≤ r/3, prefix completion already succeeds in 21/30 trials at r = 30 under the same small node budget (`gcomp2.c`). Runs at r = 40 and 60 timed out at 15 minutes each without finishing: the brute-force search over all orders × starts × completions is too slow there, so they give no data.
 - **Revised lemma (the target).** For r ≥ r₀, every 6-set W of signed differences with distinct magnitudes ≤ εr occurs as consecutive differences in some graceful permutation of [1..r], with free choice of order, start point and position.
 - **Natural construction to try.** Run the zigzag through the large differences first; it uses them rigidly at the ends. Then place W in the central interval among the small differences. This needs a local graceful completion on the central interval.
+
+## Note added after Astra's round (2026-11-26)
+- **Astra's "counterexample" to the graceful-segment lemma.** It is W = {1, 3, 7, −2, −4, −5}, which sums to 0. It is valid against the lemma *as stated above*: six consecutive differences of a simple walk cannot sum to 0.
+- **The C5 gadget never needs such a W.** There W = λH ∪ {s} sums to s ≠ 0. The lemma should have required ΣW ≠ 0. That restriction is necessary, and it was omitted by mistake.
+- **Astra's other results are not yet in this repo.** They were written on the user's machine:
+  - `research/claims/c5_interval_lift.md`: C5 for every prime p ≤ 113;
+  - `research/claims/c5_two_blocks.md`: a revised two-block lemma;
+  - `experiments/exploration/complement5/verify_interval_lift.py`;
+  - a two-path interval reduction, verified for every integer 5-set through M = 14.
+
+  They are unaudited until pushed.
