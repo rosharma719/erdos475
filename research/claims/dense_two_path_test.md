@@ -21,9 +21,10 @@ Today DIT is applied only for k ≲ log₂ p. If it holds up to k ≈ M/2, and c
    - An exact SAT encoding (`twopath_sat.py`, CaDiCaL) settles the question instance by instance.
    - Sanity check: it rejects both known counterexamples and accepts {−6, −5, −4, 7, 8} at M = 8.
    - **At k = M/2, every random T has paths:** M = 12, 20/20; M = 16, 20/20. Every model is re-verified independently (`verify`).
-   - Larger M (20, 24) and adversarial run-structured T (`adv_sat.py`) are still running.
+   - **Also all valid:** M = 20, 15/15; M = 24, 15/15. Adversarial run-structured T at M = 16 with k ≤ M/2 (`adv_sat.py`): 60/60.
+   - **Total so far:** 110 exact SAT instances at the dense boundary, all with verified paths, and no counterexample.
 
 ## Reading
 - No counting obstruction appears anywhere near the boundary k = M/2. The only known obstructions need k > M/2.
 - Simplicity of the two paths at large M is untested so far. The SAT encoding is the tool for that.
-- If SAT confirms paths at k = M/2 for M up to about 30, DIT at k ≤ M/2 becomes the main proof target.
+- **Conclusion.** DIT at k ≤ M/2 survives every test: exhaustive for M ≤ 11, LP up to M = 40, SAT up to M = 24, random and adversarial. It is now the main proof target, together with the closure for centred sums that are a nonzero multiple of p.

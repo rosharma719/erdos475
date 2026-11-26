@@ -1069,3 +1069,9 @@ Source: GPT PDF with 16 embedded files, now in `experiments/checks/cycle_selecti
 - **C5 for all p ≤ 113.** This covers 7,174,166 five-sets and was re-run here: two-block certificates for p ≤ 61 and interval-lift certificates for p = 67–113.
 - **Reduction, proofs hand-checked.** The dilation counting gives the result for every p ≥ 61, and the extension and closure steps are proved. So C5 for all primes follows from IT(5) at heights M ≥ 15. Heights M ≤ 14 are verified (2,154 sets).
 - **General k.** For every p ≥ max{8k+1, k·2^{k−1}+k−1}, complement-k follows from the dense two-path conjecture (M ≥ 2k).
+
+## 2026-11-26 Dense two-path conjecture at k ≤ M/2 survives all tests (claims/dense_two_path_test.md)
+- **Exhaustive, M ≤ 11:** passes.
+- **LP test for cut-type obstructions:** passes for random and adversarial T, M ≤ 40. The LP rejects both known counterexamples.
+- **Exact SAT:** 110/110 instances have verified paths (M = 12, 16, 20, 24, plus adversarial sets at M = 16).
+- **Why it matters:** it is now the main target. If proved, and the closure handles centred sums that are a nonzero multiple of p, it gives Graham for |A| ≳ 3p/4 at every prime.
