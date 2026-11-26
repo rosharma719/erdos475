@@ -26,6 +26,11 @@ Negation preserves IT5. If P,Q certify T, the combined multiset for Q,P is the n
 
 **Proof.** First take h<c. Begin P at (0,c) and Q at (0,1,c). From their shared vertex c attach the same tail to both paths. Use the magnitudes in {2,…,c−2} except h in decreasing order, taking the first jump down, the next up, and alternating thereafter. If the first magnitude is v, the tail stays in [c−v,c]⊆[2,c] and is simple. Indeed every new vertex after the first edge lies strictly between the ends of the preceding edge since the sign alternates and the magnitude decreases, giving nested intervals with no vertex revisited. An empty tail is also valid. The two initial pieces supply +c,−1,−(c−1); all other required magnitudes occur in both signs on the shared tail. The tail avoids both 0 and 1, and its endpoint is positive. When h>c, first use the same construction at height c without omitting a tail magnitude. To add a symmetric magnitude q from c+1 through h−1, replace the pair by (0) followed by q−Q and (0) followed by q−P, with pointwise reflection. The reflected vertices are positive; the exchange preserves old combined labels and the two initial jumps add ±q. The new endpoint q−y is positive. At the end both paths lie in [0,h−1] and use exactly the required labels for height h with both ±h absent. This covers every placement of an opposite pair for this triple type.
 
+
+**Arithmetic criterion for synchronized prefixes and a common nested tail (all five cases).** Put U={−t : t∈T and −t∉T}, K=max{|u| : u∈U}, and F={|t| : t∈T and |t|≤K}. Test all orders of U and all their nonempty proper cuts. From zero, use the first part as P's steps and the negatives of the second part as Q's steps. Require each prefix simple and in [0,K], and their common endpoint y positive. Let V be the union of the two prefixes' vertices before y. Partition [1,K] outside F into descending maximal consecutive runs. For each of the two choices of sign, test the following inequalities. At the beginning of a run h,…,l let the current vertex be z and current sign ε. Put n=h−l+1. Take the integer intervals with endpoints (z,z+ε⌊n/2⌋) and (z+εh,z+ε(h−⌊(n−1)/2⌋)). Require both inside [0,K] and disjoint from V. Continue from the last even or odd vertex according to n, flipping ε exactly when n is odd. Acceptance of any prefix and sign implies IT5 at the original height. The test uses at most 480 ordered cuts and two signs, and at most six runs per sign, independently of M. It describes an explicit arithmetic class of five-sets.
+
+**Proof.** The two prefix sums agree because U sums to zero. Their combined signed steps are precisely U. Append the same jumps of descending magnitude in [1,K] outside F to each path, alternating signs throughout. In a consecutive run the vertex after 2i steps is z+εi, and after 2i+1 steps it is z+ε(h−i), by grouping adjacent terms. The two integer intervals are exactly all visited vertices, so the tests are necessary and sufficient for these tails to remain in bounds and avoid both prefixes before y. The alternating tail is simple by strict nesting, as proved above. The endpoint cannot be zero since zero is in V. Each magnitude outside F occurs once with each sign. If K<M, both outer holes are ±M, and the reflection-and-exchange extension from the preceding proof supplies ±(K+1),…,±(M−1). If K=M, no extension is required. This accounts for every label and both endpoints. Conversely any construction of precisely this stated form passes the inequalities using its prefix and initial sign, so rejection describes the exact remaining cases for this construction, not a failure of IT5.
+
 ## (c) Refuted
 
 No new refutation in this run.
@@ -48,6 +53,12 @@ python3 experiments/exploration/complement5/it5_samples.py --output experiments/
 python3 experiments/exploration/complement5/it5_samples.py --output experiments/exploration/complement5/it5_samples.jsonl --per-stratum 4 --budget 10000 --seconds 45
 ```
 
+Checkpoint 4. The direct arithmetic test and a separate step-by-step construction agree on all accepted normalized inputs at height 15. Of 376 inputs, 63 pass (51 paired, 11 inverse-free 2+3, one inverse-free 1+4). The program records every input, accepting prefix, and result, then checks the actual paths. Exact command:
+
+```sh
+python3 experiments/exploration/complement5/it5_nested.py --lo 15 --hi 15 --seconds 25 --output /private/tmp/it5-nested-census
+```
+
 ## (e) Next step
 
-For a paired set with asymmetric triple {a,b,−(a+b)}, a<b, calculate exactly which partial sums of the shared decreasing tail are skipped and whether either a or b can be used before the tail.
+Select an inverse-free accepted input with separated magnitudes and use the affine run-endpoint inequalities to prove an unbounded region where its prefix order always works.
