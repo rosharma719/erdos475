@@ -80,3 +80,4 @@ Scripts: `reflection_convention_check.py` (+ `witness_data.py`), `simultaneous_c
 - Rank-4 degree-sensitivity counterexample (sign character): nf(q) = 40·z_1z_2²z_3³, T_4(q) = 0 in R_5. With χ_Q instead, q = 0 in R_4.
 - Simultaneous saturation ker T ⊆ ker L on χ_Q-equivariant degree-D_m polynomials: holds at ranks 4, 5, 6 (ranks of T: 1, 6, 54; joint rank equal).
 - Not reproduced: the report's rank-7 numbers (452, 20/19/0 comparison) unless `saturation_rank7.txt` says otherwise; the realisation theorem; the proof of Thm 10.
+- `saturation_rank7.txt`: log of the rank-7 saturation run (`python3 saturation_check.py 7 7`, 2400 s limit). Committed while in progress; it contains a rank-7 result line only if the run finished.

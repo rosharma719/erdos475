@@ -1,0 +1,2 @@
+rank-4 degree-6 q with permutation-sign character: terms in q=16, nf(q) in R_4 = {(0, 1, 2, 3): 40}, nonzero terms of T_4(q) in R_5 = 0
+rank-4 degree-6 q with true chi_Q: terms in q=16, nf(q) in R_4 = {}, nonzero terms of T_4(q) in R_5 = 4
