@@ -831,3 +831,8 @@ Scripts: `experiments/linear_alternation/two_pattern_v2.py`, `vacuum.py`. Unnorm
 **New consequence and its failure.** Since every term of Q_m has h^(k), k >= 2, Q_m(0) = Q_m(1) = 0, and by reflection the vacuum value S_m(0) = +-Q_m(-1) = +-sum_k (-1)^k k! M_{m,k}. If S_m(0) were always +- a product of primes <= m+1, the conjecture would follow. It is not: S_m(0) = -12, 288, 138240, -696729600 for m = 3..6 (primes <= m+1 only), but S_7(0) = 121147342848000 = 2^17 3^8 5^3 7^2 23. So a single-vacuum witness fails at m = 7, p = 23 (like the fixed-coordinate witnesses of §39).
 
 **Status.** The moment theorem is an exact, useful identity expressing one pattern through rank-(m-1) vacuum coefficients. The remaining statement (S_m = +-Q_m(-h-1) +- Q_m(h) is not identically 0 mod p) is still the open noncancellation problem; no proof.
+
+**§41 recomputation finished (corrected routine; replaces the withdrawn §38/§39 numbers).**
+- n = 8 minor table: large-prime (> n+1) part of the maximal-minor gcd of P_8 = 1 (2^44 3^30 5^17 7^5, unchanged); of the 2x2 minors of [P(H_2)|P(q_8)] = 1 (now 2^10 3^2 7^2).
+- P_n(H_2) coordinates (`ph2_fixed.txt`): n <= 6 unchanged. n = 7 e_1, e_2 change (65003/210691031040000, -1243/1950842880000; the §39 values 13553/..., -9881/... were wrong), e_3..e_6 unchanged. n = 8: e_7 = 0, e_5 = 569/6019743744000, e_6 = 569/3009871872000 (prime 569 > 9), e_1..e_4 with large primes. n = 9: e_8 = 0, e_6 = -1974029/5461111524556800000, e_7 = 2 e_6.
+- So the qualitative conclusions of §39 survive with the corrected numbers: the top coordinate e_{n-1} vanishes at n = 4, 5, 8, 9; the top nonzero pair always has ratio 1:2 but its numerator is not a unit from n = 8 on (569, 1974029). Fixed-coordinate witnesses fail.
