@@ -760,3 +760,18 @@ Scripts: `experiments/linear_alternation/transfer_checks.py`, `transfer_ops.py`,
 **Status.** Everything checkable is consistent. The step "P_n(H_2) != 0 mod p for all p > n+1" is the same open statement (14) in a more explicit linear-algebra form; no proof of it, or of Graham's conjecture, is claimed.
 
 **Addendum to §37 (n = 6, 7 finished).** Exact, same checks as n = 3..5: grading, T(B_{n,n-1}) = 0, rank T|B_{n,n-2} = n-1 = dim M_n, rank P_n = n-1, P_n(H_2) and P_n(q_n) nonzero and independent (rank 2). Pivot coefficients -1/336 (n=6) and -1/1920 (n=7) match -C(n,2)/(n+1)!. Smith invariants of [P(H_2)|P(q_n)]: n=6 {1, 4233600}, n=7 {1, 161280}; prime support {2,3,5,7} in both, i.e. only primes <= n+1 (and P_n(H_2) alone has content 1). Ranks 8+ not run. The all-n statement remains open.
+
+## 38. Insertion-kernel form of the transfer and its exterior adjoint (report of 2026-11-27, third round)
+
+Scripts: `experiments/linear_alternation/dual_checks.py`, `fit_kernel.py`, `minor_table.py` (exact rational arithmetic).
+
+**Reproduced:**
+- **Insertion form (1)-(3).** T_n = sum_{h,a,b} c_{h,a,b} M_{h-a,h-b} E_u^a E_v^b with M_{ij} = wedge by U_iV_j and the paste's c_{h,0,b}, c_{h,a,b}, matches the transfer T from §37 on every balanced monomial for n = 3, 4, 5. Note: the sum must run over h up to 2n-1 (a, b up to n-1 reaches h > n). A first run with h <= n failed for exactly that reason (residual terms U2V2U4V4 etc.), so the paste's "indices outside the range are zero" is the only truncation.
+- **Dual kernel (4)-(6).** D_h(x,y) = C_h(-1-x,-1-y) reproduces d_{h,A,0} = 0 and formulas (5), (6) as a polynomial identity for h = 1..8; the operator built from d satisfies <Tf,g> = <f,T^dagger g> on sampled complementary pairs (n = 3, 4). Hence T^dagger = R_n E_v ((9)) is immediate from (4).
+- **Sign property.** Every nonzero d_{h,A,B} has sign (-1)^{h+1} (read off (5), (6)).
+- **Kernel counter-example to a first-coordinate argument.** For n = 5 the primitive integral kernel vector of P_n is (1974067200, 957254160, 353244840, 95068908, 17985731), which is (0,4,4,12,3) mod 17, exactly as stated.
+- **Minor table.** Large-prime (> n+1) part of the maximal-minor gcd of P_n: n=4: 7; n=5,6,7: 1. Large-prime part of the gcd of 2x2 minors of [P(H_2)|P(q_n)]: n=4: 0 (rank 1); n=5,6,7: 1.
+
+**Not reproduced:** the compatibility equations (7a_1 - 30a_2 + 60a_3 = 1 mod 17 etc.) since the discrepancy operator is not defined in the paste; the claim "the first three compatibility equations suffice for n <= 10"; ranks 10 (the run is cost-prohibitive here); any proof of (12). Ranks 8, 9: see the addendum if present.
+
+**Status.** All checkable identities hold; (12) (injectivity of R(E_v R)^{n-3} on adjacent-index space) is a restatement of the same open noncancellation statement (14). No proof of Graham's conjecture is claimed.

@@ -213,3 +213,6 @@ Scripts: `lowest_pair_checks.py` (PQ+QP = −C, S² = C²/4, Bernoulli extension
 
 ## Single-transfer operator (§37)
 `transfer_checks.py` (component reconstruction), `transfer_ops.py` (T on the exterior algebra; T(H_k)=H_{k+1}), `transfer_claims.py` (grading, terminal vanishing/surjectivity, pivot, P_n rank/Smith). Run `PYTHONPATH=. python3 transfer_claims.py 3 4 5`. n=6,7 were still running when filed.
+
+## Insertion kernel / dual transfer (§38)
+`dual_checks.py` (insertion form (1) vs T; dual coefficient identity; adjointness), `fit_kernel.py` (fit of T in the span of M E^a E^b; exposed the h <= n truncation error), `minor_table.py N` (maximal-minor gcd and 2x2 seed minors of P_n, kernel vector mod 17 at n=5).
