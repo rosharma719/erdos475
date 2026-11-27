@@ -81,3 +81,10 @@ Scripts: `reflection_convention_check.py` (+ `witness_data.py`), `simultaneous_c
 - Simultaneous saturation ker T ⊆ ker L on χ_Q-equivariant degree-D_m polynomials: holds at ranks 4, 5, 6 (ranks of T: 1, 6, 54; joint rank equal).
 - Not reproduced: the report's rank-7 numbers (452, 20/19/0 comparison) unless `saturation_rank7.txt` says otherwise; the realisation theorem; the proof of Thm 10.
 - `saturation_rank7.txt`: log of the rank-7 saturation run (`python3 saturation_check.py 7 7`, 2400 s limit). Committed while in progress; it contains a rank-7 result line only if the run finished.
+
+## Marked-root algebra report (2026-11-28, fourth)
+Scripts: `marked_root_checks.py` (graded linear algebra for C_m, mod F_1000003), `marked_root_m4.py`, `phi_rank_check.py`.
+- m = 3: dim C = 36, socle degree 7, η-identities, Ann(a_d) = (η_d), Ann(η_d) = (a_d), (e_2..e_m)C = vC, dim C/(v) = 18, rank Φ = 27, dim v·imΦ = 12 — all as in the report.
+- m = 4: dim C = 240, socle degree 12, η-identities verified; annihilator and vC checks in `marked_root_m4_out.txt` (in progress at commit time).
+- u^k H_{m−1} = v^k H_{m−1−k} in A_m for m = 3..8.
+- Not reproduced: the extra-direction table (ranks 5–9), the diagonalisation theorem, weighted-kernel statements, rank-7 saturation (run was terminated).
