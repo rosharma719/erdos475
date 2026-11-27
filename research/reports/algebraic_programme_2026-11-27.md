@@ -789,3 +789,20 @@ Scripts: `experiments/linear_alternation/ph2_vectors.py`, `dual_orbit.py`, `kern
 **Status.** This narrows the search (coordinate-wise and kernel-explicit routes are ruled out) but does not close the gap; nothing here proves Graham's conjecture. n = 9 coordinates were still running when filed.
 
 **Addendum to §39 (n = 9 finished).** e_8 coordinate of P_9(H_2) is exactly 0; e_7 = -1075790663/1747555687858176000000 (numerator contains primes > 10). So the top coordinate vanishes at n = 4, 5, 8, 9 and the clean pair of n = 6, 7 does not persist.
+
+## 40. Testing the "two alternating word patterns / roots at both ends" closure idea (own reconstruction)
+
+Source: a screenshot of another model's in-progress claim ("if the standard polynomial vanishes, one pattern must have m roots at each end of the height range, while its degree is at most 2m-2; that forces the pattern to vanish, and inserting two identity exponents recovers the preceding-rank standard polynomial"). No full text was available, so I made the most natural precise version and tested it. Scripts: `experiments/linear_alternation/word_patterns.py`, `word_roots.py`, `word_modp.py`.
+
+**Precise setting.** With c_k = 1/k!, Z_m = sum_{i,a} xi_i eta_a [A_a, B_i], A_a = D^a/a!, B_i = X^i/i!. The balanced coefficient of Z_m^{m-1} at xi_{[m]\d} eta_{[m]\d} is an alternating sum of products of m-1 commutators. Any word with two adjacent B's (or A's) cancels under the alternation (X-powers commute, D-powers commute), so only two patterns survive:
+G_d = S_AB + (-1)^{m-1} S_BA, S_AB = sum sgn(s)sgn(t) A_{t1}B_{s1}...A_{tk}B_{sk}, S_BA = same with B A order.
+Acting on t^h each is a polynomial in the height h.
+
+**Proved/verified:**
+- Only the two alternating patterns survive (argument above; exact check: G_d equals +-the Z^{m-1} coefficient for m = 2,3,4, all d).
+- deg S_AB = deg S_BA <= 2m-2 (m <= 5, all d; e.g. m=5: 7,6,5,4,3 for d = 1..5).
+- **New exact symmetry:** S_BA(h) = +-S_AB(-1-h) for every m <= 5 and d (the X<->D anti-automorphism). Hence G_d(h) = S_AB(h) +- S_AB(-1-h) is the (anti)symmetrisation of ONE polynomial about h = -1/2, and "G_d = 0 mod p" is equivalent to "S_AB is (anti)symmetric about -1/2 mod p".
+
+**The root-counting step fails.** S_AB is forced to vanish only at h = -1 (from the leftmost D^{t_1}, t_1 >= 1) and, for d = 1, at -2; S_BA mirror-wise at 0 (and 1). Over Q the end-root counts are 1 or 2 for all m <= 5. Mod p (all primes m+1 < p < 40) the counts in the top/bottom m heights are 1-3, never m. Under the hypothesis G = 0, the reflection only transfers these roots to the other end, giving <= 2r roots with r <= 2 (3 at sporadic p), while deg S_AB goes up to 2m-3. So the degree argument has nothing to bite on from m = 3 onward, and the induction is not closed by this mechanism as reconstructed. (Since G_d != 0 mod p in every computed case, the implication "G = 0 => many roots" cannot be refuted by data; it is the proof mechanism that is missing: the patterns themselves do not carry m forced end-roots.)
+
+**Salvageable content.** The reformulation G_d(h) = S(h) +- S(-1-h) is exact and simpler than before: (*) becomes "the single alternating word sum S_AB is not (anti)symmetric about -1/2 modulo p". Not a proof.

@@ -216,3 +216,6 @@ Scripts: `lowest_pair_checks.py` (PQ+QP = −C, S² = C²/4, Bernoulli extension
 
 ## Insertion kernel / dual transfer (§38)
 `dual_checks.py` (insertion form (1) vs T; dual coefficient identity; adjointness), `fit_kernel.py` (fit of T in the span of M E^a E^b; exposed the h <= n truncation error), `minor_table.py N` (maximal-minor gcd and 2x2 seed minors of P_n, kernel vector mod 17 at n=5).
+
+## Two-pattern / end-roots test (§40)
+`word_patterns.py` (S_AB, S_BA as height polynomials), `word_roots.py` (degrees, end-root multiplicities, agreement with Z^{m-1} coefficient), `word_modp.py` (reflection S_BA(h)=+-S_AB(-1-h); end-root counts mod p).
