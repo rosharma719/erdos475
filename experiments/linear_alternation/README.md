@@ -205,3 +205,8 @@ Scripts: `deformed_ext.py` (the algebra, relation (1), expansion (2), F_2..F_4),
 - Leakage: ℓ_m ∥ g_{m−1} only at m = 3 (t₀ = 1/4) and m = 5 (t₀ = 0); minor gcds 1, 1, 7, 1 for m = 4, 6, 7, 8.
 - Gauge counterexample (p = 7, A = {4,5}) reproduced exactly; identities (13), (15) verified.
 - Not reproduced: rank-16 gcd 96; lost gradient table.
+
+## Lowest-pair descent report (2026-12-01)
+Scripts: `lowest_pair_checks.py` (PQ+QP = −C, S² = C²/4, Bernoulli extension, four-component recurrence reproducing Z^k for m = 3..6), `boundary_sandwich_checks.py` (identity (12), alternating κ sum, adjacent-gradient minors table).
+- All algebraic identities verified; minors table 4,0,64,2240,192,3024,9216,2816 (m = 4..11) matches exactly; Σ(−1)^{d−1}κ_{m,d} = 0 for m = 3..11.
+- Not reproduced: factorization proof, marked moments (13), recurrence at ranks 7–8.

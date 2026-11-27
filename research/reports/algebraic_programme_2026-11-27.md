@@ -713,3 +713,30 @@ So in every case computed the factorial parameter is not exceptional (at m = 3, 
 **Not reproduced.** The hypersurface-smoothness equivalence proof details beyond the consistency checks above, the explicit statement that the full consecutive standard polynomial vanishes for the scalar argument, the counts "rank-16 gcd(κ_{16,1}, κ_{16,2}) = 96", and the lost gradient table (our primitive gradient vectors are listed above for m ≤ 7).
 
 **Status.** (★) is unchanged and open. New exact structure: a single-element nilpotence formulation (Z_m(c*)^{m−1} = 0), the hypersurface F_m with the exact recursion (9), and the leakage condition (11); in all computed ranks (m ≤ 8) the factorial point is smooth, with no exceptional parameter at all for m = 4, 6, 7, 8. A proof of (11) in general would complete the induction; it is the same arithmetic content as before.
+
+---
+
+## 36. Removing the lowest generator pair: Bernoulli extension and the four-component recurrence (2026-12-01)
+
+**Setting.** In the deformed exterior algebra of §35 (Z_m = Σ u_iv_i/i!, with Z_m^{m−1} ≠ 0 ⇔ T_m ≠ 0), put P = u_1, Q = v_1, n = m−1, U_j = u_{j+1}, V_j = v_{j+1} (the copy of the rank-n algebra), C = Z_n = Σ_{j=1}^n U_jV_j/j!, B = Σ_j U_jV_j/(j+1)!.
+
+**Exact structure (computed, m = 3, 4, 5).**
+- PQ + QP = −C, P² = Q² = 0, [P,C] = [Q,C] = 0, Z_m = PQ + B.
+- S = PQ + ½C satisfies S² = ¼C².
+- **Bernoulli rank extension (3):** B − ½C = −Σ_{k≥1} (B_{2k}/(2k)!) L^{2k−1}C, L(U_iV_j) = U_{i+1}V_{j+1}. Verified in the algebra (and by hand: the coefficient identity is Σ_{r=0}^i C(i+1,r)B_r = 0), so Z_m = S − (1/12)Z_{m−2}^{shifted} + (1/720)Z_{m−4}^{shifted} − …
+
+**Four-component recurrence (computed, m = 3..6).** Writing Z_m^k = A_k + PU_k + V_kQ + PH_kQ (A_k, H_k even; U_k, V_k odd; all in the lower-rank algebra) with the super-derivations δ_P = [P,·]_super, δ_Q = [Q,·]_super:
+A_{k+1} = A_kB + V_k δ_QB, U_{k+1} = U_kB + H_k δ_QB, V_{k+1} = −δ_PA_k + V_k(B−C), H_{k+1} = A_k + δ_PU_k + H_k(B−C), with A_0 = 1, U_0 = V_0 = H_0 = 0.
+Verified by rebuilding Z_m^k = A_k + PU_k + V_kQ + PH_kQ from the recursion and comparing with direct multiplication in the full algebra: **exact for every k = 0..m−1 at m = 3, 4, 5, 6**. Consequences checked: H_1 = 1, H_2 = 2B − C, H_3 = 3B² − 2BC − CB + C² + δ_Pδ_QB (m ≥ 4), and Z_m^{m−1} ≠ 0 together with H_{m−1} ≠ 0 at each rank. (With the Bernoulli correction switched off, B = C/2: H_n^{(0)} = 2^{1−n}C^{n−1} for n odd and 0 for n even, from S² = C²/4, so the odd and even rank inductions behave differently.)
+
+**Boundary identity (12) (computed).** For Y = u_{m−1}v_{m−1} + ½u_mv_m: Y² = 0 and Y·f·Y = u_{m−1}u_mv_{m−1}v_m E_uE_v f for f = u_av_b, all a, b (m = 4: 16 cases, m = 5: 25 cases, no mismatch).
+
+**New exact numerical identity (computed, m = 3..11).** Σ_{d=1}^m (−1)^{d−1} κ_{m,d} = 0 (equivalently W_m(−1) = (−1)^{...}·…; it is identity (6) of the report), i.e. the one-hole diagonal coefficients satisfy one fixed alternating linear relation at every rank tested.
+
+**Adjacent-gradient transversality table (computed; exact match with the report).** With G_{m,d} = Σ_{e≥d} (−1)^{e−d}(e!/(e−d)!) κ_{m,e}, the gcd of all 2×2 minors of (G_m, G_{m−1} padded with 0): m = 4: 4; 5: 0 (parallel); 6: 64; 7: 2240; 8: 192; 9: 3024; 10: 9216; 11: 2816. Every nonzero gcd has only prime factors ≤ m+1 (2240 = 2⁶·5·7, 3024 = 2⁴·3³·7, 2816 = 2⁸·11). Rank 5 is the genuine exceptional (proportional) case, as reported.
+
+**Centered parameters (algebra).** b_i = Σ_{j≤i} (−1/2)^{i−j}c_j/(i−j)! turns the factorial point into Σ b_it^i = 2sinh(t/2), so b_{2j} = 0 and b_{2j+1} = 1/(2^{2j}(2j+1)!); the Fourier involution then acts by b_i ↦ (−1)^{i+1}b_i. (Consistency of the claimed parity support of the gradient with the eigenvalue parity of §32 was not separately re-derived.)
+
+**Not reproduced.** The proof of the factorization theorem (Z_m^k = A_uι_{u_1}Z_m^k), the lowest-pair detection corollary (7) (only consistent), the marked-moment formula (13) and its vanishing at ranks 6–7, and the recurrence check at ranks 7–8.
+
+**Status and the exact target.** Conjecture (14): in the rank-n algebra, C^{n−1} ≠ 0 ⇒ H_n ≠ 0 (mod every p > n+2), where H_n is produced by the recurrence above with B = (½ − L/12 + L³/720 − …)C. By (9) this is literally the induction step "rank n certificate ⇒ rank n+1 certificate", i.e. the problem is unchanged; what is new is that all interfering terms are now explicit expressions in C, its raising derivation L, and the super-derivations δ_P, δ_Q (δ_P² = δ_Q² = 0, δ_Pδ_Q + δ_Qδ_P = −ad_C). Open.
