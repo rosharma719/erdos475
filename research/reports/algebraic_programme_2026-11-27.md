@@ -253,3 +253,38 @@ i.e. A_m[w] modulo e_k(w) = (−1)^{k+1} v H_{k−2}(u,v) for 1 ≤ k ≤ m (wit
 **Updated hierarchy of targets.** Actual Vandermonde descent (weakest sufficient, open) ⇐ universal dihedral simultaneous saturation (verified ranks 4–6 here) ⇐ highest-layer containment v^{m−1}R^m ⊆ J_W (reported through rank 7) ⇔ no degree-m free A_m-summand in M_m^{χ·sgn}. Degree-independent saturation is false (rank-4 counterexample, §15).
 
 **Open.** (A) a relative Lefschetz / free-summand argument for M_m^{χ·sgn}; (B) recover the monomial model inside the actual transfer, using the adjacent-cut identity with the global compatibility maps. Literature context (Maeno–Numata–Wachi strong Lefschetz elements of type A, which require pairwise-distinct coefficients and so exclude the 0/1 interval forms; Thorup's splitting algebras; Pham–Sauermann for large primes) is quoted from the report and was not checked.
+
+---
+
+## 18. Coefficient extraction fails below the socle; Catalan structure of the trace operator; cofactor identities; boundary-packet contents (2026-11-28)
+
+**Adjacent-cut identities (trivial algebra, read).** With P_d(t) = ∏_{j≠d}(t − y_j) and W̃_d(t) = ∏_{j∉{d,d+1}}(t − y_j): w_d W̃_d(t) = P_{d+1}(t) − P_d(t), hence Σ_d w_d W̃_d = 0 and Σ_{d=i}^{j−1} w_d W̃_d(t) = (y_j − y_i)∏_{k∉{i,j}}(t − y_k). These cannot simply be carried into the cut quotients because the cuts evaluate t at y_d + h with different quadratic relations.
+
+**Degree-independent extraction is false below the socle (computed).** At rank 5, with the trivial dihedral character (χ_Q = +1 for odd m), take q = Σ c_a O_a over the 12 orbit sums of degree 8 listed in the report (exponents 00017, 00026, 00035, 00044, 00116, 00125, 00134, 00143, 00152, 00161, 00224, 00233, with coefficients −410, −1605, −3640, −5110, −639, −1470, −3290, −3640, −1204, −933, 560, 280). Exact reduction: **T_d(q) = 0 for every cut** (cut 0 computed; the others follow by rotation covariance), while in R_5
+q = −980 (w_2w_3³w_4⁴ − w_2²w_3³w_4³ + w_1w_3³w_4⁴ + 2w_1w_2w_3²w_4⁴ + w_1w_2²w_3w_4⁴ + w_1w_2²w_3²w_4³) ≠ 0
+(reproduced term by term). Since the degree is below the socle (8 < 10), the monomial-model theorem (§17) forces the model transfers not all to vanish, so actual-weight vanishing does not imply monomial-weight vanishing even with the right symmetry.
+
+**Saturation by degree (computed, ordinary simultaneous saturation; missing directions = rank(T,L) − rank T on χ_Q-equivariant polynomials):**
+
+| degree | D_m | D_m+1 | D_m+2 | D_m+3 | D_m+4 | D_m+5 |
+|---|---|---|---|---|---|---|
+| rank 5 (D=5) | 0 | 0 | 0 | 1 | 0 | 1 |
+| rank 6 (D=9) | 0 | 0 | 0 | 2 | 2 | 0 |
+
+So saturation holds in the target degree and slightly above it at ranks 5 and 6, but it is not a consequence of a degree-independent cancellation theorem: the deficiency D_m (or the structure of Q_m) must be used.
+
+**Rank 8 (reported, not reproduced).** A Schubert/Monk-formula verifier reportedly shows that at rank 8 (D_8 = 20, characteristics 11 and 101) ordinary simultaneous saturation fails — 27 of 87 lower-rank directions undetected (ranks of T_8 and (T_8, L_8): 2650/2677 over F_11, 2652/2679 over F_101) — and the stronger marked-root saturation fails with all 87 undetected, with an explicit degree-20 dihedral witness (2,390 compressed terms; lower normal form has 1,289 terms including 7·w_4²w_5⁵w_6⁶w_7⁷ mod 11). The bundle was not attached and my Artin-basis code cannot reach R_9 in degree ~26, so this is unconfirmed here. If correct, simultaneous saturation (the strategy of §15–17) is dead as a route and any proof must use properties specific to Q_m.
+
+**Catalan structure of the trace operator (computed).** For g_m = Σ_j H_j u^{m−1−j} in A_m = K[u,v]/(H_m,H_{m+1}) with λ(v^{m−1}) = 1:
+- λ(g_m u^{m−1−2k} v^k) = Catalan(m−k): verified for m = 3..9, all admissible k (exact rationals).
+- Multiplication by g_m, (A_m)_d → (A_m)_{d+m−1}, is the matrix (C_{m−i−j}); with a = ⌊d/2⌋+1, b = ⌊(m−1−d)/2⌋+1 its rank is min(a,b) in characteristic 0 and min(a, b, max(0, a+b−1−m+(p−1)/2)) in characteristic p > m+1 (Catalan C_k ≡ 0 mod p iff k ≥ (p+1)/2, plus the shifted Catalan Hankel determinant). **Verified on 819 (m,p,d) cases** (m = 3..14, p ∈ {11,…,37} with p > m+1, and characteristic ≈ 0): 0 mismatches. This explains the rank loss mod 11 at m = 7, d = 3 (rank 1 of 2): the previous round's integral Smith data.
+
+**Vandermonde cofactor identities (computed, exact rationals, m = 3..7).** For upper vertices Y_0..Y_{n−1} (n = m+1), edges x_i = Y_{i+1} − Y_i (cyclic) and q_i the lower kernel after deleting vertex i (lower cycle listed in index order):
+Σ_i (−1)^i Y_i^k q_i (1/x_{i−1} + 1/x_i) = 0 for 0 ≤ k < m, and = (−1)^m Q_{m+1} for k = m.
+(This is the report's 𝒟_k with the signs written out; it follows from cofactor expansion of the Vandermonde determinant, divided by the product of upper edges, and the identity ∏(lower edges)/∏(upper edges) = (x_{i−1}+x_i)/(x_{i−1}x_i).) The report adds that these identities force q = c·Q_m among polynomials of the right symmetry (the Vandermonde matrix has a one-dimensional nullspace); not reproduced.
+
+**Boundary-packet nonvanishing for the actual kernel (computed).** For even m, Q_{m+1} = 0 ⇒ Q_m A_0 = 0 in R_m (§13, Thm 7 and its corollary), A_0 = ∏_{j=2}^{m−1} y_j. Using the alternation functional with Q_m = F_{m−1}, the content c_m = gcd_g λ_m(Q_m A_0 g) over degree-2 monomials g is
+m = 4: 1; m = 6: 2; m = 8: 6; m = 10: 1 (all pairings nonzero: 10/10, 21/21, 36/36, 55/55).
+So Q_8A_0 ≠ 0 in R_8 ⊗ F_p for every prime p > 3 (in particular p = 11, as reported), and by the boundary descent Q_9 ≠ 0 mod p for all p > 9; similarly Q_{11} ≠ 0 for every p > 11 (all p). These are consistent with, but do not extend, the |A| ≤ 15 coverage. A larger check needs an exterior-algebra dynamic programme for this packet (m = 12 already needs 12! ≈ 4.8·10⁸ permutations; the first useful rank is m = 16).
+
+**Revised assessment.** (i) Degree-independent coefficient extraction: disproved (rank 5, degree 8). (ii) Universal degree-specific simultaneous saturation: reported disproved at rank 8; verified here only through ranks 4–6. (iii) The actual kernel is not obstructed: the boundary packet is nonzero through m = 10 at every prime, and the cofactor identities give constraints unavailable to arbitrary lifts. Next attempts should target the actual Vandermonde boundary packets (A_0 and the corresponding quadratic/cubic packets) and use the cofactor identities, rather than universal faithfulness of the transfer.

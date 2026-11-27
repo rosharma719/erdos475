@@ -95,3 +95,12 @@ Scripts: `trace_poly_checks.py`, `model_weight_check.py`.
 - m = 7: g_7 = 7u⁶ − 15u⁴v + 10u²v² − v³; multiplication by g_7 on degree 3 → 9 has matrix [[165,−198],[48,−54]], det 594 = 2·3³·11, Smith diag(3, 198): reproduced exactly (rank loss mod 11).
 - Monomial-weight saturation (T^model = (h+x)h^{m−2}q): holds in every degree < N_m for m = 3, 4, 5 over all polynomial representatives (no symmetry).
 - Not reproduced: marked-root saturation table (needs a C_m normal form beyond m = 4), rank-7 ranks 562/612, v-multiplied transfer losses, the zero-sum reduction paragraph.
+
+## Coefficient-extraction obstruction report (2026-11-28, sixth)
+Scripts: `obstruction_checks.py`, `sat_lib.py`, `degree_table_check.py`, `content_lib.py`, `boundary_content.py`. Logs: `degree_table_rank6.txt`, `boundary_content_m10.txt`.
+- Rank-5 degree-8 witness: reproduced exactly (nf(q) = −980·(six Artin monomials), T_5(q) = 0 in R_6).
+- Saturation by degree: rank 5 → missing 0,0,0,1,0,1 (degrees 5..10); rank 6 → 0,0,0,2,2,0 (degrees 9..14).
+- g_m Catalan pairing m = 3..9; rank formula min(a,b,max(0,a+b−1−m+(p−1)/2)) on 819 cases, no mismatch.
+- Cofactor identities: exact, m = 3..7 (sign-explicit form).
+- Boundary-packet content gcd_g λ(Q_m A_0 g): m = 4, 6, 8, 10 → 1, 2, 6, 1.
+- Not reproduced: the rank-8 saturation failure and its witness (bundle not available), Q_8 ∉ 𝒜_8, Schubert-class coefficient, kernel-uniqueness proof.

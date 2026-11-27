@@ -1,0 +1,6 @@
+rank 6, degree 9 (D_m=9): rank T=54, joint=54, missing=0  (6s)
+rank 6, degree 10 (D_m=9): rank T=58, joint=58, missing=0  (7s)
+rank 6, degree 11 (D_m=9): rank T=67, joint=67, missing=0  (8s)
+rank 6, degree 12 (D_m=9): rank T=47, joint=49, missing=2  (8s)
+rank 6, degree 13 (D_m=9): rank T=25, joint=27, missing=2  (8s)
+rank 6, degree 14 (D_m=9): rank T=9, joint=9, missing=0  (9s)
