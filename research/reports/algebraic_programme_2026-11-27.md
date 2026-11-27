@@ -288,3 +288,19 @@ m = 4: 1; m = 6: 2; m = 8: 6; m = 10: 1 (all pairings nonzero: 10/10, 21/21, 36/
 So Q_8A_0 ≠ 0 in R_8 ⊗ F_p for every prime p > 3 (in particular p = 11, as reported), and by the boundary descent Q_9 ≠ 0 mod p for all p > 9; similarly Q_{11} ≠ 0 for every p > 11 (all p). These are consistent with, but do not extend, the |A| ≤ 15 coverage. A larger check needs an exterior-algebra dynamic programme for this packet (m = 12 already needs 12! ≈ 4.8·10⁸ permutations; the first useful rank is m = 16).
 
 **Revised assessment.** (i) Degree-independent coefficient extraction: disproved (rank 5, degree 8). (ii) Universal degree-specific simultaneous saturation: reported disproved at rank 8; verified here only through ranks 4–6. (iii) The actual kernel is not obstructed: the boundary packet is nonzero through m = 10 at every prime, and the cofactor identities give constraints unavailable to arbitrary lifts. Next attempts should target the actual Vandermonde boundary packets (A_0 and the corresponding quadratic/cubic packets) and use the cofactor identities, rather than universal faithfulness of the transfer.
+
+---
+
+## 19. The "boundary-content conjecture" is LAC (2026-11-28)
+
+A later report proposes the narrower target B_m = Q_m ∏_{j=1}^{m−1} y_j = Q_{m+1}|_{h=0} (degree N_m − 1, one below the socle), with boundary coefficients c_{m,j} = λ_m(w_j B_m) and content δ_m = gcd_j c_{m,j}, and conjectures that δ_m ≠ 0 has no prime divisor > m+1 (so B_m ≠ 0 ⇒ Q_{m+1} ≠ 0 ⇒ Graham at size m+1).
+
+**Identification (computed, m = 4..9; also immediate algebraically).** In R_m, B_m = ± F_m, the interval polynomial of §2: Q_m = F_{m−1}(w_1..w_{m−1}); F_m = F_{m−1}·y_{m−1}·∏_{i=2}^{m−1}(w_i+…+w_m), and in R_m (zero total sum) each w_i+…+w_m = −y_{i−1}. Direct alternation computation of λ_m(w_j B_m) and λ_m(w_j F_m) over all m! permutations gives identical vectors for even m and exactly negated vectors for odd m (e.g. m = 7: (966, 1662, 1338, 0, −1338, −1662, −966) vs the negative of §2's), with contents 1, 2, 4, 6, 12, 6 for m = 4..9, sum zero and reversal law c_{m+1−j} = (−1)^{N_m}c_j. Hence δ_m = g_m and the table of boundary contents (ranks 3..14: 1, 1, 2, 4, 6, 12, 6, 1, 4, 8, 4, 8) is the g_m table of §2 (ranks 11–14 still rely on the external C++ run). **The new conjecture is LAC in different notation; its numerical support is the same data, not independent evidence, and it does not extend the verified range.**
+
+**What the report adds (the notation, not new coverage).**
+- Confluent Vandermonde form: B_m = det(y_i^{j+1})_{1≤i,j≤m−1} / ∏w_i, since det(y_i^{j+1}) = ∏y_i² · Δ(y_1..y_{m−1}) and Δ(y_0 = 0, y_1, …) = ∏y_i · Δ(y_1..): verified algebraically (equals Q_m∏y_j).
+- A signed-prefix exterior recursion P(S) = Σ_{i∈S} ± P(S∖{i}) ∧ v(s(S)) with v(t) = Σ_{r=2}^m t^r e_r: this is the same subset dynamic programme as §2.1 (state count about C(2m−1, m−1) ≈ 4^m).
+- A normalised version G(S) = P(S)/(Δ(S)∏a_i), integral and symmetric, with a "symmetric remainder recursion" G_k(E) = t^{k−1}(A_k(t) mod F_k(t)), and a partial-flag divided-symmetrisation formula for c_{m,j} (cross-block Vandermonde denominators of block sizes (j−1, 1, m−j)). These are stated with proof sketches; not checked here.
+- Remark: an individual coefficient cannot suffice (c_{7,1} = −966 = −2·3·7·23, but the vector has content 6).
+
+**Status.** The open problem is unchanged: prove LAC (p > m+1 ⇒ p ∤ g_m). The new integral recursion for G_k is a possible route to a relation between g_m and g_{m+1}; no such relation has been found.

@@ -104,3 +104,8 @@ Scripts: `obstruction_checks.py`, `sat_lib.py`, `degree_table_check.py`, `conten
 - Cofactor identities: exact, m = 3..7 (sign-explicit form).
 - Boundary-packet content gcd_g λ(Q_m A_0 g): m = 4, 6, 8, 10 → 1, 2, 6, 1.
 - Not reproduced: the rank-8 saturation failure and its witness (bundle not available), Q_8 ∉ 𝒜_8, Schubert-class coefficient, kernel-uniqueness proof.
+
+## Boundary-content report (2026-11-28, seventh) — identification with LAC
+- `boundary_identity_check.py`: for m = 4..9, c'_{m,j} = λ_m(w_j·Q_m∏y_j) equals c_{m,j} = λ_m(w_j F_m) (even m) or its negative (odd m); contents 1,2,4,6,12,6; sum 0; reversal law holds. So the "boundary-content conjecture" is LAC; its table is the g_m table.
+- c_{7,1} = −966 = −2·3·7·23 confirmed.
+- Not checked: the symmetric-remainder recursion and the partial-flag pairing formula.
