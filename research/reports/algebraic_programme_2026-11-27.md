@@ -758,3 +758,5 @@ Scripts: `experiments/linear_alternation/transfer_checks.py`, `transfer_ops.py`,
 **Not reproduced:** Smith table for ranks 6-8 (run for n = 6, 7 started, not finished at time of filing); seed rigidity (9) (the discrepancy operator E_n is not defined in the paste, so it cannot be tested as written); the proofs of Thm 1, (5), (6), (8) beyond the small-rank checks.
 
 **Status.** Everything checkable is consistent. The step "P_n(H_2) != 0 mod p for all p > n+1" is the same open statement (14) in a more explicit linear-algebra form; no proof of it, or of Graham's conjecture, is claimed.
+
+**Addendum to §37 (n = 6, 7 finished).** Exact, same checks as n = 3..5: grading, T(B_{n,n-1}) = 0, rank T|B_{n,n-2} = n-1 = dim M_n, rank P_n = n-1, P_n(H_2) and P_n(q_n) nonzero and independent (rank 2). Pivot coefficients -1/336 (n=6) and -1/1920 (n=7) match -C(n,2)/(n+1)!. Smith invariants of [P(H_2)|P(q_n)]: n=6 {1, 4233600}, n=7 {1, 161280}; prime support {2,3,5,7} in both, i.e. only primes <= n+1 (and P_n(H_2) alone has content 1). Ranks 8+ not run. The all-n statement remains open.
