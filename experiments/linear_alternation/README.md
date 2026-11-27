@@ -198,3 +198,10 @@ Scripts: `memo_checks.py` (t-form identity, image theorem), `diagonal_flow_check
 ## Attempt to close the gap (2026-12-01)
 Scripts: `wpoly_structure.py` (W_m(z) for m = 3..11, pairwise gcd/division), `shifted_intervals.py` (D(r,c) = κ(I_{r,c},I_{r,c}), finite differences).
 - Result: no cross-rank factorisation among the W_m (only z from parity; W_5 = 4W_4 is a coincidence); D(r,c) is a polynomial in c of degree 1, 4, 10 for r = 2, 3, 4, with no product formula. Both negative.
+
+## Deformed exterior algebra / hypersurface report (2026-12-01)
+Scripts: `deformed_ext.py` (the algebra, relation (1), expansion (2), F_2..F_4), `hypersurface_checks.py` (gradient formula, recursion (9), c* gradients m ≤ 7), `leakage_check.py` (ℓ_m, g_{m−1}, 2×2 minors; log `leakage_m8.txt`), `gauge_counterexample.py`, `pattern_identities.py`, `cyclicity_check.py`.
+- F_m top coefficient is a pure scalar; F_2, F_3, F_4 reproduced; recursion (9) exact; F_m(c*) = 0 (m ≤ 7); ∇F_m(c*) primitive content 1 (m ≤ 7).
+- Leakage: ℓ_m ∥ g_{m−1} only at m = 3 (t₀ = 1/4) and m = 5 (t₀ = 0); minor gcds 1, 1, 7, 1 for m = 4, 6, 7, 8.
+- Gauge counterexample (p = 7, A = {4,5}) reproduced exactly; identities (13), (15) verified.
+- Not reproduced: rank-16 gcd 96; lost gradient table.

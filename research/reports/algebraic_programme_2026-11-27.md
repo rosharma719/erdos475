@@ -677,3 +677,39 @@ The relation W_5 = 4W_4 is a small-rank coincidence. For m ≥ 6 the only common
 So the family needed for an induction through shifted intervals consists of values of explicit polynomials in c of degree C(r+1,3) with huge, structureless coefficients. That is consistent with the earlier picture: the individual coefficients are not controllable, and only the collective content (gcd over d) behaves.
 
 **Honest conclusion.** The conjecture (★) remains open. Nothing found here, or in any earlier section, proves that the content of the diagonal one-hole packet (equivalently R_m, equivalently W_m ≢ 0 mod p) has no prime factor above m+1. What the programme has produced is (i) a chain of exact reductions to this one arithmetic statement, (ii) several equivalent finite formulations (binary polynomials R_m, V_m; the diagonal one-hole packet; the Weyl operator W(U,U); the sparse cyclic polynomial; the multiplicity of a root at t = 1), (iii) extensive verified numerical evidence (only the primes 2 and 3 ever occur, through rank 12–13 verified here and 17 reported), and (iv) a catalogue of proof strategies that are *provably insufficient* (universal saturation, intra-rank propagation, one-vertex induction, reciprocity plus degree bounds, linear rank descent, cross-rank factorisation). Closing the gap requires a genuinely new ingredient specific to the signed alternating structure of these determinants.
+
+---
+
+## 35. The deformed exterior algebra, the hypersurface F_m, and rank lifting with at most one exceptional parameter (2026-12-01)
+
+**The algebra (computed).** Odd generators ξ_1..ξ_m, η_1..η_m, tensored with the normally ordered Weyl algebra ([D,X] = 1); u_k = Σ_{i≥k} ξ_i X^{i−k}/(i−k)!, v_k = Σ_{a≥k} η_a D^{a−k}/(a−k)!, Z_m(c) = Σ_k c_k u_k v_k, F_m(c) = top (ξ_1⋯ξ_mη_1⋯η_m) coefficient of Z_m(c)^m. Verified exactly (rational arithmetic, symbolic Weyl normal ordering):
+- cross-relation (1): v_k u_l = −Σ_{s≥0} u_{l+s}v_{k+s}/s! (m = 3, all k, l);
+- expansion (2): Z_m(c*) = Σ_{i,a} ξ_iη_a [D^a/a!, X^i/i!] at c* = (1/k!) (m = 3, 4);
+- **the top coefficient is always a pure scalar** (no X^iD^j with (i,j) ≠ (0,0)), so F_m is an ordinary polynomial; F_2 = c_1(c_1−2c_2), F_3 = −(3/2)c_1(c_1−2c_2)(c_2−2c_3), F_4 = (1/3)c_1(c_2−2c_3)(c_1² − 3c_1c_2 − 6c_1c_3 + 18c_1c_4 + 18c_2c_3 − 36c_2c_4) all reproduced at random rational points;
+- cyclicity τ(fg) = τ(gf) for even elements (16 random trials, m = 3, 4; all equal);
+- gradient formula (5): ∂F_m/∂c_d = m·τ(u_dv_d Z^{m−1}), checked against exact derivatives (m = 3, 4);
+- **recursion (9):** F_m(c_1..c_m) = F_m(c_1..c_{m−1}, 0) + (−1)^{m−1} m c_m F_{m−1}(c_1..c_{m−1}) (m = 3, 4, 5);
+- F_m(c*) = 0 for m = 2..7.
+
+**Factorial-point gradients (computed; primitive integer vectors, m = 2..7).** ∇F_m(c*) ∝ (1,−2); (−1,2,0); (1,−6,12,0); (1,−6,12,0,0); (−7,−26,240,−480,0,0); (483,3314,−24840,41280,50400,−100800,0); each has content 1 over ℤ[1/m!] (the scaled integer vector has gcd 1), so ∇F_m(c*) ≢ 0 modulo every prime p > m+1 for m ≤ 7 — consistent with (7)–(8) and with T_m ≠ 0.
+
+**Rank lifting (consequence of (9); computed).** With c′ = (1/k!)_{k<m} and t the last parameter: ∇F_m(c′,t) = (ℓ_m + (−1)^{m−1} m t·g_{m−1}, 0), ℓ_m = ∇L_m(c′), g_{m−1} = ∇F_{m−1}(c′). Verified for m = 3..8 (including the last component and F_m(c′,t) constant in t). Exceptional t (where the gradient vanishes) exists only if ℓ_m ∥ g_{m−1}. **Computed:**
+
+| m | ℓ_m ∥ g_{m−1}? | gcd of 2×2 minors of (ℓ_m, g_{m−1}) | exceptional t | factorial value 1/m! |
+|---|---|---|---|---|
+| 3 | yes (ℓ = −¾·g) | – | t₀ = 1/4 | 1/6 |
+| 4 | no | 1 | none | – |
+| 5 | yes (ℓ_5 = 0) | – | t₀ = 0 | 1/120 |
+| 6 | no | 1 | none | – |
+| 7 | no | 7 | none | – |
+| 8 | no | 1 | none | – |
+
+So in every case computed the factorial parameter is not exceptional (at m = 3, 5 an exceptional value exists but differs from 1/m!; at m = 4, 6, 7, 8 there is none, and the minor gcds 1, 1, 7, 1 have no prime factor above m+1). This is exactly the "leakage" condition (11) of the report, ℓ_m ≠ ((−1)^m/(m−1)!)g_{m−1}, evidenced here for m ≤ 8; it is equivalent to ∇F_m(c*) ≠ 0 and hence to T_m ≠ 0 (Theorem 1), so proving it is the original problem again (the rank-lifting theorem itself, "all but at most one t is smooth if rank m−1 is smooth", is rigorous and verified, but does not exclude t = 1/m!).
+
+**Gauge counterexample (computed).** p = 7, A = {4,5}: f_1(t) = F_A(1,t) ≡ t + 3t² + 6t³ + 3t⁴ + t⁵; its reciprocal antisymmetric projection f_1(t) − t⁶f_1(1/t) vanishes identically; in the gauge z = (1,4) (t_1 = z_1/z_2, t_2 = t z_2/z_1) the projection equals 5 + 3t + 4t⁵ + 2t⁶ ≠ 0 — reproduced exactly. So vanishing of the identity-gauge reciprocal projection does not force vanishing of other gauges for A = {4,5} (a consecutive set starting at 4, not the shifted target set). The character-orthogonality averaging formula (12), f̄(t) = r!Σ_k (−1)^{rk}(∏_{a∈A}C(a,k))t^k, is consistent with the diagonal-flow lemma verified in §33 (not separately recomputed).
+
+**Individual-pattern identities (computed).** (13): P_r({0}∪A, {0}∪B) = S_{r−1}(A,B) for the D-first alternating pattern P and S = P + (−1)^rQ (Q = X-first): verified on three cases (r = 3, 3, 4). (15): if S_{m−2}({2..m−1},{2..m−1}) = Σ a_kX^kD^k then P_{m−1}({1..m−1},{1..m−1}) = Σ_k a_k/(k+1)² X^{k+1}D^{k+1}: verified for m = 4, 5 (all ratios exactly 1).
+
+**Not reproduced.** The hypersurface-smoothness equivalence proof details beyond the consistency checks above, the explicit statement that the full consecutive standard polynomial vanishes for the scalar argument, the counts "rank-16 gcd(κ_{16,1}, κ_{16,2}) = 96", and the lost gradient table (our primitive gradient vectors are listed above for m ≤ 7).
+
+**Status.** (★) is unchanged and open. New exact structure: a single-element nilpotence formulation (Z_m(c*)^{m−1} = 0), the hypersurface F_m with the exact recursion (9), and the leakage condition (11); in all computed ranks (m ≤ 8) the factorial point is smooth, with no exceptional parameter at all for m = 4, 6, 7, 8. A proof of (11) in general would complete the induction; it is the same arithmetic content as before.
