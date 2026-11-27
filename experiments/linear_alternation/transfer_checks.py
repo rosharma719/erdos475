@@ -1,81 +1,113 @@
-"""Checks of the 2026-11-27/28 transfer report: Thm1 (insertion), Thm3 (centered power sums), Thm4 (Poincare transfer)."""
-import itertools, random
+"""Check the 'single transfer' report: components U,V,A reconstructed from H via R_u,R_v,K; T_n; terminal vanishing; surjectivity; seed rigidity."""
+import sys, itertools
 from fractions import Fraction
-from math import factorial
-def sgn(p):
-    s=1
-    for i in range(len(p)):
-        for j in range(i+1,len(p)):
-            if p[i]>p[j]: s=-s
-    return s
-def Q(u):                       # cyclic Vandermonde kernel, zero-sum edges u_0..u_{m-1}
-    m=len(u); y=[0]
-    for i in range(m-1): y.append(y[-1]+u[i])
-    num=1
-    for i in range(m):
-        for j in range(i+1,m): num*=y[j]-y[i]
-    den=1
-    for v in u: den*=v
-    assert num%den==0
-    return num//den
-def lam(f,n):                    # Alt(f)/Delta at points 1..n, f(vars) callable, deg f must be C(n,2)
-    pt=list(range(1,n+1)); d=1
-    for i in range(n):
-        for j in range(i+1,n): d*=pt[j]-pt[i]
-    tot=0
-    for p in itertools.permutations(range(n)):
-        tot+=sgn(p)*f(tuple(pt[k] for k in p))
-    assert tot%d==0
-    return tot//d
-random.seed(7)
-# Thm 1:  Q_{m+1}(h,x) = +-W_m(x)(h+x0) Q_m(h+x0,x1..)
-for m in range(3,9):
-    ok=True
-    for _ in range(20):
-        x=[random.randint(-9,9) or 1 for _ in range(m)]
-        h=-sum(x)
-        if h==0 or any(v==0 for v in x) or h+x[0]==0: continue
-        W=1
-        for j in range(2,m):
-            W*=sum(x[:j])
-        lhs=Q([h]+x); rhs=W*(h+x[0])*Q([h+x[0]]+x[1:])
-        if lhs not in (rhs,-rhs): ok=False
-    print("Thm1 m=",m,"ok" if ok else "FAIL")
-# Thm 3: centered power sums p_k(x+h/m) = ((m+1)-(m+1)^k)/m^k h^k whenever p_j(x,h)=0 (zero-sum with all e_k=0) -> use roots of unity
-import cmath
-for m in range(3,7):
-    z=[cmath.exp(2j*cmath.pi*k/(m+1)) for k in range(1,m+1)]; h=1.0+0j     # the m+1 roots with h=1 -> power sums vanish
-    x=[cmath.exp(2j*cmath.pi*k/(m+1)) for k in range(1,m+1)]
-    err=max(abs(sum((xi+h/m)**k for xi in x)-((m+1)-(m+1)**k)/m**k*h**k) for k in range(1,m+1))
-    print("Thm3 m=",m,"max err",f"{err:.1e}")
-# Thm 4: lambda_{m+1}(h^{m-r} G) = (-1)^r (m-r)!/m! lambda_m(E_r G), G deg N_m+r in x_0..x_{m-1}
-def monos(m,deg):
-    def rec(k,left):
-        if k==1: yield (left,); return
-        for a in range(left+1):
-            for r in rec(k-1,left-a): yield (a,)+r
-    return list(rec(m,deg))
-def apply_Er(G,r,m):
+from math import factorial, comb
+from deformed_ext import *
+import importlib
+exec(open('lowest_pair_checks.py').read().split("for m in (3,4,5):")[0])   # pieces, sc, mulg, ...
+def Uel(j,m): return u(j+1,m)
+def Vel(j,m): return v(j+1,m)
+def Phi_mono(A,B,m):
+    r=one()
+    for a in sorted(A): r=mulg(r,Uel(a,m))
+    for b in sorted(B): r=mulg(r,Vel(b,m))
+    return r
+def Phi(f,m):
+    tot={}
+    for (A,B),c in f.items(): tot=gw_add(tot,scal(Phi_mono(A,B,m),c))
+    return tot
+def Phiinv(g,m):
+    n=m-1; g={k:dict(v) for k,v in g.items()}
     out={}
-    for mon,c in G.items():
-        for S in itertools.combinations(range(m),r):
-            e=list(mon); coef=c; okk=True
-            for i in S:
-                if e[i]==0: okk=False;break
-                coef*=e[i]; e[i]-=1
-            if okk: out[tuple(e)]=out.get(tuple(e),0)+coef
+    keys=[(A,B) for r in range(n+1) for A in itertools.combinations(range(1,n+1),r) for s in range(n+1) for B in itertools.combinations(range(1,n+1),s)]
+    keys.sort(key=lambda ab:sum(ab[0])+sum(ab[1]))
+    for A,B in keys:
+        mask=0
+        for a in A: mask|=1<<a        # xi_{a+1} bit a
+        for b in B: mask|=1<<(m+b)    # eta_{b+1} bit m+b
+        c=g.get(mask,{}).get((0,0),0)
+        if c:
+            out[(A,B)]=c
+            g=gw_add(g,scal(Phi_mono(A,B,m),c),-1)
+    assert not g, "Phiinv residual"
     return out
-def ev(P,pt):
-    t=0
-    for mon,c in P.items():
-        v=c
-        for a,b in zip(mon,pt): v*=b**a
-        t+=v
-    return t
-for m in (3,4):
-    N=m*(m-1)//2
-    for r in range(0,m+1):
-        ms=monos(m,N+r); G={mn:random.randint(-3,3) for mn in random.sample(ms,min(6,len(ms)))}
-        lhs=lam(lambda v: v[m]**(m-r)*ev(G,v[:m]),m+1)
-        rhs=Fraction((-1)**r*factorial(m-r),factorial(m))*lam(lambda v: ev(apply_Er(G,r,m),v),m)
-        print(f"Thm4 m={m} r={r}: lhs={lhs} rhs={rhs}", "OK" if lhs==rhs else "MISMATCH")
+# exterior algebra on U_1..U_n, V_1..V_n  (ids 1..n, n+1..2n); monomial = sorted tuple of ids
+def ext_mul_gen(gid,mono):
+    if gid in mono: return None,0
+    pos=sum(1 for x in mono if x<gid)
+    new=tuple(sorted(mono+(gid,)))
+    return new,(-1)**pos
+def lmul(gid,f):
+    out={}
+    for mono,c in f.items():
+        new,s=ext_mul_gen(gid,mono)
+        if s: out[new]=out.get(new,0)+s*c
+    return {k:v for k,v in out.items() if v}
+def deriv(f,n,kind):   # E_u (kind 0) or E_v (kind 1): shift generator id +1 within its block
+    out={}
+    for mono,c in f.items():
+        for idx,x in enumerate(mono):
+            blk=(x-1)//n; 
+            if blk!=kind: continue
+            y=x+1
+            if (y-1)//n!=kind or y in mono: continue
+            lst=list(mono); lst[idx]=y
+            # sort with sign
+            sign=1; arr=lst[:]
+            for i in range(len(arr)):
+                for j in range(len(arr)-1-i):
+                    if arr[j]>arr[j+1]: arr[j],arr[j+1]=arr[j+1],arr[j]; sign=-sign
+            out[tuple(arr)]=out.get(tuple(arr),0)+sign*c
+    return {k:v for k,v in out.items() if v}
+def fadd(f,g,s=1):
+    out=dict(f)
+    for k,v in g.items(): out[k]=out.get(k,0)+s*v
+    return {k:v for k,v in out.items() if v}
+def fscal(f,c): return {k:v*c for k,v in f.items() if v*c}
+def fpow(f,n,kind,s):
+    for _ in range(s): f=deriv(f,n,kind)
+    return f
+def to_ext(f,n): return {tuple(list(A)+[n+b for b in B]):c for (A,B),c in f.items()}
+def from_ext(f,n): return {(tuple(x for x in mono if x<=n),tuple(x-n for x in mono if x>n)):c for mono,c in f.items()}
+def Ru(f,n):
+    tot={}
+    for s in range(1,n+1): tot=fadd(tot,fscal(lmul(s,fpow(f,n,1,s)),Fraction(1,factorial(s+1))))
+    return tot
+def Rv(f,n):
+    tot={}
+    for s in range(1,n+1): tot=fadd(tot,fscal(lmul(n+s,fpow(f,n,0,s)),Fraction(1,factorial(s+1))))
+    return tot
+def Kop(f,n):
+    tot={}
+    for s in range(1,n+1):
+        for j in range(1,s+1):
+            g=lmul(s,lmul(n+j,fpow(f,n,1,s-j)))   # U_s ^ V_j ^ E_v^{s-j} f   (V_j generator id n+j)
+            tot=fadd(tot,fscal(g,Fraction(comb(s,j),factorial(s+1))))
+            
+    return tot
+def components(m,kmax):
+    """run recurrence; return list of (A,U,V,H) as gw elements in sub-algebra"""
+    P,Q,C,B=pieces(m)
+    A=one(); U={}; V={}; H={}
+    dQB=sc(Q,B); BC=gw_add(B,C,-1); out=[]
+    for k in range(kmax+1):
+        out.append((A,U,V,H))
+        An=gw_add(mulg(A,B),mulg(V,dQB)); Un=gw_add(mulg(U,B),mulg(H,dQB))
+        Vn=gw_add(scal(sc(P,A),-1),mulg(V,BC)); Hn=gw_add(gw_add(A,sc(P,U)),mulg(H,BC))
+        A,U,V,H=An,Un,Vn,Hn
+    return out
+if __name__=="__main__":
+    for m in (3,4,5):
+        n=m-1
+        comps=components(m,n)
+        print("m=",m,"n=",n)
+        for k in range(1,n+1):
+            A,U,V,H=comps[k]
+            hA,hU,hV,hH=[to_ext(Phiinv(x,m),n) if x else {} for x in (A,U,V,H)]
+            res={}
+            for name,tgt,cands in (("U",hU,{"Rv":Rv(hH,n),"Ru":Ru(hH,n)}),("V",hV,{"Rv":Rv(hH,n),"Ru":Ru(hH,n)}),
+                                   ("A",hA,{"RuRv+K":fadd(Ru(Rv(hH,n),n),Kop(hH,n)),"RvRu+K":fadd(Rv(Ru(hH,n),n),Kop(hH,n)),"RuRv":Ru(Rv(hH,n),n),"K":Kop(hH,n)})):
+                for cn,cv in cands.items():
+                    for sg in (1,-1):
+                        if fadd(tgt,cv,-sg)=={} : res.setdefault(name,[]).append((cn,sg))
+            print(" k=",k,"H nonzero:",bool(hH),res)

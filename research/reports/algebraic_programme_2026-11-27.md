@@ -740,3 +740,21 @@ Verified by rebuilding Z_m^k = A_k + PU_k + V_kQ + PH_kQ from the recursion and 
 **Not reproduced.** The proof of the factorization theorem (Z_m^k = A_uι_{u_1}Z_m^k), the lowest-pair detection corollary (7) (only consistent), the marked-moment formula (13) and its vanishing at ranks 6–7, and the recurrence check at ranks 7–8.
 
 **Status and the exact target.** Conjecture (14): in the rank-n algebra, C^{n−1} ≠ 0 ⇒ H_n ≠ 0 (mod every p > n+2), where H_n is produced by the recurrence above with B = (½ − L/12 + L³/720 − …)C. By (9) this is literally the induction step "rank n certificate ⇒ rank n+1 certificate", i.e. the problem is unchanged; what is new is that all interfering terms are now explicit expressions in C, its raising derivation L, and the super-derivations δ_P, δ_Q (δ_P² = δ_Q² = 0, δ_Pδ_Q + δ_Qδ_P = −ad_C). Open.
+
+## 37. Single-transfer operator on the smaller exterior algebra (report of 2026-11-27, late)
+
+Scripts: `experiments/linear_alternation/transfer_checks.py`, `transfer_ops.py`, `transfer_claims.py` (exact rational arithmetic; Phi^{-1} by triangular peeling on the (0,0) Weyl coefficient).
+
+**Reproduced (exact, n = 2..5, i.e. algebra ranks m = 3..6 for the identities; n = 3..5 for the operator claims):**
+- Component reconstruction (Thm 1): U_k = R_v H_k, V_k = R_u H_k, A_k = (R_uR_v + K) H_k, with E^s the s-th power of the raising derivation and ordinary exterior wedge. The wrong-order variants fail where the test is non-degenerate (k = 2, 3), so the formulas are pinned down.
+- Transfer identity: T(f) = (R_u + delta_P)R_v f + K f + f*(B - C) satisfies T(H_k) = H_{k+1} for all k (n up to 5). So H_k = T^{k-1}(1).
+- T preserves the balanced grading B_{n,k} -> B_{n,k+1}.
+- Terminal vanishing (6): T(B_{n,n-1}) = 0 (n = 3,4,5).
+- Terminal surjectivity (5): rank of T: B_{n,n-2} -> B_{n,n-1} is n-1 = dim M_n and the image has zero e_n row (n = 3,4,5).
+- Pivot (8): coefficient of e_{n-1} in T(a_n) equals -C(n,2)/(n+1)! (-1/8, -1/20, -1/72).
+- Obstruction example: h = 24U1V1 + 12U2V2 + 5U3V3 has T_3(h) = 0; ker T on B_{3,1} is exactly one-dimensional, spanned by it.
+- P_n = T^{n-2}: B_{n,1} -> M_n has rank n-1 and P_n(H_2) != 0, P_n(q_n) != 0 for n = 3,4,5. rank{P(H_2), P(q_n)} = 2, 1, 2 for n = 3, 4, 5 (the n = 4 proportionality matches the report's non-injective rows). Smith invariants of the 2-column map: n=3 {1,16}, n=5 {1,4320} (primes 2,3,5 only).
+
+**Not reproduced:** Smith table for ranks 6-8 (run for n = 6, 7 started, not finished at time of filing); seed rigidity (9) (the discrepancy operator E_n is not defined in the paste, so it cannot be tested as written); the proofs of Thm 1, (5), (6), (8) beyond the small-rank checks.
+
+**Status.** Everything checkable is consistent. The step "P_n(H_2) != 0 mod p for all p > n+1" is the same open statement (14) in a more explicit linear-algebra form; no proof of it, or of Graham's conjecture, is claimed.

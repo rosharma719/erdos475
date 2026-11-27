@@ -210,3 +210,6 @@ Scripts: `deformed_ext.py` (the algebra, relation (1), expansion (2), F_2..F_4),
 Scripts: `lowest_pair_checks.py` (PQ+QP = −C, S² = C²/4, Bernoulli extension, four-component recurrence reproducing Z^k for m = 3..6), `boundary_sandwich_checks.py` (identity (12), alternating κ sum, adjacent-gradient minors table).
 - All algebraic identities verified; minors table 4,0,64,2240,192,3024,9216,2816 (m = 4..11) matches exactly; Σ(−1)^{d−1}κ_{m,d} = 0 for m = 3..11.
 - Not reproduced: factorization proof, marked moments (13), recurrence at ranks 7–8.
+
+## Single-transfer operator (§37)
+`transfer_checks.py` (component reconstruction), `transfer_ops.py` (T on the exterior algebra; T(H_k)=H_{k+1}), `transfer_claims.py` (grading, terminal vanishing/surjectivity, pivot, P_n rank/Smith). Run `PYTHONPATH=. python3 transfer_claims.py 3 4 5`. n=6,7 were still running when filed.
