@@ -405,3 +405,29 @@ So the proof must use the margins 2, 3, …, m, and the full vector (not just tw
 **Not reproduced.** The two-copy Weyl covariance identities, the normal-symbol polynomial G_{m,r}(x) = Σ_d (d(−1)^{r+d−1}/(d−1)!) P_{m,d,r+1}x^{d−1}, the translated-determinant identity 𝒢_m(z,ts) = [α_Jβ_J] det(I + zH_1^+(t,s)) det(I − H_2^+(t,s)), and the reported integral contents through rank 17 (rank 18 not claimed).
 
 **Status.** Intra-rank propagation for the actual Q_m is open; generic propagation and propagation under retention of the non-diameter chord factors are disproved by exact witnesses (reproduced). The exact descent (rank-lowering identity + generating-function identity) is verified; it makes "first row zero ⇒ penultimate row constant" (equivalently the constant and highest-x coefficients of 𝒢_m) the single remaining implication.
+
+---
+
+## 24. The Witt differential on the exterior coefficients; collision derivatives (2026-11-29)
+
+Here κ(A,I) is the Pascal-recurrence coefficient with **all** positive exponent indices allowed (including 1), v(t) = Σ_{i≥1} (t^i/i!) e_i.
+
+**Exponent-one insertion (computed).** Let d be the graded derivation on the exterior algebra with d(e_c) = Σ_{a<b, a+b=c+1} (C(c,a) − C(c,b)) e_a∧e_b (equivalently d v(t) = v(t)∧v′(t), checked by coefficient comparison). The first-order coefficient of x_1 in P_k(x_1..x_k) equals (e_1∧ − d)P_{k−1}(x_2..x_k) (the report's "x_1P_k = …" has to be read as this leading-order statement, since the right side does not depend on x_1). In κ terms: κ({1}∪A′, I) = Σ_J κ(A′,J)·[e_I](e_1∧ − d)e_J. **Verified on 138 cases (k = 2, 3), no mismatch.**
+
+**Adjoint and self-adjointness (computed).** With ⟨e_A,e_I⟩ = δ_{A,I}∏a!, the adjoint merges exponents: d*(e_a∧e_b) = (b−a)e_{a+b−1} (checked algebraically: (C(c,a) − C(c,b))a!b!/c! = b − a for c = a+b−1). κ(A,I)∏_{i∈I} i! = κ(I,A)∏_{a∈A} a!: **verified on 1,927 pairs (k ≤ 4, entries ≤ 8, including exponent 1).**
+
+**Homotopy (computed).** ι_1 d + d ι_1 = ν·id with excess ν(J) = Σ(j−1); hence ι_1 D + D ι_1 = (1 − ν)id for D = e_1∧ − d. Verified on every e_J with |J| ≤ 4, entries ≤ 8. For the consecutive set U_m = {2..m}: ν(U_m) = C(m,2) and 1 − ν = −(m−2)(m+1)/2, a unit mod every prime p > m+1.
+
+**Diagonal merge recurrence (computed).** For A without exponent 1:
+κ({1}∪A,{1}∪A) = (1 − ν(A))κ(A,A) − ⟨d*e_A, M d*e_A⟩/∏_{a∈A} a!,
+M(e_J) = Σ_I κ(J,I)e_I, with d*e_A computed as the adjoint of d (so no sign convention is assumed). **154 sets A (|A| = 2..4, entries 2..9): 0 mismatches**, including A = U_3, U_4, U_5. Together with κ({1..m},{1..m}) = 0 (verified for m = 2..7) this gives the exact recurrence (1 − C(m,2))κ(U_m,U_m) = ⟨d*e_{U_m}, M d*e_{U_m}⟩/∏_{a=2}^m a!, which lowers exterior degree by one, at the price of merged (non-consecutive) exponent sets. Terms whose merged exponent a+b−1 equals an existing index vanish, and modulo p only merges with m+1 ≤ a+b−1 ≤ p−1 survive.
+
+**Collision-derivative identity (computed, m = 3..7).** For S_m = {1..m} and 1 ≤ r ≤ m−1 put
+F_{m,r}(q) = Σ_{A,I ⊆ S_m, |A|=|I|=r, ΣA=ΣI} ε(A,A^c)ε(I,I^c)(−1)^{ΣI^c} q^{ΣI} κ(A,I)κ(A^c,I^c)
+(ε = shuffle sign of concatenating the sorted subset and sorted complement). Then F_{m,r}(1) = 0 for every r, and F′_{m,r}(1) = ±(−1)^r Σ_{j=1}^{m−r} c_{m,j}, the sign being the global sign (−1)^{m−1} (derivative vectors, m = 3..7: (−1,1), (−1,0,1), (4,−2,−2,4), (28,−68,88,−68,28), (966,−2628,3966,−3966,2628,−966), i.e. the partial sums of the boundary vector, b_{m,i} of §20). Since the c_{m,j} sum to zero, C_m ≡ 0 (mod p) iff (q−1)² divides every F_{m,r}(q) mod p: a simple-root formulation of boundary primitivity.
+
+**Content of [Q_m] (computed).** gcd over all degree-m monomials g of λ_m(Q_m g): m = 4: 1; m = 5: 1; m = 6: 2; m = 7: 2 (reproducing the report's 1, 2, 2 for ranks 5–7). Ranks 8 and 9 (report: 2 and 1) not reproduced here. The boundary content is a stronger sufficient quantity than this direct one (e.g. m = 5: 1 vs 2; m = 7: 2 vs 6).
+
+**Not reproduced.** The report's examples of F_{m,r} polynomials (typeset table lost), the rank-7 insertion-identity count (236 identities), and any statement about closing the merge recursion on consecutive sets.
+
+**Status.** All of the new identities hold in the cases checked; none closes the induction. The merge recurrence is exact but leaves the set of consecutive exponents (the merged sets are not consecutive), and the simple-root form needs a statement about common double roots at q = 1. Open as before: p > m+1 ⇒ boundary vector (equivalently the g_m content) nonzero mod p.

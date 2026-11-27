@@ -138,3 +138,10 @@ Scripts: `pairing_matrix_checks.py [M]`, `pairing_counterexamples.py`, `harmonic
 - V_m(ℓ) harmonic and e_1(∂)V_m = 0 for m = 4,5,6 (all coefficients).
 - Cofactor decomposition into diagonal / off-diagonal parts, m = 3..8.
 - Not reproduced: two-copy Weyl normal-symbol identity, translated determinant identity, rank-8 restricted family counts, rank ≥ 15 contents.
+
+## Witt-differential report (2026-11-29)
+Scripts: `witt_checks.py`, `collision_checks.py`, `qcontent_check.py` (all with `PYTHONPATH=.`).
+- Exponent-one insertion κ({1}∪A′,I) = Σ_J κ(A′,J)[e_I](e_1∧ − d)e_J: 138 cases, 0 mismatches. Self-adjointness κ(A,I)I! = κ(I,A)A!: 1927 pairs. Homotopy ι_1 d + d ι_1 = ν id verified. Merge recurrence: 154 sets, 0 mismatches. κ({1..m},{1..m}) = 0 for m = 2..7.
+- F_{m,r}(1) = 0 and F′_{m,r}(1) = ±(−1)^r Σ_{j≤m−r} c_{m,j} verified for m = 3..7 (global sign (−1)^{m−1}).
+- Content of [Q_m]: m = 4..7 → 1, 1, 2, 2 (rank 8 run in `qcontent_m8.txt`, if it finishes).
+- Not reproduced: F_{m,r} example table, rank-9 content, merge-closure argument.
