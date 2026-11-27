@@ -93,7 +93,7 @@ Precisely: show that for p > m+1, some certificate in the chain  c_{m,r} → jet
 
 Suggested next steps, in order:
 1. **Close the verification gaps:** build the C++ (needs Boost.Multiprecision) or write a gmpy2 port to confirm m = 11..14; finish rank 9 of the quadratic packets with a faster implementation.
-2. **Push the binary data further** with the vectorized code (n = 10, 11 are cheap) and look for the first rank where β_n has a prime factor > n — that would be the first real test of LAC.
+2. **Binary data beyond n = 9 (done to n = 10; no new information).** n = 10 **[run]**: β_10 = 2, constant terms equal ±c_{9,r}, rounding error < 5e-5. n = 11 is beyond float64 reliability (rounding error up to 0.5), but is forced anyway: β_n | g_{n−1} and g_10 = 1, so β_11 = 1. More generally, since g_3..g_14 have only the primes 2 and 3, β_n for n ≤ 15 can only have those primes, so binary certificates cannot show anything new before n = 16. A real LAC test now requires **g_15 and beyond** (the C++ DP: ≈ 10 GB at m = 15, ≈ 40 GB at m = 16; Boost.Multiprecision needed), or exact-arithmetic binary computations at n ≥ 16.
 3. **Hunt for the transfer identity** (the two-arc / exterior-minor route): find a triangular filtration under which one minor contributes a unit and the rest lie lower. This is where all analytic attempts have stalled.
 4. Keep a falsification track: a prime p > n dividing β_n (and every stronger packet) would give a precise, finite case in which to search for a genuine counterexample or for a still stronger certificate.
 
