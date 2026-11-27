@@ -122,3 +122,11 @@ Script: `matching_expansion_check.py` (imports `pascal_checks.py`; prints their 
 - Component expansion of Ĉ_m(z) = Σ C(n,r) c_{m,r+1} z^r: exact for m = 3..6 up to global sign; tables 2, 14, 378, 39802.
 - Identity-matching table is diag(2..m) only (m = 3,4,5); its contribution is n!·∏((−1)^i − z), cancelled at m = 3 by the other table (2(z²−1) − 3(z²−1) = 1 − z²).
 - Not reproduced: rank-17 modular result; the syzygy-degenerate-family statement.
+
+## Weyl-algebra / signed-walk report (2026-11-29)
+Scripts: `walk_checks.py` (run with `PYTHONPATH=.`), `weyl_det_check.py`.
+- Triangular-flow summation: 1841 margin pairs OK. Walk formula and DP recursion for κ: 493 pairs, 0 mismatches. Boundary vector from the walk DP reproduces c_m for m = 3..10 up to global sign.
+- [D^a,U_i] b_h = T_{i,a}(h) b_{h+i−a} checked; modular height truncation holds for p = 11, 13, 17, 19.
+- Counterexamples reproduced exactly: U = {2,7} → 19 − 19z²; U = {13,14,15,16} → [293541560, 41340, −9464, 41340, 293541560], gcd of first two = 13780 = 2²·5·13·53.
+- Sign correction: with odd α, β the matrix H = YX − XY has tr(H) ≠ 0; H = XY + YX = −Σ α_iβ_a [D^a,U_i] has tr(H^k) = 0 (k = 1..4) and (H^k)_00 = ε(k) Σ κ(A,I) α_Iβ_A (verified for U = (2,3), (2,3,4)).
+- Not reproduced: exact rank-17 c_{17,1}, c_{17,2}, contents at m = 15, 16, 17.

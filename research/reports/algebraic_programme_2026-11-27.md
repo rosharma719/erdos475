@@ -355,3 +355,28 @@ over square matrices with row and column margins both U, k_H = |H|, s_H = Σ_{ve
 **Rank 17 (reported, not reproduced).** A memory-efficient modular version reportedly completes rank 17 in characteristics 19 and 23 with the boundary vector surviving (rank 17 mod 19: (12,5,17,15,4,7,10,3,6,3,10,7,4,15,17,5,12)). Not reproducible with the code in this repository (the subset dynamic programme has ~4^m states); the integral data in this repo are brute force to m = 10 and the external run to m = 14.
 
 **Status.** The remaining theorem is unchanged (LAC / boundary primitivity). The graph formulation is exact and verified, and the consecutive-margin condition U = {2..m}, not yet used analytically, is the structure a sign-reversing involution or a flow-switching argument would have to exploit.
+
+---
+
+## 22. Signed height walks, the Weyl-algebra form, and the exterior determinant representation (2026-11-29)
+
+**Triangular-flow summation (computed).** For ordered margins i_1..i_k, a_1..a_k with surplus h_r = Σ_{j≤r}(i_j − a_j), the sum of W(M) = ∏a_s!/∏m_rs! over upper-triangular nonnegative integer matrices with positive diagonal and these margins equals ∏_r [C(i_r + h_{r−1}, i_r) − C(h_r, i_r)] (zero if some h_r < 0). Verified on all 1,841 margin pairs with k ≤ 3, entries ≤ 5.
+
+**Signed-height walks (computed).** With T_{i,a}(h) = C(h+i, i) − C(h+i−a, i) for the step h → h+i−a (forbidden if the new height is negative):
+κ(A,I) = Σ_{σ,τ} sgn(σ)sgn(τ) ∏_r T_{i_σ(r), a_τ(r)}(h_{r−1}).
+Verified on all 493 pairs (k ≤ 4); the "remove the last transition" dynamic programme F(A,I) = Σ_{i,a} (−1)^{pos(i)+pos(a)} T_{i,a}(h − i + a) F(A∖a, I∖i) agrees with the Pascal κ on the same pairs, and the complementary contraction built on it reproduces the boundary vector exactly for m = 3..10 (up to the global sign (−1)^{m−1} seen before). This is the simplest independent implementation so far (about 12 s for m ≤ 10).
+
+**Weyl algebra (computed + algebra).** With U b_h = (h+1) b_{h+1}, D b_h = b_{h−1}, [D,U] = 1, U_i = U^i/i!: [D^a, U_i] b_h = T_{i,a}(h) b_{h+i−a} — checked for h ≤ 8, i, a ≤ 5.
+**Modular truncation (computed):** for p ∈ {11, 13, 17, 19}, h < p and 2 ≤ i,a ≤ p−2, every step to h + i − a ≥ p has T ≡ 0 (mod p); so modulo p walks live in heights 0..p−1 (a finite-dimensional representation, V_p = F_p[t]/(t^p)).
+
+**Exterior determinant representation — with a sign correction.** Take odd (anticommuting) generators α_i, β_a (i, a ∈ U = {2..m}), X = Σα_iU_i, Y = Σβ_aD^a, so X² = Y² = 0. The report writes H = YX − XY and also H = Σ α_iβ_a [D^a, U_i]. With odd coefficients these are **not** the same: computed with a Grassmann implementation, tr(XY) = −tr(YX) ≠ 0, tr(H) ≠ 0 for H = YX − XY, whereas **H = XY + YX = −Σ α_iβ_a [D^a, U_i] has tr(H^k) = 0 for k = 1..4** (and the argument is truncation independent: H^k = (XY)^k + (YX)^k since cross terms vanish, and tr(XY)^k = −tr(YX)^k). So the correct matrix is the commutator form (up to the harmless overall sign), and then det(I − zH) = 1 by Newton's identities (denominators ≤ m only). The coefficient extraction then holds: for H = Σ α_iβ_a[D^a, U_i], **(H^k)_{00} = ε(k) Σ_{|A|=|I|=k} κ(A,I) α_Iβ_A, ε(k) = (−1)^{k(k−1)/2}** — verified coefficient by coefficient for U = (2,3), k ≤ 2 and U = (2,3,4), k ≤ 3. Since det(I − zH) = 1, the adjugate identity gives det(I − zH^+) = Σ_k z^k (H^k)_{00}, where H^+ deletes the height-0 row and column.
+The boundary polynomial is then C_m(z) = [α_Uβ_U] det(I + zH_+^+) det(I − H_−^+), with H_− built from X ↦ Σ(−1)^iα_iU_i. By hand: the sign factors ε(k)ε(l)(−1)^{kl} (k + l = n) are the constant ε(n), the shuffle signs for sorting I ∪ I^c and A ∪ A^c cancel because ΣI = ΣA, and (−z)^k(−1)^{ΣI^c} is exactly the contraction weight, so this reproduces the verified complementary-contraction formula up to a global sign. The product itself was not recomputed as determinants.
+
+**Negative results (computed, exact).**
+- Arbitrary distinct margins are not enough: κ({a,b},{a,b}) = 2 − C(b,a), so κ({2,7},{2,7}) = −19 and the contraction polynomial for U = {2,7} is 19 − 19z², identically zero mod 19 although 19 > 8.
+- The two-coefficient shortcut fails for shifted consecutive margins: for U = {13,14,15,16} the contraction polynomial is 293541560 + 41340z − 9464z² + 41340z³ + 293541560z⁴, and gcd of the first two coefficients is 13780 = 2²·5·13·53, so both vanish mod 53 (53 > 17) while the middle coefficient does not. Reproduced exactly.
+So the proof must use the margins 2, 3, …, m, and the full vector (not just two coefficients) is the right target.
+
+**Rank 17 (reported, not reproduced).** The report gives exact c_{17,1}, c_{17,2} (about 63 digits each) with gcd 48 = 2⁴·3, matching modular values mod 19 and 23, and two-coefficient contents 32, 192, 48 at m = 15, 16, 17. Not reproducible here (the subset dynamic programmes need ~4^m states); our integral data stand at brute force to m = 10 and the external run to m = 14.
+
+**Status.** Remaining theorem unchanged: for p > m+1 the boundary vector (equivalently C_m(z), equivalently the g_m content) is nonzero mod p. New usable structure: a finite-dimensional Weyl-algebra/exterior-determinant model, exact flow summation, and a certified list of what cannot hold for general margins. The proposed first target is to exploit the consecutive powers of the Weyl generators inside the height-zero cofactors.
