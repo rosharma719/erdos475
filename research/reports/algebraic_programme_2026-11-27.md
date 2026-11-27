@@ -540,3 +540,27 @@ These vectors span the whole space of binary symmetric polynomials of degree q�
 **What this establishes.** It is not a counterexample to (★) (R_m ≢ 0 mod p); it is an obstruction to proving (★) by induction using only the preceding one-vertex certificate and generic structural properties — the same pattern as the earlier failures of universal saturation and intra-rank propagation. The mixed moments M_{q,i}(X) = Alt_X[Δ(0,s_1..s_q)∏_{j<q}(−s_j) e_i(s_1..s_{q−1})]/(Δ(X)∏x_j) carry the information the one-vertex packet loses; the exact identity R_{q+2} = (−1)^q u^{q−1}R_{q+1}(1,0) + (−1)^{q−1} Σ_{i=1}^{q−1} u^{q−1−i} z^{q−1}Ω_3(M_{q,i}) (reported) isolates the known lower-rank contribution from the genuinely new mixed-moment terms (not re-derived here; Ω_3 is the three-root Schur projection). The report's rank-17 observation (all three natural specialisations of R_{17}(1,b) vanish mod 47 while the polynomial does not) was not reproduced; I have no access to the rank-17 packet here.
 
 **Status.** Unchanged: (★) is open. A proof must control the collective arithmetic of the mixed moments M_{q,i} using something specific to the signed prefix determinant (Witt-differential insertion identities are the candidate), not just Schur, symmetry, homogeneity and reflection structure.
+
+---
+
+## 29. Modular height barrier and the midpoint (rank-halving) identity (2026-11-30)
+
+**Signed-height recurrence.** F(A,I) = Σ_{i∈I,a∈A} (−1)^{pos(i)+pos(a)} w_{a,i}(g,h) F(A∖a, I∖i), h = ΣI − ΣA (current height), g = h − i + a (height before the last step), w_{a,i}(g,h) = C(g+i,i) − C(h,i), negative heights contributing 0 (this is the walk DP of §22; F = κ with the first argument the x-exponents).
+
+**Height barrier (computed + proof re-read).** If all exponents lie in {1..p−1}, every upward step from g < p to h ≥ p has weight ≡ 0 (mod p): by Lucas, with p ≤ h < g+i < 2p, C(g+i,i) ≡ C(g+i−p, i) = 0 because g+i−p < i, and C(h,i) ≡ C(h−p,i) = 0 because h−p < i. Verified exhaustively for p = 5, 7, 11, 13 (10, 35, 165, 286 crossings with all i, a ∈ [1,p−1]): no weight with a crossing is nonzero mod p. Hence modulo p the recurrence is exactly the recurrence restricted to heights 0..p−1 (the report's p-adic strengthening, higher powers of p for higher multiples, was not tested).
+
+**Reversed-step identity (computed, exact).** For h = g + i − a, w = C(g+i,i) − C(h,i) and w′ = C(h+a,a) − C(g,a) satisfy w·g!·i! = h!·a!·w′ (since g+i = h+a). Verified for g ≤ 14, i, a ≤ 8. It telescopes along a walk.
+
+**Midpoint (rank-halving) identity (computed).** For equal-weight sets A, I and a split A = A_1 ⊔ A_2, I = I_1 ⊔ I_2 with |A_1| = |I_1| = k and h = ΣI_1 − ΣA_1 ≥ 0:
+K(A,I) = Σ ε(A_1,A_2)ε(I_1,I_2) · (∏_{a∈A_2} a!)/(h! ∏_{i∈I_2} i!) · F(A_1,I_1) F(I_2,A_2),
+ε = sign of the shuffle that sorts the concatenation. **Verified over ℚ (all heights, exact rationals) on 32 random cases with r = 2..5 and every split size k = 1..r−1: 0 mismatches.** Modulo p with the barrier restriction (0 ≤ h < p, all exponents in 1..p−1): 26 cases at p = 7 and 14 cases at p = 11, 0 mismatches, including cases where terms with h ≥ p were dropped (3 and 6 respectively). So a rank-r coefficient is a bilinear pairing of two half-rank walk packets with no factorial divisible by p. The identity is an exact rational identity valid at any split size, not only k = ⌊r/2⌋.
+
+**Two-hole sets and the coefficient transform (computed, m = 3..10).** With U = {2..m}, r = m − 1, J_j = {1..m+1} ∖ {j+1, m+1−j} (so J_j = A_{1,j+1} and k_j = K(U,J_j) = κ(U,J_j) = q_{m,1,j+1} of §26):
+u²R_m(a,b) = −Σ_{j=0}^{⌊r/2⌋} k_j v^j h_{r−2j}(a,b), u = a+b, v = ab,
+and, expanding h_n = Σ_ℓ (−1)^ℓ C(n−ℓ,ℓ) u^{n−2ℓ}v^ℓ, the coefficient of u^{r−2−2ℓ}v^ℓ in R_m is C_{m,ℓ} = −Σ_{j=0}^ℓ (−1)^{ℓ−j} C(r−ℓ−j, ℓ−j) k_j. Verified for m = 3..10 including divisibility of the sum by u². **m = 7:** k = (966, 3430, 4650, 2186) gives R_7 = −966u⁴ + 1400u²v − 156v² exactly as reported (A_7 = −k_0, B_7 = −156). The transform is integral and unitriangular, so content(R_m) = gcd(k_0, …, k_{⌊r/2⌋}); checked: 1, 1, 4, 4, 2, 2, 6, 16 for m = 3..10 (consistent with the R_m contents of §27). For even m the projected-row gcd (r ≥ 2) and content(R_m) can differ by a factor dividing m, as seen at m = 4.
+
+**Not reproduced.** The report's counts (6,562 midpoint checks over several characteristics, 196 vanishing high-height states), its normalisation remark about an older verifier comment (the specific numerical example was lost in transmission), and the p-adic strengthening.
+
+**The remaining obstacle, as the report states it.** Each k_j is a pairing ⟨V_U, W_{J_j}⟩_p of half-rank walk packets indexed by exponent subsets and midpoint heights; the missing theorem is that V_U ∉ (span{W_{J_0}, …, W_{J_{⌊r/2⌋}}})^⊥ for every p > m+1. Nondegeneracy of the ambient pairing does not imply this (isotropic vectors exist over finite fields), so a statement about these specific packets is needed; candidate routes are exterior rank propagation (do the symmetric two-hole packets span a space containing a dual witness?), the truncated Weyl algebra on F_p[t]/(t^p) (the barrier justifies the finite-dimensional representation), and a midpoint-height filtration looking for an extremal height whose component cannot cancel. All three are open; none has been tried beyond the reformulation.
+
+**Status.** New exact tools: a modular truncation theorem and a rational midpoint factorisation, both verified. The open statement is still (★): for p > m+1, R_m (equivalently k_0, …, k_{⌊r/2⌋} jointly) is not ≡ 0 mod p.

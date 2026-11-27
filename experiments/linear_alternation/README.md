@@ -170,3 +170,8 @@ Scripts: `rv_contents.py` (R_m, V_m and contents), `rv_big.py` (ranks 11–13; l
 Script: `flexibility_checks.py` (pure Python; `python3 -I flexibility_checks.py`).
 - Extraction formulas E(S_X s_λ) = s_{(r,q−1−r)} (μ = (q−2,r,q−1−r)) and 2s_{(q−1)} + 2s_{(q−2,1)} (μ = (q−1,q−2,0)) verified q = 3..8; they span the binary Schur basis. Rank-6 worked example arithmetic and R_5 = −4(a+b)², R_6 = 28s_(3) + 32s_(2,1) reproduced.
 - Not reproduced: mixed-moment identity for R_{q+2}, rank-17 specialisations mod 47.
+
+## Height-barrier / midpoint report (2026-11-30)
+Script: `midpoint_checks.py` (`PYTHONPATH=. python3 midpoint_checks.py`).
+- Barrier: p = 5,7,11,13 all upward crossings ≡ 0. Reversed-step identity exact. Midpoint identity: exact over Q (32 cases, k = 1..r−1) and mod p with h<p (40 cases). Coefficient transform and R_7 = −966u⁴ + 1400u²v − 156v² reproduced; gcd(k_j) = content(R_m), m = 3..10.
+- Not reproduced: counts of checks in the report, p-adic strengthening.
