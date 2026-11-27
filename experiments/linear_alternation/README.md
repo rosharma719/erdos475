@@ -109,3 +109,9 @@ Scripts: `obstruction_checks.py`, `sat_lib.py`, `degree_table_check.py`, `conten
 - `boundary_identity_check.py`: for m = 4..9, c'_{m,j} = λ_m(w_j·Q_m∏y_j) equals c_{m,j} = λ_m(w_j F_m) (even m) or its negative (odd m); contents 1,2,4,6,12,6; sum 0; reversal law holds. So the "boundary-content conjecture" is LAC; its table is the g_m table.
 - c_{7,1} = −966 = −2·3·7·23 confirmed.
 - Not checked: the symmetric-remainder recursion and the partial-flag pairing formula.
+
+## Pascal-recurrence report (2026-11-28, eighth)
+Scripts: `pascal_checks.py`, `artin_boundary_check.py`.
+- b_{m,i} = −Σ_{j<i} c_{m,j}: consistent m = 3..14; direct integral Artin reduction of B_m (m = 4..7) gives coefficients ±b_{m,i}, support exactly on the M_i.
+- Pascal recurrence for κ(A,I) matches the direct definition on 254 pairs (k = 1..3); complementary contraction reproduces c_m for m = 3..8 up to global sign; c_1, c_2 formulas hold in magnitude; Jacobi complementary-minor identity exact on 7×7 Pascal.
+- gcd(c_1,c_2), m = 3..14: 1,1,2,4,6,12,12,2,8,24,4,8; full content 1,1,2,4,6,12,6,1,4,8,4,8.

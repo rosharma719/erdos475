@@ -304,3 +304,32 @@ A later report proposes the narrower target B_m = Q_m ∏_{j=1}^{m−1} y_j = Q_
 - Remark: an individual coefficient cannot suffice (c_{7,1} = −966 = −2·3·7·23, but the vector has content 6).
 
 **Status.** The open problem is unchanged: prove LAC (p > m+1 ⇒ p ∤ g_m). The new integral recursion for G_k is a possible route to a relation between g_m and g_{m+1}; no such relation has been found.
+
+---
+
+## 20. Near-top Artin coefficients, Pascal recurrence, two-coefficient content (2026-11-28)
+
+This round reformulates LAC (§19) as arithmetic of the near-socle class B_m ∈ R_m^{N_m − 1}, which is an (m−1)-dimensional space, rather than of the whole (m!-dimensional) algebra.
+
+**Artin coefficients (computed).** The monomials M_i = (w_1^0 w_2^1 ⋯ w_m^{m−1})/w_i, 2 ≤ i ≤ m, form the Artin basis in degree N_m − 1, and λ_m(w_j M_i) = δ_{j,i} − δ_{j,i−1}. Writing B_m = Σ_i b_{m,i} M_i: c_{m,1} = −b_{m,2}, c_{m,j} = b_{m,j} − b_{m,j+1} (2 ≤ j < m), c_{m,m} = b_{m,m}, and b_{m,i} = −Σ_{j<i} c_{m,j}. Consistent with all stored c-vectors for m = 3..14, and gcd(b) = gcd(c) = g_m. **Direct integral Artin reduction of B_m = Q_m∏y_j in R_m (m = 4..7)** gives a normal form supported exactly on the M_i with coefficients ±b_{m,i} (e.g. m = 7: 966, 2628, 3966, 3966, 2628, 966, gcd 6; m = 6: 28, 68, 88, 68, 28 — gcd 4). So the "intrinsic" content of the boundary class is g_m (the LAC quantity) in any basis.
+
+**Pascal recurrence (computed).** Let v(t) = Σ_{i=2}^m t^i/i! e_i, P_k(x_1..x_k) = Σ_σ sgn σ · v(x_σ1) ∧ v(x_σ1+x_σ2) ∧ … ∧ v(x_σ1+…+x_σk), and κ(A,I) the coefficient of (x^A/A!) e_I (A, I increasing sets of distinct positive integers; κ = 0 unless ΣA = ΣI; κ({a},{i}) = δ_{a,i}). The recurrence
+κ(A,I) = Σ_ℓ (−1)^{ℓ−1} Σ_{|C|=k−1, ΣC = ΣI − i_ℓ} det(binom(a, c))_{a∈A, c∈{0}∪C} · κ(C, I∖{i_ℓ})
+matches the definition computed directly from polynomial arithmetic on all 254 pairs tested (k = 1, 2, 3, I ⊆ {2..7}), 0 mismatches; it is integral, so valid in every characteristic. The complementary contraction
+c_{m,r+1} = Σ_{A,I ⊆ U_m, |A|=|I|=r, ΣA=ΣI} (−1)^{r + ΣI^c} κ(A,I) κ(A^c, I^c), U_m = {2..m}
+reproduces the boundary vector exactly for m = 3..8, up to a global sign (+ for odd m, − for even m — a normalisation convention). Likewise |c_{m,1}| = |κ(U_m,U_m)| and the c_2 formula Σ_a (−1)^a κ(U_m∖a, U_m∖a) hold in magnitude (up to the same global sign) for m = 3..8.
+
+**Complementary minors (computed).** For the Pascal matrix (7×7, all |A| = |D| ≤ 4), det P_{A,D} = det P_{D^c,A^c} exactly (no sign), so near-full Pascal minors can be replaced by small complementary ones. (Jacobi's identity with the signed inverse binom matrix.)
+
+**Two-coefficient content (computed from the stored vectors, m = 3..14).**
+
+| m | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| gcd(c_1, c_2) | 1 | 1 | 2 | 4 | 6 | 12 | 12 | 2 | 8 | 24 | 4 | 8 |
+| full content g_m | 1 | 1 | 2 | 4 | 6 | 12 | 6 | 1 | 4 | 8 | 4 | 8 |
+
+At every tested rank the first two coefficients alone have no prime factor > 3; gcd(c_1,c_2) is a multiple of g_m (so the two-coefficient conjecture "p > m+1 ⇒ (c_1, c_2) ≢ (0,0) mod p" would imply LAC). It is the same data as the g_m table (m ≥ 11 resting on the external run), not independent evidence. Individual coefficients are not enough (c_{7,1} = −966 = −2·3·7·23).
+
+**Statements not checked here:** the proof sketches of the Pascal recurrence in general k, the symmetric-remainder/flag-pairing reformulations, and any proof strategy built on top of them (which would need a noncancellation invariant surviving the signed sums — the report notes this is Step 3 and remains open).
+
+**Status.** The proof obligation is unchanged: LAC (equivalently, the integral content of B_m / its Artin coefficient vector has no prime factor > m+1). The new representation is purely integer-combinatorial (Pascal minors on subsets of {2..m}), which is a candidate setting for an inductive or cofactor argument; none has been found.
