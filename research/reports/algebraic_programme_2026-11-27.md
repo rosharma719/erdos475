@@ -459,3 +459,33 @@ Ranks 3–4 give 1, 1 (d = 1 packet: 2 and 3 tests). Ranks 5–7 reproduce the r
 **Not reproduced.** The rank-9..11 packet and merge-image tables (the report lists d = 1 packet 18, 44, 44; merge image 6, 16, 4; combined gcd 6, 4 at ranks 9, 10), the block-form theorem for M with the insertion/self-adjointness constraints (derived there by algebra; not re-derived), the two-zero determination of L_k, and the unfinished rank-18 boundary run.
 
 **Status.** Route A (prove A_{m−2}^{N_m}b_m ≠ 0 mod p for p > m+1) is a cleaner target than the scalar contraction: b_m is explicitly nonzero, the matrix dimension is P(m−1) − 1, and invertibility of A fails already at m = 6 (singular mod 43, 191, 1283) so a kernel-avoidance argument specific to b_m is required. Route B (open-path collision induction) has verified exact identities but no noncancellation argument for the symmetric collision weight under edge alternation. Neither closes the induction.
+
+---
+
+## 26. The Grassmannian two-root reduction (2026-11-29)
+
+**Schur expansion of the open-path determinant (computed, m = 3..6).** For k = m−1 edges, P_k(t;x) = Φ_k(t;x)/(Δ(x)∏x_i) satisfies
+P_k(t;x) = Σ_{d=1}^m (−1)^{m+d} t^d Σ_{|A|=k, ΣA=ΣJ_d} κ(J_d, A) s_{λ(A)}(x), λ(A)_j = a_{k+1−j} − (k+1−j), J_d = {1..m}∖{d}.
+Verified at random rational points for m = 3, 4, 5, 6 with global sign +1 (exactly the report's formula). Proof sketch (re-derived): expanding the (m+1)×(m+1) Vandermonde along the t-row and using that the vertex 0 row is (1,0,…,0) leaves Alt det(s_i^{a}), a ∈ J_d; Alt det(s^{J_d}) = ∏J_d! · [e_{J_d}]P^{ext} = Σ_A κ(J_d,A) det(x^A) by the factorial adjointness κ(A,J)∏J! = κ(J,A)∏A!, and det(x^A) = Δ(x)∏x_i s_{λ(A)}. (My first test failed only because of an off-by-one in my own partition map.)
+
+**Grassmannian truncation (read).** For p > m+1 and w = p − m, the Schur terms with λ_1 > w come with a rightmost factorial divisible by p and drop out; the survivors are the Schur basis of G_{k,w} = K[e_1..e_k]/(h_{w+1},…,h_{w+k}). Hence the complete endpoint Schur packet vanishes mod p iff P_k = 0 in G_{k,w}[t]. The total-sum factor S t (t − S) can be cancelled because deg L_k = k − 2 is below the first relation degree and t(t−S) is monic in t. With w ≥ 2, setting all but two complementary roots to zero (e_j ↦ (−1)^j h_j(a,b)), a nonzero two-root specialisation 𝓛_m(t,a,b) mod p implies Q_m ≠ 0 mod p. Algebra of the substitution: s_λ(x) ↦ (−1)^{|λ|}s_{λ′}(a,b); only sets A ⊆ {1..m+1}, i.e. A_{d,r} = {1..m+1}∖{r, m+1+d−r}, survive, with λ′ = (m−r, r−d) (checked by hand), and
+P̃_m(t,a,b) = Σ_{d=1}^m t^d Σ_{r=d}^{⌊(m+d)/2⌋} q_{m,d,r} s_{(m−r,r−d)}(a,b) = −(a+b)t(t+a+b)𝓛_m(t,a,b), q_{m,d,r} = κ(J_d, A_{d,r}).
+The number of coefficients is ⌊(m+1)²/4⌋ (checked against the (d,r) count for m = 3..15).
+
+**Projected merge relation (computed, m = 3..8).** For d = 1, with q_{m,r} = q_{m,1,r}: Σ_r (−1)^{r−1} q_{m,r} = 0 (m odd), Σ_r (−1)^{r−1}(m+2−2r) q_{m,r} = 0 (m even). Verified exactly. Example m = 7: (q_{7,1}, …, q_{7,4}) = (966, 3430, 4650, 2186), 966 − 3430 + 4650 − 2186 = 0, gcd(3430, 4650, 2186) = 2. So the diagonal coordinate κ(U_m,U_m) is determined by the ⌊(m−1)/2⌋ off-diagonal ones: the projected Witt vector g_m = (q_{m,r})_{r≥2} is the whole certificate (and q_{m,r} = −(A_{m−2}^{N_m}b_m)_{C_{m,r}}, C_{m,r} = (U_m∖{r, m+2−r}) ∪ {m+1}, as observed at m = 6).
+
+**Contents (computed, m = 3..11; exact via the signed-walk DP).**
+
+| m | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 |
+|---|---|---|---|---|---|---|---|---|---|
+| projected Witt gcd, g_m = gcd_{r≥2} κ(J_1, A_{1,r}) | 1 | 2 | 4 | 4 | 2 | 2 | 6 | 16 | 4 |
+| full two-root packet gcd, entries κ(A_{d,r}, J_d) | 1 | 1 | 4 | 4 | 2 | 12 | 6 | 4 | (4 in report) |
+
+The report's two columns coincide with these: the "projected Witt" column uses κ(J_d, A) and the "full packet" column uses the Schur-pairing convention κ(A, J_d) (computing both conventions for all (d, r): κ(J_d,A) gives full gcd 1, 1, 4, 4, 2, 2, 6, 16; κ(A,J_d) gives 1, 1, 4, 4, 2, 12, 6, 4). The two conventions differ by the factor ∏J_d!/∏A!, a unit mod every prime p > m+1 (all indices ≤ m+1), so their sets of "bad primes" above m+1 agree; only the small-prime content differs. Every computed gcd has no prime factor above 3. Ranks 12–15 (report: projected 16, 8, 64, 8) were not computed here.
+
+**Rank-7 closed form (computed).** In S = a+b, Z = a−b, T = 2t+a+b:
+𝓛_7 = −(1/8)(13461 S⁴ − 8595 S²T² + 2889 S²Z² + 140 T⁴ − 245 T²Z² + 78 Z⁴) — reproduced exactly (random rational (t,a,b), 5 samples). The denominators from centering are powers of two. The parity/dihedral structure in T and Z² is as the report states (even in Z, definite parity in T).
+
+**Collision weight (algebra).** Σ_i (t − y_i) f′(y_i) is the sum of residues at the roots of (t − z) f′(z)²/f(z) — true by the residue at a simple root; its expression through power sums p_r(y) is exact but the compatibility between vertex-symmetric multiplication and the two-root projection of edge symmetric functions is not established, so the collision recurrence (verified exactly in §25) does not yet yield an induction.
+
+**Status.** The object to analyse is the binary symmetric polynomial 𝓛_m(0,a,b) ↔ g_m; it has ⌊(m−1)/2⌋ independent coefficients (mod the relation above), is p-independent, and passes the exact arithmetic checks computed here (through rank 11; the report states rank 15). The open problem is a uniform recurrence or arithmetic invariant for it.

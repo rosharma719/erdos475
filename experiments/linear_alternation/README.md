@@ -152,3 +152,10 @@ Scripts: `schur_checks.py`, `merge_matrix_check.py`, `schur_tables.py` (log `sch
 - m = 6: b_6 = (−1,2,−1,−3,2,4); det A = 18208418112 = 2⁶·3³·43·191·1283; A b_6 = (10,52,74,102,92,88); dim W = P(m−1) − 1 for m = 4..12.
 - Open-path polynomial L_k: integral, symmetric, degree k−2, reflection law (k = 3,4,5); collision recurrence exact for k = 3,4.
 - Not reproduced: ranks ≥ 9 tables, block-form theorem, two-zero determination.
+
+## Grassmannian two-root report (2026-11-29)
+Scripts: `tworoot_checks.py`, `tworoot_tables.py` (log `tworoot_tables_out.txt`), `tworoot_swapped.py` (both κ conventions).
+- Schur expansion of P_k(t;x) verified m = 3..6 (global sign +1). Packet size ⌊(m+1)²/4⌋ for m = 3..15. Projected merge relation exact m = 3..8; q_{7,1,r} = (966, 3430, 4650, 2186).
+- Projected Witt gcd m = 3..11: 1,2,4,4,2,2,6,16,4. Full packet (κ(A,J_d) convention) m = 3..10: 1,1,4,4,2,12,6,4. κ(J_d,A) convention gives full gcd 1,1,4,4,2,2,6,16.
+- Rank-7 centered polynomial 𝓛_7 reproduced exactly.
+- Not reproduced: ranks 12–15 of the tables, the Grassmannian ideal-cancellation proof (read only).
