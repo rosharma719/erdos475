@@ -636,3 +636,25 @@ Checked for (m,p) = (3,5), (3,7), (3,11), (4,7), (4,11), (4,13), (5,7) at every 
 **Not reproduced.** The proofs of the sparse-flow rank-lowering identity and of the Fourier-automorphism symmetry (the symmetry itself was verified numerically above); the exact normalisation relating Φ to the standard polynomial (we verified the identity against W_m(h) directly); eq. (8)/(9) in the lost-symbol form; the counts of 90 + 374 identity checks; ranks 13–15 gcds.
 
 **Status.** The conjecture (★) is unchanged and open. New exact facts: the dense Weyl calculation is equivalent to the sparse cyclic polynomial f_{m,p} and a reciprocity-failure statement, with an explicit rank-lowering identity and component-wise reciprocity; and an explicit abstract model shows these structures alone do not force nonvanishing. The remaining task is a joint relation among the flow components f_{A,b}, b ∈ A, specific to the genuine determinant, that rules out Σ_b(1 − (−λ)^{p−1−b})f_{A,b} ≡ 0 — still missing.
+
+---
+
+## 33. Singular-point multiplicity, a sharper cancellation obstruction, and the multivariate flow lemma (2026-12-01)
+
+This round is mostly a strategy memo; the statements below were checkable and were checked.
+
+**t-form of the eigenvalue polynomial (computed).** Put H_{m,p}(t) = G_{m,p}(−t), G = f_{m,p}(λ) + ελ^{p−1}f_{m,p}(1/λ) (§32). Then
+H_{m,p}(t) = Σ_{h=0}^{p−1} W_m(h)t^h = Σ_{d=1}^m d·κ_{m,d}·t^{d−1}(1−t)^{p−d} (mod p), κ_{m,d} = K(J_d,J_d).
+The binomial-sum identity Σ_{h<p} C(h,k)t^h ≡ t^k(1−t)^{p−1−k} (mod p) holds for all k < p at p = 5, 7, 11, 13; and G(−t) (computed from the sparse cyclic polynomial of §32) equals the right-hand side at every nonzero t ∈ F_p for (m,p) = (3,7), (4,11), (4,13), (5,7). Since the d-th summand vanishes to order exactly p−d at t = 1 and d < p, **ord_{t=1} H_{m,p} = p − max{d : κ_{m,d} ≢ 0 (mod p)}**, so (T) is equivalent to a bound on the multiplicity of the root t = 1 of the genuine cyclic-flow polynomial (this is the setting where C_λ degenerates to the rank-(r−1) cyclic difference matrix with kernel spanned by the all-ones vector).
+
+**Sharper abstract-cancellation theorem (computed).** Let P_n^η = {q : deg q ≤ n, q(t) = η t^n q(1/t)}, N = p−1, and let g_2 ∈ P_{N−2}^{−ε}, g_3 ∈ P_{N−3}^{−ε}. The map (g_2,g_3) ↦ (1−t²)g_2 + (1−t³)g_3 into P_N^ε has image exactly {H ∈ P_N^ε : H(1) = 0}: verified over ℚ by rank for N = 4..14 and both signs (image dimension equals dim P_N^ε minus the one condition for ε = +1, and equals dim P_N^{−1} for ε = −1, where H(1) = 0 is automatic); the image lies in the target by direct reciprocity check, so equal dimension means equality. The kernel contains (g_2,g_3) = ((1+t+t²)q, −(1+t)q) since (1−t²)(1+t+t²) = (1−t³)(1+t) (checked). **Consequence:** two abstract reciprocal components suffice to cancel every other component; a proof of (T) cannot rest on degree bounds, componentwise reciprocity, a nonzero extreme coefficient, or the known parity/vanishing constraints alone.
+
+**Multivariate flow polynomial and the diagonal-flow lemma (computed).** F_A(t_1..t_r) = [x^A] Alt_x det((x_i − t_i x_{i+1})^{a_j}), x_{r+1} = x_1. Verified by direct expansion on A = (2,3,5), (1,3,4), (2,4,5), (1,2,3,4), (2,3,4,6) and every 0 ≤ k ≤ min A:
+[t_1^k⋯t_r^k] F_A = (−1)^{rk} r! ∏_{a∈A} C(a,k),
+nonzero mod p for p > max A (elementary: equal transfers force the two exponent permutations to coincide). **Caveat (mine):** the univariate polynomial f_A(λ) is the specialisation t_i = 1 (i < r), t_r = −λ, which sums *all* flow monomials with weights; the diagonal coefficients are single terms among many, so their nonvanishing does not by itself constrain f_A. The "projection faithfulness" the memo proposes (vanishing of the reciprocal univariate projection forces a diagonal-flow coefficient to vanish) is exactly the unproved step and, as stated, would need an argument that recovers an individual coefficient from a sum of weighted ones.
+
+**Shifted families.** The rank-lowering identity applied to A = {p−m−1..p−3} removes its maximum; complementing again gives {3..m}, not {2..m−1}. So the natural induction passes through shifted intervals U_{r,c} = {c, …, c+r−1} (and probably holed sets), not through the preceding instance of the target.
+
+**Not checked.** The parity/multiplicity table (lost in transmission); the symplectic-automorphism and sl_2 arguments; the claimed relevance of Dzhumadil'daev–Yeliussizov path decompositions (not read); the comparison with the ProofAtlas program.
+
+**Status.** (★)/(T) remains open. Verified new facts: the t-form identity and multiplicity formula, the exact image theorem for two reciprocal components, and the diagonal-flow lemma. Still missing: a joint relation among the genuine flow components (or a faithfulness statement linking the univariate projection to the multivariate polynomial) that rules out ord_{t=1}H_{m,p} = p.

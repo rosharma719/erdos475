@@ -189,3 +189,8 @@ Script: `witness_search.py` (log `witness_search_out.txt`; rank 12 may still be 
 Scripts: `sparse_checks.py` (sparse inverse, centered polynomial), `duality_checks.py` (duality (2)), `sparse_theorem_check.py` / `sparse_theorem_check2.py` (Φ(θ) vs Weyl eigenvalue polynomial), `reciprocity_check.py` (componentwise reciprocity (6), rank-lowering (5)). Rank-12 diagonal gcd in `witness_search_out.txt`.
 - Sparse inverse exact r = 2..7; duality (2) 36 cases; main equivalence ratio exactly 1 for (m,p) = (3,5),(3,7),(3,11),(4,7),(4,11),(4,13),(5,7); reciprocity (6) 37 cases, rank-lowering (5) 11 sets; W_m(−h−1) = ±W_m(h) for m = 3..11.
 - Not reproduced: ranks 13–15 diagonal gcds, counts of checks in the report, proofs of the flow identities.
+
+## Strategy-memo checks (2026-12-01)
+Scripts: `memo_checks.py` (t-form identity, image theorem), `diagonal_flow_check.py`.
+- G(−t) = Σ_d dκ_d t^{d−1}(1−t)^{p−d} verified (m,p) = (3,7),(4,11),(4,13),(5,7); binomial-sum identity for p = 5,7,11,13. Image of (g_2,g_3) ↦ (1−t²)g_2 + (1−t³)g_3 equals {H ∈ P_N^ε : H(1) = 0}, N = 4..14. Diagonal-flow lemma verified on 5 sets.
+- Not checked: lost parity table, representation-theoretic and literature claims.
