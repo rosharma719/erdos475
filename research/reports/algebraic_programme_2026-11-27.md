@@ -836,3 +836,17 @@ Scripts: `experiments/linear_alternation/two_pattern_v2.py`, `vacuum.py`. Unnorm
 - n = 8 minor table: large-prime (> n+1) part of the maximal-minor gcd of P_8 = 1 (2^44 3^30 5^17 7^5, unchanged); of the 2x2 minors of [P(H_2)|P(q_8)] = 1 (now 2^10 3^2 7^2).
 - P_n(H_2) coordinates (`ph2_fixed.txt`): n <= 6 unchanged. n = 7 e_1, e_2 change (65003/210691031040000, -1243/1950842880000; the §39 values 13553/..., -9881/... were wrong), e_3..e_6 unchanged. n = 8: e_7 = 0, e_5 = 569/6019743744000, e_6 = 569/3009871872000 (prime 569 > 9), e_1..e_4 with large primes. n = 9: e_8 = 0, e_6 = -1974029/5461111524556800000, e_7 = 2 e_6.
 - So the qualitative conclusions of §39 survive with the corrected numbers: the top coordinate e_{n-1} vanishes at n = 4, 5, 8, 9; the top nonzero pair always has ratio 1:2 but its numerator is not a unit from n = 8 on (569, 1974029). Fixed-coordinate witnesses fail.
+
+## 43. Transfer vectors = diagonal Weyl packets; adjacent-rank minors; three-coefficient target (report of 2026-11-27, late)
+
+Script: `experiments/linear_alternation/packet_checks.py` (kappa via walk DP, cached in `kappa_cache.pkl`; v_n from `ph2_fixed.txt`).
+
+**Reproduced exactly:**
+- (1) v_n[j] = c_n (j+1)! kappa_{n+1,j+1} with one constant c_n for all j, n = 3..9 (c_3 = -1/288, c_4 = -1/34560, ...); zero coordinates match kappa_{m,m} = 0.
+- kappa_{m,m} = 0 and sum_d (-1)^{d-1} kappa_{m,d} = 0 for all computed m.
+- Adjacent-rank minor table (A_n = [kappa_{n+1,d} | kappa_{n,d}], d = 2..n+1): full / first-three-rows gcd = n=5: 32/32, 6: 1120/1120, 7: 48/192, 8: 1512/7560, 9: 576/2880, matching the report; no prime > n+1. n = 4: rank 1 (v_4 = w_4/30).
+- Odd-rank factorization (3): gcd of 2x2 minors = content(n+1) * content(n) up to primes <= n+1 at n = 5, 7, 9.
+- (4) gcd(kappa_{m,2}, kappa_{m,3}, kappa_{m,4}) has no prime > m+1 for m = 4..10 (m = 11..16 running; see addendum).
+- Highest-pair sign: w_n = (-1)^n J_n(v_{n-1}) agrees with §41.
+
+**Heuristic caveat on (4).** The individual kappa_{m,d} contain large, apparently random primes (e.g. kappa_{12,2} = 2^6 * a 21-digit prime). If k fixed coordinates behaved like random integers, the expected number of (m, p > m+1) failures is ~ sum_m sum_{p>m} p^{-k}: divergent for k = 2 (consistent with the observed failures of two-coordinate witnesses in §39), convergent for k = 3 (~0.04 expected failures beyond m = 10). So three coefficients is the smallest fixed witness that is heuristically plausible for all ranks, and data alone cannot separate "structural" from "lucky" here: (4) needs an algebraic identity. Not proved.
