@@ -1,0 +1,3 @@
+rank 5: d=1 Schur packet gcd = 4;  combined (all d) gcd = 2;  merge-image gcd = 4;  |W basis|=4   (0s)
+rank 6: d=1 Schur packet gcd = 28;  combined (all d) gcd = 4;  merge-image gcd = 2;  |W basis|=6   (0s)
+rank 7: d=1 Schur packet gcd = 14;  combined (all d) gcd = 2;  merge-image gcd = 1;  |W basis|=10   (5s)

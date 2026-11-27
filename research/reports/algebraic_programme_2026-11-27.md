@@ -431,3 +431,31 @@ F_{m,r}(q) = Σ_{A,I ⊆ S_m, |A|=|I|=r, ΣA=ΣI} ε(A,A^c)ε(I,I^c)(−1)^{ΣI^
 **Not reproduced.** The report's examples of F_{m,r} polynomials (typeset table lost), the rank-7 insertion-identity count (236 identities), and any statement about closing the merge recursion on consecutive sets.
 
 **Status.** All of the new identities hold in the cases checked; none closes the induction. The merge recurrence is exact but leaves the set of consecutive exponents (the merged sets are not consecutive), and the simple-root form needs a statement about common double roots at q = 1. Open as before: p > m+1 ⇒ boundary vector (equivalently the g_m content) nonzero mod p.
+
+---
+
+## 25. Schur endpoint packets, the Witt merge vector, and the open-path generating polynomial (2026-11-29)
+
+**Schur endpoint pairing (computed, m = 3..6).** For a partition μ ⊢ m−d with at most m−1 parts, E_{m,d,μ} = λ_m(w_1^d Q_m s_μ(y_1..y_{m−1})) (Schur polynomial via Jacobi–Trudi in the prefix vertices) equals ±κ(I_μ, J_d), where I_μ = {j + μ_{m−j}}_{j=1}^{m−1} (μ padded with zeros) and J_d = {1..m}∖{d}. **All 4, 7, 12, 19 tests for m = 3, 4, 5, 6: no mismatch**; the sign is uniformly (−1)^{C(m+1,2)} on our orientation (the report states (−1)^{C(m+1,2)−1}: an orientation convention). This extends the diagonal pairings κ(J_d,J_d) to the whole exterior packet.
+
+**Packet contents (computed, m = 5..7; m = 8 in progress).**
+| m | 5 | 6 | 7 | 8 (report) | 9 (report) |
+|---|---|---|---|---|---|
+| d = 1 Schur packet gcd (P(m−1) tests) | 4 | 28 | 14 | 12 | 18 |
+| combined gcd over all d, μ | 2 | 4 | 2 | 12 | 6 |
+| merge-image gcd (gcd of A b_m) | 4 | 2 | 1 | 2 | 6 |
+Ranks 3–4 give 1, 1 (d = 1 packet: 2 and 3 tests). Ranks 5–7 reproduce the report exactly; rank 8 (14 × 14 matrix, κ on 7-element sets) was still running at write-up time (`experiments/linear_alternation/schur_tables_out.txt`). The d = 1 packet of the report (ranks 3–11: 1, 1, 4, 28, 14, 12, 18, 44, 44) is reproduced through rank 7. All of these contents have only the prime factors 2, 3, 7 and 11 at these ranks (7 | 28, 14; 11 | 44 appears in the report's higher ranks) — each ≤ m+1 or inside the admissible range, never a prime > m+1 dividing the full packet.
+
+**The Witt merge vector and the compressed operator (computed, m = 6; dimensions m = 4..12).**
+- dim W_{m−2}^{N_m} (sets of m−2 distinct indices ≥ 2 with excess Σ(a−1) = N_m) = P(m−1) − 1: verified by enumeration for m = 4..12 (2, 4, 6, 10, 14, 21, 29, 41, 55). The single-element-at-the-minimum argument: the unique minimal-excess set of size m−1 is U_m.
+- m = 6: with basis (2,3,4,10), (2,3,5,9), (2,3,6,8), (2,4,5,8), (2,4,6,7), (3,4,5,7), the merge vector d*e_{U_6} (restricted to indices ≥ 2) is **b_6 = (−1, 2, −1, −3, 2, 4)**, coefficients (b−a) over the merges with a+b−1 > m exactly as described; the compressed matrix A_{I,J} = κ(J,I) has **det A = 18,208,418,112 = 2⁶·3³·43·191·1283** and **A b_6 = (10, 52, 74, 102, 92, 88)** (content 2). All three reproduced exactly. So A is singular modulo 43, 191, 1283 (all > m+1 = 7) while the specific vector b_6 is not in its kernel: kernel avoidance, not invertibility, is the right target.
+- The exponent-1 components of M(e_{U_6}) are κ(U_6, {1}∪K) = −(A b_6)_K and κ(U_6,U_6) = −28, i.e. M(e_{U_m}) = κ(U_m,U_m) e_{U_m} ∓ e_1∧A b_m, as claimed (sign convention aside).
+- **Vector-valued merge criterion (consequence):** M(e_{U_m}) = 0 ⇔ A_{m−2}^{N_m} b_m = 0 (and κ(U_m,U_m) = 0 is then automatic by (1 − N_m)κ(U_m,U_m) = ⟨b_m, A b_m⟩/∏a!). b_m is nonzero: the pair (m−1, m) always survives with merged index m+1 (< p for p > m+1) and coefficient ±1, and no other merge produces that set.
+
+**Open-path generating polynomial (computed, k = 3, 4, 5).** Φ_k(t;x) = Alt_x Δ(0, s_1, …, s_k, t), s_j = x_1+…+x_j, S = s_k. Checked at random integer points: L_k = Φ_k / (Δ(x)∏x_i · S · t(t−S)) is integer-valued, symmetric in the edges, homogeneous of degree k − 2 (so the factors Δ(x), ∏x_i, S, t, t−S do divide Φ_k and the reduced degree is k − 2), and Φ_k(S−t; x) = (−1)^{C(k+1,2)+1} Φ_k(t; x) (m = k+1) — reflection law confirmed. **Collision recurrence:** ∂_hΦ_k(t;h,x)|_{h=0} = (−1)^{k−1} Alt_x[Δ(y_0..y_{k−1},t) Σ_i (t − y_i) f′(y_i)], f(t) = ∏(t − y_i): exact for k = 3 (−528000) and k = 4 (−873698918400), by exact polynomial interpolation in h (note: one needs degree up to C(k+2,2) in h; with too few nodes the identity appears to fail).
+
+**Content of [Q_m] (computed):** m = 4..8: 1, 1, 2, 2, 2 (rank 8 now reproduced; rank 9 in the report: 1).
+
+**Not reproduced.** The rank-9..11 packet and merge-image tables (the report lists d = 1 packet 18, 44, 44; merge image 6, 16, 4; combined gcd 6, 4 at ranks 9, 10), the block-form theorem for M with the insertion/self-adjointness constraints (derived there by algebra; not re-derived), the two-zero determination of L_k, and the unfinished rank-18 boundary run.
+
+**Status.** Route A (prove A_{m−2}^{N_m}b_m ≠ 0 mod p for p > m+1) is a cleaner target than the scalar contraction: b_m is explicitly nonzero, the matrix dimension is P(m−1) − 1, and invertibility of A fails already at m = 6 (singular mod 43, 191, 1283) so a kernel-avoidance argument specific to b_m is required. Route B (open-path collision induction) has verified exact identities but no noncancellation argument for the symmetric collision weight under edge alternation. Neither closes the induction.

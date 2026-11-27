@@ -145,3 +145,10 @@ Scripts: `witt_checks.py`, `collision_checks.py`, `qcontent_check.py` (all with 
 - F_{m,r}(1) = 0 and F′_{m,r}(1) = ±(−1)^r Σ_{j≤m−r} c_{m,j} verified for m = 3..7 (global sign (−1)^{m−1}).
 - Content of [Q_m]: m = 4..7 → 1, 1, 2, 2 (rank 8 run in `qcontent_m8.txt`, if it finishes).
 - Not reproduced: F_{m,r} example table, rank-9 content, merge-closure argument.
+
+## Schur/Witt merge-vector report (2026-11-29)
+Scripts: `schur_checks.py`, `merge_matrix_check.py`, `schur_tables.py` (log `schur_tables_out.txt`), `openpath_checks.py`. (`qcontent_check.py 8 8` gave content 2 for [Q_8].)
+- E_{m,d,μ} = ±κ(I_μ,J_d): m = 3..6, no mismatch; packet gcds m = 5,6,7: d=1: 4, 28, 14; combined: 2, 4, 2; merge-image: 4, 2, 1.
+- m = 6: b_6 = (−1,2,−1,−3,2,4); det A = 18208418112 = 2⁶·3³·43·191·1283; A b_6 = (10,52,74,102,92,88); dim W = P(m−1) − 1 for m = 4..12.
+- Open-path polynomial L_k: integral, symmetric, degree k−2, reflection law (k = 3,4,5); collision recurrence exact for k = 3,4.
+- Not reproduced: ranks ≥ 9 tables, block-form theorem, two-zero determination.
