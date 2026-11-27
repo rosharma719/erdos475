@@ -52,3 +52,13 @@ Theorem 3 (p ∤ g_m ⇒ every (m+1)-subset of F_p^× is orderable) is sound und
 ## Binary alternation, n = 10, 11 (2026-11-27)
 - `binary_range.py` (run with `PYTHONPATH=. python3 binary_range.py 10 11`), output `binary_out_10_11.txt`. n = 10: β_10 = 2, P_{10,d}(1,0) = ±c_{9,r}, rounding error < 5e-5. n = 11: float64 rounding error up to 0.5, coefficients not reliable, but β_11 = 1 is forced by β_n | g_{n−1} and g_10 = 1.
 - Consequence: g_3..g_14 involve only primes 2 and 3, so no binary content for n ≤ 15 can exceed those primes. A meaningful LAC test needs g_15+ or exact-arithmetic binary computations at n ≥ 16.
+
+## Arbitrary-order transfer report (2026-11-28) — independent checks
+Scripts (written here): `transfer_checks.py`, `witness_checks.py` (run with `PYTHONPATH=. python3 witness_checks.py`; `transfer_checks` prints its own checks on import).
+- **Thm 1 (edge insertion), Q_{m+1}(h,x) = ±W_m(x)(h+x_0)Q_m(h+x_0,x_1..)**: exact integer check, m = 3..8, 20 random zero-sum points each. All agree.
+- **Thm 3 (centered power sums p_k(u) = ((m+1)−(m+1)^k)/m^k h^k)**: derived by hand (binomial expansion with p_j(x) = −h^j) and checked on roots of unity, m = 3..6 (error ~1e-15).
+- **Thm 4 (Poincaré transfer λ_{m+1}(h^{m−r}G) = (−1)^r (m−r)!/m! λ_m(E_r G))**: exact check with random polynomials G, m = 3, 4, every r = 0..m (values include 1, −5, 6, 3, 2). All agree.
+- **Rank-5 detection**: λ_5(x_1² q (H_1−H_0)) = −2 for q = Σ x_i(x_{i+1}²x_{i+2}² + x_{i−1}²x_{i−2}²). Reproduced.
+- **Rank-6 witness** (22 signed dihedral orbit sums, degree 9): reproduced with the reflection i ↦ r−1−i carrying sign (−1)^{r+1} and rotation sign (−1) per step: λ_6(x_0x_1^5 q) = −198; λ_7(h^4 x_0² x_1 T_6(q)) = −7646; all 21 degree-2 divided-difference packets vanish; all 6 zero-edge insertion packets vanish. (With the reflection i ↦ r−i instead, the values are −7406 and −9328 and the vanishing fails, so the convention matters.) −198 ≢ 0 mod 13.
+- Not reproduced: the F_1009 span table (residual binary directions per rank/jet order) and the first-order normal packets of the witness.
+- Boundary lemma (§8 of the report): if P, Q ∈ K[x]/(e_1) agree on every coordinate hyperplane then ∏x_i = e_m divides P−Q, so [P] = [Q] in R_m (m ≥ 3). Argued by hand; correct.
