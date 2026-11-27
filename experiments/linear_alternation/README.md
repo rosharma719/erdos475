@@ -62,3 +62,12 @@ Scripts (written here): `transfer_checks.py`, `witness_checks.py` (run with `PYT
 - **Rank-6 witness** (22 signed dihedral orbit sums, degree 9): reproduced with the reflection i ↦ r−1−i carrying sign (−1)^{r+1} and rotation sign (−1) per step: λ_6(x_0x_1^5 q) = −198; λ_7(h^4 x_0² x_1 T_6(q)) = −7646; all 21 degree-2 divided-difference packets vanish; all 6 zero-edge insertion packets vanish. (With the reflection i ↦ r−i instead, the values are −7406 and −9328 and the vanishing fails, so the convention matters.) −198 ≢ 0 mod 13.
 - Not reproduced: the F_1009 span table (residual binary directions per rank/jet order) and the first-order normal packets of the witness.
 - Boundary lemma (§8 of the report): if P, Q ∈ K[x]/(e_1) agree on every coordinate hyperplane then ∏x_i = e_m divides P−Q, so [P] = [Q] in R_m (m ≥ 3). Argued by hand; correct.
+
+## Merged-edge algebra report (2026-11-28, second) — independent checks
+Scripts: `artin.py` (exact coinvariant ring, Artin normal forms), `modrank.py`, `split_edge_checks.py`, `coverage_check.py`, `smith_check.py` (run with `PYTHONPATH=.`).
+- Thm 5 presentation relations e_j(z) = (−1)^j H_j(u,v), H_m = 0 at roots of unity: m = 3..7, errors ≤ 5e-15 (H_{m+1} = ±1 there since e_{m+1} = ±1; it vanishes only in the coinvariant quotient).
+- Thm 6 Ann(u) = (K_m) in K[u,v]/(H_m,H_{m+1}): equal graded dimensions in every degree through the top, m = 3..8, over F_1000003.
+- Rank-5 counterexample: T_5(q) reduces to 0 in R_6; q ≡ w_0^4 w_1 ≠ 0 in R_5.
+- Coverage table reproduced exactly: 1/1, 2/2, 9/9, 9/29, 47/87 for lower ranks 4..8 (χ_Q(rot) = χ_Q(rev) = (−1)^{m−1} computed).
+- Smith data reproduced exactly: relative index 1, 2, 108 for ranks 4, 5, 6; rank-6 invariants [1,1,1,1,2,2,2,2,108] vs [1,1,1,1,1,2,2,2,2].
+- Not reproduced: chord-factor (Grassmannian) annihilator statement, common-deformation identities, the F_1009 binary-direction table.

@@ -101,3 +101,72 @@ Suggested next steps, in order:
 - Several results are quoted from external sessions; only those tagged [run] or [hand] were checked here.
 - Literature IDs for Oct-2026 papers and the ProofAtlas record were not verified; overlap with ProofAtlas's unpublished working materials is unknown. Novelty is claimed for none of this.
 - "No counterexample found" refers to algebraic transfer statements at small ranks; no systematic search for counterexamples to Graham or to LAC was run.
+
+---
+
+# Addendum (2026-11-28): exact rank transfer, the merged-edge algebra, and the rank-6 obstruction
+
+This addendum covers the two rounds after §11. Everything stated as computed was reproduced by code in `experiments/linear_alternation/` (`transfer_checks.py`, `witness_checks.py`, `split_edge_checks.py`, `coverage_check.py`, `smith_check.py`, with `artin.py` and `modrank.py` as support).
+
+## 12. The insertion operator and arbitrary-order Poincaré transfer
+
+**Setup.** On the zero-sum hyperplane write Q_m(u) = Δ(y_0..y_{m−1}) / ∏u_i with y_0 = 0, y_j = u_0+…+u_{j−1}; deg Q_m = D_m = N_m − m. Goal: [Q_m] ≠ 0 in R_m ⊗ F_p for p > m.
+
+**Theorem 1 (edge insertion; proved, checked m = 3..8).** Split the first edge w_0 = h + x_0. Then
+Q_{m+1}(h,x) = ± W_m(x)(h+x_0) Q_m(h+x_0, x_1, …, x_{m−1}), W_m(x) = ∏_{j=2}^{m−1}(x_0+…+x_{j−1}).
+Write T_m(q) = W_m(x)(h+x_0)q(h+x_0,x_1,…); then Q_{m+1} = T_m(Q_m). The proof is a cancellation of the two edge factors against the new vertex's chords (y_0 = 0, y_1 = w_0).
+
+**Theorem 2 (divided-difference descent; proved).** The operator (F − s_{h,x_0}F)/(h − x_0) commutes with symmetric polynomials, hence descends to the coinvariant algebra. Setting h = 0 gives [T_m(q)] = 0 ⇒ [q(H_1 − H_0)] = 0 in R_m, with H_0 = ∏_{j=2}^{m−1}(y_0 − y_j), H_1 = ∏_{j=2}^{m−1}(y_1 − y_j). This has no conormal error (ordinary derivatives do not preserve the ideal; divided differences do).
+
+**Theorem 3 (centered presentation; proved, checked m = 3..6).** With u_i = x_i + h/m, p_k(u) = c_{m,k} h^k, c_{m,k} = ((m+1) − (m+1)^k)/m^k, and R_{m+1} ≅ K[u,h]/(h^{m+1}, p_k(u) − c_{m,k}h^k, 1 ≤ k ≤ m) in characteristic 0 or > m+1. In particular e_2(u) = ((m+1)/(2m)) h², so the second-order quotient is a genuine deformation of R_m, not R_m[h]/(h³).
+
+**Theorem 4 (Poincaré rank transfer; proved, checked m = 3, 4, every r).** For G homogeneous of degree N_m + r in x_0..x_{m−1} and 0 ≤ r ≤ m,
+λ_{m+1}(h^{m−r}G) = (−1)^r ((m−r)!/m!) · λ_m(E_r G), E_r = e_r(∂_{x_0},…,∂_{x_{m−1}}).
+(From Δ_{m+1}(z,h) = Δ_m(z) Σ_r (−1)^r e_r(z) h^{m−r}.) Taking the h-expansion of T_m(q) (coefficient of h^j is (W_m/j!) ∂_{x_0}^j(x_0 q)) gives an exact finite formula for every packet λ_{m+1}(h^{m+1−k} g T_m(q)), and by Poincaré duality [T_m(q)] = 0 iff all of them vanish. So the transfer problem is exactly a family of lower-rank functionals.
+
+**Boundary lemma (proved).** Polynomials P, Q ∈ K[x]/(e_1) that agree on every coordinate hyperplane x_i = 0 have ∏x_i | P − Q, hence [P] = [Q] in R_m (m ≥ 3). The Vandermonde class is therefore determined by its exact boundary polynomials, each of which is recursively Q_{m−1}·f′(y_d).
+
+### Witnesses (computed)
+- **Rank 5:** q = Σ x_i(x_{i+1}²x_{i+2}² + x_{i−1}²x_{i−2}²) defeats value-only faithfulness, and the divided-difference packet detects it: λ_5(x_1² q (H_1 − H_0)) = −2.
+- **Rank 6 (in characteristic 0 and mod 13):** a degree-9 signed dihedral combination of 22 orbit sums (rotation and the reversal i ↦ m−1−i each act by −1) has all zero-edge insertion packets zero (6 of 6), all degree-2 divided-difference packets zero (21 of 21), yet λ_6(x_0x_1^5 q) = −198 ≠ 0. Its second-order packet detects it: λ_7(h^4 x_0² x_1 T_6(q)) = −7646. Consequence: no transfer theorem based only on dihedral symmetry plus low-order packets can hold. (With the other reflection convention i ↦ m−i the numbers are −7406 and −9328 and the vanishing fails, so the convention is part of the statement.)
+- Over F_1009, the residual binary directions missed by value / first / second-jet packets are, per the report, 1/0/0 (rank 5), 4/4/0 (rank 6), 9/9/9 (rank 7); this table was not reproduced.
+
+## 13. The merged-edge algebra (exact quadratic presentation)
+
+Let u = h + x_0, v = h x_0, H_0 = 1, H_1 = u, H_j = uH_{j−1} − vH_{j−2} (complete homogeneous polynomials in the two split variables), and A_m = K[u,v]/(H_m, H_{m+1}).
+
+**Theorem 5 (presentation; proved, relations checked m = 3..7).** R_{m+1} ≅ B_m[h]/(h² − uh + v) with B_m = A_m[z_1..z_{m−1}]/(e_j(z) − (−1)^j H_j(u,v), 1 ≤ j ≤ m−1). B_m is free over A_m of rank (m−1)!; the extension is free of rank 2; B_m/(v) = R_m. No jet truncation is needed: every order of the deformation is retained.
+
+**Theorem 6 (exact annihilator of the merged edge; proved, checked through the top degree for m = 3..8 by modular linear algebra).** In A_m (hence in B_m and in the quadratic extension), Ann(u) = (K_m), K_m = H_m/u for m odd and H_{m+1}/u for m even. (Proof: H_{m+1}(0,v) = (−v)^{(m+1)/2} ≠ 0 for m odd, symmetric in the other parity.)
+
+**Parity consequence.** K_m(u,0) = u^m = 0 in R_m for m even, and u^{m−1} ≠ 0 for m odd. So specialising v = 0, the annihilator disappears in even lower rank and leaves exactly (u^{m−1}) in odd lower rank. A uniform cancellation argument that ignores rank parity cannot work.
+
+**Theorem 7 (two-equation transfer; proved).** Reduce the insertion factor W(h) = ∏_{j=2}^{m−1}(y_j − h) modulo h² = uh − v as A + Bh, with A_1 = 1, B_1 = 0 and
+A_j = y_j A_{j−1} + v B_{j−1},  B_j = (y_j − u)B_{j−1} − A_{j−1}.
+Then T_m(q) = 0 iff qA = qB = 0 in B_m/(K_m). At v = 0: A_0 = ∏_{j=2}^{m−1} y_j (degree m−2) and B_0 = [∏(y_j − u) − ∏ y_j]/u (degree m−3), division exact.
+- **Even m:** T_m(q) = 0 ⇒ qA_0 = qB_0 = 0 in R_m (pairing with R², R³).
+- **Odd m:** T_m(q) = 0 ⇒ qA_0, qB_0 ∈ (u^{m−1}), hence uqA_0 = uqB_0 = 0 (pairing with R¹, R²).
+
+### Coverage of the lower-rank detector (computed, F_1000003)
+Packet = Π(A_0R² + B_0R³) (even) or Π(uA_0R¹ + uB_0R²) (odd); Π = projection onto the dihedral character pairing nontrivially with Q_m (computed: χ_Q(rot) = χ_Q(rev) = (−1)^{m−1}).
+
+| lower rank | 4 | 5 | 6 | 7 | 8 |
+|---|---|---|---|---|---|
+| packet dim / full projected test space | 1/1 | 2/2 | 9/9 | 9/29 | 47/87 |
+
+**Integral saturation (computed):** packet lattice vs full projected lattice has relative index 1 (rank 4), 2 (rank 5), 108 = 2²·3³ (rank 6); rank-6 Smith invariants 1,1,1,1,2,2,2,2,108 versus 1,1,1,1,1,2,2,2,2. So through lower rank 6 the packet spans the full test space after inverting 2 and 3, i.e. the descent holds for every polynomial of the right degree and symmetry in every characteristic greater than the rank. Ranks 7 and 8 are not covered by these packets alone.
+
+### Rank-5 unrestricted-descent counterexample (verified)
+In lower rank 5 take q = w_1(w_0^4 + 4w_0²e_2(w) + 3e_2(w)²). After splitting, q = w_1K_5 with K_5 = u⁴ − 4u²v + 3v², so uq = w_1H_5 = 0 and T_5(q) = 0 in R_6, while q = w_0^4 w_1 ≠ 0 in R_5 (three nonzero Artin terms). So unrestricted fixed-cut faithfulness fails even with every jet order retained. q lacks the dihedral symmetry, so this does not touch the Vandermonde kernel or the symmetric transfer.
+
+### Chord factors beyond the merged edge (stated; not independently checked)
+For a block S of k consecutive edges, L_S is the first Chern class in the Grassmannian algebra G_{k,n}, and multiplication by it is the raising derivation on Λ^k V_n; the surviving annihilator under restriction to a zero root is {b ∈ ker E : e_1 ∧ b ∈ im E}. This generalises Theorem 6 (k = 2), but for larger k the surviving annihilators are more complicated than the parity obstruction.
+
+### Common deformation across all cuts (stated; not independently checked)
+Splitting at any edge d gives (t² − ut + v)∏(t − w_i) = (t − u)t^{m+1}, so e_k(w) = (−1)^{k+1} v H_{k−2}(w_d, v) and v = −e_2(w) is the same parameter for every cut; for a polynomial q the relation error at cut d takes the form q_d = q_0 + vE(w_d, v, w) with E common to all cuts.
+
+## 14. Updated blockers and targets
+- **The remaining theorem:** show [T_m(Q_m)] = 0 ⇒ [Q_m] = 0 for all m, uniformly over Z[1/(m+1)!]. Equivalent forms: Q_mA = Q_mB = 0 in B_m/(K_m) ⇒ Q_m = 0, using the shared parameter v across all m cuts.
+- **What cannot work:** (i) any argument using only dihedral symmetry plus values, first jets and adjacent divided differences (rank-6 witness); (ii) unrestricted fixed-cut faithfulness (rank-5 counterexample); (iii) any parity-blind cancellation (Theorem 6); (iv) the packets A_0, B_0 alone beyond lower rank 6 (coverage 9/29 at rank 7, 47/87 at rank 8).
+- **Open mechanism:** a denominator-free interpolation in the cut variable that combines the all-cut equations, using the recursive boundary structure of Q_m (the boundary lemma) that the counterexamples lack. The differences between cut parameters are zero divisors, so ordinary Lagrange interpolation is not available; exterior-power or divided-difference substitutes are the natural candidates.
+- **Computation still missing:** the F_1009 binary-direction table; first-order normal packets of the rank-6 witness; the chord-factor and common-deformation statements; rank-9 quadratic packets (d_9); g_15 and beyond.
