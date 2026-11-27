@@ -787,3 +787,5 @@ Scripts: `experiments/linear_alternation/ph2_vectors.py`, `dual_orbit.py`, `kern
 - n = 8 rows of the minor table (exact): large-prime part of the maximal-minor gcd = 1 (full factorization 2^44 3^30 5^17 7^5); of the 2x2 seed-minor gcd = 1 (2^10 3^5 5 7^2). So the compatible-seed injectivity and full rank statements hold for all primes > n+1 through n = 8.
 
 **Status.** This narrows the search (coordinate-wise and kernel-explicit routes are ruled out) but does not close the gap; nothing here proves Graham's conjecture. n = 9 coordinates were still running when filed.
+
+**Addendum to §39 (n = 9 finished).** e_8 coordinate of P_9(H_2) is exactly 0; e_7 = -1075790663/1747555687858176000000 (numerator contains primes > 10). So the top coordinate vanishes at n = 4, 5, 8, 9 and the clean pair of n = 6, 7 does not persist.
