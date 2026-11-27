@@ -16,7 +16,7 @@ def d_coef(h,A,B):
     return Fraction((-1)**(h+1)*B*(h-B),(h+1)*factorial(B+1)*factorial(h-B+1))
 def op(coef,f,n,maxh=None):
     tot={}
-    for h in range(1,2*n):
+    for h in range(1,n+(n*n)//4+2):
         for a in range(max(0,h-n),h):
             for b in range(max(0,h-n),h):
                 c=coef(h,a,b)

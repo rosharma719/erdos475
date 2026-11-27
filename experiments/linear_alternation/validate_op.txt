@@ -1,0 +1,1 @@
+n=6: corrected insertion form vs true transfer: 119/119 balanced monomials agree
