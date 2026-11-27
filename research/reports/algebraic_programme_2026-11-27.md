@@ -607,3 +607,32 @@ So if any K(J_d,J_d) ≢ 0 (mod p), every zero-sum m-set has an ordering with no
 So through rank 11 **the first two entries already carry the whole content** (no prime factor above 3 in any of them), while the first entry alone fails at ranks 7–11 (c_{m,1} = K(J_1,J_1) has large prime factors 23, 30539, 9989341, 21966239, 3019, 13647452681). For every prime p with m+1 < p ≤ 2000 the smallest index d with K(J_d,J_d) ≢ 0 (mod p) is d = 1 except at m = 7, p = 23, where d = 2 is needed (checked for m = 3..11). Rank 12 was still running when this was written.
 
 **What this is and is not.** It is exploratory evidence for a narrower target than the full packet: "W(U,U) does not kill both 1 and x modulo any prime p > m+1", equivalently gcd(K(J_1,J_1), K(J_2,J_2)) has no prime factor > m+1 (for p odd). It is **not** a proof, and two-coefficient shortcuts have failed before in neighbouring settings (shifted margins {13..16}; the last two coordinates of the projected Witt packet at rank 13 vanish mod 19). Here the two entries are the first two (not the last two), the margins are consecutive from 2, and the data stop at m = 11, so no extrapolation is justified. A proof would need to show directly that W(U,U)·1 and W(U,U)·x cannot both vanish in F_p[x]/(x^p) — an explicit pair of vacuum-type matrix elements of the alternating commutator product, which is a smaller object than the whole operator.
+
+---
+
+## 32. The sparse cyclic difference operator and the reciprocity criterion (2026-11-30)
+
+**Setting.** r = m−1, U = {2..m}, w = ΣU, p > m+1 prime. W(U,U) is the alternating commutator product of §30; its eigenvalue on e_h is W_m(h) = Σ_d d·C(h,d−1)·K(J_d,J_d). The report replaces the dense staircase matrix B (B_ij = 1 for i ≤ j, −1 for i > j; symmetric ordering e^{uD}e^{vX} = e^{uv/2}e^{uD+vX}) by its sparse inverse.
+
+**Sparse inverse (computed).** With B_θ = B + θ·11ᵀ and λ = (1−θ)/(1+θ): B_θ⁻¹ = ½C_λ, C_λ = 1 on the diagonal, −1 on the superdiagonal, last row (λ, 0, …, 0, 1), and det B_θ = 2^{r−1}(1+θ). Verified exactly for r = 2..7 and five values of θ.
+
+**Complementary-exponent duality (computed).** Define c_T(J) = [t^J] Alt_t Δ_J(Tt) in F_p[t_1..t_r]/(t_i^p), J ⊆ {0..p−1} increasing, J^∨ = {p−1−j} (sorted). Then c_T(J) = det(T)^{p−1} c_{T^{−1}}(J^∨). Verified on 36 random (T,J) pairs at p = 5, 7 with r = 2, 3 (no mismatches; most values nonzero). This pins down the reading of the report's notation (coefficient of t^J in the alternation).
+
+**Main equivalence (computed, 7 cases).** With A = U^∨ = {p−m−1..p−3} (size r), f_{m,p}(λ) = c_{C_λ}(A) (degree ≤ p−3) and ε = (−1)^{r+w}:
+Φ(θ) := (1+θ)^{p−1} f(λ) + ε(1−θ)^{p−1} f(1/λ) = Σ_{d=1}^m d·K(J_d,J_d)·((θ−1)/2)^{d−1} (mod p).
+Checked for (m,p) = (3,5), (3,7), (3,11), (4,7), (4,11), (4,13), (5,7) at every θ ∈ F_p∖{±1} (λ ≠ 0): the two sides agree **exactly (ratio 1)**, with many nonzero values. Hence W(U,U) ≠ 0 over F_p ⇔ f_{m,p}(λ) + ελ^{p−1}f_{m,p}(1/λ) ≢ 0 (the report's theorem (3)), at least in these cases.
+
+**Componentwise structure (computed over Z).** Writing f_A = Σ_{b∈A} f_{A,b} (terms whose last-row exponent is b; each of degree ≤ b):
+- Reciprocity (6): f_{A,b}(λ) = (−1)^{r−1+L−b} λ^b f_{A,b}(1/λ), L = ΣA: **37 (A,b) cases, 0 mismatches** (35 nontrivial; sets A of sizes 3–5 with entries ≤ 7, including 0).
+- Rank-lowering (5): [λ^M]f_A = (−1)^{r−1+L−M} f_{A∖{M}}(0), M = max A: 11 sets, 0 mismatches.
+- Consequently G_{m,p}(λ) = f + ελ^{p−1}f(1/λ) = Σ_b (1 − (−λ)^{p−1−b}) f_{A,b}(λ) (algebra: ε(−1)^{r−1+L−b} = −(−1)^b since L ≡ w mod 2).
+
+**Abstract cancellation model (arithmetic checked).** F_M = (1+λ³)(1 − ελ^{p−6}), F_{M−1} = −(1−λ²)(1 − ελ^{p−6}) have the right degrees (M = p−3), F_M(0) = 1, satisfy the reciprocity signs, and (1−λ²)F_M + (1+λ³)F_{M−1} = 0. So reciprocity plus the extreme-coefficient identity cannot by themselves force nonvanishing; a proof must use further relations among the genuine flow components. (These are abstract polynomials, not determinant coefficients.)
+
+**Centered eigenvalue polynomial (computed, m = 3..11).** W_m(−h−1) = ±W_m(h) as polynomials, signs −, +, +, −, −, +, +, −, − for m = 3..11 (period 4); in the centered variable z = 2h+1, W_m is even or odd. The two highest nonzero coefficients (denominators cleared) have no prime factor > m+1 for every m = 3..11; the leading coefficient alone acquires large primes from m = 9 (569 at m = 9, 1974029 at m = 10, 4608319 at m = 11) and cannot be a uniform witness — as reported. Degrees of W_m: 1, 2, 2, 3, 5, 6, 6, 7, 9 (m = 3..11).
+
+**Diagonal one-hole contents.** gcd_d K(J_d,J_d), m = 3..12: 1, 1, 4, 4, 2, 12, 18, 16, 8, 16 (rank 12 now computed here: 16; the first two entries again carry the whole content, and K(J_1,J_1) alone has the large prime factors 29 and 12953077208391719881 at m = 12, with witness index 2 at p = 29). The report lists 8, 32, 32 for ranks 13, 14, 15; not recomputed.
+
+**Not reproduced.** The proofs of the sparse-flow rank-lowering identity and of the Fourier-automorphism symmetry (the symmetry itself was verified numerically above); the exact normalisation relating Φ to the standard polynomial (we verified the identity against W_m(h) directly); eq. (8)/(9) in the lost-symbol form; the counts of 90 + 374 identity checks; ranks 13–15 gcds.
+
+**Status.** The conjecture (★) is unchanged and open. New exact facts: the dense Weyl calculation is equivalent to the sparse cyclic polynomial f_{m,p} and a reciprocity-failure statement, with an explicit rank-lowering identity and component-wise reciprocity; and an explicit abstract model shows these structures alone do not force nonvanishing. The remaining task is a joint relation among the flow components f_{A,b}, b ∈ A, specific to the genuine determinant, that rules out Σ_b(1 − (−λ)^{p−1−b})f_{A,b} ≡ 0 — still missing.

@@ -7,3 +7,4 @@ m=8: first-t gcds (t, gcd, primes>m+1 dividing it): [(1, 366468, [30539]), (2, 1
 m=9: first-t gcds (t, gcd, primes>m+1 dividing it): [(1, 359616276, [9989341]), (2, 18, []), (3, 18, [])];  max over admissible primes p<=2000 of the smallest witness index d: 1 (at p=11)   (0s)
 m=10: first-t gcds (t, gcd, primes>m+1 dividing it): [(1, 595372941856, [21966239]), (2, 16, []), (3, 16, [])];  max over admissible primes p<=2000 of the smallest witness index d: 1 (at p=13)   (1s)
 m=11: first-t gcds (t, gcd, primes>m+1 dividing it): [(1, 18128730243333160, [3019, 13647452681]), (2, 8, []), (3, 8, [])];  max over admissible primes p<=2000 of the smallest witness index d: 1 (at p=13)   (6s)
+m=12: first-t gcds (t, gcd, primes>m+1 dividing it): [(1, 18030683474081274074352, [29, 12953077208391719881]), (2, 16, []), (3, 16, [])];  max over admissible primes p<=2000 of the smallest witness index d: 2 (at p=29)   (442s)

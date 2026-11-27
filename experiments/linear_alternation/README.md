@@ -184,3 +184,8 @@ Scripts: `exterior_checks.py`, `weyl_eigen_checks.py`, `diag_onehole.py`.
 
 ## Witness-search experiment (2026-11-30)
 Script: `witness_search.py` (log `witness_search_out.txt`; rank 12 may still be running / incomplete). For m = 3..11: gcd(K(J_1,J_1),K(J_2,J_2)) = full gcd of the diagonal one-hole packet = 1,1,4,4,2,12,18,16,8 (no prime > 3); K(J_1,J_1) alone has large primes at m = 7..11; smallest witness index over primes ≤ 2000 is 1 except (m,p) = (7,23) where it is 2.
+
+## Sparse cyclic operator report (2026-11-30)
+Scripts: `sparse_checks.py` (sparse inverse, centered polynomial), `duality_checks.py` (duality (2)), `sparse_theorem_check.py` / `sparse_theorem_check2.py` (Φ(θ) vs Weyl eigenvalue polynomial), `reciprocity_check.py` (componentwise reciprocity (6), rank-lowering (5)). Rank-12 diagonal gcd in `witness_search_out.txt`.
+- Sparse inverse exact r = 2..7; duality (2) 36 cases; main equivalence ratio exactly 1 for (m,p) = (3,5),(3,7),(3,11),(4,7),(4,11),(4,13),(5,7); reciprocity (6) 37 cases, rank-lowering (5) 11 sets; W_m(−h−1) = ±W_m(h) for m = 3..11.
+- Not reproduced: ranks 13–15 diagonal gcds, counts of checks in the report, proofs of the flow identities.
