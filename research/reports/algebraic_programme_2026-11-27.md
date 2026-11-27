@@ -523,3 +523,20 @@ All the exact identities give a *way to compute* these integers (and a rank-lowe
 
 ### 27.5 Honest bottom line
 No proof of Graham's conjecture and no counterexample. We have a verified chain reducing the conjecture to (★) and a large toolkit for computing and structurally describing the polynomials in (★). The finite-characteristic gap is closed only for |A| ≤ 15 (and p ≤ 43), plus whatever the asymptotic literature covers for large p. Closing (★) requires a new noncancellation idea; the evidence (contents only ever 2^a3^b) is suggestive but is not a proof.
+
+---
+
+## 28. Why a one-vertex induction cannot close the binary certificate (2026-11-29)
+
+**Setting.** R_{q+2}(a,b) = B_q(−u,0;a,b) + u A_q(−u,0;a,b), u = a+b, where A_q, B_q are the full-column and almost-full-column Schur sectors of the lower second moment G_{q,2}(T;X) (§27, Section 5 of that report). An induction that recovers A_q, B_q from the preceding one-vertex moment G_{q,1}(t;X) = S_X L_q(t;X) alone would need the sectors to be determined by Schur branching, homogeneity, divisibility by S_X, reflection covariance, and the leading-coefficient identity t_1^{q−1}G_{q,2}(t_1,t_2;X) = G_{q,1}(t_2;X).
+
+**Schur-slice flexibility (extraction formulas computed, q = 3..8).** Perturb G_{q,2} by P(X) = S_X s_λ(X), independent of the extra vertices (so the preceding one-vertex moment is untouched), with |λ| = 2q − 3. After the complementary-root substitution the effect on the binary certificate is E(P) = [z^{q−1}] (a+b+z) s_μ(a,b,z), μ = λ′. Verified by explicit Jacobi–Trudi/Pieri computation:
+- μ = (q−2, r, q−1−r), ⌈(q−1)/2⌉ ≤ r ≤ q−2: **E(P) = s_{(r,q−1−r)}(a,b)**;
+- μ = (q−1, q−2, 0): **E(P) = 2s_{(q−1)} + 2s_{(q−2,1)}**.
+These vectors span the whole space of binary symmetric polynomials of degree q−1 (⌊(q−1)/2⌋ + 1 Schur functions; the factor 2 is invertible in odd characteristic). Hence the listed structural constraints leave the binary certificate completely free: one can change R_{q+2} by an arbitrary symmetric polynomial of degree q − 1 while keeping the preceding one-vertex packet and every listed identity. (That the perturbation is independent of the extra vertices, divisible by S, and homogeneous of the right degree is immediate; reflection covariance and the exact class of such perturbations in the true moment hierarchy are as stated in the report and were not re-derived.)
+
+**Worked example (checked).** q = 4 (rank 6): R_6 = 28a³ + 60a²b + 60ab² + 28b³ = 28s_{(3)} + 32s_{(2,1)}, R_5 = −4(a+b)² (both reproduced from the exact packets). With E(S_X s_{(3,2)}) = s_{(2,1)} (μ = (2,2,1)) and E(S_X s_{(2,2,1)}) = 2s_{(3)} + 2s_{(2,1)} (μ = (3,2,0)), replacing G_{4,2} by G_{4,2} − 14P_2 − 4P_1 makes the extracted certificate zero (s_{(3)}: 28 − 28 = 0; s_{(2,1)}: 32 − 28 − 4 = 0) with the first moment unchanged.
+
+**What this establishes.** It is not a counterexample to (★) (R_m ≢ 0 mod p); it is an obstruction to proving (★) by induction using only the preceding one-vertex certificate and generic structural properties — the same pattern as the earlier failures of universal saturation and intra-rank propagation. The mixed moments M_{q,i}(X) = Alt_X[Δ(0,s_1..s_q)∏_{j<q}(−s_j) e_i(s_1..s_{q−1})]/(Δ(X)∏x_j) carry the information the one-vertex packet loses; the exact identity R_{q+2} = (−1)^q u^{q−1}R_{q+1}(1,0) + (−1)^{q−1} Σ_{i=1}^{q−1} u^{q−1−i} z^{q−1}Ω_3(M_{q,i}) (reported) isolates the known lower-rank contribution from the genuinely new mixed-moment terms (not re-derived here; Ω_3 is the three-root Schur projection). The report's rank-17 observation (all three natural specialisations of R_{17}(1,b) vanish mod 47 while the polynomial does not) was not reproduced; I have no access to the rank-17 packet here.
+
+**Status.** Unchanged: (★) is open. A proof must control the collective arithmetic of the mixed moments M_{q,i} using something specific to the signed prefix determinant (Witt-differential insertion identities are the candidate), not just Schur, symmetry, homogeneity and reflection structure.

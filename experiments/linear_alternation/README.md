@@ -165,3 +165,8 @@ Scripts: `rv_contents.py` (R_m, V_m and contents), `rv_big.py` (ranks 11–13; l
 - ∂_xQ_{m+1} = (a+b)V_m verified numerically m = 4,5,6 (ratio 1 + O(1e-15)). Extra-vertex descent verified k = 2..4, ℓ = 1,2. Plücker obstruction numbers reproduced exactly.
 - Contents: R_m, m = 4..12: 1,4,4,2,2,6,16,4,16; V_m: 1,4,28,6,2,12,16,8,8. Rank 13: projected gcd 8, last two coordinates gcd 152 = 8·19, vector mod 19 = (13,10,17,8,7,0,0).
 - Not reproduced: two-slice descent / A_q,B_q formulas, ranks ≥ 14 contents, combined ζ_m table.
+
+## Schur-slice flexibility report (2026-11-29)
+Script: `flexibility_checks.py` (pure Python; `python3 -I flexibility_checks.py`).
+- Extraction formulas E(S_X s_λ) = s_{(r,q−1−r)} (μ = (q−2,r,q−1−r)) and 2s_{(q−1)} + 2s_{(q−2,1)} (μ = (q−1,q−2,0)) verified q = 3..8; they span the binary Schur basis. Rank-6 worked example arithmetic and R_5 = −4(a+b)², R_6 = 28s_(3) + 32s_(2,1) reproduced.
+- Not reproduced: mixed-moment identity for R_{q+2}, rank-17 specialisations mod 47.
