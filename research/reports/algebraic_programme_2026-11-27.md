@@ -489,3 +489,37 @@ The report's two columns coincide with these: the "projected Witt" column uses �
 **Collision weight (algebra).** Σ_i (t − y_i) f′(y_i) is the sum of residues at the roots of (t − z) f′(z)²/f(z) — true by the residue at a simple root; its expression through power sums p_r(y) is exact but the compatibility between vertex-symmetric multiplication and the two-root projection of edge symmetric functions is not established, so the collision recurrence (verified exactly in §25) does not yet yield an induction.
 
 **Status.** The object to analyse is the binary symmetric polynomial 𝓛_m(0,a,b) ↔ g_m; it has ⌊(m−1)/2⌋ independent coefficients (mod the relation above), is p-independent, and passes the exact arithmetic checks computed here (through rank 11; the report states rank 15). The open problem is a uniform recurrence or arithmetic invariant for it.
+
+---
+
+## 27. Where the programme stands, and the missing step (2026-11-29)
+
+### 27.1 Checks of the latest report (all reproduced)
+- **Two-marked-edge certificate.** V_m(a,b) = 𝓛_m(−b,a,b) gives ∂_xQ_{m+1} = (a+b)V_m(a,b): divided symmetrization of Q_{m+1}(x_1..x_{m−1},a,b) (last vertex −b), evaluated at x with e_j(x) = (−1)^j h_j(a,b), equals (a+b)V_m with ratio 1 to 1e-15 at m = 4, 5, 6. Hence V_m ≢ 0 (mod p) ⇒ Q_{m+1} ≠ 0, and R_m ≢ 0 ⇒ Q_m ≠ 0, where R_m(a,b) = 𝓛_m(0,a,b) = −C_1(a,b)/(a+b)², C_1 = Σ_r q_{m,1,r}s_{(m−r,r−1)}(a,b); V_m = P̃_m(−b,a,b)/((a+b)ab).
+- **Contents of R_m and V_m (exact):** m = 4..12: content(R_m) = 1, 4, 4, 2, 2, 6, 16, 4, 16; content(V_m) = 1, 4, 28, 6, 2, 12, 16, 8, 8 — rank 8–12 values agree with the report's ρ = 2, 6, 16, 4, 16 and η = 2, 12, 16, 8, 8. Rank 13: projected gcd 8; **the last two coordinates have gcd 152 = 8·19 and the vector mod 19 is (13, 10, 17, 8, 7, 0, 0)**, exactly as reported (so the two-coordinate shortcut genuinely fails at rank 13 mod 19 while the full binary packet survives). Higher ranks (14–17) not recomputed.
+- **Extra-vertex descent (exact):** G_{k,ℓ}(T;X) = S Σ_{u∈X} [∏_ν (t_ν − S + u)/f_X′(u)] G_{k−1,ℓ+1}((S,T); X∖u), G_{1,ℓ} = 1, verified for k = 2, 3, 4, ℓ = 1, 2; and G_{k,1} = S·L_k.
+- **Non-decomposability (exact):** for x = (1,2,4), the Plücker coordinates of the prefix two-vector modulo v(7) are p_23 = 0, p_24 = 96, p_25 = 1680, p_34 = 1008, p_35 = 15120, p_45 = 47040 and p_23p_45 − p_24p_35 + p_25p_34 = 241920 = 2⁸·3³·5·7 ≠ 0.
+- **Not reproduced:** the two-slice descent identity 𝓛_m = z^{m−3}𝓗_{m−2} + t z^{m−2}𝓗_{m−2} and the A_q/B_q column-sector formula (symbolic through rank 5 per the report); combined contents ζ_m and ranks 14–17.
+
+### 27.2 What is established
+1. **Reduction.** For a zero-sum set (general sets reduce to these), Graham at size m+1 ⇐ [Q_{m+1}] ≠ 0 in R_{m+1} ⊗ F_p for p > m+1 (via λ_{m+1}(Q_{m+1} f) ≠ 0 for some f, then the alternation argument). Everything below only strengthens or localises this.
+2. **Certificates, from strongest to weakest sufficient condition:** the linear packet (g_m, LAC) ⇒ binary certificates R_m / V_m (strictly smaller, p-independent, ⌊(m−1)/2⌋ independent integer coordinates after the projected merge relation) ⇒ [Q] ≠ 0. These are exact integer objects with rich verified structure (Pascal recurrence, unique-matching/component expansion, signed-height walks, Weyl/exterior determinants, Witt differential with contracting unit 1 − C(m,2), Schur/Grassmannian truncation, rank-descent identities).
+3. **Numerical coverage.** Exhaustive search p ≤ 43; linear packet g_m for m ≤ 14 (m ≤ 10 brute-forced here, m = 11–14 external): Graham for every |A| ≤ 15 at every prime; boundary/binary contents computed here through rank 13 (and reported through 17) with no prime factor above 3 anywhere. Large primes: literature (Pham–Sauermann et al.).
+4. **Structure that is a theorem, not data:** the exact identities of §§12–26 (insertion, rank-lowering P_{m,m−1,j+1} − P_{m,m−1,j} = (−1)^{m−1}m c_{m−1,m−j}, collision derivatives, the two-marked-edge and Schur-expansion formulas).
+
+### 27.3 The missing step, stated exactly
+The programme has been reduced, without loss, to **one arithmetic statement about explicit integer polynomials**:
+
+> **(★)** For every m ≥ 3 and every prime p > m+1, the binary polynomial R_m(a,b) (equivalently the vector g_m = (q_{m,1,r})_{r≥2}, equivalently the content of the boundary class B_m) is not ≡ 0 (mod p) — or, at least, R_m and V_{m−1} are not both ≡ 0 (mod p).
+
+All the exact identities give a *way to compute* these integers (and a rank-lowering recursion R_m = B_{m−2}(−a−b,0) + (a+b)A_{m−2}(−a−b,0) in terms of the "almost-full" and "full" column sectors of the lower determinant); **none gives a mechanism that prevents the signed sums from being divisible by a large prime.** Formally missing: a noncancellation theorem — an invariant or an inductive relation between consecutive ranks (for example a Bézout-type identity D·g_m ∈ ideal(g_{m−1}, …) with D having only prime factors ≤ m+1, or kernel avoidance A_{m−2}^{N_m}b_m ≠ 0 mod p, or a closed recurrence on the binary packet) that forces the content to have no prime factor > m+1.
+
+### 27.4 Why the natural routes do not close it (all verified here unless marked)
+- **Universal saturation / transfer theorems are false** (rank-5 degree-8 witness, rank-6 witness; rank-8 failure of simultaneous saturation is reported, not reproduced). Intra-rank propagation "first row zero ⇒ penultimate row constant" fails for general polynomials of the right degree and symmetry (rank-5 and rank-6 witnesses), even retaining all non-diameter chord factors.
+- **Representation theory / harmonicity / symmetry alone cannot work** (cyclic sum of 5-variable Vandermondes; matrix A singular mod 43, 191, 1283 at rank 6 while b_6 ∉ ker).
+- **The consecutive margins 2, …, m must be used:** arbitrary margins fail (κ({2,7},{2,7}) = −19; U = {13,14,15,16} gives two coordinates vanishing mod 53).
+- **A single coefficient, two coefficients, or the last two coordinates do not suffice:** c_{7,1} = −966 = −2·3·7·23; shifted margins; rank 13 last two coordinates vanish mod 19.
+- **The recursion is exact but sign-cancelling:** the diagonal merge recurrence lands on non-consecutive exponent sets; the collision recurrence and the open-path descent need a compatibility between vertex-symmetric multiplication and two-root projection that has not been proved; the prefix exterior vectors are not decomposable (Plücker obstruction above), so determinantal closure is unavailable; the identity-matching term is cancelled by other matchings (m = 3: 2(z²−1) − 3(z²−1) = 1 − z²).
+
+### 27.5 Honest bottom line
+No proof of Graham's conjecture and no counterexample. We have a verified chain reducing the conjecture to (★) and a large toolkit for computing and structurally describing the polynomials in (★). The finite-characteristic gap is closed only for |A| ≤ 15 (and p ≤ 43), plus whatever the asymptotic literature covers for large p. Closing (★) requires a new noncancellation idea; the evidence (contents only ever 2^a3^b) is suggestive but is not a proof.

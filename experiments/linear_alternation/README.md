@@ -159,3 +159,9 @@ Scripts: `tworoot_checks.py`, `tworoot_tables.py` (log `tworoot_tables_out.txt`)
 - Projected Witt gcd m = 3..11: 1,2,4,4,2,2,6,16,4. Full packet (κ(A,J_d) convention) m = 3..10: 1,1,4,4,2,12,6,4. κ(J_d,A) convention gives full gcd 1,1,4,4,2,2,6,16.
 - Rank-7 centered polynomial 𝓛_7 reproduced exactly.
 - Not reproduced: ranks 12–15 of the tables, the Grassmannian ideal-cancellation proof (read only).
+
+## Two-marked-edge / extra-vertex report (2026-11-29)
+Scripts: `rv_contents.py` (R_m, V_m and contents), `rv_big.py` (ranks 11–13; log `rv_big_out.txt`), `twomarked_checks.py`.
+- ∂_xQ_{m+1} = (a+b)V_m verified numerically m = 4,5,6 (ratio 1 + O(1e-15)). Extra-vertex descent verified k = 2..4, ℓ = 1,2. Plücker obstruction numbers reproduced exactly.
+- Contents: R_m, m = 4..12: 1,4,4,2,2,6,16,4,16; V_m: 1,4,28,6,2,12,16,8,8. Rank 13: projected gcd 8, last two coordinates gcd 152 = 8·19, vector mod 19 = (13,10,17,8,7,0,0).
+- Not reproduced: two-slice descent / A_q,B_q formulas, ranks ≥ 14 contents, combined ζ_m table.
