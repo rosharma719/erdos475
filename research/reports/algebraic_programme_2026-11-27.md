@@ -658,3 +658,22 @@ nonzero mod p for p > max A (elementary: equal transfers force the two exponent 
 **Not checked.** The parity/multiplicity table (lost in transmission); the symplectic-automorphism and sl_2 arguments; the claimed relevance of Dzhumadil'daev–Yeliussizov path decompositions (not read); the comparison with the ProofAtlas program.
 
 **Status.** (★)/(T) remains open. Verified new facts: the t-form identity and multiplicity formula, the exact image theorem for two reciprocal components, and the diagonal-flow lemma. Still missing: a joint relation among the genuine flow components (or a faithfulness statement linking the univariate projection to the multivariate polynomial) that rules out ord_{t=1}H_{m,p} = p.
+
+---
+
+## 34. Attempt to close the gap: two structural searches, both negative (2026-12-01)
+
+**Search 1 — cross-rank structure of the eigenvalue polynomials W_m (computed, m = 3..11).** In the centered variable z = 2h+1, with W_m(h) = Σ_d d·C(h,d−1)·κ_{m,d} (exact):
+W_3 = z; W_4 = (3z²+1)/4; W_5 = 3z²+1 = 4·W_4; W_6 ∝ z(5z²−26); W_7 ∝ z(21z⁴ − 17330z² + 63677); W_8 ∝ 147z⁶ − 533645z⁴ + 17803649z² + 6183801; W_9 ∝ 111524z⁶ − 116873785z⁴ + 2923472606z² + 1029196599; W_10, W_11 odd in z with coefficients up to 10²¹.
+The relation W_5 = 4W_4 is a small-rank coincidence. For m ≥ 6 the only common factor between any two of these polynomials (checked for all pairs m, m−s, s ≤ 4, by exact polynomial gcd and division) is z, which comes from parity (odd-type ranks), so there is **no cross-rank factorisation or recursion** between the W_m. The hope that the polynomials build on each other (which would have given an induction) is false.
+
+**Search 2 — the shifted intervals produced by the rank-lowering identity (computed).** Let D(r,c) = κ(I_{r,c}, I_{r,c}), I_{r,c} = {c, …, c+r−1}. Exact finite-difference analysis:
+- r = 2: D = 1 − c (degree 1; agrees with κ({a,b},{a,b}) = 2 − C(b,a) at b = a+1).
+- r = 3: D = −c⁴/4 + … (degree 4 in c, fourth difference constant −6 on 15 data points; values 0, 1, −6, −36, −110, −255, −504, −896, …).
+- r = 4: degree 10 in c (15 data points, differences of order 11 vanish).
+- Degrees 1, 4, 10 = C(r+1,3) (r = 2, 3, 4); r = 5 not resolved with 12 points (degree ≥ 11, presumably 20).
+- D(r,1) = 0 (the known vanishing for the interval starting at 1) and D(r,c) ≠ 0 for 2 ≤ c ≤ 14 (r = 2..4).
+- The values at c = 2..8 carry large primes with no product pattern (e.g. D(4,4) = 2·397, D(4,7) = 2²·3·7·7901, D(5,3) = 2²·569, D(5,7) = 2²·3·7²·18502153), so there is **no closed product formula** in c.
+So the family needed for an induction through shifted intervals consists of values of explicit polynomials in c of degree C(r+1,3) with huge, structureless coefficients. That is consistent with the earlier picture: the individual coefficients are not controllable, and only the collective content (gcd over d) behaves.
+
+**Honest conclusion.** The conjecture (★) remains open. Nothing found here, or in any earlier section, proves that the content of the diagonal one-hole packet (equivalently R_m, equivalently W_m ≢ 0 mod p) has no prime factor above m+1. What the programme has produced is (i) a chain of exact reductions to this one arithmetic statement, (ii) several equivalent finite formulations (binary polynomials R_m, V_m; the diagonal one-hole packet; the Weyl operator W(U,U); the sparse cyclic polynomial; the multiplicity of a root at t = 1), (iii) extensive verified numerical evidence (only the primes 2 and 3 ever occur, through rank 12–13 verified here and 17 reported), and (iv) a catalogue of proof strategies that are *provably insufficient* (universal saturation, intra-rank propagation, one-vertex induction, reciprocity plus degree bounds, linear rank descent, cross-rank factorisation). Closing the gap requires a genuinely new ingredient specific to the signed alternating structure of these determinants.

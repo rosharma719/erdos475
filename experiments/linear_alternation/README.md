@@ -194,3 +194,7 @@ Scripts: `sparse_checks.py` (sparse inverse, centered polynomial), `duality_chec
 Scripts: `memo_checks.py` (t-form identity, image theorem), `diagonal_flow_check.py`.
 - G(−t) = Σ_d dκ_d t^{d−1}(1−t)^{p−d} verified (m,p) = (3,7),(4,11),(4,13),(5,7); binomial-sum identity for p = 5,7,11,13. Image of (g_2,g_3) ↦ (1−t²)g_2 + (1−t³)g_3 equals {H ∈ P_N^ε : H(1) = 0}, N = 4..14. Diagonal-flow lemma verified on 5 sets.
 - Not checked: lost parity table, representation-theoretic and literature claims.
+
+## Attempt to close the gap (2026-12-01)
+Scripts: `wpoly_structure.py` (W_m(z) for m = 3..11, pairwise gcd/division), `shifted_intervals.py` (D(r,c) = κ(I_{r,c},I_{r,c}), finite differences).
+- Result: no cross-rank factorisation among the W_m (only z from parity; W_5 = 4W_4 is a coincidence); D(r,c) is a polynomial in c of degree 1, 4, 10 for r = 2, 3, 4, with no product formula. Both negative.
