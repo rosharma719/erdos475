@@ -775,3 +775,15 @@ Scripts: `experiments/linear_alternation/dual_checks.py`, `fit_kernel.py`, `mino
 **Not reproduced:** the compatibility equations (7a_1 - 30a_2 + 60a_3 = 1 mod 17 etc.) since the discrepancy operator is not defined in the paste; the claim "the first three compatibility equations suffice for n <= 10"; ranks 10 (the run is cost-prohibitive here); any proof of (12). Ranks 8, 9: see the addendum if present.
 
 **Status.** All checkable identities hold; (12) (injectivity of R(E_v R)^{n-3} on adjacent-index space) is a restatement of the same open noncancellation statement (14). No proof of Graham's conjecture is claimed.
+
+## 39. Attempt on the gap: explicit P_n(H_2), single-coordinate witnesses, kernel vectors (own work, not from a report)
+
+Scripts: `experiments/linear_alternation/ph2_vectors.py`, `dual_orbit.py`, `kernel_vec.py`, `minor_table.py`; output `minor_table_8_9.txt`, `orbit9.txt`.
+
+**Findings (exact):**
+- P_n(H_2) in the basis e_1..e_{n-1} for n = 3..7 is computed explicitly (`ph2_vectors.py`). For n = 6, 7 the top two coordinates e_{n-2}, e_{n-1} are clean: numerator +-1, only primes <= n+1, ratio 1:2. Other coordinates carry large primes (13, 1657, 13553, 41, 241, ...).
+- The clean pattern does NOT persist. n = 8: the e_{n-1} = e_7 coordinate is exactly 0 and e_6 = -569/3009871872000 (569 prime > n+1). The e_{n-1} coordinate vanishes at n = 4, 5, 8 and is nonzero at n = 3, 6, 7. A fixed-coordinate witness for P_n(H_2) != 0 mod p therefore cannot work uniformly (same lesson as the first-coordinate obstruction of the report).
+- Kernel generators of P_n (n = 3..7) have no visible closed form: denominators are 5, 7, 17985731, 431607920920116839023, ... , so a "H_2 is not in the kernel" argument via an explicit kernel is out.
+- n = 8 rows of the minor table (exact): large-prime part of the maximal-minor gcd = 1 (full factorization 2^44 3^30 5^17 7^5); of the 2x2 seed-minor gcd = 1 (2^10 3^5 5 7^2). So the compatible-seed injectivity and full rank statements hold for all primes > n+1 through n = 8.
+
+**Status.** This narrows the search (coordinate-wise and kernel-explicit routes are ruled out) but does not close the gap; nothing here proves Graham's conjecture. n = 9 coordinates were still running when filed.

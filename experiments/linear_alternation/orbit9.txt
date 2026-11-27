@@ -1,0 +1,2 @@
+n=9 start=8:  <H2, g> = 0
+n=9 start=7: 
