@@ -850,3 +850,21 @@ Script: `experiments/linear_alternation/packet_checks.py` (kappa via walk DP, ca
 - Highest-pair sign: w_n = (-1)^n J_n(v_{n-1}) agrees with §41.
 
 **Heuristic caveat on (4).** The individual kappa_{m,d} contain large, apparently random primes (e.g. kappa_{12,2} = 2^6 * a 21-digit prime). If k fixed coordinates behaved like random integers, the expected number of (m, p > m+1) failures is ~ sum_m sum_{p>m} p^{-k}: divergent for k = 2 (consistent with the observed failures of two-coordinate witnesses in §39), convergent for k = 3 (~0.04 expected failures beyond m = 10). So three coefficients is the smallest fixed witness that is heuristically plausible for all ranks, and data alone cannot separate "structural" from "lucky" here: (4) needs an algebraic identity. Not proved.
+
+## 44. Complementary-hole contraction recurrence and the factorial-seed obstruction (report of 2026-11-27, late) + seed-split tests
+
+Scripts: `experiments/linear_alternation/hole_recurrence.py`, `seed_split.py`, `seed_det.py`. F_r^{(m)} has coordinates S(m\A, m\B)(0) indexed by hole sets A, B of size m-r; H = sum_s s! d^(s) (x) d^(s) (divided powers of d e_i = i e_{i-1}), J = (-1)^{weight of first factor}, R = HJ, C_j = iota_{e_j} (x) iota_{e_j}, L = C_0 R.
+
+**Reproduced exactly:**
+- Recurrence (3): F_r = (-1)^{r-1+C(m+1,2)} L F_{r-1}, checked against directly computed vacuum packets at every r for m = 3, 4, 5, starting from F_0 = top (x) top.
+- Rank-one seed at m = 5: (120, 24, 6, 2, 1) = a!.
+- Modified-seed obstruction: replacing 120 by -360 makes the upper packet F_4 vanish identically while C_5 F_3 = (288, 432, 96) is unchanged (exactly the genuine rank-4 packet).
+- (The reflection-only tensor F* and the ambiguity-dimension table were lost in the paste and are not reproduced.)
+
+**Why the obstruction works (own observation).** Lowering never creates the index m, so the seed entry for exponent m never reaches C_m. By linearity F_{m-1} = A + m! B with B = L^{m-2} delta_m fixed and A determined by the other seed entries; at m = 5, A = 360 B.
+
+**Seed-split tests (own):**
+- A is proportional to B only at m = 5 (lambda = 360, lambda + 5! = 480 = 2^5 3 5). For m = 4, 6, 7 it is not, so there is no scalar collapse.
+- Seed-free sufficient condition: N_m = [L^{m-2} delta_a]_{a=1..m} is m x m; if invertible mod p, then F_{m-1} = 0 would force a! = 0 mod p. det N_m: m=4: 2^12 3^4; m=5: 0 (rank 4); m=6: -2^62 3^22 5^8 13^2; m=7: -2^94 3^37 5^17 7^8 12087000659; m=8: 2^161 3^58 5^25 7^12 31 3847507177691 86349130662493. Large primes appear from m = 6, so the seed-free route fails; mod those primes some seed kills the upper packet, and only the genuine factorial seed survives. This independently confirms the report's diagnosis: the proof must use the specific seed a!.
+
+**Status.** The gap is now: show sum_a a! L^{m-2} delta_a is nonzero mod p for p > m+1. No proof.
