@@ -128,7 +128,7 @@ Write T_m(q) = W_m(x)(h+x_0)q(h+x_0,x_1,…); then Q_{m+1} = T_m(Q_m). The proof
 
 ### Witnesses (computed)
 - **Rank 5:** q = Σ x_i(x_{i+1}²x_{i+2}² + x_{i−1}²x_{i−2}²) defeats value-only faithfulness, and the divided-difference packet detects it: λ_5(x_1² q (H_1 − H_0)) = −2.
-- **Rank 6 (in characteristic 0 and mod 13):** a degree-9 signed dihedral combination of 22 orbit sums (rotation and the reversal i ↦ m−1−i each act by −1) has all zero-edge insertion packets zero (6 of 6), all degree-2 divided-difference packets zero (21 of 21), yet λ_6(x_0x_1^5 q) = −198 ≠ 0. Its second-order packet detects it: λ_7(h^4 x_0² x_1 T_6(q)) = −7646. Consequence: no transfer theorem based only on dihedral symmetry plus low-order packets can hold. (With the other reflection convention i ↦ m−i the numbers are −7406 and −9328 and the vanishing fails, so the convention is part of the statement.)
+- **Rank 6 (in characteristic 0 and mod 13):** a degree-9 signed dihedral combination of 22 orbit sums (rotation and the reversal i ↦ m−1−i each act by −1) has all zero-edge insertion packets zero (6 of 6), all degree-2 divided-difference packets zero (21 of 21), yet λ_6(x_0x_1^5 q) = −198 ≠ 0. Its second-order packet detects it: λ_7(h^4 x_0² x_1 T_6(q)) = −7646. Consequence: no transfer theorem based only on dihedral symmetry plus low-order packets can hold. (Convention settled — see §15: this is the true symmetry of Q_6. A polynomial built with the reflection i ↦ m−i carrying the same signs is not Q-equivariant, which is why it gave different numbers.)
 - Over F_1009, the residual binary directions missed by value / first / second-jet packets are, per the report, 1/0/0 (rank 5), 4/4/0 (rank 6), 9/9/9 (rank 7); this table was not reproduced.
 
 ## 13. The merged-edge algebra (exact quadratic presentation)
@@ -170,3 +170,33 @@ Splitting at any edge d gives (t² − ut + v)∏(t − w_i) = (t − u)t^{m+1},
 - **What cannot work:** (i) any argument using only dihedral symmetry plus values, first jets and adjacent divided differences (rank-6 witness); (ii) unrestricted fixed-cut faithfulness (rank-5 counterexample); (iii) any parity-blind cancellation (Theorem 6); (iv) the packets A_0, B_0 alone beyond lower rank 6 (coverage 9/29 at rank 7, 47/87 at rank 8).
 - **Open mechanism:** a denominator-free interpolation in the cut variable that combines the all-cut equations, using the recursive boundary structure of Q_m (the boundary lemma) that the counterexamples lack. The differences between cut parameters are zero divisors, so ordinary Lagrange interpolation is not available; exterior-power or divided-difference substitutes are the natural candidates.
 - **Computation still missing:** the F_1009 binary-direction table; first-order normal packets of the rank-6 witness; the chord-factor and common-deformation statements; rank-9 quadratic packets (d_9); g_15 and beyond.
+
+---
+
+## 15. Reflection convention, deformation annihilators and simultaneous interpolation (2026-11-28)
+
+**Reflection convention (computed, m = 4..8).** For zero-sum edge vectors, Q_m(w) transforms under the dihedral group by
+- rotation i ↦ i+r: sign (−1)^{r(m−1)};
+- reflection i ↦ c−i: sign (−1)^{c(m−1)}.
+
+So reversing the edge sequence (c = m−1) acts by (−1)^{m−1}, as does a rotation by one step, while the reflection i ↦ −i (c = 0) acts trivially. The rank-6 witness built with the reflection i ↦ r−1−i carrying sign (−1)^{r+1} is equivariant under this character for all 12 group elements; the variant built with i ↦ r−i and the same signs fails on all six reflections, i.e. it is not a Q-equivariant polynomial. Hence the witness values −198 and −7646 are the ones for the Vandermonde symmetry type.
+
+**Theorem 8 (annihilators of the deformation parameter; proved, checked m = 3..8).** In A_m = K[u,v]/(H_m,H_{m+1}) (and by freeness in B_m and in the quadratic extension), Ann(v) = (H_{m−1}) and Ann(H_{m−1}) = (v). Multiplication by H_{m−1} therefore embeds R_m = B_m/(v) into B_m with a degree shift: an exact upward Poincaré-type map.
+
+**Theorem 9 (deformation filtration; proved, layers checked m = 3..8).** v^b H_{m−b} = 0 for 0 ≤ b ≤ m and v^m = 0; the standard monomials are u^a v^b with a + b ≤ m−1 (m(m+1)/2 of them), the b-th layer of A_m has dimension m−b, and in B_m the b-th layer is ≅ R_m/(u^{m−b}) shifted by 2b.
+
+**Theorem 10 (simultaneous trace interpolation; checked m = 3, 4, 5, every r).** Let E_r : R_m[t]_{<r} → ⊕_d R_m/(w_d^r), F ↦ (F(w_d) mod w_d^r)_d. Writing b = m−r, a tuple (f_d) lies in the image iff Σ_d w_d^{b+k} f_d = 0 for k = 0..r−1, and dim im E_r = r·m!/2 (computed: 3, 6 at m = 3; 12, 24, 36 at m = 4; 60, 120, 180, 240 at m = 5). The image is a maximal isotropic subspace for ⟨f,g⟩ = Σ_d λ(w_d^b f_d g_d) (power sums vanish in R_m); the proof of equality uses the base case rank E_1 = m!/2 via the Cohen–Macaulay squarefree quotient and induction on r. The statement is thus a denominator-free substitute for Lagrange interpolation across the cut variables. (The proof was not re-derived here; the dimension formula was checked directly.) A realisation statement — every compatible tuple at deformation order b comes from a common polynomial correction in (e_2..e_m)^b — is stated but not checked, and lower layers can interact with higher ones.
+
+**Simultaneous saturation (computed).** Let V_m be the space of χ_Q-equivariant polynomials of degree D_m, spanned by signed dihedral orbit sums; let T_m be the (representative-level) transfer polynomial and L_m the class in R_m. Saturation means ker T_m ⊆ ker L_m, i.e. rank T = rank (T, L). Over F_1000003:
+
+| rank m | D_m | orbit sums | rank T | rank L | joint rank | saturation |
+|---|---|---|---|---|---|---|
+| 4 | 2 | 2 | 1 | 1 | 1 | holds |
+| 5 | 5 | 16 | 6 | 2 | 6 | holds |
+| 6 | 9 | 185 | 54 | 9 | 54 | holds |
+
+Rank 7 (2,829 orbit sums; reported rank 452 = 452 over F_11, F_13, F_1009, with the earlier boundary packet missing 20, the independent-lift deformation 19, and the full simultaneous deformation 0 of the 29 target directions) is not reproduced in this table; see the README for the status of the rank-7 run.
+
+**Degree sensitivity (computed).** Rank 4, q = 5·O_{(0,1,2,3)} + O_{(0,0,1,5)} with O the orbit sums for the permutation-sign character: q = 40 z_1 z_2² z_3³ ≠ 0 in R_4 but T_4(q) = 0 in R_5 (and, by rotation covariance, at every cut). So saturation cannot be proved at the socle degree and descended by duality; the deficiency D_m must enter. (With the χ_Q character the same exponents give q = 0 in R_4, so no counterexample; the sign character is the relevant one at socle degree because λ transforms by the sign.)
+
+**Status.** Simultaneous interpolation (Thm 10) is proved in all ranks per the report and dimension-checked here; simultaneous saturation at degree D_m is verified at ranks 4–6 and is the remaining open theorem in general. The next analytical problem is the interaction of the maximal-isotropic interpolation spaces with the multiplication ideals generated by the insertion factors.

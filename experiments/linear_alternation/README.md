@@ -71,3 +71,12 @@ Scripts: `artin.py` (exact coinvariant ring, Artin normal forms), `modrank.py`, 
 - Coverage table reproduced exactly: 1/1, 2/2, 9/9, 9/29, 47/87 for lower ranks 4..8 (χ_Q(rot) = χ_Q(rev) = (−1)^{m−1} computed).
 - Smith data reproduced exactly: relative index 1, 2, 108 for ranks 4, 5, 6; rank-6 invariants [1,1,1,1,2,2,2,2,108] vs [1,1,1,1,1,2,2,2,2].
 - Not reproduced: chord-factor (Grassmannian) annihilator statement, common-deformation identities, the F_1009 binary-direction table.
+
+## Reflection convention and simultaneous interpolation (2026-11-28, third)
+Scripts: `reflection_convention_check.py` (+ `witness_data.py`), `simultaneous_checks.py` (+ `split_edge_checks_lib.py`), `saturation_check.py`.
+- **Convention (computed, m = 4..8):** Q_m has character (−1)^{r(m−1)} on rotation i→i+r and (−1)^{c(m−1)} on reflection i→c−i. The rank-6 witness built with i→r−1−i (signs (−1)^{r+1}) is equivariant for all 12 elements; the i→r−i variant is not equivariant (fails all 6 reflections).
+- Ann(v) = (H_{m−1}), Ann(H_{m−1}) = (v): OK for m = 3..8. Deformation layers m, m−1, …, 1 and v^m A = 0: OK for m = 3..8.
+- Trace interpolation rank r·m!/2: OK for m = 3, 4, 5, all r.
+- Rank-4 degree-sensitivity counterexample (sign character): nf(q) = 40·z_1z_2²z_3³, T_4(q) = 0 in R_5. With χ_Q instead, q = 0 in R_4.
+- Simultaneous saturation ker T ⊆ ker L on χ_Q-equivariant degree-D_m polynomials: holds at ranks 4, 5, 6 (ranks of T: 1, 6, 54; joint rank equal).
+- Not reproduced: the report's rank-7 numbers (452, 20/19/0 comparison) unless `saturation_rank7.txt` says otherwise; the realisation theorem; the proof of Thm 10.
