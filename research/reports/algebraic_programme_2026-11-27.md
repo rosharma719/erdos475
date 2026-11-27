@@ -881,3 +881,5 @@ Scripts: `experiments/linear_alternation/seed_rigidity.py`, `v3check.py`, `mod13
 - The hand proof of the rigidity step (first deviation g_k with k odd, g_{k+1} = (k+1)^2 g_k / 2, contradiction 2(k+1)^2 g_k = 0) is consistent with the computed solution spaces; I did not re-derive every sign in it.
 
 **Status.** Rigidity explains the odd-rank modified-seed obstruction of §44 (e_m is exactly the extra compatible direction). At even ranks it reduces the induction step to "G_m(1!,...,m!) != 0 mod p", which is the original statement; rigidity alone does not imply it. Open.
+
+**Addendum to §43.** The m = 11..16 run hit its time limit after caching kappa through m = 14 (`kappa_cache.pkl`). From the cache: gcd(kappa_{m,2}, kappa_{m,3}, kappa_{m,4}) = 2^3, 2^5, 2^3, 2^5 for m = 11..14, so (4) holds (no prime > m+1) through m = 14. m = 15, 16 not computed.
