@@ -88,3 +88,10 @@ Scripts: `marked_root_checks.py` (graded linear algebra for C_m, mod F_1000003),
 - m = 4: dim C = 240, socle degree 12, η-identities verified; annihilator and vC checks in `marked_root_m4_out.txt` (in progress at commit time).
 - u^k H_{m−1} = v^k H_{m−1−k} in A_m for m = 3..8.
 - Not reproduced: the extra-direction table (ranks 5–9), the diagonalisation theorem, weighted-kernel statements, rank-7 saturation (run was terminated).
+
+## Weighted noncancellation report (2026-11-28, fifth)
+Scripts: `trace_poly_checks.py`, `model_weight_check.py`.
+- v·g = u^{m+1} − H_{m+1}: verified symbolically for m = 2..12.
+- m = 7: g_7 = 7u⁶ − 15u⁴v + 10u²v² − v³; multiplication by g_7 on degree 3 → 9 has matrix [[165,−198],[48,−54]], det 594 = 2·3³·11, Smith diag(3, 198): reproduced exactly (rank loss mod 11).
+- Monomial-weight saturation (T^model = (h+x)h^{m−2}q): holds in every degree < N_m for m = 3, 4, 5 over all polynomial representatives (no symmetry).
+- Not reproduced: marked-root saturation table (needs a C_m normal form beyond m = 4), rank-7 ranks 562/612, v-multiplied transfer losses, the zero-sum reduction paragraph.
