@@ -130,3 +130,11 @@ Scripts: `walk_checks.py` (run with `PYTHONPATH=.`), `weyl_det_check.py`.
 - Counterexamples reproduced exactly: U = {2,7} → 19 − 19z²; U = {13,14,15,16} → [293541560, 41340, −9464, 41340, 293541560], gcd of first two = 13780 = 2²·5·13·53.
 - Sign correction: with odd α, β the matrix H = YX − XY has tr(H) ≠ 0; H = XY + YX = −Σ α_iβ_a [D^a,U_i] has tr(H^k) = 0 (k = 1..4) and (H^k)_00 = ε(k) Σ κ(A,I) α_Iβ_A (verified for U = (2,3), (2,3,4)).
 - Not reproduced: exact rank-17 c_{17,1}, c_{17,2}, contents at m = 15, 16, 17.
+
+## Pairing-matrix / intra-rank propagation report (2026-11-29)
+Scripts: `pairing_matrix_checks.py [M]`, `pairing_counterexamples.py`, `harmonic_and_cofactor.py` (all with `PYTHONPATH=.`).
+- P_{m,d,j}: rank-lowering identity and generating-function descent verified m = 4..8; quadratic-packet contents reproduced m = 3..9.
+- Counterexamples reproduced exactly: rank 5 matrix (rows 0; −7,0,7; −2,4,−2; 5,0,−5; 0) and rank 6 (zero first row, penultimate (0,−144,216,−216,144,0)).
+- V_m(ℓ) harmonic and e_1(∂)V_m = 0 for m = 4,5,6 (all coefficients).
+- Cofactor decomposition into diagonal / off-diagonal parts, m = 3..8.
+- Not reproduced: two-copy Weyl normal-symbol identity, translated determinant identity, rank-8 restricted family counts, rank ≥ 15 contents.

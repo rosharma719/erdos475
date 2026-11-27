@@ -380,3 +380,28 @@ So the proof must use the margins 2, 3, …, m, and the full vector (not just tw
 **Rank 17 (reported, not reproduced).** The report gives exact c_{17,1}, c_{17,2} (about 63 digits each) with gcd 48 = 2⁴·3, matching modular values mod 19 and 23, and two-coefficient contents 32, 192, 48 at m = 15, 16, 17. Not reproducible here (the subset dynamic programmes need ~4^m states); our integral data stand at brute force to m = 10 and the external run to m = 14.
 
 **Status.** Remaining theorem unchanged: for p > m+1 the boundary vector (equivalently C_m(z), equivalently the g_m content) is nonzero mod p. New usable structure: a finite-dimensional Weyl-algebra/exterior-determinant model, exact flow summation, and a certified list of what cannot hold for general margins. The proposed first target is to exploit the consecutive powers of the Weyl generators inside the height-zero cofactors.
+
+---
+
+## 23. The pairing matrix P_{m,d,j}, exact rank descent, and counterexamples to intra-rank propagation (2026-11-29)
+
+**Definition.** With Q_m = F_{m−1}(w_1..w_{m−1}), y_k = w_1+…+w_k (y_0 = 0): P_{m,d,j} = λ_m(Q_m w_j^d e_{m−d}(y)), 1 ≤ d ≤ m−1 (degree check: (N_m − m) + d + (m − d) = N_m). Row d = 1 is the boundary vector (e_{m−1}(y) = ∏_{k≥1} y_k).
+
+**Computed (exact alternation, m = 3..8, rank 9 for the packet table):**
+- **Rank-lowering identity:** P_{m,m−1,j+1} − P_{m,m−1,j} = (−1)^{m−1} m c_{m−1,m−j}, with c_{m−1,·} the first row of P_{m−1}. Holds exactly for m = 4..8.
+- **Generating-function descent:** (−1)^m (1 − z) Σ_{r=0}^{m−1} P_{m,m−1,r+1} z^r = C′_{m−1}(1)(1 − z^m) − m ε_m z C_{m−1}(z), ε_m = (−1)^{C(m−1,2)}, C_{m−1}(z) = Σ_j c_{m−1,j}z^{j−1}. Holds exactly for m = 4..8; this is the report's identity (1−z)x^{m−2}𝒢_m = ((m−1)/(m−2)!)[…] once x^{m−2}𝒢_m = ((m−1)(−1)^m/(m−2)!)·Σ_r P_{m,m−1,r+1}z^r is substituted. Hence: **if the penultimate row of P_m is constant then C_{m−1} = 0**, and iterating down to C_3 = 1 − z² gives a contradiction. So the induction reduces to: *first row of P_m zero ⇒ penultimate row constant*, for the actual Q_m.
+- **Quadratic packets:** boundary / Hessian H_{ij} = λ(Q_m w_iw_j e_{m−2}(y)) / split A_{ij} = λ(Q_m w_iw_j ∏_{k=2}^{m−1} y_k) / reflected divided-difference J content:
+  m = 3: 1/1/1/1; 4: 1/3/1/2; 5: 2/1/2/2; 6: 4/2/2/2; 7: 6/2/2/6; 8: 12/2/6/6; 9: 6/1/1/1 — **reproduced exactly** (J = A_{ij} − (−1)^{m−2+⌊(m−1)/2⌋}A_{ρ(i)ρ(j)}, ρ fixing edge 1 and reversing the rest). Notably at m = 9 both quadratic packets are primitive although the boundary content is 6.
+
+**Counterexamples to intra-rank propagation (computed, exact).** The implication "first row zero ⇒ penultimate row constant" is false for general polynomials of the right degree and symmetry:
+- Rank 5: q = Σ_i w_i(w_{i+1}²w_{i+2}² + w_{i−1}²w_{i−2}²) (the §12 witness) has P_5(q) with rows d = 1..5 equal to (0,0,0,0,0), (0,−7,0,7,0), (0,−2,4,−2,0), (0,5,0,−5,0), (0,0,0,0,0): first row zero, penultimate row (0,5,0,−5,0) not constant. Reproduced entry by entry (valid mod every prime > 6).
+- Rank 6: q = f·∏_{i=1}^6 (w_i + w_{i+1}) (cyclic), f = 5O_{(3,0,0,0,0,0)} − 26O_{(1,1,1,0,0,0)} + 35O_{(1,1,0,1,0,0)} (signed dihedral orbit sums, rotation and reversal acting by −1): P_{6,1,•}(q) = 0 and P_{6,5,•}(q) = (0, −144, 216, −216, 144, 0). Reproduced exactly. This q retains all six factors w_i + w_{i+1} (every non-diameter chord of Q_6), so retaining the non-diameter chord factors does not suffice either.
+(Reported, not reproduced: the rank-8 restricted-family ranks 24/3/6.)
+
+**Harmonic vertex-insertion polynomial (computed).** V_m(ℓ) = λ_m(Q_m ∏_{i=0}^{m−1}(y_i + L)), L = Σℓ_jw_j, has degree ≤ m in ℓ. Computing all of its coefficients exactly for m = 4, 5, 6 (46, 210, 898 nonzero monomials): the Laplacian Σ_j ∂²/∂ℓ_j² V_m and e_1(∂)V_m vanish identically, as the report states (e_1 because Σw_j = 0; the Laplacian because the coefficient involves e_1(∂)² − 2e_2(∂) and e_2(w) = 0). The gradient at ℓ = −(indicator of the first d edges) is a rotated copy of the boundary vector by the product rule. The report's higher-order detection theorem (vanishing of all Taylor coefficients through order m−2 at a vertex forces q = 0, via harmonicity) was not re-derived.
+
+**Cofactor decomposition (computed, m = 3..8).** Splitting the contraction formula c_{m,r+1} = Σ_{I,A} (−1)^{r+ΣI^c}κ(A,I)κ(A^c,I^c) into the diagonal part (A = I) and the off-diagonal part (A ≠ I): for m = 3, 4 the boundary vector is purely diagonal; from m = 5 the off-diagonal part is nonzero only in the middle positions (m = 5: −30 at position 3 against diagonal 26; m = 6: ∓320 at positions 3, 4; m = 7: 8392 at positions 3, 5; m = 8: contents of off-diagonal and diagonal parts both 4). The first two coefficients c_1, c_2 are always purely diagonal. The off-diagonal contents (30, 320, 8392, 4) show no small-prime structure on their own; the cancellation between diagonal and off-diagonal parts is where the work is.
+
+**Not reproduced.** The two-copy Weyl covariance identities, the normal-symbol polynomial G_{m,r}(x) = Σ_d (d(−1)^{r+d−1}/(d−1)!) P_{m,d,r+1}x^{d−1}, the translated-determinant identity 𝒢_m(z,ts) = [α_Jβ_J] det(I + zH_1^+(t,s)) det(I − H_2^+(t,s)), and the reported integral contents through rank 17 (rank 18 not claimed).
+
+**Status.** Intra-rank propagation for the actual Q_m is open; generic propagation and propagation under retention of the non-diameter chord factors are disproved by exact witnesses (reproduced). The exact descent (rank-lowering identity + generating-function identity) is verified; it makes "first row zero ⇒ penultimate row constant" (equivalently the constant and highest-x coefficients of 𝒢_m) the single remaining implication.
