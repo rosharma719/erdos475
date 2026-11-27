@@ -181,3 +181,6 @@ Scripts: `exterior_checks.py`, `weyl_eigen_checks.py`, `diag_onehole.py`.
 - K_U = Σ(−1)^a E^a(e_0∧K_{U∖a}) exact (m = 4,5,6). T_2+T_3 surjective at 7 tested (m,p). Coupled image reproduces all 9 table rows with positive-exponent sources; codim 1 iff p = m+2.
 - W(U,U) eigenvalue W_m(h) = Σ d C(h,d−1) K(J_d,J_d) exact (m = 3,4,5); W({1..m−1}) = 0; Alt F_d identity exact. gcd_d K(J_d,J_d), m = 3..11: 1,1,4,4,2,12,18,16,8.
 - Not reproduced: Smith invariants m = 5,6; proofs of surjectivity/injectivity; (6)–(7); eq. (9).
+
+## Witness-search experiment (2026-11-30)
+Script: `witness_search.py` (log `witness_search_out.txt`; rank 12 may still be running / incomplete). For m = 3..11: gcd(K(J_1,J_1),K(J_2,J_2)) = full gcd of the diagonal one-hole packet = 1,1,4,4,2,12,18,16,8 (no prime > 3); K(J_1,J_1) alone has large primes at m = 7..11; smallest witness index over primes ≤ 2000 is 1 except (m,p) = (7,23) where it is 2.

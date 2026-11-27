@@ -588,3 +588,22 @@ So if any K(J_d,J_d) ≢ 0 (mod p), every zero-sum m-set has an ordering with no
 **Not reproduced.** Surjectivity proofs, equation (6)–(7) (explicit common-component decomposition of the two lower rows), the equivalence with the standard polynomial (12) and its Amitsur–Levitzki context, equation (9) (the adjoint-lowering identity; only its consequence (10) was tested), and the 190 modular height configurations.
 
 **Status.** (★) is open. This round adds a clean, exact reformulation (the one-hole diagonal packet / the operator W(U,U), i.e. the polynomial W_m(h)), additional obstructions to rank-descent induction (surjectivity and the p = m+2 codimension-one phenomenon), and verified supporting identities. A uniform proof that gcd_d K(J_d,J_d) has no prime factor > m+1 (equivalently that W_m ≢ 0 as a polynomial over F_p) is still missing.
+
+---
+
+## 31. Experiment: how small a subpacket of the diagonal one-hole packet certifies (2026-11-30)
+
+**Question.** By §30, W(U,U) ≢ 0 over F_p ⇔ some K(J_d,J_d) ≢ 0 (mod p), where W_m(h) = Σ_d d·C(h,d−1)·K(J_d,J_d) is its eigenvalue on e_h. Evaluating at h = 0 and h = 1 gives W_m(0) = K(J_1,J_1) and W_m(1) = K(J_1,J_1) + 2K(J_2,J_2); so for odd p the pair (K(J_1,J_1), K(J_2,J_2)) vanishes mod p iff W(U,U) annihilates both e_0 = 1 and e_1 = x. Is that two-entry subpacket already certifying (no prime p > m+1 divides both)?
+
+**Result (computed, m = 3..11; exact via the signed-walk DP; log `experiments/linear_alternation/witness_search_out.txt`).**
+
+| m | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 |
+|---|---|---|---|---|---|---|---|---|---|
+| gcd(K(J_1,J_1), K(J_2,J_2)) | 1 | 1 | 4 | 4 | 2 | 12 | 18 | 16 | 8 |
+| gcd of first three entries | 1 | 1 | 4 | 4 | 2 | 12 | 18 | 16 | 8 |
+| full gcd over d (§30) | 1 | 1 | 4 | 4 | 2 | 12 | 18 | 16 | 8 |
+| primes > m+1 dividing K(J_1,J_1) alone | – | – | – | – | 23 | 30539 | 9989341 | 21966239 | 3019, 13647452681 |
+
+So through rank 11 **the first two entries already carry the whole content** (no prime factor above 3 in any of them), while the first entry alone fails at ranks 7–11 (c_{m,1} = K(J_1,J_1) has large prime factors 23, 30539, 9989341, 21966239, 3019, 13647452681). For every prime p with m+1 < p ≤ 2000 the smallest index d with K(J_d,J_d) ≢ 0 (mod p) is d = 1 except at m = 7, p = 23, where d = 2 is needed (checked for m = 3..11). Rank 12 was still running when this was written.
+
+**What this is and is not.** It is exploratory evidence for a narrower target than the full packet: "W(U,U) does not kill both 1 and x modulo any prime p > m+1", equivalently gcd(K(J_1,J_1), K(J_2,J_2)) has no prime factor > m+1 (for p odd). It is **not** a proof, and two-coefficient shortcuts have failed before in neighbouring settings (shifted margins {13..16}; the last two coordinates of the projected Witt packet at rank 13 vanish mod 19). Here the two entries are the first two (not the last two), the margins are consecutive from 2, and the data stop at m = 11, so no extrapolation is justified. A proof would need to show directly that W(U,U)·1 and W(U,U)·x cannot both vanish in F_p[x]/(x^p) — an explicit pair of vacuum-type matrix elements of the alternating commutator product, which is a smaller object than the whole operator.
