@@ -333,3 +333,25 @@ At every tested rank the first two coefficients alone have no prime factor > 3; 
 **Statements not checked here:** the proof sketches of the Pascal recurrence in general k, the symmetric-remainder/flag-pairing reformulations, and any proof strategy built on top of them (which would need a noncancellation invariant surviving the signed sums — the report notes this is Step 3 and remains open).
 
 **Status.** The proof obligation is unchanged: LAC (equivalently, the integral content of B_m / its Artin coefficient vector has no prime factor > m+1). The new representation is purely integer-combinatorial (Pascal minors on subsets of {2..m}), which is a candidate setting for an inductive or cofactor argument; none has been found.
+
+---
+
+## 21. Unique-matching expansion and the component expansion of the boundary polynomial (2026-11-29)
+
+**Expansion of κ (computed).** For increasing sets A = {a_1<…<a_k}, I = {i_1<…<i_k} with ΣA = ΣI, sum over nonnegative integer k×k matrices M with row sums i_r and column sums a_s that have a **unique perfect matching** π_M:
+κ(A,I) = Σ_M sgn(π_M) · ℓ(D_M) · W(M), W(M) = ∏ a_s! / ∏ m_rs!,
+where D_M is the DAG obtained by contracting the matching edges (vertex r ↔ row r/column π_M(r); edge r → r′ when m_{r,π(r′)} > 0, r′ ≠ r) and ℓ is its number of linear extensions (edge orientation does not matter for this count). Verified against the Pascal recurrence (§20), which was itself verified against the direct definition: **493 pairs (A,I), k = 1..4, I ⊆ {2..7}, 0 mismatches**. The mechanism: the signed sum over row/column orderings of the multinomial terms is a determinant of 0/1 rows (1,…,1,0,…,0) that vanishes unless the row "first-positive-entry" positions are all distinct, forcing a triangular support with a unique diagonal matching; every matrix with several perfect matchings cancels exactly.
+
+**Component expansion (computed, m = 3..6).** With U = {2..m}, n = m−1 and Ĉ_m(z) = Σ_r C(n,r) c_{m,r+1} z^r (binomials are units mod p > m+1, so Ĉ_m ≢ 0 ⇔ C_m ≢ 0):
+Ĉ_m(z) = Σ_M sgn(π_M) ℓ(D_M) W(M) ∏_{H ∈ components of D_M} ((−z)^{k_H} + (−1)^{s_H}),
+over square matrices with row and column margins both U, k_H = |H|, s_H = Σ_{vertices in H} (margin). Reproduces the boundary polynomial exactly for m = 3, 4, 5, 6 (up to the global sign (−1)^{m−1}, a normalisation), summing over 2, 14, 378, 39,802 unique-matching tables respectively.
+
+**Consequences (checked).**
+- The constant and linear coefficients are c_{m,1} = (−1)^S Σ_M μ(M) and n·c_{m,2} = (−1)^{S+1} Σ_M μ(M) Σ_{i ∈ isolated vertices of D_M} (−1)^i, S = Σ_{i=2}^m i, with μ(M) = sgn(π_M)ℓ(D_M)W(M) (algebraic consequence of the expansion; consistent with the magnitudes of c_1, c_2 checked in §20).
+- **Identity-matching contribution.** The only unique-matching table with matching = identity is diag(2,3,…,m) (verified for m = 3, 4, 5; follows because identity matching makes off-diagonal flows balanced, hence zero on an acyclic graph). Its weight is μ = n!, every vertex is isolated, and it contributes n! ∏_{i=2}^m ((−1)^i − z) to Ĉ_m — verified symbolically for m = 3..6. At m = 3 this is 2(z²−1); the only other surviving table contributes −3(z²−1); they sum to 1 − z² = Ĉ_3(z). So the canonical diagonal term is cancelled by other matchings: one cannot extract it by evaluating z.
+
+**Syzygy limitation (stated; not checked here).** The exterior syzygies Σ_{i∈I} ± A_i K(I∖i) = 0 are satisfied by the degenerate family K̃(∅) = 1, K̃({i}) = e_i, K̃(I) = 0 for |I| ≥ 2 (all boundary contractions vanish), so any backward-propagation proof must use the creation operator in the raising recursion, not just the syzygies.
+
+**Rank 17 (reported, not reproduced).** A memory-efficient modular version reportedly completes rank 17 in characteristics 19 and 23 with the boundary vector surviving (rank 17 mod 19: (12,5,17,15,4,7,10,3,6,3,10,7,4,15,17,5,12)). Not reproducible with the code in this repository (the subset dynamic programme has ~4^m states); the integral data in this repo are brute force to m = 10 and the external run to m = 14.
+
+**Status.** The remaining theorem is unchanged (LAC / boundary primitivity). The graph formulation is exact and verified, and the consecutive-margin condition U = {2..m}, not yet used analytically, is the structure a sign-reversing involution or a flow-switching argument would have to exploit.

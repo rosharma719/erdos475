@@ -115,3 +115,10 @@ Scripts: `pascal_checks.py`, `artin_boundary_check.py`.
 - b_{m,i} = −Σ_{j<i} c_{m,j}: consistent m = 3..14; direct integral Artin reduction of B_m (m = 4..7) gives coefficients ±b_{m,i}, support exactly on the M_i.
 - Pascal recurrence for κ(A,I) matches the direct definition on 254 pairs (k = 1..3); complementary contraction reproduces c_m for m = 3..8 up to global sign; c_1, c_2 formulas hold in magnitude; Jacobi complementary-minor identity exact on 7×7 Pascal.
 - gcd(c_1,c_2), m = 3..14: 1,1,2,4,6,12,12,2,8,24,4,8; full content 1,1,2,4,6,12,6,1,4,8,4,8.
+
+## Unique-matching expansion report (2026-11-29)
+Script: `matching_expansion_check.py` (imports `pascal_checks.py`; prints their checks on import).
+- κ(A,I) = Σ over unique-perfect-matching tables of sgn·ℓ(D)·W: 493 pairs, 0 mismatches.
+- Component expansion of Ĉ_m(z) = Σ C(n,r) c_{m,r+1} z^r: exact for m = 3..6 up to global sign; tables 2, 14, 378, 39802.
+- Identity-matching table is diag(2..m) only (m = 3,4,5); its contribution is n!·∏((−1)^i − z), cancelled at m = 3 by the other table (2(z²−1) − 3(z²−1) = 1 − z²).
+- Not reproduced: rank-17 modular result; the syzygy-degenerate-family statement.
