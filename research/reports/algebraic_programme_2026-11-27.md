@@ -815,3 +815,19 @@ Acting on t^h each is a polynomial in the height h.
 **Report checks (n <= 7, true values):** w_n = T^{n-2}q_n = +-q_n v_{n-1} (sign alternates); block-triangularity (T never removes U_n or V_n) verified n = 4,5,6; the split h_n = j h_{n-1} - (n-1)/(n+1)! q_n and T_{n-1}^{n-2} h_{n-1} = 0 are immediate. Dichotomy: n = 4: v_4 is parallel to w_4 with total scalar 1/30 (unit for p > 5); n = 5, 6, 7: v_n not parallel to w_n, and the gcd of 2x2 minors of [v_n | w_n] has no prime factor > n+2. Note every coordinate e_d (d < n) contains U_nV_n, so both terms of (2) live in the same sector; the sector decomposition does not separate the induction term from the correction. No proof of the induction step.
 
 **§41 update (corrected routine).** Validation: the corrected insertion form agrees with the true transfer on all balanced monomials at n = 6 (119/119) and n = 7 (347/347). Boundary-recurrence dichotomy with the corrected routine: w_n = +-q_n v_{n-1} exactly for n = 4..9 (sign (-1)^n); n = 4 parallel with unit total scalar 1/30; for n = 5..9, v_n is not parallel to w_n and the gcd of the 2x2 minors of [v_n | w_n] has no prime factor > n+2. Hence v_n = T_n^{n-2}(H_2) != 0 mod p for every p > n+2 through n = 9 (exact). Corrected n = 8 minor table and n = 8, 9 coordinates still running.
+
+## 42. Corrected two-pattern analysis: moment theorem (report of 2026-11-27, late) + vacuum test
+
+Scripts: `experiments/linear_alternation/two_pattern_v2.py`, `vacuum.py`. Unnormalised patterns P(A,B) = sum sgn D^a X^b ... (X applied first), Q(A,B) = sum sgn X^b D^a ..., S = P + (-1)^r Q, U = {2..m}.
+
+**Reproduced exactly (m = 3, 4, 5):**
+- Degree bounds: deg P_m = deg Q_m <= 2m-2 (4; 5; 7), deg S_m <= m-1 (1; 2; 2).
+- Reflection P_m(-h-1) = (-1)^{sum U} Q_m(h).
+- Two-identity descent P({0} u A, {0} u B) = +-S(A,B) as operators (tested on t^h, all balanced A, B subsets of {1..m} of size m-2).
+- **Moment theorem (3):** Q_m(h) = (-1)^{m-2} sum_{k=2}^{2m-2} M_{m,k} h^(k) (falling factorial), M_{m,k} = sum over i<j, a<b with i+j = a+b = k+1 of (j-i)(b-a) S(A_ij, A_ab)(vacuum), A_ij = {1..m} \ {i,j}. Moments: m=3 {6, 8, 1}; m=4 {-288, -768, -300, -24, 0}; m=5 {-103680, -161280, 72000, 62208, 9408, 384, 0}. M_{m,2} = S({3..m},{3..m})(0) as stated.
+- m = 3: S_3 = -24h - 12 and Q_3(0) = Q_3(1) = 0, Q_3(2) = -12 as stated. The displayed P_3, Q_3 in the report have typos (actual P_3 = h^4 + 2h^3 - 7h^2 - 20h - 12, Q_3 = -h^4 - 2h^3 + 7h^2 - 4h).
+- Hence the original root-count step is invalid (agrees with §40).
+
+**New consequence and its failure.** Since every term of Q_m has h^(k), k >= 2, Q_m(0) = Q_m(1) = 0, and by reflection the vacuum value S_m(0) = +-Q_m(-1) = +-sum_k (-1)^k k! M_{m,k}. If S_m(0) were always +- a product of primes <= m+1, the conjecture would follow. It is not: S_m(0) = -12, 288, 138240, -696729600 for m = 3..6 (primes <= m+1 only), but S_7(0) = 121147342848000 = 2^17 3^8 5^3 7^2 23. So a single-vacuum witness fails at m = 7, p = 23 (like the fixed-coordinate witnesses of §39).
+
+**Status.** The moment theorem is an exact, useful identity expressing one pattern through rank-(m-1) vacuum coefficients. The remaining statement (S_m = +-Q_m(-h-1) +- Q_m(h) is not identically 0 mod p) is still the open noncancellation problem; no proof.
