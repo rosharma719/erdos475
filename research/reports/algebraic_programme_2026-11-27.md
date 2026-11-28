@@ -1026,3 +1026,13 @@ Script: `experiments/linear_alternation/jet_obstruction.py`.
 **Not reproduced:** the two-step descent formula (4), the middle-coefficient formulas (6)-(7), the cofactor factorisation (8), and the reduced-diagonal formula (9)-(10) (not tested numerically here).
 
 **Status.** Generic symmetric-function closure is ruled out; the remaining target is a recurrence or elimination identity specific to the genuine prefix-determinant cofactors. Open. (Background: gcd(kappa_{15,1}, kappa_{15,2}) = 2^5, confirming rank 15 independently; m = 16 running.)
+
+## 56. Two-rank sparse transfer via finite-versus-stable specialization (report of 2026-11-28)
+
+**Checked against my kappa data (exact):**
+- Theorem 2 table: kappa_{n,1} = -1, 1, 4, -28, 966 (n = 3..7) and kappa_{n+2,n+1} = 0, 0, 280, -15120, 0 match `kappa_cache.pkl`; the reported Q_n(0) = 1, -1, -284, -15092, -966 make kappa_{n+2,n+1} = (-1)^n (kappa_{n,1} + Q_n(0)) hold in every row. In the parity-forced zero rows Q_n(0) = -kappa_{n,1} exactly.
+- Rank 9 split of Theorem 3: boundary + first hook + second hook = -57376 - 51616484 - 17152380 = -68826240 = kappa_{9,7} and 818084 - 132765152 + 656264064 = 524316996 = kappa_{9,5}; residues mod 569 are (93, 351, 125) -> 0 and (431, 187, 517) -> 566, as stated.
+
+**Not reproduced:** Theorem 1 (finite-versus-stable specialization with the two single-hook and one double-hook corrections), the central-window telescoping (3), the double-hook vanishing argument, the boundary formula (7), and the Q_n(0) values themselves (only their consistency with the kappa data was checked).
+
+**Status.** Exact transfer kappa_{m,m-q} = S + L + M with S a boundary of the preceding two-hole packet and L, M single long-hook corrections; the conservation law linking the hook corrections of the two witnesses is missing. Open.
