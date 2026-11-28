@@ -1075,3 +1075,18 @@ Script: `experiments/linear_alternation/commutator_check.py`.
 **Not reproduced:** the transport theorem (8) with the Schur-overflow correction (7), the overflow cancellation (9), and the defect values for ranks 7-9 (they need the memo's verifier, which is not in the repo).
 
 **Status.** Interior Pieri moves are absorbed exactly; the residual is the positional defect, which introduces the single extra shape (2,1^{q-1}). Proposed next step: work in the 11-shape marked-Schur certificate space (degree <= 4) and look for a unit-ideal identity there (sufficient for Graham via reciprocity, §54). Open.
+
+## 60. Residual cycle polynomial in the coinvariant ring (report of 2026-11-28)
+
+Script: `experiments/linear_alternation/coinv_content.py` (integral triangular reduction x_k^k -> -sum_{j<k} x_k^j h_{k-j}(x_{k+1},...,x_m), no denominators).
+
+**Context.** The residual-cycle statement (RC), f_m != 0 in Z[x]/(e_1..e_m) tensor F_p, is the programme's original base statement (§1-§5: the class of Q_m in R_m; `qcontent_m8.txt` already gave content 2 at m = 8). The linear boundary markers alpha_{n,j} are the LAC/boundary vector of §19 (alpha_{n,1} = +-kappa_{n,1}; linear contents 1, 1, 2, 4, 6, 12, 6 for n = 3..9 equal §19's), and the linear+quadratic joint content parallels the §5 content recurrence d_{m+1} = gcd(g_m, b_m). The perfect-pairing step is the standard Artin-basis duality.
+
+**Reproduced (exact):**
+- Normal forms of f_m: number of nonzero coefficients 1, 4, 18, 88, 355, 1412 and content gamma_m = 1, 1, 1, 2, 2, 2 for m = 3..8, exactly as reported.
+- Rank-9 Bézout pair: gcd(alpha_{9,1}, beta_{9,2,4}) = gcd(-359616276, 604555685) = 1, and 249688799 alpha + 148525865 beta = 1.
+- gamma_9, gamma_10 by direct normal form: running (`coinv_content_out.txt`); this independently tests the claim gamma_10 = 1 that the report derives from b_9 = 1 through the edge-splitting chain.
+
+**Not reproduced:** the edge-splitting factorisation (8), the divided-difference restriction (11), the quadratic markers beta beyond the quoted values, the identity (16), and the dimension table in §12 of the report.
+
+**Status.** RC is weaker than the contraction statement and is exactly what Graham needs (gamma_m | gcd_d kappa_{m,d}). Its all-rank content bound is open.
