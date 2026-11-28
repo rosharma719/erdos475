@@ -1062,3 +1062,16 @@ Script: `experiments/linear_alternation/defect_test.py`.
 **Status.** The transport identity relocates the difficulty to D_{I,J}; no interior transport theorem yet. Open.
 
 **Addendum to §58.** r = 4: Alt(W_0 V_I(Lx)) vanishes for 1 of 35 exponent sets in [1,7] (nonzero e.g. for (1,2,3,5), (1,2,3,6)). Term-by-term reversal parity still fails generically.
+
+## 59. Complete adjacent-hook transport, overflow cancellation, surviving positional defect (report of 2026-11-28)
+
+Script: `experiments/linear_alternation/commutator_check.py`.
+
+**Reproduced (exact):**
+- Commutator (1): [T_k, R] = e_1 wedge iota_k as derivations on the exterior algebra of exponent vectors, on 387 monomials (k = 2, 3, 4; sizes 1-3). Hence (2) for T(t) = T_{n+1} + t T_{n+2}.
+- Positional-weight decomposition (11): W_0 = e_1(V - S/2) - (X + Y - S) for V = (0, s_1, ..., s_r, X, Y) (symbolic, r = 4); (12) is then the Pieri rule e_1 e_q = e_{q+1} + s_{(2,1^{q-1})}.
+- Consistent with §58: the memo finds the centered defect also survives in the genuine cofactor aggregate (e.g. 2 d_{9,2} = 178, 2 d_{9,4} = 295 mod 569 while kappa_{9,7} = 0 mod 569).
+
+**Not reproduced:** the transport theorem (8) with the Schur-overflow correction (7), the overflow cancellation (9), and the defect values for ranks 7-9 (they need the memo's verifier, which is not in the repo).
+
+**Status.** Interior Pieri moves are absorbed exactly; the residual is the positional defect, which introduces the single extra shape (2,1^{q-1}). Proposed next step: work in the 11-shape marked-Schur certificate space (degree <= 4) and look for a unit-ideal identity there (sufficient for Graham via reciprocity, §54). Open.
