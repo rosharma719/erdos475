@@ -953,3 +953,19 @@ Script: `experiments/linear_alternation/swap_family.py`; G_m, N_m from `cycle_or
 **Not reproduced:** the cyclotomic Galois-grouped spans and Smith factors at m = 7, 8 (U_m = V_m with Smith 1, 2, 70 and 2, 6, 12); the swap-family statistics table; the incidence/Vandermonde factorization (6) and interpolation criterion (8) (plausible, not run).
 
 **Status.** Local (swap-family) noncancellation fails in general; global symmetry quotients fill the whole space from m = 7. The needed identity is a common functional / conservation law on the actual weighted sum. Open.
+
+## 51. Zero-edge confluent rank descent and stable specialization (report of 2026-11-28)
+
+Scripts: `experiments/linear_alternation/confluent.py`, `confluent2.py` (mpmath, 400 digits, zero edges replaced by edges of size 1e-40; B_m is a polynomial in t so the limit is continuous).
+
+**Reproduced:**
+- Confluent rank descent (1): B_{n+1}(z) = sum_a P_a(z) ((z-1) A_a - B_a), A_a = sum_i Q_a'(v_i), B_a = sum_i v_i Q_a'(v_i), for n = 3, 4, 5, 6 (exact to 1e-6 in double precision).
+- Geometric moments: A_a = 0 and B_a = n^2/(q-1)^n for every geometric ordering (n = 5, 7, all q). Hence the lifted geometric Bézout identity (4) follows by the same one-line argument.
+- Stable specialization (8): deg(B_m - B_{m;n}) <= m - n for every m = 5..8 and n = 2..m-1. In fact the difference is identically 0 for small numbers of zero edges (k <= 2 for m <= 7, k <= 3 for m = 8), and otherwise its degree is often below the bound. Example: m = 8, a single nonzero edge (-1) plus six zero edges reproduces the top two coefficients 52920, -15120 of B_8.
+- Two-coefficient gcd (10): gcd(kappa_{m,d_m}, kappa_{m,d_m-2}) = 4, 40, 168, 756, 224, 504, 10080, 2688, 1056 for m = 6..14, matching the report; no prime > m+1.
+
+**Own observation.** The top coefficient alone is NOT a witness: kappa_{m,d_m} contains 569 (m = 9), 1974029 (m = 10), 4608319 (m = 11), ..., the same primes as the top coordinates of P_n(H_2) in §41 (consistent with v_n ~ kappa_{n+1}). The adjacent coefficient shares them (2 kappa_{d-1} = d kappa_d), so (10) is the minimal pair of this type.
+
+**Not reproduced:** the m = 7, p = 113 obstruction matrix (determinant 39) and the lifted-span table; formula (11) as a separate computation (the numerical limit computes the same object).
+
+**Status.** Exact descent identities verified; (10) holds through m = 14 but is unproved. Open.
