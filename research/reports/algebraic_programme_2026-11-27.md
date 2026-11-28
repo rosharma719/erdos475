@@ -1106,3 +1106,13 @@ Script: `experiments/linear_alternation/binary_cert.py` (partial alternation ove
 **Not reproduced:** the full linear/quadratic contents for lower ranks 10-11 and the rank-12 bound gamma_13 | 24 beyond the quoted Bézout pair; the differential/permanent representation (5)-(8) (the m = 5 cancelling canonical matching was not recomputed).
 
 **Status.** New exact data and a sound two-variable certificate family; uniform noncancellation open.
+
+## 62. Divided-difference rank descent for the residual cycle class (report of 2026-11-28)
+
+Script: `experiments/linear_alternation/dd_descent.py` (sympy; comparison in C_4 by integral normal form).
+
+**Reproduced (exact):** f_4 = -rho_5 (d_1 d_2 d_1 + d_2 d_3 d_2 + d_4 d_3 d_2) f_5 in C_4 (= Z[y]/(e_1..e_4)), with d_i the divided difference in (x_i, x_{i+1}), words applied right-to-left, and rho_5 setting x_1 = 0 and relabelling x_2..x_5 -> y_1..y_4. (Other readings, x_5 = 0 or left-to-right composition, do not give the identity.) So rank propagation 4 -> 5 is an explicit integral operator identity valid in every characteristic.
+
+**Not reproduced:** the Hermite-normal-form descent lattices for upper ranks 6, 7 (multipliers 2, 2; Hermite entries in {2,4,12}), the rank-8 modular ranks, the exhaustive "no single word works" search, and the adjointness formulas (self-adjointness of d_i under the top-degree pairing is standard).
+
+**Status (agreed with the memo).** What would close the problem along this line is a uniform construction U_m f_{m-1} = sum_w c_{m,w} rho_m d_w f_m with U_m an admissible unit. Low-rank identities exist; no uniform construction is known. No further reformulation is being added.
