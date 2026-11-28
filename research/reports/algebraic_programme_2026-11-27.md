@@ -937,3 +937,5 @@ Scripts: `experiments/linear_alternation/cycle_orbits.py`, `orbit_check.py`, `ka
 **Not reproduced:** the m = 5, p = 11 per-coefficient table (row labels lost in the paste); the block factorization (6)-(7) for nontrivial stabilizers; the Hasse-moment identity (8). Ranks 17-19: recomputation of gcd(kappa_{m,1}, kappa_{m,2}) for m = 15..19 started (see addendum when it finishes).
 
 **Status.** Every valid orbit is individually nonzero, and the geometric orbit has an explicit all-rank Bézout certificate; joint noncancellation over all orbits is the open statement.
+
+**Addendum to §49.** `orbit_extra.py`: the block factorization (6) Q_a(c+x) = prod_{j<l} (x^h - (v_j - c)^h) holds for every orbit with nontrivial stabilizer (2, 4, 6, 6 such orbits for m = 4..7, including the geometric ones), and the Hasse-moment identity (8) reproduces the orbit sum coefficient by coefficient (m = 4..7). The repeated paste of the orbit report contained nothing beyond these.
