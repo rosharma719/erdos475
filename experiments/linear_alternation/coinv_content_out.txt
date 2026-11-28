@@ -1,0 +1,1 @@
+m=9: nonzero normal-form coefficients 5543, content gamma_m = 1  (67s)

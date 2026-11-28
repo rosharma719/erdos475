@@ -1090,3 +1090,5 @@ Script: `experiments/linear_alternation/coinv_content.py` (integral triangular r
 **Not reproduced:** the edge-splitting factorisation (8), the divided-difference restriction (11), the quadratic markers beta beyond the quoted values, the identity (16), and the dimension table in §12 of the report.
 
 **Status.** RC is weaker than the contraction statement and is exactly what Graham needs (gamma_m | gcd_d kappa_{m,d}). Its all-rank content bound is open.
+
+**§60 update.** Direct normal form at m = 9: 5543 nonzero coefficients, content gamma_9 = 1 (67 s). This is sharper than the edge-splitting bound gamma_9 | b_8 = 6. m = 10 running.
