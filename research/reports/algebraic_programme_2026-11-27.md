@@ -1001,3 +1001,16 @@ Script: `experiments/linear_alternation/ebasis.py` (exact Fractions; B_m evaluat
 **Not reproduced:** the m = 10 row; the e_r-descent identity (1), the degree filter (2), the rim-hook formula (3)-(4), the hook-sum formula (5) for a_m, the Kostka/Euler-moment reduction (6)-(7). These are plausible symmetric-function manipulations; none was tested numerically here.
 
 **Status.** Clean reformulation: (10) is p not dividing gcd(a_m, b_m + c_m [+ d_m]). The proposed mechanisms (unimodular 2x2 recurrence, discrete Wronskian, modular elimination) are not yet supported by any found recurrence. Open.
+
+## 54. Short-jet substitution, mixed-marker reciprocity, Casoratian obstruction (report of 2026-11-28)
+
+Script: `experiments/linear_alternation/recip_check.py`.
+
+**Reproduced (exact):**
+- Individual-coefficient gcds gcd(a_m, b_m, c_m[, d_m]) = 2, 10, 56, 252 for m = 6, 7, 8, 9 (from the §52 rows), as in the report's table.
+- Casoratian obstruction: primitive witness pairs v_4 = (2, 1), v_8 = (-90, 3397) (from a_8 = 15120, b_8 + c_8 = -570696, content 168); det = -6884 = -2^2 * 1721 with 1721 prime > 9. A unit 4-step Casoratian of the two witnesses is false.
+- Mixed-marker reciprocity (4): c_{B,A} prod_{a in A} a! = c_{A,B} prod_{b in B} b!, where Alt_t V_B(Lt) = sum_A c_{B,A} V_A(t), L = prefix-sum matrix: verified exactly for r = 3 on all 257 pairs with B subset [0,6].
+
+**Not reproduced:** the short-jet identity (1) and the moment formulas J_0..J_3 (not tested numerically here); the scalar formulas for a_m, b_m, c_m, d_m in terms of h_{q,b}; the rank-16 values kappa_{16,15}, kappa_{16,13} and their gcd 768768 (my kappa data stop at m = 14; the m = 15..19 run is still going); the step "c_{A,B} != 0 is a universal rearrangement certificate" (it relies on the earlier Lagrange-interpolation framework, not re-checked in this round).
+
+**Status.** If the reciprocity-to-certificate step is accepted, Graham at size m follows from p not dividing gcd(a_m, b_m, c_m[, d_m]), a weaker target than (10). Still unproved for all m.
