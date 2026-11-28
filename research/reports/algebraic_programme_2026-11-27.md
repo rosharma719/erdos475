@@ -989,3 +989,15 @@ Script: `experiments/linear_alternation/ebasis.py` (exact Fractions; B_m evaluat
 **Status.** Reformulation: (10) concerns explicit integer sequences (e-basis coefficients of the top four symmetric polynomials). No closed forms found; open.
 
 **Addendum to §52 (m = 9).** z^8: 0; z^7: -68826240 e1^2; z^6: -240891840 e1^3; z^5: 22777020 e3e1 + 120766464 e2e1^2 + 380773512 e1^4. So an e3e1 term appears again in the fourth coefficient (as at m = 6): for m = 1, 2 mod 4 the needed coefficient kappa_{m,d_m-2} depends on e3, and the three-edge (cube-root) core is not sufficient there; four or five nonzero edges are needed, as the plan said. Still no e4 or e2^2 terms through m = 9. The gcd(kappa_{m,1}, kappa_{m,2}) run for m = 15..19 has not finished m = 15 after more than an hour.
+
+## 53. Sparse elementary-basis sequences and rim-hook rank descent (report of 2026-11-28)
+
+**Checked against §52 data (exact):**
+- Divisibility of every F_{m,j} by e_1: holds in all computed expansions (m = 4..9).
+- The sparse coefficients agree with `ebasis.py`: m=6 (a,b,c,d) = (80, 70, -12, -6); m=7 (a,b,c) = (-280, 2950, 490); m=8 (15120, -524104, -46592); m=9 (-68826240, 380773512, 120766464, 22777020). The relation F_{m,2} = +-(m-1)/2 a_m e_1^2 holds (sign differs by the z versus w convention).
+- The gcd table (m = 6..14) is the same as §51 (4, 40, 168, 756, 224, 504, 10080, 2688, 1056).
+- m = 9: a_9 = -68826240 = -2^7 3^3 5 7 569 (the report says 2^8; the exponent of 2 is 7). b_9 + c_9 + d_9 = 524316996 = -3 mod 569, as stated.
+
+**Not reproduced:** the m = 10 row; the e_r-descent identity (1), the degree filter (2), the rim-hook formula (3)-(4), the hook-sum formula (5) for a_m, the Kostka/Euler-moment reduction (6)-(7). These are plausible symmetric-function manipulations; none was tested numerically here.
+
+**Status.** Clean reformulation: (10) is p not dividing gcd(a_m, b_m + c_m [+ d_m]). The proposed mechanisms (unimodular 2x2 recurrence, discrete Wronskian, modular elimination) are not yet supported by any found recurrence. Open.
