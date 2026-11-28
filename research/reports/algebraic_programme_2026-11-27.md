@@ -1118,3 +1118,17 @@ Script: `experiments/linear_alternation/dd_descent.py` (sympy; comparison in C_4
 **Status (agreed with the memo).** What would close the problem along this line is a uniform construction U_m f_{m-1} = sum_w c_{m,w} rho_m d_w f_m with U_m an admissible unit. Low-rank identities exist; no uniform construction is known. No further reformulation is being added.
 
 **Background results (addenda to §60, §61).** The direct normal-form computation of gamma_10 was killed (out of memory); gamma_10 remains established only through the report's edge-splitting chain. Binary certificates at m = 9: joint content 2 (versus gamma_9 = 1), so the binary family loses a factor 2 at m = 9 and 3 at m = 8; harmless, but it never beats the full class.
+
+## 63. Schubert coordinates for the residual cycle class (report of 2026-11-28)
+
+Script: `experiments/linear_alternation/schubert_coeffs.py` (integral coinvariant reduction with top monomial x^delta; a_{m,sigma} = top coefficient of F_m * S_sigma by Schubert duality; S_sigma = d_{sigma^{-1} w0} x^delta).
+
+**Reproduced (exact):**
+- Number of nonzero Schubert coefficients a_{m,sigma} (l(sigma) = m), smallest |a|, and number that are admissible units: m=4: 4, 1, 4; m=5: 14, 1, 14; m=6: 88, 2, 88; m=7: 337, 2, 165. All as reported.
+- Rank-8 single-coefficient witness: a_{8,(3,2,4,6,5,7,1,8)} = 48 = 2^4 * 3. So F_8 != 0 in C_8 (x) F_p for every p > 3, from one Schubert coefficient.
+- Factorization (1): F_m = F_{m-1} G_m with G_m = E_{m-2} prod_{i=2}^{m-2}(x_i + ... + x_{m-1}) = (-1)^{m-3} E_{m-2} prod_{i=1}^{m-3}(E_i + x_m) mod e_1 (by inspection of the interval sets).
+- Annihilator counterexample: for even m, (x_1 + x_m) P_m = h_{m-1}(x_1, x_m) = 0 in C_m while P_m|_{x_m=0} = x_1^{m-2} != 0 in C_{m-1}; since x_1 + x_m = E_1 + x_m divides G_m, G_m P_m = 0. Generic multiplication-injectivity is false (argument checked).
+
+**Not reproduced:** the m = 8 totals (1352 nonzero, 58 admissible units), the insertion-chain search and its six coefficients (the permutations were lost in the paste), the last-variable filtration theorem (2) (plausible from Monk's rule; not tested), the descent-matrix formula (4).
+
+**Status.** Concrete combinatorial target: a sign-reversing involution on signed Bruhat chains for the rank extension G_m, with the negative Monk moves concentrated at position m. Not constructed. Open.
