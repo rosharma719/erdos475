@@ -1,0 +1,5 @@
+m=9:
+   z^(m-1) coefficient in e-basis {'1': 0}  consistent: True
+   z^(m-2) coefficient in e-basis {'2': 0, '11': -68826240}  consistent: True
+   z^(m-3) coefficient in e-basis {'3': 0, '21': 0, '111': -240891840}  consistent: True
+   z^(m-4) coefficient in e-basis {'4': 0, '31': 22777020, '22': 0, '211': 120766464, '1111': 380773512}  consistent: True
