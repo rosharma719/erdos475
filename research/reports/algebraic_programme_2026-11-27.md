@@ -939,3 +939,17 @@ Scripts: `experiments/linear_alternation/cycle_orbits.py`, `orbit_check.py`, `ka
 **Status.** Every valid orbit is individually nonzero, and the geometric orbit has an explicit all-rank Bézout certificate; joint noncancellation over all orbits is the open statement.
 
 **Addendum to §49.** `orbit_extra.py`: the block factorization (6) Q_a(c+x) = prod_{j<l} (x^h - (v_j - c)^h) holds for every orbit with nontrivial stabilizer (2, 4, 6, 6 such orbits for m = 4..7, including the geometric ones), and the Hasse-moment identity (8) reproduces the orbit sum coefficient by coefficient (m = 4..7). The repeated paste of the orbit report contained nothing beyond these.
+
+## 50. Symmetry-grouped separation and adjacent-swap determinants (report of 2026-11-28)
+
+Script: `experiments/linear_alternation/swap_family.py`; G_m, N_m from `cycle_orbits.py`.
+
+**Reproduced exactly:**
+- G_5 = 21/5 z - 58/5 z^2 + 22/5 z^3 + 5 z^4 - 2 z^5, N_5 = B_5 - G_5 = -1/5 z - 2/5 z^2 + 18/5 z^3 - 5 z^4 + 2 z^5; G_6 = 36z + 90z^2 - 240z^3 + 90z^4 + 36z^5 - 12z^6, N_6 = -8z - 38z^2 + 80z^3 - 10z^4 - 36z^5 + 12z^6. The functionals Lambda = [z] + (1/10)[z^5] (m=5) and [z^4] + (5/6)[z^6] (m=6) kill N_m and give 4 and 80 on G_m.
+  *Caveat:* since [z^5]B_5 = 0 and [z^6]B_6 = 0, these functionals evaluated on the full polynomial are just the coefficients [z]B_5 = 4 and [z^4]B_6 = 80 (= kappa entries); the "separation certificate" is equivalent to reading off one nonzero coefficient of B_m and adds no all-rank mechanism.
+- m = 9, p = 37 swap family: edges (16,7,34,26,10,12,9,33,1) are the ninth roots of unity mod 37; with independent swaps of the first four adjacent pairs, all 16 orderings are valid (distinct vertices), fixed vertices {0, 9, 23, 31, 36}, intermediate pairs (16,7), (20,12), (19,21), (3,27), and the 16 contributions sum to the zero polynomial mod 37. Complete cancellation of an all-valid swap family is real.
+- The adjacent-swap pair theorem (two orderings differing by one adjacent swap cancel only if both are invalid) has a two-line proof as given; consistent with the above.
+
+**Not reproduced:** the cyclotomic Galois-grouped spans and Smith factors at m = 7, 8 (U_m = V_m with Smith 1, 2, 70 and 2, 6, 12); the swap-family statistics table; the incidence/Vandermonde factorization (6) and interpolation criterion (8) (plausible, not run).
+
+**Status.** Local (swap-family) noncancellation fails in general; global symmetry quotients fill the whole space from m = 7. The needed identity is a common functional / conservation law on the actual weighted sum. Open.
