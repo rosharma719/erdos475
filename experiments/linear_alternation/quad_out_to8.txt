@@ -1,0 +1,40 @@
+rank 4
+ cut 1 A 1 B (2, 2, 0)
+ cut 2 A 1 B (2, 2, 6)
+ cut 3 A 1 B (2, 2, 6)
+ cut 4 A 1 B (2, 2, 0)
+aggregate A,B,T 1 [2, 2, 6] [1, 1, 2]
+rank 5
+ cut 1 A 2 B (2, 4, 2)
+ cut 2 A 2 B (2, 2, 2)
+ cut 3 A 2 B (2, 2, 2)
+ cut 4 A 2 B (2, 2, 2)
+ cut 5 A 2 B (2, 4, 2)
+aggregate A,B,T 2 [2, 2, 2] [1, 1, 2]
+rank 6
+ cut 1 A 4 B (2, 12, 2)
+ cut 2 A 4 B (2, 6, 2)
+ cut 3 A 4 B (2, 18, 2)
+ cut 4 A 4 B (2, 18, 2)
+ cut 5 A 4 B (2, 6, 2)
+ cut 6 A 4 B (2, 12, 2)
+aggregate A,B,T 4 [2, 6, 2] [2, 2, 2]
+rank 7
+ cut 1 A 6 B (6, 6, 6)
+ cut 2 A 6 B (6, 6, 6)
+ cut 3 A 6 B (6, 6, 6)
+ cut 4 A 6 B (2, 5850, 2)
+ cut 5 A 6 B (6, 6, 6)
+ cut 6 A 6 B (6, 6, 6)
+ cut 7 A 6 B (6, 6, 6)
+aggregate A,B,T 6 [2, 6, 2] [2, 2, 2]
+rank 8
+ cut 1 A 12 B (6, 24, 6)
+ cut 2 A 12 B (2, 4, 2)
+ cut 3 A 12 B (2, 4, 2)
+ cut 4 A 12 B (6, 24, 6)
+ cut 5 A 12 B (6, 24, 6)
+ cut 6 A 12 B (2, 4, 2)
+ cut 7 A 12 B (2, 4, 2)
+ cut 8 A 12 B (6, 24, 6)
+aggregate A,B,T 12 [2, 4, 2] [2, 6, 2]

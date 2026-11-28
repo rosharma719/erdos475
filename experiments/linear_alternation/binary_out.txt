@@ -1,0 +1,26 @@
+/home/user/erdos475/experiments/linear_alternation/binary_alternation_check.py:4: SyntaxWarning: invalid escape sequence '\ '
+  z = mu_n \ {1, zeta^j} (valid since e_k(mu_n)=0 for 1<=k<=n-1), then P(1,T) (degree n-3) fitted by least squares
+n=4 d=1 err=3.5e-16 P(1,T) coeffs=[-1, -1]
+n=4 d=2 err=2.0e-16 P(1,T) coeffs=[0, 0]
+n=4 binary content beta=1
+n=5 d=1 err=4.5e-16 P(1,T) coeffs=[1, 0, -1]
+n=5 d=2 err=6.7e-16 P(1,T) coeffs=[1, 0, -1]
+n=5 binary content beta=1
+n=6 d=1 err=1.6e-14 P(1,T) coeffs=[4, 4, -4, -4]
+n=6 d=2 err=1.8e-14 P(1,T) coeffs=[2, 8, -8, -2]
+n=6 d=3 err=1.1e-14 P(1,T) coeffs=[-4, 8, -8, 4]
+n=6 binary content beta=2
+n=7 d=1 err=1.7e-13 P(1,T) coeffs=[-28, -168, -280, -168, -28]
+n=7 d=2 err=2.7e-13 P(1,T) coeffs=[40, -18, -236, -18, 40]
+n=7 d=3 err=2.9e-13 P(1,T) coeffs=[-20, 114, -176, 114, -20]
+n=7 binary content beta=2
+n=8 d=1 err=2.4e-11 P(1,T) coeffs=[966, 7710, 18246, 18246, 7710, 966]
+n=8 d=2 err=3.7e-11 P(1,T) coeffs=[-1662, -2478, 13716, 13716, -2478, -1662]
+n=8 d=3 err=2.6e-11 P(1,T) coeffs=[1338, -7086, 5454, 5454, -7086, 1338]
+n=8 d=4 err=2.9e-11 P(1,T) coeffs=[0, 0, 0, 0, 0, 0]
+n=8 binary content beta=6
+n=9 d=1 err=2.8e-08 P(1,T) coeffs=[-366468, -1536312, -1976146, 0, 1976146, 1536312, 366468]
+n=9 d=2 err=2.4e-08 P(1,T) coeffs=[92412, -1450372, -4166446, 0, 4166446, 1450372, -92412]
+n=9 d=3 err=1.3e-08 P(1,T) coeffs=[144324, 1199000, -3541802, 0, 3541802, -1199000, -144324]
+n=9 d=4 err=9.4e-09 P(1,T) coeffs=[-314556, 1113060, -1351502, 0, 1351502, -1113060, 314556]
+n=9 binary content beta=2

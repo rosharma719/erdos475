@@ -1,0 +1,1 @@
+m=8: content of [Q_m] (gcd over 6435 degree-m monomials) = 2

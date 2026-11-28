@@ -1,0 +1,1 @@
+m=15: gcd(kappa_1,kappa_2) = 32 = {2: 5}  primes>m+1: []  (2191s)

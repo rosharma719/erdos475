@@ -1,0 +1,8 @@
+n= 8 P shape 7 x 8 time 85.6
+ maximal-minor gcd (scaled): big part = 1  full: {2: 44, 3: 30, 5: 17, 7: 5}
+ 2x2 minors of [P(H2)|P(qn)]: gcd big part = 1  factorint: {2: 10, 3: 5, 5: 1, 7: 2}
+ total time 85.6
+n= 9 P shape 8 x 9 time 600.9
+ maximal-minor gcd (scaled): big part = 1  full: {2: 63, 3: 34, 5: 16, 7: 13}
+ 2x2 minors of [P(H2)|P(qn)]: gcd big part = 1  factorint: {2: 8, 3: 7, 5: 4, 7: 1}
+ total time 600.9

@@ -1,0 +1,1 @@
+m=8: (10) gradient formula along the line holds: True;  ell_m and g_(m-1) parallel: False;  gcd of 2x2 minors (numerators over common denominator 58980004465213440000000) = 1; prime factors > m+1: []   [119.2s]

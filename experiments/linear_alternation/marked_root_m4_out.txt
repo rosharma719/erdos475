@@ -1,0 +1,2 @@
+m=4: graded dims [1, 4, 10, 19, 29, 37, 40, 37, 29, 19, 10, 4, 1, 0, 0]; dim C = 240 (expected 240); socle degree 12 (expected 12)
+  eta_d a_d=0: True;  eta_d eta_e=0 (d!=e): True;  eta_d^2=g eta_d: True;  sum eta_d = g: True
