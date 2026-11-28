@@ -908,3 +908,17 @@ Scripts: `experiments/linear_alternation/terminal_joint.py`, `terminal_modp.py`.
 - Not reproduced: the specific minors (96, -2^22 3^8 5^5, 2(-1)^{m+1} m^2) individually; the commutation relations (8), (9).
 
 **Status.** Terminal-step arguments cannot propagate rank by themselves (Theorem 3); the proof must use the whole ordered product X^{m-1} F_0. Open.
+
+## 48. Root-of-unity determinant reduction (report of 2026-11-28, strategy memo)
+
+Scripts: `experiments/linear_alternation/rootunity.py`, `geomorder.py`, `geomsum.py` (complex double precision; outputs are rationals recognised exactly to < 1e-9).
+
+**Reproduced:**
+- Reduction (2), in a sharper form: with t_i = zeta^i (zeta a primitive m-th root of unity, i = 1..m-1), B_m(t, z) = Alt_t D_m(t,z) / (Delta(t) prod t_i) equals +- sum_d (-1)^d kappa_{m,d} z^d exactly, m = 3..7 (e.g. m = 7: z-coefficients 280, -840, -3440, 8280, -3314, -966 versus kappa_7 = 966, -3314, -8280, -3440, 840, 280). So nonvanishing of the evaluation is literally equivalent to nonvanishing of the packet (B is a polynomial in e_j(t) with integer coefficients, so the specialisation also holds mod p).
+- Formula (3) for a geometric ordering (zeta^k, zeta^{2k}, ...), gcd(k,m) = 1, holds exactly with T = C(m+1, 2) (m = 5, 7, all k).
+
+**New observations (own):**
+- D vanishes exactly when two partial sums of the ordering collide or a partial sum is 0, so B_m is a signed sum over orderings of mu_m \ {1} with distinct partial sums (a Graham-type count in the cyclotomic field / its F_p analogue).
+- The non-geometric orderings do NOT cancel among themselves: B minus the geometric part is nonzero for m = 5, 6, 7, 8 (zero only for m = 4). Over C every ordering contributes for prime m = 5, 7 (24/24, 720/720); for m = 6, 8 only 14/120 and 1296/5040 do. Contributions come in Galois orbits ((Z/m)^x acting by zeta -> zeta^k); the geometric orderings form one orbit. Any proof along this route must evaluate the remaining orbit sums.
+
+**Status.** Exact restatement plus one explicit orbit; noncancellation of the full orbit sum is open.
