@@ -1060,3 +1060,5 @@ Script: `experiments/linear_alternation/defect_test.py`.
 **Not reproduced:** the complementary-hole hook formula (4) (checked by the memo on 24,638 configurations), the hook pairing (5), the Pascal split (9).
 
 **Status.** The transport identity relocates the difficulty to D_{I,J}; no interior transport theorem yet. Open.
+
+**Addendum to §58.** r = 4: Alt(W_0 V_I(Lx)) vanishes for 1 of 35 exponent sets in [1,7] (nonzero e.g. for (1,2,3,5), (1,2,3,6)). Term-by-term reversal parity still fails generically.
