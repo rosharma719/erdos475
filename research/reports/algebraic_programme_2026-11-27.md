@@ -1116,3 +1116,5 @@ Script: `experiments/linear_alternation/dd_descent.py` (sympy; comparison in C_4
 **Not reproduced:** the Hermite-normal-form descent lattices for upper ranks 6, 7 (multipliers 2, 2; Hermite entries in {2,4,12}), the rank-8 modular ranks, the exhaustive "no single word works" search, and the adjointness formulas (self-adjointness of d_i under the top-degree pairing is standard).
 
 **Status (agreed with the memo).** What would close the problem along this line is a uniform construction U_m f_{m-1} = sum_w c_{m,w} rho_m d_w f_m with U_m an admissible unit. Low-rank identities exist; no uniform construction is known. No further reformulation is being added.
+
+**Background results (addenda to §60, §61).** The direct normal-form computation of gamma_10 was killed (out of memory); gamma_10 remains established only through the report's edge-splitting chain. Binary certificates at m = 9: joint content 2 (versus gamma_9 = 1), so the binary family loses a factor 2 at m = 9 and 3 at m = 8; harmless, but it never beats the full class.
