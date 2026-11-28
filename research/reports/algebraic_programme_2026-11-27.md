@@ -1036,3 +1036,15 @@ Script: `experiments/linear_alternation/jet_obstruction.py`.
 **Not reproduced:** Theorem 1 (finite-versus-stable specialization with the two single-hook and one double-hook corrections), the central-window telescoping (3), the double-hook vanishing argument, the boundary formula (7), and the Q_n(0) values themselves (only their consistency with the kappa data was checked).
 
 **Status.** Exact transfer kappa_{m,m-q} = S + L + M with S a boundary of the preceding two-hole packet and L, M single long-hook corrections; the conservation law linking the hook corrections of the two witnesses is missing. Open.
+
+## 57. Research-route memo: boundary/hook matrix tests (2026-11-28)
+
+**Checked (exact, rank 9):**
+- The boundary/first-hook/second-hook matrix D_9 has row sums (0, -68826240, -240891840, 524316996) = (kappa_{9,8}, kappa_{9,7}, kappa_{9,6}, kappa_{9,5}).
+- gcd of its four maximal minors = 417312 = 2^5 3^4 7 23, so the rank-3 criterion fails at p = 23; there u_9 = (0, 18, 17, 3) mod 23, so the certificate survives.
+- For the two witnesses (kappa_{9,7}, kappa_{9,5}): s = (-57376, 818084), h = L + M = (-68768864, 523498912), det(s, h) = 2^7 3^5 7 * 120436663. At p = 120436663 both coordinate ratios give alpha = h/s = 48632623, not -1, so v_9 = (1 + alpha) s survives. (The memo's prime was lost in the paste; it is 120436663, not 569. At 569, s and h are not proportional: the coordinate ratios are -1 and 333.)
+- Not checked: the rank-10 numbers (minor gcd 5376, alpha = 141) and the shift identities (1)-(4) of Route 1.
+
+**Comment.** The "boundary-hook exclusion principle" (when det(s,h) = 0, alpha != -1) is not weaker than the target: if s != 0 mod p it is literally equivalent to v_m != 0 mod p. Its value is only as a framing; it needs an independent reason why alpha = -1 is impossible. Same for the modular-elimination route: C_m being a unit mod A_m is exactly the two-witness statement restricted to primes dividing A_m.
+
+**Status.** No new theorem; routes ranked. Open.
