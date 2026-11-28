@@ -1132,3 +1132,17 @@ Script: `experiments/linear_alternation/schubert_coeffs.py` (integral coinvarian
 **Not reproduced:** the m = 8 totals (1352 nonzero, 58 admissible units), the insertion-chain search and its six coefficients (the permutations were lost in the paste), the last-variable filtration theorem (2) (plausible from Monk's rule; not tested), the descent-matrix formula (4).
 
 **Status.** Concrete combinatorial target: a sign-reversing involution on signed Bruhat chains for the rank extension G_m, with the negative Monk moves concentrated at position m. Not constructed. Open.
+
+## 64. Local Bruhat cancellation, cyclic character, constrained induction (report of 2026-11-28)
+
+Script: `experiments/linear_alternation/cyclic_and_paths.py`.
+
+**Reproduced (exact):**
+- Cyclic character (1): tau_n F_n = (-1)^{n-1} F_n in C_n (tau: x_i -> x_{i+1} cyclically), n = 4..7, by integral normal form.
+- Rank-5 example, factor order (L_1, L_2, E_3): exactly two nonzero Monk paths 13425 -> 23415 -> 24315 -> 25314 (+1) and 13425 -> 13524 -> 15324 -> 25314 (-1), differing at both intermediate permutations, as stated.
+
+**Correction.** The "three-step obstruction" depends on the chosen order of the commuting factors. In the orders (L_2, L_1, E_3) and (L_2, E_3, L_1) the same coefficient is produced by two paths 13425 -> 14325 -> {24315 | 15324} -> 25314 that share the first intermediate and cancel as a single two-step diamond; in (L_1, E_3, L_2) and (E_3, L_1, L_2) they share the second intermediate (23514). So this example does not show that local diamond moves are insufficient; it shows that a pairing must be allowed to choose the factor order (or work order-independently). The memo's rank-6, 7 obstructions were not re-tested for order dependence.
+
+**Not reproduced:** the two-step cancellation classification, the symmetry-constrained kernel dimensions (3, 4, 330 -> 0, 0, 30 -> 19) and the rank-8 mod-101 result that adjacent-pair divisibility kills the remaining 19-dimensional obstruction (code not in the repo).
+
+**Status.** Constrained induction (3) (cyclic character + reflection + divisibility by adjacent pair sums) survives one rank-8 modular test as reported; unproved.
