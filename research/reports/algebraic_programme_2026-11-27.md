@@ -1048,3 +1048,15 @@ Script: `experiments/linear_alternation/jet_obstruction.py`.
 **Comment.** The "boundary-hook exclusion principle" (when det(s,h) = 0, alpha != -1) is not weaker than the target: if s != 0 mod p it is literally equivalent to v_m != 0 mod p. Its value is only as a framing; it needs an independent reason why alpha = -1 is impossible. Same for the modular-elimination route: C_m being a unit mod A_m is exactly the two-witness statement restricted to primes dividing A_m.
 
 **Status.** No new theorem; routes ranked. Open.
+
+## 58. Adjacent-exponent transport via mixed Pieri (memo of 2026-11-28)
+
+Script: `experiments/linear_alternation/defect_test.py`.
+
+**Comment on (7).** The mixed Pieri transport identity sum_{I+} c_{I+,J} - sum_{J-} c_{I,J-} = D_{I,J} is immediate from the definitions: e_1(Lx) = e_1(x) + W(x) with W = sum_{i<r} (r-i) x_i, alternant Pieri on both sides, and Alt(e_1 f) = e_1 Alt f. It is correct, but all the content sits in the positional defect D_{I,J} = [V_J] Alt(W V_I(Lx)).
+
+**Test of the cheapest proposed reduction (prefix reversal).** For r = 3, Alt(W_0 V_I(Lx)) with W_0 = W - ((r-1)/2) e_1 is nonzero for all 20 exponent sets I in [1,6] (including consecutive I = (1,2,3)). Reversal sends prefix sums to suffix sums (S - s_{r-i}), not to prefix sums, so there is no term-by-term reflection parity; any cancellation of the centered defect would have to come from the cofactor aggregate. (r = 4 run left in background.)
+
+**Not reproduced:** the complementary-hole hook formula (4) (checked by the memo on 24,638 configurations), the hook pairing (5), the Pascal split (9).
+
+**Status.** The transport identity relocates the difficulty to D_{I,J}; no interior transport theorem yet. Open.
