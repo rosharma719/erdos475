@@ -896,3 +896,15 @@ Scripts: `experiments/linear_alternation/onesided.py`, `onesided_ratios.py`. X f
 **Not reproduced:** the path formula (8)/(9) as a separate computation (it is a restatement of (6) with Pascal-minor weights); the "diagonal paths give -12 at rank 5" number; the rank-12 integer computation.
 
 **Status.** (6) is a genuine simplification (one-sided operator, deletions only in one factor), but sum_sigma sgn(sigma) N_{sigma,d} != 0 mod p is the same open noncancellation statement. Not proved.
+
+## 47. Terminal joint image and prescribed-kernel-projection obstruction (report of 2026-11-28)
+
+Scripts: `experiments/linear_alternation/terminal_joint.py`, `terminal_modp.py`.
+
+**Reproduced:**
+- Closed forms (2) for X E_ab and (3) for L E_ab on diagonal two-hole tensors agree in absolute value with the operators of §44/§46 for every a < b, m = 4..8 (signs differ only by convention).
+- Theorem 2 (joint terminal image): rank of F -> (XF, LF) on two-hole tensors equals 2m-2 for m = 6, 7, 8 (also when restricted to diagonal inputs), over Q and modulo every prime m+1 < p < 200. For m = 4, 5 the rank is 2m-3 (the theorem is stated for m >= 6).
+- Theorem 3 (prescribed kernel projection): on symmetric balanced two-hole tensors, the common kernel of X, Y, L has dimension 6, 12, 22 for m = 5, 6, 7, and its image under pi_m = iota_{e_m} (x) iota_{e_m} is exactly the hyperplane sum_d (-1)^d d! g_d = 0 (dimension m-2), over Q. The genuine rank-6 packet (-696729600, 646963200, 663552000, 82944000, 0) lies in that hyperplane, so it is the pi_7-projection of a tensor killed by all three contractions.
+- Not reproduced: the specific minors (96, -2^22 3^8 5^5, 2(-1)^{m+1} m^2) individually; the commutation relations (8), (9).
+
+**Status.** Terminal-step arguments cannot propagate rank by themselves (Theorem 3); the proof must use the whole ordered product X^{m-1} F_0. Open.
