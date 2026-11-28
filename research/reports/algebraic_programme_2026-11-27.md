@@ -969,3 +969,21 @@ Scripts: `experiments/linear_alternation/confluent.py`, `confluent2.py` (mpmath,
 **Not reproduced:** the m = 7, p = 113 obstruction matrix (determinant 39) and the lifted-span table; formula (11) as a separate computation (the numerical limit computes the same object).
 
 **Status.** Exact descent identities verified; (10) holds through m = 14 but is unproved. Open.
+
+## 52. Fixed-core confluent programme (research plan of 2026-11-28) and the elementary-basis structure of the top coefficients
+
+Script: `experiments/linear_alternation/ebasis.py` (exact Fractions; B_m evaluated at 7 random rational configurations, top four z-coefficients solved in the e-basis, consistency checked on the extra points).
+
+**Comment on the plan.** The plan's analytical statements (factorization (2)-(3), differential extraction (4), single-cluster cancellation, disjoint-exponent selection rule (6)-(7)) are plausible and standard but were not tested here; no recurrence is claimed in the plan. A simplification that bears on it: the coefficient of z^{m-j} (j <= 4) in B_m(t, z) is a homogeneous symmetric polynomial of degree j in t with integer coefficients, i.e. it is fixed by p(j) <= 5 integers. The confluent configuration is only one way to evaluate it at e_i = (-1)^i; the genuine unknowns are these integer sequences in m.
+
+**Computed e-basis expansions (exact):**
+- m=4: z^3: -2 e1; z^2: -3 e1^2; z^1: -e1^3.
+- m=5: z^4: 0; z^3: 8 e1^2; z^2: 12 e1^3; z^1: 4 e1^4.
+- m=6: z^5: 0; z^4: 80 e1^2; z^3: 160 e1^3; z^2: -6 e3e1 - 12 e2e1^2 + 70 e1^4.
+- m=7: z^6: -280 e1; z^5: -840 e1^2; z^4: 490 e2e1 + 2950 e1^3; z^3: 980 e2e1^2 + 7300 e1^4.
+- m=8: z^7: 15120 e1; z^6: 52920 e1^2; z^5: -46592 e2e1 - 524104 e1^3; z^4: -116480 e2e1^2 - 1442560 e1^4.
+(m = 9 running, `ebasis9.txt`.)
+
+**Observations.** The top coefficients are very sparse: through m = 8 only monomials e1^a e2^b appear (plus e3e1 once at m = 6). The ratio of the top two is (m-1)/2 (the reflection identity). Where no e3, e4, e2^2 terms occur, the top four coefficients depend only on (e1, e2) = (-1, 1), which the primitive cube roots of unity realise: a THREE-edge core (omega, omega^2, plus zero edges) suffices at m = 7, 8 (matches the n = 3 rows of §51). It fails at m = 6 for the z^2 coefficient (58 versus 52) because of the e3e1 term, so this is not universal.
+
+**Status.** Reformulation: (10) concerns explicit integer sequences (e-basis coefficients of the top four symmetric polynomials). No closed forms found; open.
