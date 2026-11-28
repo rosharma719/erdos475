@@ -922,3 +922,18 @@ Scripts: `experiments/linear_alternation/rootunity.py`, `geomorder.py`, `geomsum
 - The non-geometric orderings do NOT cancel among themselves: B minus the geometric part is nonzero for m = 5, 6, 7, 8 (zero only for m = 4). Over C every ordering contributes for prime m = 5, 7 (24/24, 720/720); for m = 6, 8 only 14/120 and 1296/5040 do. Contributions come in Galois orbits ((Z/m)^x acting by zeta -> zeta^k); the geometric orderings form one orbit. Any proof along this route must evaluate the remaining orbit sums.
 
 **Status.** Exact restatement plus one explicit orbit; noncancellation of the full orbit sum is open.
+
+## 49. Geometric Bézout certificate and cycle-orbit decomposition (reports of 2026-11-28)
+
+Scripts: `experiments/linear_alternation/cycle_orbits.py`, `orbit_check.py`, `kappa12.py` (output `kappa12_out.txt`).
+
+**Reproduced exactly (m = 4..7):**
+- Individual-cycle formula (1): summing B_a(z) = (-1)^{m-1} m rho(a) Q_a(z-1) over all orderings a of mu_m with a_m = 1 gives +- sum_d (-1)^d kappa_{m,d} z^d (same as §48).
+- Geometric contribution G_m(z) = (-1)^{m-1} m sum_{ord q = m} ((1+(q-1)z)^m - 1)/(q-1)^T, T = C(m+1,2).
+- Bézout identity: with R(X) = X^{T-1} mod Phi_m(1+X) = sum r_j X^j, Lambda_m(P) = sum_{k=1}^{phi(m)} r_{k-1}/C(m,k) [z^k]P gives Lambda_m(G_m) = (-1)^{m-1} m phi(m): -8, 20, -12, 42 for m = 4..7. (The proof is one line: [z^k]((1+wz)^m - 1) = C(m,k) w^k and w R(w) = w^T for w = q-1.) So the geometric part is nonzero mod every p > m.
+- m = 5: r = (5000, 10000, 8625, 3625), Lambda_5(G_5) = 20, Lambda_5(full) = Lambda_5(4z(z-1)(2z-1)) = -1100 = 2^2 5^2 11, so mod 11 the other orderings cancel the geometric certificate exactly, as reported. Lambda_m(full) = -8, -1100, -122/15, -96448856 for m = 4..7: not a universal certificate.
+- Orbit theorem (2) (rotation-rescaling orbits): the orbit sum equals ((-1)^{m-1} m / h_a) rho(a) sum_i Q_a(v_i + a_i z) for every orbit (8, 24, 108 orbits for m = 5, 6, 7), and sum over orbits of rho/h = 0 (identity (5)) to machine precision.
+
+**Not reproduced:** the m = 5, p = 11 per-coefficient table (row labels lost in the paste); the block factorization (6)-(7) for nontrivial stabilizers; the Hasse-moment identity (8). Ranks 17-19: recomputation of gcd(kappa_{m,1}, kappa_{m,2}) for m = 15..19 started (see addendum when it finishes).
+
+**Status.** Every valid orbit is individually nonzero, and the geometric orbit has an explicit all-rank Bézout certificate; joint noncancellation over all orbits is the open statement.
