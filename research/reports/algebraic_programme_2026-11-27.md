@@ -1092,3 +1092,17 @@ Script: `experiments/linear_alternation/coinv_content.py` (integral triangular r
 **Status.** RC is weaker than the contraction statement and is exactly what Graham needs (gamma_m | gcd_d kappa_{m,d}). Its all-rank content bound is open.
 
 **§60 update.** Direct normal form at m = 9: 5543 nonzero coefficients, content gamma_9 = 1 (67 s). This is sharper than the edge-splitting bound gamma_9 | b_8 = 6. m = 10 running.
+
+## 61. Accelerated boundary arithmetic and two-position binary certificates (report of 2026-11-28)
+
+Script: `experiments/linear_alternation/binary_cert.py` (partial alternation over the m-2 unmarked edges evaluated at the roots y of sum_j h_j(u,v) x^{m-2-j}, 80-digit mpmath, interpolation in v; all coefficients came out integral to < 1e-75).
+
+**Checked (exact):**
+- alpha_{n,1} = +-kappa_{n,1} for n = 10, 11, 12.
+- Bézout identities: 138432337921 alpha_{10,1} - 57429917837 alpha_{10,4} = 1 (so the rank-11 residual class is primitive, given the edge-splitting chain of §60); -22025712036228168324 alpha_{12,1} - 24171106358449868599 beta_{12,2,4} = 24; gcds of the quoted pairs: 2 (rank 10), 4 (rank 11), 24 (rank 12).
+- Two-position theorem: degree count deg G = C(m,2) - m - C(m-2,2) = m - 3 < m - 1, and the substitution e_j(y) = (-1)^j h_j(u,v) is a ring map on y-symmetric polynomials, so P_{m;a,b} != 0 mod p implies f_m != 0 in C_m (x) F_p. Argument checked; sound.
+- Joint content of all binary certificates P_{m;a,b} (all pairs a < b): 1, 1, 2, 2, 6 for m = 4..8. Equal to gamma_m for m <= 7; at m = 8 it is 6 versus gamma_8 = 2 (binary family loses a factor 3, harmless since 3 <= m+1, but strictly weaker than the full class). m = 9 running.
+
+**Not reproduced:** the full linear/quadratic contents for lower ranks 10-11 and the rank-12 bound gamma_13 | 24 beyond the quoted Bézout pair; the differential/permanent representation (5)-(8) (the m = 5 cancelling canonical matching was not recomputed).
+
+**Status.** New exact data and a sound two-variable certificate family; uniform noncancellation open.
