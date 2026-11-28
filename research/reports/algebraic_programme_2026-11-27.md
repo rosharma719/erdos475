@@ -1014,3 +1014,15 @@ Script: `experiments/linear_alternation/recip_check.py`.
 **Not reproduced:** the short-jet identity (1) and the moment formulas J_0..J_3 (not tested numerically here); the scalar formulas for a_m, b_m, c_m, d_m in terms of h_{q,b}; the rank-16 values kappa_{16,15}, kappa_{16,13} and their gcd 768768 (my kappa data stop at m = 14; the m = 15..19 run is still going); the step "c_{A,B} != 0 is a universal rearrangement certificate" (it relies on the earlier Lagrange-interpolation framework, not re-checked in this round).
 
 **Status.** If the reciprocity-to-certificate step is accepted, Graham at size m follows from p not dividing gcd(a_m, b_m, c_m[, d_m]), a weaker target than (10). Still unproved for all m.
+
+## 55. Restricted-jet obstruction and genuine cofactor determinants (report of 2026-11-28)
+
+Script: `experiments/linear_alternation/jet_obstruction.py`.
+
+**Reproduced (exact, s = 6..9):**
+- P = e_s^2 (e_{s-2} e_s - e_{s-1}^2) under e_i -> E_i(t) = 1 + ... + t^i equals -t^{s-1}(1 - t^{s+1})^2/(1-t)^2.
+- J_{n-1}(delta g_2) = -[t^{s+1}] (1+t)^3 (1 - t^{s+1})^2/(1-t) = -6 and J_{n-2}(delta g_3) = -[t^s] (1+t)^2 (1-t^{s+1})^2/(1-t) = -4, independent of s, so the perturbation changes a_m by 2 (a unit for p > 2). P vanishes whenever e_{s-2} = e_{s-1} = e_s, so the restricted generating polynomial (distinguished e_1, e_2, e_3, all others equal) is unchanged. The generic bounded-jet closure proposed in §54 is therefore impossible without using the determinantal origin of the cofactors.
+
+**Not reproduced:** the two-step descent formula (4), the middle-coefficient formulas (6)-(7), the cofactor factorisation (8), and the reduced-diagonal formula (9)-(10) (not tested numerically here).
+
+**Status.** Generic symmetric-function closure is ruled out; the remaining target is a recurrence or elimination identity specific to the genuine prefix-determinant cofactors. Open. (Background: gcd(kappa_{15,1}, kappa_{15,2}) = 2^5, confirming rank 15 independently; m = 16 running.)
